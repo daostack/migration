@@ -49,6 +49,7 @@ Example: `@daostack/arc@<arc version>` -> npm: `@daostack/ganache@<arcversion>-v
 To get information about the deployed contract addresses, you can run:
 ```sh
 docker exec ganache cat /base.json
+docker exec ganache cat /dao.json
 ```
 
 ## Use as a library
