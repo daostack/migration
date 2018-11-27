@@ -15,7 +15,8 @@
     "migrate": "./migrate.js",
     "docker:build": "docker build . -t daostack/migration:$(cat package.json | jq -r '.version')",
     "docker:push": "docker push daostack/migration:$(cat package.json | jq -r '.version')",
-    "release": "./release.sh"
+    "release": "./release.sh",
+    "prune-arc-build": "node ./pruneArcBuild.js"
   },
   "repository": {
     "type": "git",
@@ -36,7 +37,9 @@
     "moment": "^2.22.2",
     "ora": "^3.0.0",
     "prompt-confirm": "^2.0.4",
+    "typedarray-to-buffer": "^3.1.5",
     "web3": "1.0.0-beta.35",
+    "yaeti": "^1.0.2",
     "yargs": "^12.0.2"
   }
 }
