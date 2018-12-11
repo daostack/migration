@@ -29,6 +29,7 @@
   },
   "kovan": {
     "base": {
+      "Reputation": "0xB670E69FD6B0bD30E7044a70C957f05dd7628ebD",
       "DAOToken": "0x543Ff227F64Aa17eA132Bf9886cAb5DB55DCAddf",
       "ControllerCreator": "0x27CB603aBe320D5909B1ca5A6D957127cc4A9AD1",
       "DaoCreator": "0xbfaF00C7F7f378eF403dcEaD20802276Ca12d6f7",
@@ -49,9 +50,9 @@
     },
     "dao": {
       "name": "Genesis Test",
-      "Avatar": "0x6e5a40dbf12d95811f8a99F78B78BbE2a253019d",
-      "NativeToken": "0xe82c5599FdA2EA4bDE2Eb423f5CEe2F8c70eA0B4",
-      "NativeReputation": "0x74454d2FE9B0F5bB8aDD4Aa65daf914A12629145"
+      "Avatar": "0xdd6da146bc83b43935142895Cd63E90401A1BDd7",
+      "NativeToken": "0x0c3E464F586A15F5D32C0a1a40CDb5Ad8C571F1A",
+      "NativeReputation": "0x3799252fA5e58E7072a752cB921249b0b885ca15"
     }
   },
   "rinkeby": {
