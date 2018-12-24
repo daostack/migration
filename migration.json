@@ -47,13 +47,14 @@
       "VoteInOrganizationScheme": "0x4fC336ACb9b3DD827a49C9BD513a39A993f70666",
       "OrganizationRegister": "0x8625EabCE5F7015Aa423Cc9fc31d3a98216A04EC",
       "Redeemer": "0x70273622E4a1d7B62dC457cbFaB4313805cBfE5a",
-      "Reputation": "0xB8C93D2A53d13Df07CCc403901D9798c4dA9C53B"
+      "Reputation": "0xB8C93D2A53d13Df07CCc403901D9798c4dA9C53B",
+      "GenericScheme": "0x58a6C125e86b2880F887c316fa6d8187eDE3B8b7"
     },
     "dao": {
       "name": "Genesis Test",
-      "Avatar": "0xd717fD6da6e49B63c70D3a9B307A1B4F7Cf9CC92",
-      "NativeToken": "0x8f5030e0a2EaABf456bdA6b27324485b69fbcfFb",
-      "NativeReputation": "0x4195F4E0AAAa1ec3A7816445435b7f334987Ef4f"
+      "Avatar": "0x7b4db9eAE3160a884FBd565Acb98D18B35F305E8",
+      "NativeToken": "0x894085eEd3eC78F9e85DB7746a719E3472bCF0F1",
+      "NativeReputation": "0x8FA0cB9bDEabb8c54CE4C73cf09cc66F95E587aE"
     }
   },
   "rinkeby": {
@@ -75,13 +76,14 @@
       "VoteInOrganizationScheme": "0x44fB03f918741f1874db7fF2A7a2808F9509A80b",
       "OrganizationRegister": "0x3a935199179191Ae0c8EEa1428583f6204c71487",
       "Redeemer": "0xCf1b33896451A65298B9768a4c66198EcCaFCB9d",
-      "Reputation": "0x928da53A04E7B3bdc54Fe5641Eff3CbC46D19E4d"
+      "Reputation": "0x928da53A04E7B3bdc54Fe5641Eff3CbC46D19E4d",
+      "GenericScheme": "0x082Ea4D85055dE18297be0F112240F8c6a6ae319"
     },
     "dao": {
       "name": "Genesis Test",
-      "Avatar": "0x7027Fd1c297b057D98eDf5836403FB461Ee6cbb7",
-      "NativeToken": "0x4E99466bc09eC5516B4CfdDbe82eFCa103759E3e",
-      "NativeReputation": "0x0053B32D9Cc8571E7EecfAf865409c8bB8c91574"
+      "Avatar": "0x789B2F3a25A5b269e54027348255C90682d5b022",
+      "NativeToken": "0x6438Cb4cF081505e03b4C7c9509cD3e5DD551d9b",
+      "NativeReputation": "0x6B232988bFb6ACDAf849f5EA4c7f0fF878b6cc2A"
     }
   }
 }
