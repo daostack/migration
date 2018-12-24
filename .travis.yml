@@ -11,3 +11,11 @@ install:
 
 script:
   - npm run lint
+
+deploy:
+  provider: npm
+  email: "ben@daostack.io"
+  api_key: $NPM_API_TOKEN
+  tag: next
+  on:
+    branch: master

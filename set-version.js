@@ -10,16 +10,8 @@ async function setVersion () {
   const arcVersion = packageJson.dependencies['@daostack/arc'] || packageJson.devDependencies['@daostack/arc']
   spinner.info(`Current package version is '${packageJson.version}'`)
   spinner.info(`@daostack/arc version is '${arcVersion}'`)
-  const { migrationVersion } = await inquirer.prompt([
-    {
-      type: 'input',
-      name: 'migrationVersion',
-      message: `What would you like to call this migration version ('${arcVersion}-v???')?`,
-      validate: x => (x ? true : 'Please choose a version')
-    }
-  ])
-
-  packageJson.version = `${arcVersion}-v${migrationVersion}`
+  const newVersion = parseInt(packageJson.version.split('-v')[1]) + 1;
+  packageJson.version = `${arcVersion}-v${newVersion}`
   fs.writeFileSync('package.json', JSON.stringify(packageJson, undefined, 2), 'utf-8')
   spinner.succeed(`Updated package version to ${packageJson.version}`)
 }

@@ -251,5 +251,6 @@ In order to release a version:
    1. Make sure you have the required `.env` variables set (`kovan_provider`, `kovan_private_key`, `rinkeby_provider`,
       `rinkeby_private_key`).
    2. Make sure that you have a Dockerhub ID with permission to push an image to the `daostack` organization.
-   3. Make sure that you have an `npm` account with permission to push an image to the `daostack` organization.
-   4. `npm run release` - This will perform all the nesserary steps to deploy a new release.
+   3. Make sure that you are on your intended Git branch.
+   4. `npm run prepare-release` - This will perform all the nesserary steps to prepare a new release.
+   5. After the branch is merged, Travis will automatically deploy a new version to NPM.
