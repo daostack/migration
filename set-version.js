@@ -2,7 +2,6 @@
 
 const fs = require('fs')
 const ora = require('ora')
-const inquirer = require('inquirer')
 
 async function setVersion () {
   const spinner = ora()
@@ -10,7 +9,7 @@ async function setVersion () {
   const arcVersion = packageJson.dependencies['@daostack/arc'] || packageJson.devDependencies['@daostack/arc']
   spinner.info(`Current package version is '${packageJson.version}'`)
   spinner.info(`@daostack/arc version is '${arcVersion}'`)
-  const newVersion = parseInt(packageJson.version.split('-v')[1]) + 1;
+  const newVersion = parseInt(packageJson.version.split('-v')[1]) + 1
   packageJson.version = `${arcVersion}-v${newVersion}`
   fs.writeFileSync('package.json', JSON.stringify(packageJson, undefined, 2), 'utf-8')
   spinner.succeed(`Updated package version to ${packageJson.version}`)
