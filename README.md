@@ -253,4 +253,4 @@ In order to release a version:
    2. Make sure that you have a Dockerhub ID with permission to push an image to the `daostack` organization.
    3. Make sure that you are on your intended Git branch.
    4. `npm run prepare-release` - This will perform all the nesserary steps to prepare a new release.
-   5. After the branch is merged, Travis will automatically deploy a new version to NPM.
+   5. After PR for the branch is merged into the master branch,if there the version was changed, Travis will automatically deploy a new version to NPM.
