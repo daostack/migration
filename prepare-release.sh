@@ -21,7 +21,7 @@ echo "Migrating rinkeby..."
 npm run migrate -- --gasPrice 10 --provider $rinkeby_provider --private-key $rinkeby_private_key "$@"
 # migrate mainnet
 echo "Migrating mainnet..."
-npm run migrate -- --gasPrice 5 --provider $mainnet_provider --private-key $mainnet_private_key "$@"
+npm run migrate -- --gasPrice 25 --provider $mainnet_provider --private-key $mainnet_private_key "$@"
 # set version
 echo "Setting version..."
 node set-version.js
