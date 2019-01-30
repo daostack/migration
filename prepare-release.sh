@@ -4,6 +4,9 @@ set -e
 source .env
 
 
+# npm ci
+echo "Installing NPM modules..."
+npm ci
 # generate abis
 echo "Generating abis..."
 npm run generate-abis
