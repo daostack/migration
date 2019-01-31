@@ -90,6 +90,12 @@ async function migrateBase ({ web3, spinner, confirm, opts, logTx, previousMigra
     GenesisProtocol
   )
 
+  // deploy Reputation
+  await deploy(
+    require('@daostack/arc/build/contracts/Reputation.json'),
+    []
+  )
+
   await deploy(require('@daostack/arc/build/contracts/GenericScheme.json'))
 
   return {
