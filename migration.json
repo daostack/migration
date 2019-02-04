@@ -1,7 +1,7 @@
 {
   "private": {
     "base": {
-      "DAOToken": "0xe78A0F7E598Cc8b0Bb87894B0F60dD2a88d6a8Ab",
+      "GEN": "0xe78A0F7E598Cc8b0Bb87894B0F60dD2a88d6a8Ab",
       "ControllerCreator": "0x5b1869D9A4C187F2EAa108f3062412ecf0526b24",
       "DaoCreator": "0xCfEB869F69431e42cdB54A4F4f105C19C080A601",
       "UController": "0x254dffcd3277C0b1660F6d42EFbB754edaBAbC2B",
@@ -39,25 +39,7 @@
     }
   },
   "kovan": {
-    "base": {
-      "GEN": "0x543Ff227F64Aa17eA132Bf9886cAb5DB55DCAddf",
-      "ControllerCreator": "0xA69a758Ba69d7950D0EBa1d5A0369cD19615D6FF",
-      "DaoCreator": "0x5F16D78245c71dC667a75a7D6c072A5F6991f343",
-      "UController": "0x06D13144685Ae31C8d1004eedc60E8d76C66eAff",
-      "GenesisProtocol": "0x32337118FE4eA5FEb16809374eb6B85b0609752e",
-      "SchemeRegistrar": "0x38830652fc8c749B4E1485f500227b6944563955",
-      "UpgradeScheme": "0xea0EE24517Bb15D6b5E63813a91591926F38Ca0E",
-      "GlobalConstraintRegistrar": "0x1127604d3Acae2Bf87d177123792D4899fd2410b",
-      "ContributionReward": "0x098b1D066cc224593cF996510539692B48b814A1",
-      "AbsoluteVote": "0xfC490CaCCE47728e68CBF03958A955a3fDd58f82",
-      "QuorumVote": "0xDBcaAcf4739f9Fd398150F5d17723C61dD6e19E2",
-      "TokenCapGC": "0x5b30332381E16aF9fb9B3008B8c5552D27af1A7f",
-      "VestingScheme": "0x43FD017320e5f7338Bd48D83D31cF67b147a5770",
-      "VoteInOrganizationScheme": "0x717085B7B8c0Cb36c515E242dC5149DBD347b3a6",
-      "OrganizationRegister": "0xAE79dEd9e9284f9FCd35942Ef6380CEe8c3fd1aA",
-      "Redeemer": "0x8128239aFC8ce0f1c3619a1557DF63daf5D2690e",
-      "GenericScheme": "0x0E5e9086B69Cca78D22682a1e50f5051cbe1B747"
-    },
+    "base": {},
     "dao": {
       "name": "Genesis Test",
       "Avatar": "0xf22Ab662c2201eC9B6c0aD297A6d7fe5034D7723",
