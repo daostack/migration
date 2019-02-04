@@ -98,13 +98,45 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
   const DAOToken = await avatar.methods.nativeToken().call()
   const Reputation = await avatar.methods.nativeReputation().call()
 
+  
+  const DemoDAOToken = await new this.web3.eth.Contract(
+    require('@daostack/arc/build/contracts/DAOToken.json').abi,
+    undefined,
+    this.opts
+  ).deploy({
+    data: require('@daostack/arc/build/contracts/DAOToken.json').bytecode,
+    arguments: ['DemoToken', 'DTN', 0]
+  }).send();
+
+  const DemoReputation = await new this.web3.eth.Contract(
+    require('@daostack/arc/build/contracts/Reputation.json').abi,
+    undefined,
+    this.opts
+  ).deploy({
+    data: require('@daostack/arc/build/contracts/Reputation.json').bytecode
+  }).send();
+
+  const DemoAvatar = await new this.web3.eth.Contract(
+    require('@daostack/arc/build/contracts/Avatar.json').abi,
+    undefined,
+    this.opts
+  ).deploy({
+    data: require('@daostack/arc/build/contracts/Avatar.json').bytecode,
+    arguments: ['DemoAvatar', DemoDAOToken.options.address, DemoReputation.options.address]
+  }).send();
+
   return {
     test: {
       name: orgName,
       Avatar,
       DAOToken,
       Reputation,
-      proposalId
+      proposalId,
+      organs: {
+        DemoAvatar,
+        DemoDAOToken,
+        DemoReputation
+      }
     }
   }
 }
