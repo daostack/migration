@@ -132,9 +132,9 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
       Reputation,
       proposalId,
       organs: {
-        DemoAvatar,
-        DemoDAOToken,
-        DemoReputation
+        DemoAvatar: DemoAvatar.options.address,
+        DemoDAOToken: DemoDAOToken.options.address,
+        DemoReputation: DemoReputation.options.address
       }
     }
   }
