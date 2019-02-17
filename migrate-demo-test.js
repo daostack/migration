@@ -59,7 +59,7 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
     }
   ]
 
-  await setSchemes(schemes, avatarAddress, "metaData")
+  await setSchemes(schemes, avatarAddress, 'metaData')
 
   const [PASS, FAIL] = [1, 2]
 
