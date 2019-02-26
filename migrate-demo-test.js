@@ -52,7 +52,7 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
   const crParamsHash = await setContributionRewardParams(gpParamsHash) // FIXME
 
   const ActionMock = await migrateActionMock()
-  
+
   const gsParamsHash = await setGenericSchemeParams(gpParamsHash, ActionMock) // FIXME
 
   const srParamsHash = await setSchemeRegistrarParams(gpParamsHash) // FIXME
@@ -72,7 +72,7 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
       address: this.base.SchemeRegistrar,
       params: srParamsHash,
       permissions: '0x0000001F' /* no special params */
-    },
+    }
   ]
 
   await setSchemes(schemes, avatarAddress, 'metaData')
