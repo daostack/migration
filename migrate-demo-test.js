@@ -66,12 +66,12 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
     {
       address: this.base.GenericScheme,
       params: gsParamsHash,
-      permissions: '0x00000010' /* no special params */
+      permissions: '0x00000010'
     },
     {
       address: this.base.SchemeRegistrar,
       params: srParamsHash,
-      permissions: '0x0000001F' /* no special params */
+      permissions: '0x0000001F'
     }
   ]
 
