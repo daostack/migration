@@ -41,15 +41,15 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
     GEN
   } = this.base
 
-  GENToken = await new this.web3.eth.Contract(
+  const GENToken = await new this.web3.eth.Contract(
     require('@daostack/arc/build/contracts/DAOToken.json').abi,
     GEN,
     this.opts
   )
 
   for (let i = 0; i < accounts.length; i++) {
-    await GENToken.methods.mint(accounts[i].address, this.web3.utils.toWei('1000')).send();
-    await GENToken.methods.approve(GenesisProtocol, this.web3.utils.toWei('1000')).send({ from: accounts[i].address });
+    await GENToken.methods.mint(accounts[i].address, this.web3.utils.toWei('1000')).send()
+    await GENToken.methods.approve(GenesisProtocol, this.web3.utils.toWei('1000')).send({ from: accounts[i].address })
   }
 
   const externalTokenAddress = await migrateExternalToken()
@@ -96,13 +96,13 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
 
   await setSchemes(schemes, avatarAddress, 'metaData')
 
- const { 
-   gsProposalId, 
-   queuedProposalId, 
-   preBoostedProposalId, 
-   boostedProposalId, 
-   executedProposalId 
-  } = await submitDemoProposals(accounts, avatarAddress, externalTokenAddress, ActionMock)
+  const {
+    gsProposalId,
+    queuedProposalId,
+    preBoostedProposalId,
+    boostedProposalId,
+    executedProposalId
+  } = await submitDemoProposals(accounts, web3, avatarAddress, externalTokenAddress, ActionMock)
 
   const avatar = new this.web3.eth.Contract(
     require('@daostack/arc/build/contracts/Avatar.json').abi,
@@ -151,7 +151,7 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
       queuedProposalId,
       preBoostedProposalId,
       boostedProposalId,
-      executedProposalId,
+      executedProposalId
     },
     organs: {
       DemoAvatar: DemoAvatar.options.address,
@@ -210,18 +210,18 @@ async function migrateDemoDao (orgName, tokenName, tokenSymbol, founders, tokenD
   return avatarAddress
 }
 
-async function submitDemoProposals(accounts, avatarAddress, externalTokenAddress, actionMockAddress) {
+async function submitDemoProposals (accounts, web3, avatarAddress, externalTokenAddress, actionMockAddress) {
   const [PASS, FAIL] = [1, 2]
   const actionMock = await new this.web3.eth.Contract(
     require('@daostack/arc/build/contracts/ActionMock.json').abi,
     actionMockAddress,
     this.opts
   )
-  let callData = await actionMock.methods.test2(avatarAddress).encodeABI();
+  let callData = await actionMock.methods.test2(avatarAddress).encodeABI()
   let gsProposalId = await submitGSProposal({
     avatarAddress: avatarAddress,
     callData,
-    descHash: '0x000000000000000000000000000000000000000000000000000000000000abcd',
+    descHash: '0x000000000000000000000000000000000000000000000000000000000000abcd'
   })
 
   // QUEUED PROPOSAL //
@@ -297,7 +297,7 @@ async function submitDemoProposals(accounts, avatarAddress, externalTokenAddress
     outcome: PASS,
     voter: accounts[1].address
   })
-  
+
   await increaseTime(259300, web3)
 
   await voteOnProposal({
@@ -344,15 +344,14 @@ async function submitDemoProposals(accounts, avatarAddress, externalTokenAddress
     voter: accounts[3].address
   })
 
-  return { 
-    gsProposalId, 
-    queuedProposalId, 
-    preBoostedProposalId, 
-    boostedProposalId, 
-    executedProposalId 
+  return {
+    gsProposalId,
+    queuedProposalId,
+    preBoostedProposalId,
+    boostedProposalId,
+    executedProposalId
   }
 }
-
 
 async function migrateActionMock () {
   this.spinner.start('Deploying Action Mock...')
@@ -545,7 +544,7 @@ async function setSchemes (schemes, avatarAddress, metadata) {
 async function submitGSProposal ({
   avatarAddress,
   callData,
-  descHash,
+  descHash
 }) {
   this.spinner.start('Submitting a new Proposal...')
 
@@ -564,7 +563,7 @@ async function submitGSProposal ({
   const prop = genericScheme.methods.proposeCall(
     avatarAddress,
     callData,
-    descHash,
+    descHash
   )
 
   const proposalId = await prop.call()
@@ -660,28 +659,28 @@ async function stakeOnProposal ({ proposalId, outcome, staker, amount }) {
   await this.logTx(tx, 'Staked on Proposal.')
 }
 
-async function increaseTime(duration, web3) {
-  const id = await Date.now();
-  web3.providers.HttpProvider.prototype.sendAsync = web3.providers.HttpProvider.prototype.send;
+async function increaseTime (duration, web3) {
+  const id = await Date.now()
+  web3.providers.HttpProvider.prototype.sendAsync = web3.providers.HttpProvider.prototype.send
 
   return new Promise((resolve, reject) => {
     web3.currentProvider.sendAsync({
       jsonrpc: '2.0',
       method: 'evm_increaseTime',
       params: [duration],
-      id,
+      id
     }, (err1) => {
-      if (err1) { return reject(err1); }
+      if (err1) { return reject(err1) }
 
       web3.currentProvider.sendAsync({
         jsonrpc: '2.0',
         method: 'evm_mine',
-        id: id + 1,
+        id: id + 1
       }, (err2, res) => {
-        return err2 ? reject(err2) : resolve(res);
-      });
-    });
-  });
+        return err2 ? reject(err2) : resolve(res)
+      })
+    })
+  })
 }
 
 module.exports = migrateDemoTest
