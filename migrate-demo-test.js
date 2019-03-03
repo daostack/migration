@@ -1,3 +1,4 @@
+const utils = require("./utils.js");
 async function assignGlobalVariables (web3, spinner, opts, logTx, base) {
   this.web3 = web3
   this.spinner = spinner
@@ -54,10 +55,11 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
 
   const externalTokenAddress = await migrateExternalToken()
 
+  const randomName = utils.generateRnadomName()
   const [orgName, tokenName, tokenSymbol, founders, tokenDist, repDist, cap] = [
-    'Genesis Test',
-    'Genesis Test',
-    'GDT',
+    randomName,
+    randomName + ' Token',
+    randomName[0] + randomName.split(' ')[0] + 'T',
     migrationParams.founders.map(({ address }) => address),
     migrationParams.founders.map(({ tokens }) => web3.utils.toWei(tokens.toString())),
     migrationParams.founders.map(({ reputation }) => web3.utils.toWei(reputation.toString())),
