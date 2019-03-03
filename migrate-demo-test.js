@@ -1,4 +1,4 @@
-const utils = require("./utils.js");
+const utils = require('./utils.js')
 async function assignGlobalVariables (web3, spinner, opts, logTx, base) {
   this.web3 = web3
   this.spinner = spinner

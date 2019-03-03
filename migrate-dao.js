@@ -1,4 +1,4 @@
-const utils = require("./utils.js");
+const utils = require('./utils.js')
 async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logTx, previousMigration: { base } }) {
   if (!(await confirm('About to migrate new DAO. Continue?'))) {
     return
