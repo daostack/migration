@@ -99,7 +99,7 @@ async function migrateBase ({ web3, spinner, confirm, opts, logTx, previousMigra
   )
 
   await deploy(require('@daostack/arc/build/contracts/GenericScheme.json'))
-
+  await deploy(require('@daostack/arc/build/contracts/Wallet.json'))
   return {
     base: addresses
   }

@@ -10,6 +10,7 @@ const moment = require('moment')
 const migrateBase = require('./migrate-base')
 const migrateDAO = require('./migrate-dao')
 const migrateDemoTest = require('./migrate-demo-test')
+const migrateEthCCDAO = require('./migrate-dao-ethcc')
 const path = require('path')
 
 async function migrate (opts) {
@@ -21,6 +22,7 @@ async function migrate (opts) {
     ...dao,
     ...demo
   }
+  const ethCCDao = await migrateEthCCDAO({ ...opts, previousMigration: { ...opts.previousMigration, ...base } })
 }
 
 const defaults = {
@@ -198,6 +200,7 @@ function cli () {
     .command('base', 'Migrate an example DAO', yargs => yargs, wrapCommand(migrateBase))
     .command('dao', 'Migrate base contracts', yargs => yargs, wrapCommand(migrateDAO))
     .command('demo', 'Migrate base contracts', yargs => yargs, wrapCommand(migrateDemoTest))
+    .command('ethcc', 'Migrate base contracts', yargs => yargs, wrapCommand(migrateEthCCDAO))
     .showHelpOnFail(false)
     .completion()
     .wrap(120)
@@ -213,6 +216,7 @@ if (require.main === module) {
     migrateBase: wrapCommand(migrateBase),
     migrateDAO: wrapCommand(migrateDAO),
     migrateDemoTest: wrapCommand(migrateDemoTest),
+    migrateEthCCDAO: wrapCommand(migrateEthCCDAO),
     cli
   }
 }
