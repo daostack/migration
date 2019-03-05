@@ -1,0 +1,32 @@
+{
+  "default": {
+    "ContributionReward": {
+      "orgNativeTokenFeeGWei": 0
+    },
+    "AbsoluteVote": {
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votePerc": 50
+    },
+    "GenesisProtocol": {
+      "boostedVotePeriodLimit": 86400,
+      "daoBountyConst": 10,
+      "minimumDaoBountyGWei": 100,
+      "queuedVotePeriodLimit": 259200,
+      "queuedVoteRequiredPercentage": 50,
+      "preBoostedVotePeriodLimit": 10800,
+      "proposingRepRewardGwei": 5,
+      "quietEndingPeriod": 10800,
+      "thresholdConst": 1300,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votersReputationLossRatio": 1,
+      "activationTime" : 1552086000
+    },
+    "founders": [
+      {
+        "address": "0x73Db6408abbea97C5DB8A2234C4027C315094936",
+        "tokens": 1000,
+        "reputation": 1000
+      },
+    ]
+  }
+}
