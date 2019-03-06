@@ -11,7 +11,7 @@
       "boostedVotePeriodLimit": 86400,
       "daoBountyConst": 10,
       "minimumDaoBountyGWei": 100,
-      "queuedVotePeriodLimit": 259200,
+      "queuedVotePeriodLimit": 172800,
       "queuedVoteRequiredPercentage": 50,
       "preBoostedVotePeriodLimit": 10800,
       "proposingRepRewardGwei": 5,
