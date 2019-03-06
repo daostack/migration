@@ -63,7 +63,7 @@ async function migrateEthCCDAO ({ web3, spinner, confirm, opts, migrationParams,
   const [orgName, tokenName, tokenSymbol, founderAddresses, tokenDist, repDist, uController, cap] = [
     randomName,
     randomName + ' Token',
-    randomName[0] + randomName.split(' ')[0] + 'T',
+    'EPT',
     migrationParams.founders.map(({ address }) => address),
     migrationParams.founders.map(({ tokens }) => web3.utils.toWei(tokens.toString())),
     migrationParams.founders.map(({ reputation }) => web3.utils.toWei(reputation.toString())),
@@ -166,7 +166,7 @@ async function migrateEthCCDAO ({ web3, spinner, confirm, opts, migrationParams,
   return {
     ethcc_dao: {
       name: orgName,
-      Avatar,
+      Avatar: Avatar,
       DAOToken,
       Reputation
     }
