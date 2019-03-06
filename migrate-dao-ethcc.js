@@ -21,7 +21,6 @@ async function migrateEthCCDAO ({ web3, spinner, confirm, opts, migrationParams,
     ContributionReward,
     GenericScheme,
     GenesisProtocol,
-    AbsoluteVote,
     Wallet
   } = base
 
@@ -54,16 +53,9 @@ async function migrateEthCCDAO ({ web3, spinner, confirm, opts, migrationParams,
     opts
   )
 
-  await wallet.methods.transferOwnership(GenericScheme).send()
-
   const genesisProtocol = new web3.eth.Contract(
     require('@daostack/arc/build/contracts/GenesisProtocol.json').abi,
     GenesisProtocol,
-    opts
-  )
-  const absoluteVote = new web3.eth.Contract(
-    require('@daostack/arc/build/contracts/AbsoluteVote.json').abi,
-    AbsoluteVote,
     opts
   )
 
@@ -95,25 +87,7 @@ async function migrateEthCCDAO ({ web3, spinner, confirm, opts, migrationParams,
   tx = await forgeOrg.send()
   await logTx(tx, 'Created new organization.')
 
-  spinner.start('Setting AbsoluteVote parameters...')
-
-  const absoluteVoteSetParams = absoluteVote.methods.setParameters(
-    migrationParams.AbsoluteVote.votePerc,
-    migrationParams.AbsoluteVote.voteOnBehalf
-  )
-  const absoluteVoteParams = await absoluteVoteSetParams.call()
-  tx = await absoluteVoteSetParams.send()
-  await logTx(tx, 'AbsoluteVote parameters set.')
-
-  spinner.start('Setting SchemeRegistrar parameters...')
-  const schemeRegistrarSetParams = schemeRegistrar.methods.setParameters(
-    absoluteVoteParams,
-    absoluteVoteParams,
-    AbsoluteVote
-  )
-  const schemeRegistrarParams = await schemeRegistrarSetParams.call()
-  tx = await schemeRegistrarSetParams.send()
-  await logTx(tx, 'SchemeRegistrar parameters set.')
+  await wallet.methods.transferOwnership(Avatar).send()
 
   spinner.start('Setting GenesisProtocol parameters...')
   const genesisProtocolSetParams = genesisProtocol.methods.setParameters(
@@ -135,6 +109,16 @@ async function migrateEthCCDAO ({ web3, spinner, confirm, opts, migrationParams,
   const genesisProtocolParams = await genesisProtocolSetParams.call()
   tx = await genesisProtocolSetParams.send()
   await logTx(tx, 'GenesisProtocol parameters set.')
+
+  spinner.start('Setting SchemeRegistrar parameters...')
+  const schemeRegistrarSetParams = schemeRegistrar.methods.setParameters(
+    genesisProtocolParams,
+    genesisProtocolParams,
+    GenesisProtocol
+  )
+  const schemeRegistrarParams = await schemeRegistrarSetParams.call()
+  tx = await schemeRegistrarSetParams.send()
+  await logTx(tx, 'SchemeRegistrar parameters set.')
 
   spinner.start("Setting 'ContributionReward' parameters...")
   const contributionRewardSetParams = contributionReward.methods.setParameters(
