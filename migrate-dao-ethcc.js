@@ -16,7 +16,6 @@ async function migrateEthCCDAO ({ web3, spinner, confirm, opts, migrationParams,
 
   const {
     UController,
-    DaoCreator,
     SchemeRegistrar,
     ContributionReward,
     GenericScheme,
@@ -24,11 +23,12 @@ async function migrateEthCCDAO ({ web3, spinner, confirm, opts, migrationParams,
     Wallet
   } = base
 
-  const daoCreator = new web3.eth.Contract(
-    require('@daostack/arc/build/contracts/DaoCreator.json').abi,
-    DaoCreator,
+  const uController = new web3.eth.Contract(
+    require('@daostack/arc/build/contracts/UController.json').abi,
+    UController,
     opts
   )
+
   const schemeRegistrar = new web3.eth.Contract(
     require('@daostack/arc/build/contracts/SchemeRegistrar.json').abi,
     SchemeRegistrar,
@@ -60,34 +60,72 @@ async function migrateEthCCDAO ({ web3, spinner, confirm, opts, migrationParams,
   )
 
   const randomName = 'ETHParisHackathon'
-  const [orgName, tokenName, tokenSymbol, founderAddresses, tokenDist, repDist, uController, cap] = [
+  const [orgName, tokenName, tokenSymbol, founderAddresses, tokenDist, repDist, cap] = [
     randomName,
     randomName + ' Token',
     'EPT',
     migrationParams.founders.map(({ address }) => address),
     migrationParams.founders.map(({ tokens }) => web3.utils.toWei(tokens.toString())),
     migrationParams.founders.map(({ reputation }) => web3.utils.toWei(reputation.toString())),
-    UController,
     '0'
   ]
 
   spinner.start('Creating a new organization...')
-  const forgeOrg = daoCreator.methods.forgeOrg(
-    orgName,
-    tokenName,
-    tokenSymbol,
-    founderAddresses,
-    tokenDist,
-    repDist,
-    uController,
-    cap
+
+  const ETHCCDAOToken = (await new web3.eth.Contract(
+    require('@daostack/arc/build/contracts/DAOToken.json').abi,
+    undefined,
+    opts
+  ).deploy({
+    data: require('@daostack/arc/build/contracts/DAOToken.json').bytecode,
+    arguments: [tokenName, tokenSymbol, 0]
+  }).send()).options.address
+
+  const DAOReputation = (await new web3.eth.Contract(
+    require('@daostack/arc/build/contracts/Reputation.json').abi,
+    undefined,
+    opts
+  ).deploy({
+    data: require('@daostack/arc/build/contracts/Reputation.json').bytecode
+  }).send()).options.address
+
+  const Avatar = (await new web3.eth.Contract(
+    require('@daostack/arc/build/contracts/Avatar.json').abi,
+    undefined,
+    opts
+  ).deploy({
+    data: require('@daostack/arc/build/contracts/Avatar.json').bytecode,
+    arguments: [randomName, ETHCCDAOToken, DAOReputation]
+  }).send()).options.address
+
+  console.log(Avatar)
+  const reputation = await new web3.eth.Contract(
+    require('@daostack/arc/build/contracts/Reputation.json').abi,
+    DAOReputation,
+    opts
   )
 
-  const Avatar = await forgeOrg.call()
-  tx = await forgeOrg.send()
-  await logTx(tx, 'Created new organization.')
+  const daoToken = await new web3.eth.Contract(
+    require('@daostack/arc/build/contracts/DAOToken.json').abi,
+    ETHCCDAOToken,
+    opts
+  )
 
+  const avatar = await new web3.eth.Contract(
+    require('@daostack/arc/build/contracts/Avatar.json').abi,
+    Avatar,
+    opts
+  )
+
+  console.log(avatar.options.address)
+
+  await avatar.methods.transferOwnership(UController).send()
   await wallet.methods.transferOwnership(Avatar).send()
+
+  await uController.methods.newOrganization(Avatar).send()
+  await reputation.methods.transferOwnership(UController).send()
+  await daoToken.methods.transferOwnership(UController).send()
+  
 
   spinner.start('Setting GenesisProtocol parameters...')
   const genesisProtocolSetParams = genesisProtocol.methods.setParameters(
@@ -155,10 +193,15 @@ async function migrateEthCCDAO ({ web3, spinner, confirm, opts, migrationParams,
   ]
 
   spinner.start('Setting DAO schemes...')
-  tx = await daoCreator.methods.setSchemes(Avatar, schemes, params, permissions, 'metaData').send()
-  await logTx(tx, 'DAO schemes set.')
+  tx = await uController.methods.registerScheme(schemes[0], params[0], permissions[0], Avatar).send()
+  tx = await uController.methods.registerScheme(schemes[1], params[1], permissions[1], Avatar).send()
+  tx = await uController.methods.registerScheme(schemes[2], params[2], permissions[2], Avatar).send()
+  tx = await uController.methods.registerScheme(schemes[3], params[3], permissions[3], Avatar).send()
 
-  const avatar = new web3.eth.Contract(require('@daostack/arc/build/contracts/Avatar.json').abi, Avatar, opts)
+  console.log(web3.eth.defaultAccount)
+  tx = await uController.methods.unregisterScheme(web3.eth.defaultAccount, Avatar).send()
+
+  await logTx(tx, 'DAO schemes set.')
 
   const DAOToken = await avatar.methods.nativeToken().call()
   const Reputation = await avatar.methods.nativeReputation().call()

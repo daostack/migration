@@ -1,24 +1,24 @@
 {
   "private": {
     "base": {
-      "GEN": "0x5b1869D9A4C187F2EAa108f3062412ecf0526b24",
-      "ControllerCreator": "0xCfEB869F69431e42cdB54A4F4f105C19C080A601",
-      "DaoCreator": "0x254dffcd3277C0b1660F6d42EFbB754edaBAbC2B",
-      "UController": "0xC89Ce4735882C9F0f0FE26686c53074E09B0D550",
-      "GenesisProtocol": "0xD833215cBcc3f914bD1C9ece3EE7BF8B14f841bb",
-      "SchemeRegistrar": "0x9561C133DD8580860B6b7E504bC5Aa500f0f06a7",
-      "UpgradeScheme": "0xe982E462b094850F12AF94d21D470e21bE9D0E9C",
-      "GlobalConstraintRegistrar": "0x59d3631c86BbE35EF041872d502F218A39FBa150",
-      "ContributionReward": "0x0290FB167208Af455bB137780163b7B7a9a10C16",
-      "AbsoluteVote": "0x9b1f7F645351AF3631a656421eD2e40f2802E6c0",
-      "QuorumVote": "0x67B5656d60a809915323Bf2C40A8bEF15A152e3e",
-      "TokenCapGC": "0x2612Af3A521c2df9EAF28422Ca335b04AdF3ac66",
-      "VestingScheme": "0xA57B8a5584442B467b4689F1144D269d096A3daF",
-      "VoteInOrganizationScheme": "0x26b4AFb60d6C903165150C6F0AA14F8016bE4aec",
-      "OrganizationRegister": "0x630589690929E9cdEFDeF0734717a9eF3Ec7Fcfe",
-      "Redeemer": "0x0E696947A06550DEf604e82C26fd9E493e576337",
-      "GenericScheme": "0xDb56f2e9369E0D7bD191099125a3f6C370F8ed15",
-      "Wallet": "0xA94B7f0465E98609391C623d0560C5720a3f2D33"
+      "GEN": "0xe78A0F7E598Cc8b0Bb87894B0F60dD2a88d6a8Ab",
+      "ControllerCreator": "0x5b1869D9A4C187F2EAa108f3062412ecf0526b24",
+      "DaoCreator": "0xCfEB869F69431e42cdB54A4F4f105C19C080A601",
+      "UController": "0x254dffcd3277C0b1660F6d42EFbB754edaBAbC2B",
+      "GenesisProtocol": "0xC89Ce4735882C9F0f0FE26686c53074E09B0D550",
+      "SchemeRegistrar": "0xD833215cBcc3f914bD1C9ece3EE7BF8B14f841bb",
+      "UpgradeScheme": "0x9561C133DD8580860B6b7E504bC5Aa500f0f06a7",
+      "GlobalConstraintRegistrar": "0xe982E462b094850F12AF94d21D470e21bE9D0E9C",
+      "ContributionReward": "0x59d3631c86BbE35EF041872d502F218A39FBa150",
+      "AbsoluteVote": "0x0290FB167208Af455bB137780163b7B7a9a10C16",
+      "QuorumVote": "0x9b1f7F645351AF3631a656421eD2e40f2802E6c0",
+      "TokenCapGC": "0x67B5656d60a809915323Bf2C40A8bEF15A152e3e",
+      "VestingScheme": "0x2612Af3A521c2df9EAF28422Ca335b04AdF3ac66",
+      "VoteInOrganizationScheme": "0xA57B8a5584442B467b4689F1144D269d096A3daF",
+      "OrganizationRegister": "0x26b4AFb60d6C903165150C6F0AA14F8016bE4aec",
+      "Redeemer": "0x630589690929E9cdEFDeF0734717a9eF3Ec7Fcfe",
+      "GenericScheme": "0x0E696947A06550DEf604e82C26fd9E493e576337",
+      "Wallet": "0xdFccc9C59c7361307d47c558ffA75840B32DbA29"
     },
     "dao": {
       "name": "Mendacious Sea barnacles",
@@ -45,9 +45,9 @@
     },
     "ethcc_dao": {
       "name": "ETHParisHackathon",
-      "Avatar": "0x83ce3B813791Dfe112A348e2f2816f782323B399",
-      "DAOToken": "0x05678a3797bf8dC4dE0C6B0Fd13c3C455629E02f",
-      "Reputation": "0x332280007303d5942dd60A945169b2b303320686"
+      "Avatar": "0xb4fFe5983B0B748124577Af4d16953bd096b6897",
+      "DAOToken": "0x9e90054F4B6730cffAf1E6f6ea10e1bF9dD26dbb",
+      "Reputation": "0xfE82e8f24A51E670133f4268cDfc164c49FC3b37"
     }
   },
   "kovan": {
@@ -96,7 +96,7 @@
       "OrganizationRegister": "0x58f6d32FCeeC19866464288FCeA7a0C9CE31f69B",
       "Redeemer": "0x1331082205301C8188D530E11c2100038448fa2f",
       "GenericScheme": "0x9777130bAc261B3882444622841AEBCDA93834bA",
-      "Wallet": "0xE7DAa98D048e2462f1B04Dc8eB0bA21Efc187ba2"
+      "Wallet": "0x786C54F0c31a6af156D1dCC894f3DBD509413917"
     },
     "dao": {
       "name": "Crapulous Stick figures",
@@ -106,9 +106,9 @@
     },
     "ethcc_dao": {
       "name": "ETHParisHackathon",
-      "Avatar": "0xdb1ad1E4A032754c0E421148f4B47cd6980D4E45",
-      "DAOToken": "0xfFA96008b355B5f7986E4edF437D54d723d6914a",
-      "Reputation": "0x3271a18421F135DD20aE198FABE3A5df1345bF34"
+      "Avatar": "0x2Ece87781b4D20491B92e135bb602a2445323d24",
+      "DAOToken": "0xF0760cB988DDea042368029eBeD24A4d02863673",
+      "Reputation": "0xDf6030B140Ba67b1703C1365C18a4EAc860db825"
     }
   },
   "main": {
