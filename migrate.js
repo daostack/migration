@@ -17,12 +17,13 @@ async function migrate (opts) {
   const base = await migrateBase(opts)
   const dao = await migrateDAO({ ...opts, previousMigration: { ...opts.previousMigration, ...base } })
   const demo = await migrateDemoTest({ ...opts, previousMigration: { ...opts.previousMigration, ...base } })
+  const ethCCDao = await migrateEthCCDAO({ ...opts, previousMigration: { ...opts.previousMigration, ...base } })
   return {
     ...base,
     ...dao,
-    ...demo
+    ...demo,
+    ...ethCCDao
   }
-  const ethCCDao = await migrateEthCCDAO({ ...opts, previousMigration: { ...opts.previousMigration, ...base } })
 }
 
 const defaults = {

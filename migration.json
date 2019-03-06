@@ -96,7 +96,7 @@
       "OrganizationRegister": "0x58f6d32FCeeC19866464288FCeA7a0C9CE31f69B",
       "Redeemer": "0x1331082205301C8188D530E11c2100038448fa2f",
       "GenericScheme": "0x9777130bAc261B3882444622841AEBCDA93834bA",
-      "Wallet": "0x55D6166DAcD03f321FC3F3a143959249Ed72Df55"
+      "Wallet": "0xE7DAa98D048e2462f1B04Dc8eB0bA21Efc187ba2"
     },
     "dao": {
       "name": "Crapulous Stick figures",
@@ -106,9 +106,9 @@
     },
     "ethcc_dao": {
       "name": "ETHParisHackathon",
-      "Avatar": "0xeAC3173EEc63147e3b27BEaBeE546F83f46caa75",
-      "DAOToken": "0x8DBa81ec97756F594F9Bb4CCEe9AB4f4191FD636",
-      "Reputation": "0x50900C68420E9FEa8d8e55938C03000848B53569"
+      "Avatar": "0xdb1ad1E4A032754c0E421148f4B47cd6980D4E45",
+      "DAOToken": "0xfFA96008b355B5f7986E4edF437D54d723d6914a",
+      "Reputation": "0x3271a18421F135DD20aE198FABE3A5df1345bF34"
     }
   },
   "main": {
