@@ -5,32 +5,33 @@ source .env
 
 
 # npm ci
-echo "Installing NPM modules..."
-npm install
-npm ci
-# recompiling contracts
-echo "Recompiling contracts..."
-npm explore @daostack/arc -- npm i
-npm explore @daostack/arc -- npm run build
-# generate abis
-echo "Generating abis..."
-npm run generate-abis
-# prune arc build
-echo "Pruning Arc build..."
-npm run prune-arc-build -- "$@"
-# # migrate ganache
-# echo "Migrating ganache..."
-# npm run migrate -- "$@"
-# # migrate kovan
-# echo "Migrating kovan..."
-# npm run migrate -- --gasPrice 10 --provider $kovan_provider --private-key $kovan_private_key "$@"
-# # migrate rinkeby
-echo "Migrating rinkeby..."
-npm run migrate base -- --gasPrice 10 --provider $rinkeby_provider --private-key $rinkeby_private_key "$@"
-npm run migrate ethcc -- --gasPrice 10 --provider $rinkeby_provider --private-key $rinkeby_private_key "$@"
-# # migrate mainnet
+# echo "Installing NPM modules..."
+# npm install
+# npm ci
+# # recompiling contracts
+# echo "Recompiling contracts..."
+# npm explore @daostack/arc -- npm i
+# npm explore @daostack/arc -- npm run build
+# # generate abis
+# echo "Generating abis..."
+# npm run generate-abis
+# # prune arc build
+# echo "Pruning Arc build..."
+# npm run prune-arc-build -- "$@"
+# # # migrate ganache
+# # echo "Migrating ganache..."
+# # npm run migrate -- "$@"
+# # # migrate kovan
+# # echo "Migrating kovan..."
+# # npm run migrate -- --gasPrice 10 --provider $kovan_provider --private-key $kovan_private_key "$@"
+# # # migrate rinkeby
+# # echo "Migrating rinkeby..."
+# # npm run migrate base -- --gasPrice 10 --provider $rinkeby_provider --private-key $rinkeby_private_key "$@"
+# # npm run migrate ethcc -- --gasPrice 10 --provider $rinkeby_provider --private-key $rinkeby_private_key "$@"
+# # # migrate mainnet
 # echo "Migrating mainnet..."
-# npm run migrate -- --gasPrice 30 --provider $mainnet_provider --private-key $mainnet_private_key "$@"
+npm run migrate base -- --gasPrice 20 --provider $mainnet_provider --private-key $mainnet_private_key "$@"
+npm run migrate ethcc -- --gasPrice 20 --provider $mainnet_provider --private-key $mainnet_private_key "$@"
 # # set version
 # echo "Setting version..."
 # node set-version.js

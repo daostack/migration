@@ -1,4 +1,5 @@
 async function migrateEthCCDAO ({ web3, spinner, confirm, opts, migrationParams, logTx, previousMigration: { base } }) {
+  opts.gas = 8000000
   migrationParams = require('./migration-params-ethparis.json').default
   if (!(await confirm('About to migrate new DAO. Continue?'))) {
     return
