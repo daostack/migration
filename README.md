@@ -167,63 +167,77 @@ Example migration parameters object:
 
 ```json
 {
-	"ContributionReward": {
-		"orgNativeTokenFeeGWei": 0
-	},
-	"AbsoluteVote": {
-		"voteOnBehalf": "0x0000000000000000000000000000000000000000",
-		"votePerc": 50
-	},
-	"GenesisProtocol": {
-      "boostedVotePeriodLimit": 259200,
-      "daoBountyConst": 75,
-      "minimumDaoBountyGWei": 100,
-      "queuedVotePeriodLimit": 1814400,
-      "queuedVoteRequiredPercentage": 50,
-      "preBoostedVotePeriodLimit": 259200,
-      "proposingRepRewardGwei": 5,
-      "quietEndingPeriod": 86400,
-      "thresholdConst": 2000,
-      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
-      "votersReputationLossRatio": 1
-	},
-	"founders": [
-		{
-			"address": "0x123",
-			"tokens": 1000,
-			"reputation": 1000
-		},
-		//...
-		{
-			"address": "0x321",
-			"tokens": 1000,
-			"reputation": 1000
-		}
-	]
+  "ContributionReward": {
+    "orgNativeTokenFeeGWei": 0
+  },
+  "GenericScheme": {
+    "targetContract": "0x0000000000000000000000000000000000000000"
+  },
+  "SchemeRegistrar": {
+  },
+  "GlobalConstraintRegistrar": {
+  },
+  "UpgradeScheme": {
+  },
+  "GenesisProtocol": {
+    "boostedVotePeriodLimit": 600,
+    "daoBountyConst": 10,
+    "minimumDaoBountyGWei": 100,
+    "queuedVotePeriodLimit": 1800,
+    "queuedVoteRequiredPercentage": 50,
+    "preBoostedVotePeriodLimit": 600,
+    "proposingRepRewardGwei": 5,
+    "quietEndingPeriod": 300,
+    "thresholdConst": 2000,
+    "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+    "votersReputationLossRatio": 1,
+    "activationTime": 0
+  },
+  "schemes": {
+    "ContributionReward": true,
+    "GenericScheme": false,
+    "SchemeRegistrar": true,
+    "GlobalConstraintRegistrar": true,
+    "UpgradeScheme": true
+  },
+  "unregisterOwner": true,
+  "orgName": "The DAO",
+  "tokenName": "The DAO Token",
+  "tokenSymbol": "TDT",
+  "founders": [
+    {
+      "address": "0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1",
+      "tokens": 1000,
+      "reputation": 1000
+    },
+    {
+      "address": "0xffcf8fdee72ac11b5c542428b35eef5769c409f0",
+      "tokens": 1000,
+      "reputation": 1000
+    },
+    {
+      "address": "0x22d491bde2303f2f43325b2108d26f1eaba1e32b",
+      "tokens": 1000,
+      "reputation": 1000
+    },
+    {
+      "address": "0xe11ba2b4d45eaed5996cd0823791e0c93114882d",
+      "tokens": 1000,
+      "reputation": 1000
+    },
+    {
+      "address": "0xd03ea8624c8c5987235048901fb614fdca89b117",
+      "tokens": 1000,
+      "reputation": 1000
+    },
+    {
+      "address": "0x95ced938f7991cd0dfcb48f0a06a40fa1af46ebc",
+      "tokens": 1000,
+      "reputation": 1000
+    }
+  ]
 }
 ```
-
-## The Example DAO
-
-The migrated DAO is a simple DAO with the following configuration:
-
-- using `UController` as a controller.
-- founders - first 5 accounts generated from `mnemonic` each with `1000` native token and `1000` reputation.
-- no native token cap.
-- schemes:
-  - `SchemeRegistrar`
-    - permissions: all permissions (`0x0000001F`)
-    - voting machine: `AbsoluteVote(votePerc=50,voteOnBehalf="0x0000000000000000000000000000000000000000")`
-  - `GlobalConstraintRegistrar`
-    - permissions: manage global constraints (`0x00000004`)
-    - voting machine: `AbsoluteVote(votePerc=50,voteOnBehalf="0x0000000000000000000000000000000000000000")`
-  - `UpgradeScheme`
-    - permissions: manage schemes + upgrade controller (`0x0000000A`)
-    - voting machine: `AbsoluteVote(votePerc=50,voteOnBehalf="0x0000000000000000000000000000000000000000")`
-  - `ContributionReward`
-    - orgNativeTokenFee: no fee.
-    - permissions: no permissions (`0x00000000`)
-    - voting machine: `GenesisProtocol(<details in params.json file>)`
 
 ## Develop
 
