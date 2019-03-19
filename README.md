@@ -114,6 +114,24 @@ Options:
   --help             Show help                                                                                 [boolean]
 ```
 
+### How to deploying a new DAO:
+1. Make sure you have Node.js and NPM installed and updated to a version later that 10.0.0 and 6.0.0 respectively. You can find instructions for installation [here](https://nodejs.org/en/download/), and then verify your version by opening your CMD/ Terminal and type: `node -v` and then `npm -v`.
+
+2. In your terminal, use this command to install the DAOstack migration CLI: `npm install --global @daostack/migration`.
+
+3. Create a new `migration-params.json` file, you can also use the same [`migration-params.json`](https://github.com/daostack/migration/blob/master/migration-params.json) from the DAOstack migratio GitHub repo.
+
+4. Customize your `migration-params.json` by setting up the DAO name, token, founders, schemes etc.
+
+5. Obtain a URL of an Ethereum node connected to your desired netwrok. You can also use [Infure](https://infura.io) for that.
+
+6. Get some ether in your Ethereum account to pay for the mining fee of deploying the DAO. Make sure you have the private key for the account.
+
+7. In the terminal window, use this command to deploy your DAO:
+`daostack-migrate dao --gasPrice <YOUR_DESIRED_VALUE> --provider <YOUR_ETHERUM_NODE> --private-key <YOUR_PRIVATE_KEY>`.
+
+8. This will deploy the DAO for you and output the addresses into a `migration.json` file.
+
 ### As a docker image
 
 1. `docker pull daostack/migration`
