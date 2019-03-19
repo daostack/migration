@@ -128,7 +128,7 @@ Options:
 6. Get some ether in your Ethereum account to pay for the mining fee of deploying the DAO. Make sure you have the private key for the account.
 
 7. In the terminal window, use this command to deploy your DAO:
-`daostack-migrate dao --gasPrice <YOUR_DESIRED_VALUE> --provider <YOUR_ETHERUM_NODE> --private-key <YOUR_PRIVATE_KEY>`.
+`daostack-migrate dao --params <YOUR_PARAMS_FILE_LOCATION> --gasPrice <YOUR_DESIRED_VALUE> --provider <YOUR_ETHERUM_NODE> --private-key <YOUR_PRIVATE_KEY>`.
 
 8. This will deploy the DAO for you and output the addresses into a `migration.json` file.
 
