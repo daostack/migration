@@ -115,13 +115,13 @@ Options:
 ```
 
 ### How to deploying a new DAO:
-1. Make sure you have Node.js and NPM installed and updated to a version later that 10.0.0 and 6.0.0 respectively. You can find instructions for installation [here](https://nodejs.org/en/download/), and then verify your version by opening your CMD/ Terminal and type: `node -v` and then `npm -v`.
+1. Make sure you have Node.js and NPM installed and updated to a version later than 10.15.3 and 6.0.0 respectively. You can find instructions for installation [here](https://nodejs.org/en/download/), and then verify your version by opening your CMD/ Terminal and type: `node -v` and then `npm -v`.
 
 2. In your terminal, use this command to install the DAOstack migration CLI: `npm install --global @daostack/migration`.
 
-3. Create a new `migration-params.json` file, you can also use the same [`migration-params.json`](https://github.com/daostack/migration/blob/master/migration-params.json) from the DAOstack migratio GitHub repo.
+3. Create a new `your-new-dao-params.json` file, you can also use the same [`migration-params.json`](https://github.com/daostack/migration/blob/master/migration-params.json) from the DAOstack migratio GitHub repo.
 
-4. Customize your `migration-params.json` by setting up the DAO name, token, founders, schemes etc.
+4. Customize `your-new-dao-params.json` by setting up the DAO name, token, founders, schemes etc. To learn more about the customization options for the parameters please see the [Migration parameters](#migration-parameters) section below.
 
 5. Obtain a URL of an Ethereum node connected to your desired netwrok. You can also use [Infure](https://infura.io) for that.
 
@@ -129,6 +129,7 @@ Options:
 
 7. In the terminal window, use this command to deploy your DAO:
 `daostack-migrate dao --params <YOUR_PARAMS_FILE_LOCATION> --gasPrice <YOUR_DESIRED_VALUE> --provider <YOUR_ETHERUM_NODE> --private-key <YOUR_PRIVATE_KEY>`.
+_Note: You can also use a mnemonic seed instead of a private key by replacing the `--private-key` option with `--mnemonic <YOUR_MNEMONIC>`._
 
 8. This will deploy the DAO for you and output the addresses into a `migration.json` file.
 
@@ -183,20 +184,23 @@ Example migration result object:
 
 Example migration parameters object:
 
-```json
+```js
 {
+  "orgName": "The DAO", // Sets the name of your DAO
+  "tokenName": "The DAO Token", // Sets the name of your DAO token
+  "tokenSymbol": "TDT", // Sets the name of your DAO token symbol
+
+  // Needed only if you would like to use Contribution Reward scheme in your DAO
   "ContributionReward": {
     "orgNativeTokenFeeGWei": 0
   },
+
+  // Needed only if you would like to use Generic Scheme scheme in your DAO
   "GenericScheme": {
+    // The address of the contract the Generic Scheme can call.
     "targetContract": "0x0000000000000000000000000000000000000000"
   },
-  "SchemeRegistrar": {
-  },
-  "GlobalConstraintRegistrar": {
-  },
-  "UpgradeScheme": {
-  },
+  // Parameters list your DAO will use with the Genesis Protocol voting machine
   "GenesisProtocol": {
     "boostedVotePeriodLimit": 600,
     "daoBountyConst": 10,
@@ -211,6 +215,7 @@ Example migration parameters object:
     "votersReputationLossRatio": 1,
     "activationTime": 0
   },
+  // Select the schemes you would like your DAO to have
   "schemes": {
     "ContributionReward": true,
     "GenericScheme": false,
@@ -218,10 +223,10 @@ Example migration parameters object:
     "GlobalConstraintRegistrar": true,
     "UpgradeScheme": true
   },
+  // If true, the permission of the account which was used to deploy the DAO will 
+  // be revoked at the end of the deplyment process
   "unregisterOwner": true,
-  "orgName": "The DAO",
-  "tokenName": "The DAO Token",
-  "tokenSymbol": "TDT",
+  // List of addresses to mint initial tokens and reputation to
   "founders": [
     {
       "address": "0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1",
