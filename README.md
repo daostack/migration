@@ -36,8 +36,10 @@ const DAOstackMigration = require('@daostack/migration');
 // options are as specified in https://github.com/trufflesuite/ganache-cli#library
 DAOstackMigration.Ganache.server(..);
 DAOstackMigration.Ganache.provider(..);
+// choose the network to get addressed for. Either private (ganache), kovan, rinkeby, main.
+let network = 'private'
 // migration result object for ganache
-DAOstackMigration.migration('private');
+DAOstackMigration.migration(network);
 
 const options = {
   // web3 provider url
@@ -115,6 +117,7 @@ Options:
 ```
 
 ### How to deploying a new DAO:
+#### From CLI:
 1. Make sure you have Node.js and NPM installed and updated to a version later than 10.15.3 and 6.0.0 respectively. You can find instructions for installation [here](https://nodejs.org/en/download/), and then verify your version by opening your CMD/ Terminal and type: `node -v` and then `npm -v`.
 
 2. In your terminal, use this command to install the DAOstack migration CLI: `npm install --global @daostack/migration`.
@@ -132,6 +135,53 @@ Options:
 _Note: You can also use a mnemonic seed instead of a private key by replacing the `--private-key` option with `--mnemonic <YOUR_MNEMONIC>`._
 
 8. This will deploy the DAO for you and output the addresses into a `migration.json` file.
+
+#### From Javascript
+
+```javascript
+const DAOstackMigration = require('@daostack/migration');
+
+const options = {
+  // web3 provider url
+  provider: 'http://localhost:8545',
+  // gas price in GWei. If not specified, will use an automatically suggested price.
+  gasPrice: 3.4,
+  // surpress console output
+  quiet: true,
+  // disable confirmation messages
+  force: true,
+  // filepath to output the migration results
+  output: 'migration.json',
+  // private key of the account used in migration (overrides the 'mnemonic' option)
+  privateKey: '0x123...',
+  // mnemonic used to generate the private key of the account used in migration
+	mnemonic: 'one two three ...',
+	// migration parameters
+	params: {
+		default: {
+			// migration params as defined in the "Migration parameters" section below
+		},
+		private: {
+			// overide defaults on private network
+		},
+		kovan: {
+			// overide defaults on kovan
+		},
+	},
+};
+
+
+const migrationDAOResult = await DAOstackMigration.migrateDAO(options);
+migrationDAOResult.dao.Avatar // DAO avatar address
+// migrate an demo test scenario (requires an existing `output` file with a base migration)
+const migrationDemoResult = await DAOstackMigration.migrateDemoTest(options);
+migrationDemoResult.test.Avatar // Test DAO avatar address
+// migrate base, example DAO and demo test contracts
+const migrationResult = await DAOstackMigration.migrate(options); // migrate
+
+// run the cli
+DAOstackMigration.cli()
+```
 
 ### As a docker image
 
