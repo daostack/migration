@@ -276,6 +276,8 @@ Example migration parameters object:
   // If true, the permission of the account which was used to deploy the DAO will 
   // be revoked at the end of the deplyment process
   "unregisterOwner": true,
+  // True if should use Universal Controller (default false).
+  "useUController": false,
   // List of addresses to mint initial tokens and reputation to
   "founders": [
     {

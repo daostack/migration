@@ -121,20 +121,40 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
     }
   }
 
+  let Controller, controller
+
+  if (migrationParams.useUController) {
+    Controller = UController
+    controller = uController
+  } else {
+    spinner.start('Deploying Controller')
+    controller = (await new web3.eth.Contract(
+      require('@daostack/arc/build/contracts/Controller.json').abi,
+      undefined,
+      opts
+    ).deploy({
+      data: require('@daostack/arc/build/contracts/Controller.json').bytecode,
+      arguments: [avatar.options.address]
+    }).send())
+    Controller = controller.options.address
+  }
+
   spinner.start('Transfer Avatar to Controller ownership')
-  tx = await avatar.methods.transferOwnership(UController).send()
+  tx = await avatar.methods.transferOwnership(Controller).send()
   await logTx(tx, 'Finished transferring Avatar to Controller ownership')
 
-  spinner.start('Register Avatar to UController')
-  tx = await uController.methods.newOrganization(avatar.options.address).send()
-  await logTx(tx, 'Finished registerring Avatar')
+  if (migrationParams.useUController) {
+    spinner.start('Register Avatar to UController')
+    tx = await controller.methods.newOrganization(avatar.options.address).send()
+    await logTx(tx, 'Finished registerring Avatar')
+  }
 
   spinner.start('Transfer Reputation to Controller ownership')
-  tx = await reputation.methods.transferOwnership(UController).send()
+  tx = await reputation.methods.transferOwnership(Controller).send()
   await logTx(tx, 'Finished transferring Reputation to Controller ownership')
 
   spinner.start('Transfer DAOToken to Controller ownership')
-  tx = await daoToken.methods.transferOwnership(UController).send()
+  tx = await daoToken.methods.transferOwnership(Controller).send()
   await logTx(tx, 'Finished transferring DAOToken to Controller ownership')
 
   spinner.start('Setting GenesisProtocol parameters...')
@@ -169,7 +189,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
     schemeRegistrarParams = await schemeRegistrarSetParams.call()
     tx = await schemeRegistrarSetParams.send()
     await logTx(tx, 'Scheme Registrar parameters set.')
-    tx = await uController.methods.registerScheme(SchemeRegistrar, schemeRegistrarParams, '0x0000001F', avatar.options.address).send()
+    tx = await controller.methods.registerScheme(SchemeRegistrar, schemeRegistrarParams, '0x0000001F', avatar.options.address).send()
     await logTx(tx, 'Scheme Registrar successfully added to DAO.')
   }
 
@@ -183,7 +203,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
     contributionRewardParams = await contributionRewardSetParams.call()
     tx = await contributionRewardSetParams.send()
     await logTx(tx, 'Contribution Reward parameters set.')
-    tx = await uController.methods.registerScheme(ContributionReward, contributionRewardParams, '0x00000000', avatar.options.address).send()
+    tx = await controller.methods.registerScheme(ContributionReward, contributionRewardParams, '0x00000000', avatar.options.address).send()
     await logTx(tx, 'Contribution Reward successfully added to DAO.')
   }
 
@@ -197,7 +217,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
     genericSchemeParams = await genericSchemeSetParams.call()
     tx = await genericSchemeSetParams.send()
     await logTx(tx, 'Generic Scheme parameters set.')
-    tx = await uController.methods.registerScheme(GenericScheme, genericSchemeParams, '0x00000010', avatar.options.address).send()
+    tx = await controller.methods.registerScheme(GenericScheme, genericSchemeParams, '0x00000010', avatar.options.address).send()
     await logTx(tx, 'Generic Scheme successfully added to DAO.')
   }
 
@@ -210,7 +230,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
     globalConstraintRegistrarParams = await globalConstraintRegistrarSetParams.call()
     tx = await globalConstraintRegistrarSetParams.send()
     await logTx(tx, 'Global Constraints Registrar parameters set.')
-    tx = await uController.methods.registerScheme(GlobalConstraintRegistrar, globalConstraintRegistrarParams, '0x00000004', avatar.options.address).send()
+    tx = await controller.methods.registerScheme(GlobalConstraintRegistrar, globalConstraintRegistrarParams, '0x00000004', avatar.options.address).send()
     await logTx(tx, 'Global Constraints Registrar successfully added to DAO.')
   }
 
@@ -223,12 +243,12 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
     upgradeSchemeParams = await upgradeSchemeSetParams.call()
     tx = await upgradeSchemeSetParams.send()
     await logTx(tx, 'Upgrade Scheme parameters set.')
-    tx = await uController.methods.registerScheme(UpgradeScheme, upgradeSchemeParams, '0x0000000A', avatar.options.address).send()
+    tx = await controller.methods.registerScheme(UpgradeScheme, upgradeSchemeParams, '0x0000000A', avatar.options.address).send()
     await logTx(tx, 'Upgrade Scheme successfully added to DAO.')
   }
 
   if (migrationParams.unregisterOwner) {
-    tx = await uController.methods.unregisterScheme(web3.eth.defaultAccount, avatar.options.address).send()
+    tx = await controller.methods.unregisterScheme(web3.eth.defaultAccount, avatar.options.address).send()
     await logTx(tx, 'Revoked deployer access.')
   }
 
@@ -237,7 +257,8 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
       name: orgName,
       Avatar: avatar.options.address,
       DAOToken: daoToken.options.address,
-      Reputation: reputation.options.address
+      Reputation: reputation.options.address,
+      Controller
     }
   }
 }
