@@ -136,7 +136,7 @@ const wrapCommand = fn => async options => {
 
   // write results to file
   const results = { ...existingFile, [network]: { ...existingFile[network], ...result } }
-  
+
   fs.writeFileSync(output, JSON.stringify(results, undefined, 2), 'utf-8')
   spinner.succeed(`Wrote results to ${output}.`)
 

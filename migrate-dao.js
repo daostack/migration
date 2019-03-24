@@ -247,7 +247,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
     await logTx(tx, 'Upgrade Scheme successfully added to DAO.')
   }
 
-  if (migrationParams.unregisterOwner || migrationParams.unregisterOwner == undefined) {
+  if (migrationParams.unregisterOwner || migrationParams.unregisterOwner === undefined) {
     tx = await controller.methods.unregisterScheme(web3.eth.defaultAccount, avatar.options.address).send()
     await logTx(tx, 'Revoked deployer access.')
   }
