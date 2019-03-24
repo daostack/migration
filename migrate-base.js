@@ -63,10 +63,10 @@ async function migrateBase ({ web3, spinner, confirm, opts, logTx, previousMigra
       web3.utils.toWei('100000000')
     )
 
-    const GENTokenContract = await new this.web3.eth.Contract(
+    const GENTokenContract = await new web3.eth.Contract(
       require('@daostack/arc/build/contracts/DAOToken.json').abi,
       GENToken,
-      this.opts
+      opts
     )
 
     web3.eth.accounts.wallet.clear()
@@ -85,8 +85,8 @@ async function migrateBase ({ web3, spinner, confirm, opts, logTx, previousMigra
     ]
 
     for (let i = 0; i < privateKeys.length; i++) {
-      this.web3.eth.accounts.wallet.add(this.web3.eth.accounts.privateKeyToAccount(privateKeys[i]))
-      await GENTokenContract.methods.mint(this.web3.eth.accounts.wallet[i], this.web3.utils.toWei('1000')).send()
+      web3.eth.accounts.wallet.add(web3.eth.accounts.privateKeyToAccount(privateKeys[i]))
+      await GENTokenContract.methods.mint(web3.eth.accounts.wallet[i].address, web3.utils.toWei('1000')).send()
     }
   } else {
     addresses['GEN'] = GENToken
