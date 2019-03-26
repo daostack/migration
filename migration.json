@@ -17,7 +17,8 @@
       "VoteInOrganizationScheme": "0x21a59654176f2689d12E828B77a783072CD26680",
       "OrganizationRegister": "0xD86C8F0327494034F60e25074420BcCF560D5610",
       "Redeemer": "0x4bf749ec68270027C5910220CEAB30Cc284c7BA2",
-      "GenericScheme": "0xaD888d0Ade988EbEe74B8D4F39BF29a8d0fe8A8D"
+      "GenericScheme": "0xaD888d0Ade988EbEe74B8D4F39BF29a8d0fe8A8D",
+      "DAORegistry": "0x7C728214be9A0049e6a86f2137ec61030D0AA964"
     },
     "dao": {
       "name": "Tremulous Director",
