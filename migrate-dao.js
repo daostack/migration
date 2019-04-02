@@ -83,7 +83,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
     migrationParams.founders
   ]
 
-  let avatar, daoToken, reputation, Controller, controller;
+  let avatar, daoToken, reputation, Controller, controller
 
   if (migrationParams.useDaoCreator === true) {
     spinner.start('Creating a new organization...')
@@ -91,7 +91,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
     const [founderAddresses, tokenDist, repDist] = [
       founders.map(({ address }) => address),
       founders.map(({ tokens }) => web3.utils.toWei(tokens.toString())),
-      founders.map(({ reputation }) => web3.utils.toWei(reputation.toString())),
+      founders.map(({ reputation }) => web3.utils.toWei(reputation.toString()))
     ]
 
     spinner.start('Creating a new organization...')
@@ -102,7 +102,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
       founderAddresses,
       tokenDist,
       repDist,
-      migrationParams.useUController === true ? UController : "0x0000000000000000000000000000000000000000",
+      migrationParams.useUController === true ? UController : '0x0000000000000000000000000000000000000000',
       '0'
     )
 
@@ -115,7 +115,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
       Avatar,
       opts
     )
-    
+
     daoToken = new web3.eth.Contract(
       require('@daostack/arc/build/contracts/DAOToken.json').abi,
       await avatar.methods.nativeToken().call(),
@@ -149,7 +149,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
       data: require('@daostack/arc/build/contracts/DAOToken.json').bytecode,
       arguments: [tokenName, tokenSymbol, 0]
     }).send())
-  
+
     spinner.start('Deploying Reputation')
     reputation = (await new web3.eth.Contract(
       require('@daostack/arc/build/contracts/Reputation.json').abi,
@@ -158,7 +158,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
     ).deploy({
       data: require('@daostack/arc/build/contracts/Reputation.json').bytecode
     }).send())
-  
+
     spinner.start('Deploying Avatar.')
     avatar = (await new web3.eth.Contract(
       require('@daostack/arc/build/contracts/Avatar.json').abi,
@@ -168,11 +168,11 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
       data: require('@daostack/arc/build/contracts/Avatar.json').bytecode,
       arguments: [orgName, daoToken.options.address, reputation.options.address]
     }).send())
-  
+
     spinner.start('Minting founders tokens and reputation')
     for (let i in founders) {
       let founder = founders[i]
-  
+
       if (founder.reputation > 0) {
         tx = await reputation.methods.mint(founder.address, web3.utils.toWei(`${founder.reputation}`)).send()
         await logTx(tx, `Minted ${founder.reputation} reputation to ${founder.address}`)
@@ -182,7 +182,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
         await logTx(tx, `Minted ${founder.tokens} tokens to ${founder.address}`)
       }
     }
-  
+
     if (migrationParams.useUController) {
       Controller = UController
       controller = uController
@@ -198,19 +198,19 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
       }).send())
       Controller = controller.options.address
     }
-  
+
     spinner.start('Transfer Avatar to Controller ownership')
     tx = await avatar.methods.transferOwnership(Controller).send()
     await logTx(tx, 'Finished transferring Avatar to Controller ownership')
-  
+
     spinner.start('Transfer Reputation to Controller ownership')
     tx = await reputation.methods.transferOwnership(Controller).send()
     await logTx(tx, 'Finished transferring Reputation to Controller ownership')
-  
+
     spinner.start('Transfer DAOToken to Controller ownership')
     tx = await daoToken.methods.transferOwnership(Controller).send()
     await logTx(tx, 'Finished transferring DAOToken to Controller ownership')
-  
+
     if (migrationParams.useUController) {
       spinner.start('Register Avatar to UController')
       tx = await controller.methods.newOrganization(avatar.options.address).send()
