@@ -21,11 +21,11 @@
       "GenericScheme": "0x7C728214be9A0049e6a86f2137ec61030D0AA964"
     },
     "dao": {
-      "name": "Tenacious Miller",
-      "Avatar": "0xFF6049B87215476aBf744eaA3a476cBAd46fB1cA",
-      "DAOToken": "0x5017A545b09ab9a30499DE7F431DF0855bCb7275",
-      "Reputation": "0x86072CbFF48dA3C1F01824a6761A03F105BCC697",
-      "Controller": "0xFcCeD5E997E7fb1D0594518D3eD57245bB8ed17E"
+      "name": "Genesis Alpha",
+      "Avatar": "0xE7A2C59e134ee81D4035Ae6DB2254f79308e334f",
+      "DAOToken": "0xcDbe8b52A6c60A5f101d4A0F1f049f19a9e1D35F",
+      "Reputation": "0x93cdbf39fB9e13BD253CA5819247D52fbabf0F2f",
+      "Controller": "0x5109F62E4e0CA152f5543E59E42dc0360C3aeD25"
     },
     "test": {
       "name": "Dilatory Sawfiler",
@@ -102,11 +102,11 @@
       "GenericScheme": "0x8b09ED90bF01BcBB41609d0a519b553Dd6474d01"
     },
     "dao": {
-      "name": "Loquacious Carrot",
-      "Avatar": "0x10dB3F591c6ADAF9B025660925454231F5D0d3c9",
-      "DAOToken": "0x34c3cD78Dbd46e187f8FA41Ef07Ac94a0C01781C",
-      "Reputation": "0x5B54906B2bF6Da61EF8Bac3a6656321352637D98",
-      "Controller": "0xBebFA32962c9959c1832Af3D43AF1b11e319b22B"
+      "name": "Genesis Alpha",
+      "Avatar": "0x8c45444de92c4299Ab6c1259dd21bCdE461475B2",
+      "DAOToken": "0x9Fb3493679f1029aA142C5028Ef7B26307bf7DBa",
+      "Reputation": "0xb893EfEce22581f6Cf480b61C7F040A1098C0c2f",
+      "Controller": "0x2241e851c898e26e506BC8213500B7A53D5b64c9"
     }
   },
   "main": {
@@ -129,6 +129,13 @@
       "OrganizationRegister": "0x66A7Fdc68e9691F927D937E060bBa4Fe02833984",
       "Redeemer": "0xBfeed48f3c1E309B942246354C5c1460C0E44D4E",
       "GenericScheme": "0xaFE59DF878E23623A7a91d16001a66A4DD87e0c0"
+    },
+    "dao": {
+      "name": "Genesis Alpha",
+      "Avatar": "0x43055F921C30a6e70A943b7762e54e22b9665657",
+      "DAOToken": "0xA2064Ac981beC4a26E0085e67c92e55F92E1E0bf",
+      "Reputation": "0x84f55C43A09Bd1dB79A39372bD2f1be6459bAdCE",
+      "Controller": "0x09373546B9eEC1aD05564948F3c7BC0De9e9581D"
     }
   }
 }
