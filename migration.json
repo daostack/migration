@@ -131,11 +131,11 @@
       "GenericScheme": "0xaFE59DF878E23623A7a91d16001a66A4DD87e0c0"
     },
     "dao": {
-      "name": "Genesis Alpha",
-      "Avatar": "0x43055F921C30a6e70A943b7762e54e22b9665657",
-      "DAOToken": "0xA2064Ac981beC4a26E0085e67c92e55F92E1E0bf",
-      "Reputation": "0x84f55C43A09Bd1dB79A39372bD2f1be6459bAdCE",
-      "Controller": "0x09373546B9eEC1aD05564948F3c7BC0De9e9581D"
+      "name": "Parsimonious Glitter",
+      "Avatar": "0xd512576C536BE2aFAC1bd647A403985439470E4d",
+      "DAOToken": "0x1c2fcF6aEE50ea40B1A53ec221e14aE4bD0AeE2a",
+      "Reputation": "0x46c701b227Ac130157545Fd4Bc828d7F031FD7DE",
+      "Controller": "0x2D6b07Fb085d69d939c6034BC7E45cf38D1850f8"
     }
   }
 }

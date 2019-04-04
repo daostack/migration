@@ -1,6 +1,6 @@
 const utils = require('./utils.js')
 async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logTx, previousMigration: { base } }) {
-  opts.gas = 7500000
+  opts.gas = 8000000
   if (!(await confirm('About to migrate new DAO. Continue?'))) {
     return
   }
@@ -94,60 +94,45 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
       founders.map(({ reputation }) => web3.utils.toWei(reputation !== undefined ? reputation.toString() : "0"))
     ]
 
+    const foundersBatchSize = 40
+
+    let foundersInitCount = founderAddresses.length < foundersBatchSize ? founderAddresses.length : foundersBatchSize
     const forgeOrg = daoCreator.methods.forgeOrg(
       orgName,
       tokenName,
       tokenSymbol,
-      founderAddresses.slice(0, 1),
-      tokenDist.slice(0, 1),
-      repDist.slice(0, 1),
+      founderAddresses.slice(0, foundersInitCount),
+      tokenDist.slice(0, foundersInitCount),
+      repDist.slice(0, foundersInitCount),
       migrationParams.useUController === true ? UController : '0x0000000000000000000000000000000000000000',
       '0'
     )
 
     tx = await forgeOrg.send({
-      "gas": 6000000
+      "gas": 6500000
     })
 
     const Avatar = tx.events.NewOrg.returnValues._avatar
 
     await logTx(tx, 'Created new organization.')
 
-    spinner.start('Adding founders...')
-
-    tx = await daoCreator.methods.addFounders(
-      Avatar,
-      founderAddresses.slice(1, 35),
-      tokenDist.slice(1, 35),
-      repDist.slice(1, 35)
-    ).send({
-      "gas": 6000000
-    })
-    await logTx(tx, 'Finished adding founders.')
-
-    spinner.start('Adding founders...')
-
-    tx = await daoCreator.methods.addFounders(
-      Avatar,
-      founderAddresses.slice(35, 80),
-      tokenDist.slice(35, 80),
-      repDist.slice(35, 80)
-    ).send({
-      "gas": 6000000
-    })
-    await logTx(tx, 'Finished adding founders.')
-
-    spinner.start('Adding founders...')
-
-    tx = await daoCreator.methods.addFounders(
-      Avatar,
-      founderAddresses.slice(80, 137),
-      tokenDist.slice(80, 137),
-      repDist.slice(80, 137)
-    ).send({
-      "gas": 6000000
-    })
-    await logTx(tx, 'Finished adding founders.')
+    let foundersToAddCount = founderAddresses.length - foundersBatchSize
+    let i = 0;
+    while (foundersToAddCount > 0) {
+      i++;
+      spinner.start('Adding founders...')
+      let currentBatchCount = foundersToAddCount < foundersBatchSize ? foundersToAddCount : foundersBatchSize
+      tx = await daoCreator.methods.addFounders(
+        Avatar,
+        founderAddresses.slice(i * foundersBatchSize, i * foundersBatchSize + currentBatchCount),
+        tokenDist.slice(i * foundersBatchSize, i * foundersBatchSize + currentBatchCount),
+        repDist.slice(i * foundersBatchSize, i * foundersBatchSize + currentBatchCount)
+      ).send({
+        "gas": 6500000
+      })
+      await logTx(tx, 'Finished adding founders.')
+      foundersToAddCount -= foundersBatchSize;
+  }
 
     avatar = new web3.eth.Contract(
       require('@daostack/arc/build/contracts/Avatar.json').abi,
@@ -264,27 +249,31 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
 
   spinner.start('Setting GenesisProtocol parameters...')
 
-  let genesisProtocolParams = []
+  let votingMachinesParams = []
 
-  for (let i in migrationParams.GenesisProtocol) {
+  for (let i in migrationParams.votingMachinesParams) {
+    if (votingMachinesParams[i].votingParamsHash !== undefined) {
+      votingMachinesParams.push(votingMachinesParams[i].votingParamsHash)
+      continue
+    }
     const genesisProtocolSetParams = genesisProtocol.methods.setParameters(
       [
-        migrationParams.GenesisProtocol[i].queuedVoteRequiredPercentage,
-        migrationParams.GenesisProtocol[i].queuedVotePeriodLimit,
-        migrationParams.GenesisProtocol[i].boostedVotePeriodLimit,
-        migrationParams.GenesisProtocol[i].preBoostedVotePeriodLimit,
-        migrationParams.GenesisProtocol[i].thresholdConst,
-        migrationParams.GenesisProtocol[i].quietEndingPeriod,
-        web3.utils.toWei(migrationParams.GenesisProtocol[i].proposingRepRewardGwei.toString(), 'gwei'),
-        migrationParams.GenesisProtocol[i].votersReputationLossRatio,
-        web3.utils.toWei(migrationParams.GenesisProtocol[i].minimumDaoBountyGWei.toString(), 'gwei'),
-        migrationParams.GenesisProtocol[i].daoBountyConst,
-        migrationParams.GenesisProtocol[i].activationTime
+        migrationParams.VotingMachinesParams[i].queuedVoteRequiredPercentage,
+        migrationParams.VotingMachinesParams[i].queuedVotePeriodLimit,
+        migrationParams.VotingMachinesParams[i].boostedVotePeriodLimit,
+        migrationParams.VotingMachinesParams[i].preBoostedVotePeriodLimit,
+        migrationParams.VotingMachinesParams[i].thresholdConst,
+        migrationParams.VotingMachinesParams[i].quietEndingPeriod,
+        web3.utils.toWei(migrationParams.VotingMachinesParams[i].proposingRepRewardGwei.toString(), 'gwei'),
+        migrationParams.VotingMachinesParams[i].votersReputationLossRatio,
+        web3.utils.toWei(migrationParams.VotingMachinesParams[i].minimumDaoBountyGWei.toString(), 'gwei'),
+        migrationParams.VotingMachinesParams[i].daoBountyConst,
+        migrationParams.VotingMachinesParams[i].activationTime
       ],
-      migrationParams.GenesisProtocol[i].voteOnBehalf
+      migrationParams.VotingMachinesParams[i].voteOnBehalf
     )
 
-    genesisProtocolParams.push(await genesisProtocolSetParams.call())
+    votingMachinesParams.push(await genesisProtocolSetParams.call())
     tx = await genesisProtocolSetParams.send()
     await logTx(tx, 'GenesisProtocol parameters set.')
   }
@@ -292,8 +281,8 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
   if (migrationParams.schemes.SchemeRegistrar) {
     spinner.start('Setting Scheme Registrar parameters...')
     const schemeRegistrarSetParams = schemeRegistrar.methods.setParameters(
-      migrationParams.SchemeRegistrar.voteRegisterParams === undefined ? genesisProtocolParams[0] : genesisProtocolParams[migrationParams.SchemeRegistrar.voteRegisterParams],
-      migrationParams.SchemeRegistrar.voteRemoveParams === undefined ? genesisProtocolParams[0] : genesisProtocolParams[migrationParams.SchemeRegistrar.voteRemoveParams],
+      migrationParams.SchemeRegistrar.voteRegisterParams === undefined ? votingMachinesParams[0] : votingMachinesParams[migrationParams.SchemeRegistrar.voteRegisterParams],
+      migrationParams.SchemeRegistrar.voteRemoveParams === undefined ? votingMachinesParams[0] : votingMachinesParams[migrationParams.SchemeRegistrar.voteRemoveParams],
       migrationParams.SchemeRegistrar.votingMachine === undefined ? GenesisProtocol : migrationParams.SchemeRegistrar.votingMachine
     )
     schemeRegistrarParams = await schemeRegistrarSetParams.call()
@@ -308,7 +297,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
   if (migrationParams.schemes.ContributionReward) {
     spinner.start('Setting Contribution Reward parameters...')
     const contributionRewardSetParams = contributionReward.methods.setParameters(
-      migrationParams.ContributionReward.voteParams === undefined ? genesisProtocolParams[0] : genesisProtocolParams[migrationParams.ContributionReward.voteParams],
+      migrationParams.ContributionReward.voteParams === undefined ? votingMachinesParams[0] : votingMachinesParams[migrationParams.ContributionReward.voteParams],
       migrationParams.ContributionReward.votingMachine === undefined ? GenesisProtocol : migrationParams.ContributionReward.votingMachine
     )
     contributionRewardParams = await contributionRewardSetParams.call()
@@ -323,8 +312,8 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
   if (migrationParams.schemes.GenericScheme) {
     spinner.start('Setting Generic Scheme parameters...')
     const genericSchemeSetParams = genericScheme.methods.setParameters(
-      migrationParams.GenericScheme.voteParams === undefined ? genesisProtocolParams[0] : genesisProtocolParams[migrationParams.GenericScheme.voteParams],
-      GenesisProtocol,
+      migrationParams.GenericScheme.voteParams === undefined ? votingMachinesParams[0] : votingMachinesParams[migrationParams.GenericScheme.voteParams],
+      migrationParams.GenericScheme.votingMachine === undefined ? GenesisProtocol : migrationParams.GenericScheme.votingMachine,
       migrationParams.genericScheme.targetContract
     )
     genericSchemeParams = await genericSchemeSetParams.call()
@@ -339,7 +328,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
   if (migrationParams.schemes.GlobalConstraintRegistrar) {
     spinner.start('Setting Global Constraint Registrar parameters...')
     const globalConstraintRegistrarSetParams = globalConstraintRegistrar.methods.setParameters(
-      migrationParams.GlobalConstraintRegistrar.voteParams === undefined ? genesisProtocolParams[0] : genesisProtocolParams[migrationParams.GlobalConstraintRegistrar.voteParams],
+      migrationParams.GlobalConstraintRegistrar.voteParams === undefined ? votingMachinesParams[0] : votingMachinesParams[migrationParams.GlobalConstraintRegistrar.voteParams],
       migrationParams.GlobalConstraintRegistrar.votingMachine === undefined ? GenesisProtocol : migrationParams.GlobalConstraintRegistrar.votingMachine
     )
     globalConstraintRegistrarParams = await globalConstraintRegistrarSetParams.call()
@@ -354,7 +343,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
   if (migrationParams.schemes.UpgradeScheme) {
     spinner.start('Setting Upgrade Scheme parameters...')
     const upgradeSchemeSetParams = upgradeScheme.methods.setParameters(
-      migrationParams.UpgradeScheme.voteParams === undefined ? genesisProtocolParams[0] : genesisProtocolParams[migrationParams.UpgradeScheme.voteParams],
+      migrationParams.UpgradeScheme.voteParams === undefined ? votingMachinesParams[0] : votingMachinesParams[migrationParams.UpgradeScheme.voteParams],
       migrationParams.UpgradeScheme.votingMachine === undefined ? GenesisProtocol : migrationParams.UpgradeScheme.votingMachine
     )
     upgradeSchemeParams = await upgradeSchemeSetParams.call()
