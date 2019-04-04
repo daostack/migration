@@ -90,8 +90,8 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
 
     const [founderAddresses, tokenDist, repDist] = [
       founders.map(({ address }) => address),
-      founders.map(({ tokens }) => web3.utils.toWei(tokens !== undefined ? tokens.toString() : "0")),
-      founders.map(({ reputation }) => web3.utils.toWei(reputation !== undefined ? reputation.toString() : "0"))
+      founders.map(({ tokens }) => web3.utils.toWei(tokens !== undefined ? tokens.toString() : '0')),
+      founders.map(({ reputation }) => web3.utils.toWei(reputation !== undefined ? reputation.toString() : '0'))
     ]
 
     const foundersBatchSize = 40
@@ -109,7 +109,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
     )
 
     tx = await forgeOrg.send({
-      "gas": 6500000
+      'gas': 6500000
     })
 
     const Avatar = tx.events.NewOrg.returnValues._avatar
@@ -117,9 +117,9 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
     await logTx(tx, 'Created new organization.')
 
     let foundersToAddCount = founderAddresses.length - foundersBatchSize
-    let i = 0;
+    let i = 0
     while (foundersToAddCount > 0) {
-      i++;
+      i++
       spinner.start('Adding founders...')
       let currentBatchCount = foundersToAddCount < foundersBatchSize ? foundersToAddCount : foundersBatchSize
       tx = await daoCreator.methods.addFounders(
@@ -128,11 +128,11 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
         tokenDist.slice(i * foundersBatchSize, i * foundersBatchSize + currentBatchCount),
         repDist.slice(i * foundersBatchSize, i * foundersBatchSize + currentBatchCount)
       ).send({
-        "gas": 6500000
+        'gas': 6500000
       })
       await logTx(tx, 'Finished adding founders.')
-      foundersToAddCount -= foundersBatchSize;
-  }
+      foundersToAddCount -= foundersBatchSize
+    }
 
     avatar = new web3.eth.Contract(
       require('@daostack/arc/build/contracts/Avatar.json').abi,
