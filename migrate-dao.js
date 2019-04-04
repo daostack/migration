@@ -251,9 +251,9 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
 
   let votingMachinesParams = []
 
-  for (let i in migrationParams.votingMachinesParams) {
-    if (votingMachinesParams[i].votingParamsHash !== undefined) {
-      votingMachinesParams.push(votingMachinesParams[i].votingParamsHash)
+  for (let i in migrationParams.VotingMachinesParams) {
+    if (migrationParams.VotingMachinesParams[i].votingParamsHash !== undefined) {
+      votingMachinesParams.push(migrationParams.VotingMachinesParams[i].votingParamsHash)
       continue
     }
     const genesisProtocolSetParams = genesisProtocol.methods.setParameters(
