@@ -1,6 +1,5 @@
 const utils = require('./utils.js')
 async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logTx, previousMigration: { base } }) {
-  opts.gas = 8000000
   if (!(await confirm('About to migrate new DAO. Continue?'))) {
     return
   }
@@ -108,9 +107,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
       '0'
     )
 
-    tx = await forgeOrg.send({
-      'gas': 6500000
-    })
+    tx = await forgeOrg.send()
 
     const Avatar = tx.events.NewOrg.returnValues._avatar
 
@@ -127,9 +124,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
         founderAddresses.slice(i * foundersBatchSize, i * foundersBatchSize + currentBatchCount),
         tokenDist.slice(i * foundersBatchSize, i * foundersBatchSize + currentBatchCount),
         repDist.slice(i * foundersBatchSize, i * foundersBatchSize + currentBatchCount)
-      ).send({
-        'gas': 6500000
-      })
+      ).send()
       await logTx(tx, 'Finished adding founders.')
       foundersToAddCount -= foundersBatchSize
     }
