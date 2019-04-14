@@ -55,7 +55,7 @@
   },
   "unregisterOwner": true,
   "useUController": false,
-  "useDaoCreator": false,
+  "useDaoCreator": true,
 
   "founders": [
     {
