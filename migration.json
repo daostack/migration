@@ -127,11 +127,11 @@
       "GenericScheme": "0x448A3A18c0c06335eddA45Cb3fD2Fe5A87c020e7"
     },
     "dao": {
-      "name": "Spasmodic Chair",
-      "Avatar": "0xd05e2aB61fEd443BFF835B9850d50205ACa4f1Fa",
-      "DAOToken": "0x43B844aE9DF3d6CA88ed95d8eE7C0319BEE0F852",
-      "Reputation": "0xE121FfA1Fee7d8be1627d2C93037Cd0d674760dd",
-      "Controller": "0x3446Cf2Bd4ACb574c153684095268a00E0388681"
+      "name": "Liberland DAO",
+      "Avatar": "0x87190Bb60067876570158dbb4E2fD7b71DaB17c3",
+      "DAOToken": "0x46e3F56fFdfdFEfB609c48C6f866952B8D7b75B5",
+      "Reputation": "0xD52Ac27FAF4d085929c93D339233aCDa96938d1D",
+      "Controller": "0x8a29Ea0fe0E96Db050DE126EAf9e71b0cA9acC19"
     }
   }
 }
