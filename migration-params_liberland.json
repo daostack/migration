@@ -1,4 +1,8 @@
 {
+  "orgName": "Liberland DAO",
+  "tokenName": "Liberland DAO Token",
+  "tokenSymbol": "LDT",
+
   "ContributionReward": {
     "voteParams": 0
   },
