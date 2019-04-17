@@ -13,7 +13,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
   spinner.start('Migrating DAO...')
   let contributionRewardParams, genericSchemeParams, schemeRegistrarParams, globalConstraintRegistrarParams, upgradeSchemeParams
   let tx
-  let nonce = await web3.eth.getTransactionCount(web3.eth.defaultAccount) - 1;
+  let nonce = await web3.eth.getTransactionCount(web3.eth.defaultAccount) - 1
 
   const {
     UController,
