@@ -175,7 +175,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
     daoToken = new web3.eth.Contract(
       require('@daostack/arc/build/contracts/DAOToken.json').abi,
       c.options.address,
-      opts,
+      opts
     )
 
     spinner.start('Deploying Reputation')
@@ -193,7 +193,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
     reputation = new web3.eth.Contract(
       require('@daostack/arc/build/contracts/Reputation.json').abi,
       c.options.address,
-      opts,
+      opts
     )
 
     spinner.start('Deploying Avatar.')
@@ -212,7 +212,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
     avatar = new web3.eth.Contract(
       require('@daostack/arc/build/contracts/Avatar.json').abi,
       c.options.address,
-      opts,
+      opts
     )
 
     spinner.start('Minting founders tokens and reputation')
