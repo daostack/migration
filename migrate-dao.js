@@ -287,9 +287,9 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
         migrationParams.VotingMachinesParams[i].preBoostedVotePeriodLimit,
         migrationParams.VotingMachinesParams[i].thresholdConst,
         migrationParams.VotingMachinesParams[i].quietEndingPeriod,
-        web3.utils.toWei(migrationParams.VotingMachinesParams[i].proposingRepRewardGwei.toString(), 'gwei'),
+        web3.utils.toWei(migrationParams.VotingMachinesParams[i].proposingRepReward.toString()),
         migrationParams.VotingMachinesParams[i].votersReputationLossRatio,
-        web3.utils.toWei(migrationParams.VotingMachinesParams[i].minimumDaoBountyGWei.toString(), 'gwei'),
+        web3.utils.toWei(migrationParams.VotingMachinesParams[i].minimumDaoBounty.toString()),
         migrationParams.VotingMachinesParams[i].daoBountyConst,
         migrationParams.VotingMachinesParams[i].activationTime
       ],
