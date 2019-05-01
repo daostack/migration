@@ -99,11 +99,11 @@
       "GenericScheme": "0x2C4170B899f451225145e686bb1897635884b45F"
     },
     "dao": {
-      "name": "Loquacious Animator",
-      "Avatar": "0x4612D267f435092720dFD2270dd3Bc7F41128A37",
-      "DAOToken": "0x2de651e460b63fCeb8F96242D0d3578252f74664",
-      "Reputation": "0x1E06bFd5E3a8133E971Dc591bcDc8b9FbD54EfB3",
-      "Controller": "0x473C45F70678D550d30823E8aDEd27c0d28A7fc6"
+      "name": "Kyber DAO",
+      "Avatar": "0x6b8d56B26d1C34e0B9531EB0636f74C3AaA9ec54",
+      "DAOToken": "0x799B4E4CD9bdff0e203A03c20a80242AE7F40e75",
+      "Reputation": "0x885027F3d472C63c3802107eD3ab76f17FD3b7AC",
+      "Controller": "0xD20bbc6076Ed8AC4D007d14177EbA678b852f2a3"
     }
   },
   "mainnet": {
@@ -127,11 +127,11 @@
       "GenericScheme": "0x448A3A18c0c06335eddA45Cb3fD2Fe5A87c020e7"
     },
     "dao": {
-      "name": "Liberland DAO",
-      "Avatar": "0x87190Bb60067876570158dbb4E2fD7b71DaB17c3",
-      "DAOToken": "0x46e3F56fFdfdFEfB609c48C6f866952B8D7b75B5",
-      "Reputation": "0xD52Ac27FAF4d085929c93D339233aCDa96938d1D",
-      "Controller": "0x8a29Ea0fe0E96Db050DE126EAf9e71b0cA9acC19"
+      "name": "Kyber DAO",
+      "Avatar": "0xFf07F416B7065348653df9072fF7CB52aC677599",
+      "DAOToken": "0x0F7C390bB4b32220E5245F23DCB00C208215fC34",
+      "Reputation": "0x1C85cCCCbaeC5887bf456b3ac18B2ecDf44a7614",
+      "Controller": "0x295FAb72A49da54311e70EF07C64380973118506"
     }
   }
 }
