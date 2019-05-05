@@ -85,6 +85,7 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
   await setSchemes(schemes, avatarAddress, 'metaData')
 
   const {
+    srProposalId,
     gsProposalId,
     queuedProposalId,
     preBoostedProposalId,
@@ -135,6 +136,7 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
       DAOToken,
       Reputation,
       ActionMock,
+      srProposalId,
       gsProposalId,
       queuedProposalId,
       preBoostedProposalId,
@@ -206,6 +208,15 @@ async function submitDemoProposals (accounts, web3, avatarAddress, externalToken
     this.opts
   )
   let callData = await actionMock.methods.test2(avatarAddress).encodeABI()
+
+  let srProposalId = await submitSRProposal({
+    avatarAddress: avatarAddress,
+    scheme: '0x0000000000000000000000000000000000000001',
+    parametersHash: '0x000000000000000000000000000000000000000000000000000000000000abcd',
+    permissions: '0x00000000',
+    descHash: '0x000000000000000000000000000000000000000000000000000000000000abcd'
+  })
+
   let gsProposalId = await submitGSProposal({
     avatarAddress: avatarAddress,
     callData,
@@ -333,6 +344,7 @@ async function submitDemoProposals (accounts, web3, avatarAddress, externalToken
   })
 
   return {
+    srProposalId,
     gsProposalId,
     queuedProposalId,
     preBoostedProposalId,
@@ -525,6 +537,43 @@ async function setSchemes (schemes, avatarAddress, metadata) {
 
   await this.logTx(tx, 'Dao Creator Set Schemes.')
 }
+
+async function submitSRProposal ({
+  avatarAddress,
+  scheme,
+  parametersHash,
+  permissions,
+  descHash
+}) {
+  this.spinner.start('Submitting a new Proposal...')
+
+  const {
+    SchemeRegistrar
+  } = this.base
+
+  let tx
+
+  const schemeRegistrar = new this.web3.eth.Contract(
+    require('@daostack/arc/build/contracts/SchemeRegistrar.json').abi,
+    SchemeRegistrar,
+    this.opts
+  )
+
+  const prop = schemeRegistrar.methods.proposeScheme(
+    avatarAddress,
+    scheme,
+    parametersHash,
+    permissions,
+    descHash
+  )
+
+  const proposalId = await prop.call()
+  tx = await prop.send()
+  await this.logTx(tx, 'Submit new Proposal.')
+
+  return proposalId
+}
+
 async function submitGSProposal ({
   avatarAddress,
   callData,

@@ -20,28 +20,29 @@
       "GenericScheme": "0xaD888d0Ade988EbEe74B8D4F39BF29a8d0fe8A8D"
     },
     "dao": {
-      "name": "Turbulent Banjo",
+      "name": "Sagacious Musician",
       "Avatar": "0x86072CbFF48dA3C1F01824a6761A03F105BCC697",
       "DAOToken": "0x7C728214be9A0049e6a86f2137ec61030D0AA964",
       "Reputation": "0x5017A545b09ab9a30499DE7F431DF0855bCb7275",
       "Controller": "0x4bf3A7dFB3b76b5B3E169ACE65f888A4b4FCa5Ee"
     },
     "test": {
-      "name": "Nefarious Soaper",
+      "name": "Jocular Director",
       "Avatar": "0xE7A2C59e134ee81D4035Ae6DB2254f79308e334f",
       "DAOToken": "0xcDbe8b52A6c60A5f101d4A0F1f049f19a9e1D35F",
       "Reputation": "0x93cdbf39fB9e13BD253CA5819247D52fbabf0F2f",
       "ActionMock": "0x2c5f3c004878923f55A2a255F89Fe29393177509",
-      "gsProposalId": "0x2c320fa0e7a341cd28b8140247422b430c941390567ca3690fffc1e8577d3057",
-      "queuedProposalId": "0x8aa9e79ccae5d18919d7c8850370f3595a1f858e6e4d4323803469bf2a4e7357",
-      "preBoostedProposalId": "0xfebcac95ae283c1944909eacc11e8a4ac9e2ed31c1192342690fc7c9aae9bbbc",
-      "boostedProposalId": "0x766999e5d9f07dc297d8b404f245ca37515e03ec7dcb53bd5b4cc7bac068d439",
-      "executedProposalId": "0x6afee092a28c74f6358093d5376ac75014ac4d9fd42d296a5498ef42eecd7248"
+      "srProposalId": "0x2c320fa0e7a341cd28b8140247422b430c941390567ca3690fffc1e8577d3057",
+      "gsProposalId": "0x8aa9e79ccae5d18919d7c8850370f3595a1f858e6e4d4323803469bf2a4e7357",
+      "queuedProposalId": "0xfebcac95ae283c1944909eacc11e8a4ac9e2ed31c1192342690fc7c9aae9bbbc",
+      "preBoostedProposalId": "0x766999e5d9f07dc297d8b404f245ca37515e03ec7dcb53bd5b4cc7bac068d439",
+      "boostedProposalId": "0x6afee092a28c74f6358093d5376ac75014ac4d9fd42d296a5498ef42eecd7248",
+      "executedProposalId": "0xe2c6f4ef338357f3bff81bb9eb7128631358f0d093a476ea8af5108834baf65c"
     },
     "organs": {
-      "DemoAvatar": "0xd611F1AF9D056f00F49CB036759De2753EfA82c2",
-      "DemoDAOToken": "0x42D4BA5e542d9FeD87EA657f0295F1968A61c00A",
-      "DemoReputation": "0x25AF99b922857C37282f578F428CB7f34335B379"
+      "DemoAvatar": "0x995629b19667Ae71483DC812c1B5a35fCaaAF4B8",
+      "DemoDAOToken": "0x25AF99b922857C37282f578F428CB7f34335B379",
+      "DemoReputation": "0xd611F1AF9D056f00F49CB036759De2753EfA82c2"
     },
     "orgName": {
       "name": "The DAO",
