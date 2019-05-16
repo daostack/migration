@@ -130,7 +130,7 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
   }).send()
 
   return {
-    test: {
+    ['test-' + this.arcVersion]: {
       name: orgName,
       Avatar,
       DAOToken,
@@ -142,7 +142,7 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
       boostedProposalId,
       executedProposalId
     },
-    organs: {
+    ['organs-' + this.arcVersion]: {
       DemoAvatar: DemoAvatar.options.address,
       DemoDAOToken: DemoDAOToken.options.address,
       DemoReputation: DemoReputation.options.address
