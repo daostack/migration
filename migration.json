@@ -334,8 +334,8 @@
     }
   },
   "mainnet": {
-    "0.0.1-rc.16": {
-      "base": {
+    "base": {
+      "0.0.1-rc.16": {
         "GEN": "0x543Ff227F64Aa17eA132Bf9886cAb5DB55DCAddf",
         "DAORegistry": "0x41C24232452057b9c812A94f84b8643Ee0253C44",
         "ControllerCreator": "0x02E472D11dC05AFD8bD4136df24068d9cCcB49A3",
