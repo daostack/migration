@@ -1,8 +1,4 @@
 async function migrateBase ({ web3, spinner, confirm, opts, logTx, previousMigration }) {
-  for (let existing in previousMigration.base) {
-    existing = previousMigration.base[existing]
-    console.log(existing)
-  }
   if (!(await confirm('About to migrate base contracts. Continue?'))) {
     return
   }
