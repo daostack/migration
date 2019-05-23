@@ -1,0 +1,142 @@
+{
+  "ContributionReward": {
+    "voteParams": 0
+  },
+  "GenericScheme": {
+    "targetContract": "0x0000000000000000000000000000000000000000"
+  },
+  "SchemeRegistrar": {
+  "voteParams": 1
+  },
+  "GlobalConstraintRegistrar": {
+  },
+  "UpgradeScheme": {
+  },
+  "VotingMachinesParams": [
+    {
+      "boostedVotePeriodLimit": 259200,
+      "daoBountyConst": 10,
+      "minimumDaoBounty": 150,
+      "queuedVotePeriodLimit": 2592000,
+      "queuedVoteRequiredPercentage": 50,
+      "preBoostedVotePeriodLimit": 86400,
+      "proposingRepReward": 1250,
+      "quietEndingPeriod": 172800,
+      "thresholdConst": 1200,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votersReputationLossRatio": 4,
+      "activationTime": 1558958400
+    },
+    {
+      "boostedVotePeriodLimit": 691200,
+      "daoBountyConst": 10,
+      "minimumDaoBounty": 500,
+      "queuedVotePeriodLimit": 2592000,
+      "queuedVoteRequiredPercentage": 50,
+      "preBoostedVotePeriodLimit": 172800,
+      "proposingRepReward": 200,
+      "quietEndingPeriod": 345600,
+      "thresholdConst": 1500,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votersReputationLossRatio": 4,
+      "activationTime": 1558958400
+    }
+  ],
+  "schemes": {
+    "ContributionReward": true,
+    "GenericScheme": false,
+    "SchemeRegistrar": true,
+    "GlobalConstraintRegistrar": false,
+    "UpgradeScheme": false
+  },
+  "unregisterOwner": true,
+  "useUController": false,
+  "useDaoCreator": false,
+  "founders": [
+  {
+    "address": "0xb038105f748B1033C6a8D01fefe0C15CDfdB70fb",
+    "tokens": 0,
+    "reputation": 25000
+  },
+  {
+    "address": "0xD9d21d54fb2BF93AFC62a7115a2518682A50508b",
+    "tokens": 0,
+    "reputation": 25000
+  },
+  {
+    "address": "0x77488ed6c9448E1A5dBe6772d6D31dB85108A53E",
+    "tokens": 0,
+    "reputation": 10000
+  },
+  {
+    "address": "0xcf356a6eFa93781c6CD23d8d8d270fa49C1E549C",
+    "tokens": 0,
+    "reputation": 10000
+  },
+  {
+    "address": "0x72ff95ddf81bfd2db7a088aaafe39e7f3ad3682d",
+    "tokens": 0,
+    "reputation": 10000
+  },
+  {
+    "address": "0xe86ef0955bdd2a4865f16f5b3df7d0ec8d3a4050",
+    "tokens": 0,
+    "reputation": 10000
+  },
+  {
+    "address": "0x742c8C86efeD4f8E46Bb2e03BB8b2fc255526428",
+    "tokens": 0,
+    "reputation": 10000
+  },
+  {
+    "address": "0x2E23d90cF9B6AFf7D029b79cC46B6293eF5B4359",
+    "tokens": 0,
+    "reputation": 10000
+  },
+  {
+    "address": "0xe18713a37f29035673d7C41161b1c9ABd0B1Cd1d",
+    "tokens": 0,
+    "reputation": 10000
+  },
+  {
+    "address": "0xeca851e264d43291656181b6adf1a0eae9496bed",
+    "tokens": 0,
+    "reputation": 10000
+  },
+  {
+    "address": "0x1624754786D7cf67B373dF646B80dE0a8A766fae",
+    "tokens": 0,
+    "reputation": 10000
+  },
+  {
+    "address": "0x97282A7a15f9bEaDC854E8793AAe43B089F14b4e",
+    "tokens": 0,
+    "reputation": 10000
+  },
+  {
+    "address": "0x004230A4d379BfE3b23b6b3a6422139b52b508f6",
+    "tokens": 0,
+    "reputation": 10000
+  },
+  {
+    "address": "0x8AEdf9e2AfbCD49ba4edf86aC5e0Aaf3871A9165",
+    "tokens": 0,
+    "reputation": 10000
+  },
+  {
+    "address": "0x9f3ae1d603320980Bd7FD79EB6dF981d8A2A0e24",
+    "tokens": 0,
+    "reputation": 10000
+  },
+  {
+    "address": "0xE68705Ee4f07365C31fB7927F7dA89Dfe710Ec5B",
+    "tokens": 0,
+    "reputation": 10000
+  },
+  {
+    "address": "0xBBAf7c4Aa0bc6F9a80Ae58fC0E68F876BCE577FA",
+    "tokens": 0,
+    "reputation": 10000
+  },
+]
+}
