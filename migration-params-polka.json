@@ -1,4 +1,7 @@
 {
+  "orgName": "PolkaDAO",
+  "tokenName": "PolkaToken",
+  "tokenSymbol": "PDT",
   "ContributionReward": {
     "voteParams": 0
   },
@@ -51,7 +54,7 @@
   },
   "unregisterOwner": true,
   "useUController": false,
-  "useDaoCreator": false,
+  "useDaoCreator": true,
   "founders": [
   {
     "address": "0xb038105f748B1033C6a8D01fefe0C15CDfdB70fb",
@@ -137,6 +140,6 @@
     "address": "0xBBAf7c4Aa0bc6F9a80Ae58fC0E68F876BCE577FA",
     "tokens": 0,
     "reputation": 10000
-  },
+  }
 ]
 }

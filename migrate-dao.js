@@ -384,8 +384,8 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
   spinner.start('Setting ReputationFromToken ...')
 
   schemeNames.push('ReputationFromToken')
-  schemes.push("0xfB08de08d4e41944BDb084F9B6E241F15812F970")
-  params.push(0x0)
+  schemes.push('0xfB08de08d4e41944BDb084F9B6E241F15812F970')
+  params.push('0x0000000000000000000000000000000000000000000000000000000000000000')
   permissions.push('0x00000001')
 
   if (migrationParams.useDaoCreator === true) {
@@ -399,8 +399,6 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
       await logTx(tx, schemeNames[i] + ' was successfully registered to the DAO.')
     }
   }
-
-
 
   console.log(
     {
