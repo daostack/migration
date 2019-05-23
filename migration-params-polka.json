@@ -28,15 +28,15 @@
       "activationTime": 1558958400
     },
     {
-      "boostedVotePeriodLimit": 691200,
+      "boostedVotePeriodLimit": 518400,
       "daoBountyConst": 10,
       "minimumDaoBounty": 500,
       "queuedVotePeriodLimit": 2592000,
       "queuedVoteRequiredPercentage": 50,
       "preBoostedVotePeriodLimit": 172800,
-      "proposingRepReward": 200,
-      "quietEndingPeriod": 345600,
-      "thresholdConst": 1500,
+      "proposingRepReward": 5000,
+      "quietEndingPeriod": 259200,
+      "thresholdConst": 1600,
       "voteOnBehalf": "0x0000000000000000000000000000000000000000",
       "votersReputationLossRatio": 4,
       "activationTime": 1558958400
