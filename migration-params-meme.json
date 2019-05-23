@@ -39,7 +39,7 @@
       "preBoostedVotePeriodLimit": 172800,
       "proposingRepReward": 500,
       "quietEndingPeriod": 172800,
-      "thresholdConst": 1500,
+      "thresholdConst": 1400,
       "voteOnBehalf": "0x0000000000000000000000000000000000000000",
       "votersReputationLossRatio": 4,
       "activationTime": 0
