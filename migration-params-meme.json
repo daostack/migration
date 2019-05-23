@@ -1,0 +1,95 @@
+{
+  "orgName": "Meme",
+  "tokenName": "MemeToken",
+  "tokenSymbol": "MEM",
+  "ContributionReward": {
+    "voteParams": 0
+  },
+  "GenericScheme": {
+    "targetContract": "0x0000000000000000000000000000000000000000"
+  },
+  "SchemeRegistrar": {
+  "voteParams": 1
+  },
+  "GlobalConstraintRegistrar": {
+  },
+  "UpgradeScheme": {
+  },
+  "VotingMachinesParams": [
+    {
+      "boostedVotePeriodLimit": 10800,
+      "daoBountyConst": 10,
+      "minimumDaoBounty": 50,
+      "queuedVotePeriodLimit": 172800,
+      "queuedVoteRequiredPercentage": 50,
+      "preBoostedVotePeriodLimit": 3600,
+      "proposingRepReward": 100,
+      "quietEndingPeriod": 3600,
+      "thresholdConst": 1100,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votersReputationLossRatio": 4,
+      "activationTime": 0
+    },
+    {
+      "boostedVotePeriodLimit": 432000,
+      "daoBountyConst": 10,
+      "minimumDaoBounty": 500,
+      "queuedVotePeriodLimit": 2592000,
+      "queuedVoteRequiredPercentage": 50,
+      "preBoostedVotePeriodLimit": 172800,
+      "proposingRepReward": 500,
+      "quietEndingPeriod": 172800,
+      "thresholdConst": 1500,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votersReputationLossRatio": 4,
+      "activationTime": 0
+    }
+  ],
+  "schemes": {
+    "ContributionReward": true,
+    "GenericScheme": false,
+    "SchemeRegistrar": true,
+    "GlobalConstraintRegistrar": false,
+    "UpgradeScheme": false
+  },
+  "unregisterOwner": true,
+  "useUController": false,
+  "useDaoCreator": true,
+  "founders": [
+  {
+    "address": "0x7B2e78D4dFaABA045A167a70dA285E30E8FcA196",
+    "tokens": 0,
+    "reputation": 100
+  },
+  {
+    "address": "0x34bF0d00c38D714e7FfD96cC4E8c796F43832624",
+    "tokens": 0,
+    "reputation": 100
+  },
+  {
+    "address": "0xAe5fB390e5c4fA1962e39E98DBfb0ed8055Ed7A9",
+    "tokens": 0,
+    "reputation": 100
+  },
+  {
+    "address": "0x0f07D407aC41d6DBb2cF237b0704c0AB5b9b8754",
+    "tokens": 0,
+    "reputation": 100
+  },
+  {
+    "address": "0x7539a96097e5214da7336be510cddd415339949e",
+    "tokens": 0,
+    "reputation": 100
+  },
+  {
+    "address": "0xF16294a979a027F297DAcE2F618Cb57bc4Bf5d16",
+    "tokens": 0,
+    "reputation": 100
+  },
+  {
+    "address": "0x73Db6408abbea97C5DB8A2234C4027C315094936",
+    "tokens": 0,
+    "reputation": 100
+  }
+]
+}
