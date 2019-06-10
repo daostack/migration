@@ -7,7 +7,6 @@
   },
   "GenericScheme": {
     "targetContract": "0x0000000000000000000000000000000000000000",
-    "voteParams": 2
   },
   "SchemeRegistrar": {
       "voteParams": 0
@@ -44,25 +43,11 @@
       "voteOnBehalf": "0x0000000000000000000000000000000000000000",
       "votersReputationLossRatio": 4,
       "activationTime": 0
-    },
-    {
-      "boostedVotePeriodLimit": 129600,
-      "daoBountyConst": 10,
-      "minimumDaoBounty": 50,
-      "queuedVotePeriodLimit": 1209600,
-      "queuedVoteRequiredPercentage": 50,
-      "preBoostedVotePeriodLimit": 43200,
-      "proposingRepReward": 5,
-      "quietEndingPeriod": 43200,
-      "thresholdConst": 1300,
-      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
-      "votersReputationLossRatio": 4,
-      "activationTime": 0
     }
   ],
   "schemes": {
     "ContributionReward": true,
-    "GenericScheme": true,
+    "GenericScheme": false,
     "SchemeRegistrar": true,
     "GlobalConstraintRegistrar": false,
     "UpgradeScheme": false
