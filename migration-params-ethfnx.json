@@ -1,0 +1,180 @@
+{
+  "orgName": "efxDAO",
+  "tokenName": "efxDAO token",
+  "tokenSymbol": "EFXT",
+  "ContributionReward": {
+    "voteParams": 1
+  },
+  "GenericScheme": {
+    "targetContract": "0x0000000000000000000000000000000000000000",
+    "voteParams": 2
+  },
+  "SchemeRegistrar": {
+      "voteParams": 0
+  },
+  "GlobalConstraintRegistrar": {
+  },
+  "UpgradeScheme": {
+  },
+  "VotingMachinesParams": [
+    {
+      "boostedVotePeriodLimit": 1209600,
+      "daoBountyConst": 10,
+      "minimumDaoBounty": 500,
+      "queuedVotePeriodLimit": 3888000,
+      "queuedVoteRequiredPercentage": 50,
+      "preBoostedVotePeriodLimit": 172800,
+      "proposingRepReward": 300,
+      "quietEndingPeriod": 345600,
+      "thresholdConst": 2000,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votersReputationLossRatio": 4,
+      "activationTime": 0
+    },
+    {
+      "boostedVotePeriodLimit": 259200,
+      "daoBountyConst": 10,
+      "minimumDaoBounty": 150,
+      "queuedVotePeriodLimit": 1814400,
+      "queuedVoteRequiredPercentage": 50,
+      "preBoostedVotePeriodLimit": 86400,
+      "proposingRepReward": 100,
+      "quietEndingPeriod": 86400,
+      "thresholdConst": 1500,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votersReputationLossRatio": 4,
+      "activationTime": 0
+    },
+    {
+      "boostedVotePeriodLimit": 129600,
+      "daoBountyConst": 10,
+      "minimumDaoBounty": 50,
+      "queuedVotePeriodLimit": 1209600,
+      "queuedVoteRequiredPercentage": 50,
+      "preBoostedVotePeriodLimit": 43200,
+      "proposingRepReward": 5,
+      "quietEndingPeriod": 43200,
+      "thresholdConst": 1300,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votersReputationLossRatio": 4,
+      "activationTime": 0
+    }
+  ],
+  "schemes": {
+    "ContributionReward": true,
+    "GenericScheme": true,
+    "SchemeRegistrar": true,
+    "GlobalConstraintRegistrar": false,
+    "UpgradeScheme": false
+  },
+  "unregisterOwner": true,
+  "useUController": false,
+  "useDaoCreator": false,
+  "founders": [
+      {
+        "address": "0x14d06788090769F669427B6AEA1c0240d2321f34",
+        "tokens": 0,
+        "reputation": 476
+      },
+      {
+        "address": "0xDB40aE9e2CBaF17bBE68d2aE221Fa499f8E42C85",
+        "tokens": 0,
+        "reputation": 476
+      },
+      {
+        "address": "0x2a7b76feF91A276b6CCcD9364ed483ae5e312f50",
+        "tokens": ,
+        "reputation": 476
+      },
+      {
+        "address": "0xD60460191a4174037B4D835f416FEAfD801e703e",
+        "tokens": 0,
+        "reputation": 476
+      },
+      {
+        "address": "0xfc898b18a70ce49579f8d79a32e29928c15b4bc8",
+        "tokens": 0,
+        "reputation": 476
+      },
+      {
+        "address": "0x55e788CE5745eb7612F49FF54e9fCECa91b18448",
+        "tokens": 0,
+        "reputation": 476
+      },
+      {
+        "address": "0xf9B9AeD5CDc4C7313265193FbFA98fDcfF96F945",
+        "tokens": 0,
+        "reputation": 476
+      },
+      {
+        "address": "0x90079aABC47b5BeA2dFC358d7114Ade57Ee39209",
+        "tokens": 0,
+        "reputation": 476
+      },
+      {
+        "address": "0xD9B99266C42d427Bb3A64f30a0242bbEb41F6830",
+        "tokens": 0,
+        "reputation": 476
+      },
+      {
+        "address": "0xd87eb1b4C26D4509acA8C099c1Eb9E513d053F63",
+        "tokens": 0,
+        "reputation": 476
+      },
+      {
+        "address": "0x9158f36722cA256B86648844C88699968C836bc3",
+        "tokens": 0,
+        "reputation": 476
+      },
+      {
+        "address": "0x389DD85156d4DC6f5e88bb7BC37D31655409DEE6",
+        "tokens": 0,
+        "reputation": 476
+      },
+      {
+        "address": "0x91744ccD83d4CA77a4e4698374A9D18d0c99db48",
+        "tokens": 0,
+        "reputation": 476
+      },
+      {
+        "address": "0x216f909bE2F37113bbcFa11BA9F0489F1074870C",
+        "tokens": 0,
+        "reputation": 476
+      },
+      {
+        "address": "0x2b8d5c9209fbd500fd817d960830ac6718b88112",
+        "tokens": 0,
+        "reputation": 476
+      },
+      {
+        "address": "0xcee5cf6fDC1286E737edb5f576b65051eA5e7b08",
+        "tokens": 0,
+        "reputation": 476
+      },
+      {
+        "address": "0x2aD8083DfAE498C80C9822D6d9Bf228d1ebe7741",
+        "tokens": 0,
+        "reputation": 476
+      },
+      {
+        "address": "0x6a7E2baAcd79C0CC1c74e214F3970383Ef70FE31",
+        "tokens": 0,
+        "reputation": 476
+      },
+      {
+        "address": "0x719BD9F4FCB2C7fE0Ef994B2A9E1D84Fd35B3619",
+        "tokens": 0,
+        "reputation": 476
+      },
+      {
+        "address": "0x37028d9556E985dD97b4D1Dc96f28dbF4fE2Fec5",
+        "tokens": 0,
+        "reputation": 476
+      },
+      {
+        "address": "0xDb422897f0F0D3f33845545F691Eac4501799a4d",
+        "tokens": 0,
+        "reputation": 476
+      },
+    ]
+}
