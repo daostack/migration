@@ -6,7 +6,7 @@
     "voteParams": 1
   },
   "GenericScheme": {
-    "targetContract": "0x0000000000000000000000000000000000000000",
+    "targetContract": "0x0000000000000000000000000000000000000000"
   },
   "SchemeRegistrar": {
       "voteParams": 0
@@ -68,7 +68,7 @@
       },
       {
         "address": "0x2a7b76feF91A276b6CCcD9364ed483ae5e312f50",
-        "tokens": ,
+        "tokens": 0,
         "reputation": 476
       },
       {
@@ -160,6 +160,6 @@
         "address": "0xDb422897f0F0D3f33845545F691Eac4501799a4d",
         "tokens": 0,
         "reputation": 476
-      },
+      }
     ]
 }
