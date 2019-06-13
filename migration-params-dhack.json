@@ -2,19 +2,35 @@
   "orgName": "BitFWD blockhathon",
   "tokenName": "BitFWD",
   "tokenSymbol": "BFW",
-{
   "ContributionReward": {
+    "voteParams": 1
   },
   "GenericScheme": {
     "targetContract": "0x0000000000000000000000000000000000000000"
   },
   "SchemeRegistrar": {
+    "voteRegisterParams": 0,
+     "voteRemoveParams": 0
   },
   "GlobalConstraintRegistrar": {
   },
   "UpgradeScheme": {
   },
   "VotingMachinesParams": [
+    {
+      "boostedVotePeriodLimit": 1209600,
+      "daoBountyConst": 10,
+      "minimumDaoBounty": 500,
+      "queuedVotePeriodLimit": 3888000,
+      "queuedVoteRequiredPercentage": 50,
+      "preBoostedVotePeriodLimit": 172800,
+      "proposingRepReward": 300,
+      "quietEndingPeriod": 345600,
+      "thresholdConst": 2000,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votersReputationLossRatio": 4,
+      "activationTime": 0
+    },
     {
       "boostedVotePeriodLimit": 7200,
       "daoBountyConst": 10,
@@ -40,8 +56,7 @@
   "unregisterOwner": true,
   "useUController": false,
   "useDaoCreator": false,
--------------------------------------------------  
-// FOUNDERS
+
 "founders": [
     {
       "address": "0xf981f4AfBe907AA31951365f66F50c5441A777EF",
