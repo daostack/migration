@@ -1,0 +1,93 @@
+{
+  "orgName": "BitFWD blockhathon",
+  "tokenName": "BitFWD",
+  "tokenSymbol": "BFW",
+{
+  "ContributionReward": {
+  },
+  "GenericScheme": {
+    "targetContract": "0x0000000000000000000000000000000000000000"
+  },
+  "SchemeRegistrar": {
+  },
+  "GlobalConstraintRegistrar": {
+  },
+  "UpgradeScheme": {
+  },
+  "VotingMachinesParams": [
+    {
+      "boostedVotePeriodLimit": 7200,
+      "daoBountyConst": 10,
+      "minimumDaoBounty": 25,
+      "queuedVotePeriodLimit": 28800,
+      "queuedVoteRequiredPercentage": 50,
+      "preBoostedVotePeriodLimit": 3600,
+      "proposingRepReward": 10,
+      "quietEndingPeriod": 3600,
+      "thresholdConst": 1150,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votersReputationLossRatio": 4,
+      "activationTime": 0
+    }
+  ],
+  "schemes": {
+    "ContributionReward": true,
+    "GenericScheme": false,
+    "SchemeRegistrar": true,
+    "GlobalConstraintRegistrar": true,
+    "UpgradeScheme": true
+  },
+  "unregisterOwner": true,
+  "useUController": false,
+  "useDaoCreator": false,
+-------------------------------------------------  
+// FOUNDERS
+"founders": [
+    {
+      "address": "0xf981f4AfBe907AA31951365f66F50c5441A777EF",
+      "tokens": 0,
+      "reputation": 600
+    },
+    {
+      "address": "0x5174493812970990647D4d27292C819e2F419d36",
+      "tokens": 0,
+      "reputation": 600
+    }, 
+    {
+      "address": "0x867E3df45C4e235eC27635850b708242F70f7831",
+      "tokens": 0,
+      "reputation": 600
+    }, 
+    {
+      "address": "0x1D49b948CB414Ec1Cdbf468108548cC7211af1C7",
+      "tokens": 0,
+      "reputation": 600
+    },
+    {
+      "address": "0xEda3c41535ae147BD10d7B18884C7340b893cbDc",
+      "tokens": 0,
+      "reputation": 600
+    },
+    {
+      "address": "0x5CCE3d9c5DFba843aa5fe7888a7644Db1575b3D0",
+      "tokens": 0,
+      "reputation": 600
+    },
+    {
+      "address": "0xbAAEa72417f4dC3E0f52a1783B0913d0f3516634",
+      "tokens": 0,
+      "reputation": 600
+    },
+    {
+      "address": "0xF439B8e757dbFbed6a0C3089ab916c3fd01DDA78",
+      "tokens": 0,
+      "reputation": 600
+    },
+       {
+      "address": "0xF8D1d34956cEa24718cf8687588D6FeDbc6d9AA6",
+      "tokens": 0,
+      "reputation": 600
+    },
+    
+  ]
+}
