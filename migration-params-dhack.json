@@ -50,8 +50,8 @@
     "ContributionReward": true,
     "GenericScheme": false,
     "SchemeRegistrar": true,
-    "GlobalConstraintRegistrar": true,
-    "UpgradeScheme": true
+    "GlobalConstraintRegistrar": false,
+    "UpgradeScheme": false
   },
   "unregisterOwner": true,
   "useUController": false,
