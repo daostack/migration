@@ -29,13 +29,21 @@ npm run verify.build
 ### Verify all of the contracts migrated to the given network
 
 ```script
-npm run verify -p [provider url] kovan
+npm run verify -- -p [provider url] -n kovan
 ```
+
+### Verify all of the contracts of a specific Arc version migrated to the given network
+
+```script
+npm run verify -- -p [provider url] -n kovan -v 0.0.1-rc.18
+```
+
+The default Arc version is the last version listed in the migration.json file for the given network.
 
 ### Verify a single scheme
 
 ```script
-npm run verify -- -c UpgradeScheme -p [provider url] kovan
+npm run verify -- -c UpgradeScheme -p [provider url] -n kovan
 ```
 
 Outputs a GUID that you can use with `npm run verify -- -g`.
@@ -43,7 +51,7 @@ Outputs a GUID that you can use with `npm run verify -- -g`.
 ### Verify a single scheme at an address
 
 ```script
-npm run verify -- -c UpgradeScheme -a 0x12345... -p [provider url] kovan
+npm run verify -- -c UpgradeScheme -a 0x12345... -p [provider url] -n kovan
 ```
 
 ### Obtain a flattened contract
@@ -51,7 +59,7 @@ npm run verify -- -c UpgradeScheme -a 0x12345... -p [provider url] kovan
 Output the flattened script to a file named "flattened.[contractName].sol", by supplying the absolute path to a folder in which to write the file(s):
 
 ```script
-npm run verify -- -f [absolute folder path] [...] -p [provider url] kovan
+npm run verify -- -f [absolute folder path] [...] -p [provider url] -n kovan
 ```
 
 ### Check verification status, given GUID
@@ -59,7 +67,7 @@ npm run verify -- -f [absolute folder path] [...] -p [provider url] kovan
 Given the GUID that is output by `npm run verify`:
 
 ```script
-npm run verify -- -g [GUID] kovan
+npm run verify -- -g [GUID] -n kovan
 ```
 
 ## Help

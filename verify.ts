@@ -20,9 +20,10 @@ const sleep = (milliseconds: number): Promise<any> => {
 // tslint:disable: max-line-length
 const optionDefinitions = [
   { name: 'help', alias: 'h', type: Boolean, description: 'show these command line options' },
+  { name: 'version', alias: 'v', type: String, description: 'Optional Arc package version number.  Default is the last version listed in migration.json.' },
   { name: 'contractAddress', alias: 'a', type: String, description: 'Optional address of a single contract to verify, instead of the default.  Must be given with \'contractName\'.' },
   { name: 'contractName', alias: 'c', type: String, description: 'Optional name of a single contract to verify, instead of verifying all of them.' },
-  { name: 'network', alias: 'n', defaultOption: true, type: String, description: 'Required name of the network, such as kovan, rinkeby or mainnet.' },
+  { name: 'network', alias: 'n', type: String, description: 'Required name of the network, such as kovan, rinkeby or mainnet.' },
   { name: 'provider', alias: 'p', type: String, description: 'Required url for web3 network provider (not needed for -g).' },
   { name: 'check', alias: 'g', type: String, description: 'Given verify GUID, check contract verification status.  Ignores other options.' },
   { name: 'outputFlattened', alias: 'f', type: String, description: 'When verifying, absolute path where to save the flattened .sol file to flattened.["contractName"].sol.' },
@@ -90,7 +91,14 @@ if (!options.check) {
    */
   const migratedContracts = require('./migration.json');
 
-  allAddresses = (migratedContracts[options.network] && migratedContracts[options.network].base) || undefined;
+  options.version = options.version ||
+    migratedContracts[options.network] &&
+    // tslint:disable-next-line: max-line-length
+    (Object.keys(migratedContracts[options.network].base)[Object.keys(migratedContracts[options.network].base).length - 1]);
+
+  allAddresses = (migratedContracts[options.network] &&
+    migratedContracts[options.network].base[options.version]) || undefined;
+
   if (!allAddresses) {
     error(`contracts were not deployed to ${options.network}, or invalid network name`);
   }
@@ -128,7 +136,7 @@ const processContracts = async (): Promise<any> => {
       exitCode = 0;
     } else {
 
-      console.log(`Verifying contract(s) on ${options.network}...`);
+      console.log(`Verifying contract(s) on ${options.network}, Arc version ${options.version}...`);
       // tslint:disable-next-line: forin
       for (const contractName in addresses) {
 
