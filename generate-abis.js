@@ -9,7 +9,7 @@ async function generateAbis (bases) {
     let arcVersion = require('./package.json').dependencies['@daostack/arc']
     const base = require('path').dirname(require.resolve(bases[i]))
     if (!fs.existsSync('./abis/' + arcVersion)) {
-      fs.mkdirSync('./abis/' + arcVersion)
+      fs.mkdirSync('./abis/' + arcVersion, { recursive: true })
     }
     const files = fs.readdirSync(base)
     files.forEach(file => {
