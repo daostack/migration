@@ -367,7 +367,7 @@ In order to release a version:
 		mainnet_provider="https://mainnet.infura.io/v3/<YOUR_INFURA_KEY>"
 		mainnet_private_key="0x<YOUR_PRIVATE_KEY>"
       	```
-      	_Note: Make sure you have enough ETH in the account corresponding to the private key you used to pay the deployment gas costs._
+      	_Note: Make sure you have enough ETH in the account corresponding to the private key you will use to pay the deployment gas costs._
    2. Make sure you are not on the `master` branch. If needed, create a new branch for the release process.
    3. `npm run prepare-release` - This will perform all the necessary steps to update version and prepare for a new release. The changes made here will be committed to the git branch.
    4. Create a PR and merge the new branch with the changes into `master`.
