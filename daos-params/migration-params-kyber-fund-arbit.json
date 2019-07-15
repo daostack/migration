@@ -47,8 +47,8 @@
       "thresholdConst": 2000,
       "voteOnBehalf": "0x0000000000000000000000000000000000000000",
       "votersReputationLossRatio": 4,
-      "activationTime": 0
-    },
+      "activationTime": 1563408000
+    }
   ],
   "schemes": {
     "ContributionReward": true,
@@ -56,7 +56,7 @@
     "SchemeRegistrar": true,
     "GlobalConstraintRegistrar": false,
     "UpgradeScheme": false,
-    "UseReputationFromToken": true
+    "ReputationFromToken": true
   },
   "unregisterOwner": true,
   "useUController": false,

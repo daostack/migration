@@ -397,15 +397,33 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
     permissions.push('0x0000000A')
   }
 
-  if (migrationParams.schemes.UseReputationFromToken) {
-    spinner.start('Setting ReputationFromToken ...')
+  if (migrationParams.schemes.ReputationFromToken) {
+    let { abi: reputationFromTokenABI, bytecode: reputationFromTokenBytecode } = require('@daostack/arc/build/contracts/ReputationFromToken.json')
+    spinner.start('Migrating ReputationFromToken...')
+    const reputationFromTokenContract = new web3.eth.Contract(reputationFromTokenABI, undefined, opts)
+    const reputationFromTokenDeployedContract = reputationFromTokenContract.deploy({
+      data: reputationFromTokenBytecode,
+      arguments: null
+    }).send({ nonce: ++nonce })
+    tx = await new Promise(resolve => reputationFromTokenDeployedContract.on('receipt', resolve))
+    const reputationFromToken = await reputationFromTokenDeployedContract
+    await logTx(tx, `${reputationFromToken.options.address} => ReputationFromToken`)
+
+    spinner.start('Setting ReputationFromToken...')
+
+    const reputationFromTokenInit = reputationFromToken.methods.initialize(
+      avatar.options.address,
+      migrationParams.ReputationFromToken.tokenContract,
+      migrationParams.ReputationFromToken.curve === undefined ? '0x0000000000000000000000000000000000000000' : migrationParams.ReputationFromToken.curve
+    )
+    tx = await reputationFromTokenInit.send({ nonce: ++nonce })
+    await logTx(tx, 'Reputation From Token Scheme Initialized.')
+
     schemeNames.push('ReputationFromToken')
-    //todo: deploy ReputationFromToken
-    //todo: initilize ReputationFromToken
-    //schemes.push('0xfB08de08d4e41944BDb084F9B6E241F15812F970')
+    schemes.push(reputationFromToken.options.address)
     params.push('0x0000000000000000000000000000000000000000000000000000000000000000')
     permissions.push('0x00000001')
- }
+  }
 
   if (migrationParams.useDaoCreator === true) {
     spinner.start('Setting DAO schemes...')
