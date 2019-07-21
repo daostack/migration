@@ -1,5 +1,5 @@
 const utils = require('./utils.js')
-async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logTx, previousMigration }) {
+async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logTx, previousMigration, customABIsLocation }) {
   let base = previousMigration.base
   if (!(await confirm('About to migrate new DAO. Continue?'))) {
     return
@@ -399,7 +399,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
 
   for (const schemeName in migrationParams.CustomSchemes) {
     let scheme = migrationParams.CustomSchemes[schemeName]
-    let { abi, bytecode } = require(`./custom-abis/${schemeName}.json`)
+    let { abi, bytecode } = require(`${customABIsLocation}/${schemeName}.json`)
     let schemeContract
     if (scheme.address === undefined) {
       spinner.start(`Migrating ${schemeName}...`)
