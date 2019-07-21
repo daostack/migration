@@ -99,35 +99,35 @@
     },
     "dao": {
       "0.0.1-rc.16": {
-        "name": "Boorish Woodworkers",
+        "name": "Redolent Mechanic",
         "Avatar": "0x86072CbFF48dA3C1F01824a6761A03F105BCC697",
         "DAOToken": "0x7C728214be9A0049e6a86f2137ec61030D0AA964",
         "Reputation": "0x5017A545b09ab9a30499DE7F431DF0855bCb7275",
         "Controller": "0x4bf3A7dFB3b76b5B3E169ACE65f888A4b4FCa5Ee"
       },
       "0.0.1-rc.17": {
-        "name": "Ruminative Moldmaker",
+        "name": "Verdant Engineering",
         "Avatar": "0x180D179Bbf473A30183Fe858E8416351D2170Fd2",
         "DAOToken": "0x10fB2Ab116E2Eb3a8B5a1Ca912E05f63c3D969E4",
         "Reputation": "0xDe2f00CCfEefAdD1Ecc87BE765cf46AC901A6AC8",
         "Controller": "0xF6aFcd935c28365CCe278Fed78b26Fe2BC9ae518"
       },
       "0.0.1-rc.18": {
-        "name": "Limpid Flatter",
+        "name": "Friable Flatter",
         "Avatar": "0x4d040B247949a76cB8134203Da822Da50C674557",
         "DAOToken": "0x79e0ba0C34ED4cc6a493ebCdf11A84491Cb6f5ea",
         "Reputation": "0x467fD9FEA4e77AC79504a23B45631D29e42eaa4A",
         "Controller": "0x27d160115a1E2aA7C4F709dDEB9dABbA82Ba5188"
       },
       "0.0.1-rc.19": {
-        "name": "Parsimonious Soaper",
+        "name": "Calamitous Silversmith",
         "Avatar": "0x1846df34672262F228bff4d7FD0187FAF735f68d",
         "DAOToken": "0xDd3c31A2B2754f0438bEd4FCFFaBa5d95eB65d21",
         "Reputation": "0x397171A11b37152118B7F20d91B26572D45744D3",
         "Controller": "0x2830E4110C99c988694f86d737956305F489B26d"
       },
       "0.0.1-rc.21": {
-        "name": "Rebarbative Inker",
+        "name": "Lachrymose Plant operator",
         "Avatar": "0x1FCE6Ad3a48168BBA8214aB40ddEa9257C294c9C",
         "DAOToken": "0xC58F9C1af2ED42B4902Aa59964a761cfa35305C3",
         "Reputation": "0xe365e88Eb44e10d2a4832198D622A4469F482259",
@@ -136,7 +136,7 @@
     },
     "test": {
       "0.0.1-rc.16": {
-        "name": "Amatory Animator",
+        "name": "Intransigent Mermaid eggs",
         "Avatar": "0xE7A2C59e134ee81D4035Ae6DB2254f79308e334f",
         "DAOToken": "0xcDbe8b52A6c60A5f101d4A0F1f049f19a9e1D35F",
         "Reputation": "0x93cdbf39fB9e13BD253CA5819247D52fbabf0F2f",
@@ -153,7 +153,7 @@
         }
       },
       "0.0.1-rc.17": {
-        "name": "Insolent Coppersmith",
+        "name": "Limpid Coppersmith",
         "Avatar": "0x68728fE67Fb1fBAe9076110f98E9ba3F5A00F936",
         "DAOToken": "0xAf2606a5dCB68b3D15af4003dcd48cBDb651C010",
         "Reputation": "0x550CF363f4d46996073B40440FF906867859d4C0",
@@ -170,7 +170,7 @@
         }
       },
       "0.0.1-rc.18": {
-        "name": "Wheedling Patternmaker",
+        "name": "Dowdy Beader",
         "Avatar": "0xFA0196eC747AE03F7794B5bDf03135279197BddD",
         "DAOToken": "0xa2b79E1B3671D41B281FbAD501efAFe25C01bDd5",
         "Reputation": "0x3e62B0426c390F18c687135dA4Dc2aA8BB736F99",
@@ -187,7 +187,7 @@
         }
       },
       "0.0.1-rc.19": {
-        "name": "Pernicious Carousel",
+        "name": "Voracious Silversmith",
         "Avatar": "0xe3016a92B6C728f5a55Fe45029804dE60148c689",
         "DAOToken": "0x5276B5a8D1CF44cDAfCb139A3e95A0E31a67855b",
         "Reputation": "0xD7c66e086E414990A77Da9bf674FB922465217Ec",
@@ -204,7 +204,7 @@
         }
       },
       "0.0.1-rc.21": {
-        "name": "Fecund Mechanic",
+        "name": "Jejune Unicorn",
         "Avatar": "0xF2707F3831E1245be863D9199E99775E85baab9E",
         "DAOToken": "0x77FF3B1A103319256167bCd618437D529bE03Aeb",
         "Reputation": "0x390b619ec0fF16Eed4a2E5aaeFa6E2D25362dfD1",
