@@ -87,7 +87,12 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
     migrationParams.founders
   ]
 
-  let avatar, daoToken, reputation, Controller, controller , Schemes = { }
+  let avatar
+  let daoToken
+  let reputation
+  let Controller
+  let controller
+  let Schemes = { }
 
   if (migrationParams.useDaoCreator === true) {
     spinner.start('Creating a new organization...')
@@ -423,7 +428,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
     schemes.push(reputationFromToken.options.address)
     params.push('0x0000000000000000000000000000000000000000000000000000000000000000')
     permissions.push('0x00000001')
-    Schemes.ReputationFromToken = reputationFromToken.options.address;
+    Schemes.ReputationFromToken = reputationFromToken.options.address
   }
 
   for (const schemeName in migrationParams.CustomSchemes) {
@@ -481,7 +486,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
     schemes.push(schemeContract.options.address)
     params.push(schemeParamsHash)
     permissions.push(scheme.permissions)
-    Schemes[schemeName] = schemeContract.options.address;
+    Schemes[schemeName] = schemeContract.options.address
   }
 
   if (migrationParams.useDaoCreator === true) {
