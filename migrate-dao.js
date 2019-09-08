@@ -414,6 +414,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
 
   if (migrationParams.schemes.ReputationFromToken) {
     let { abi: reputationFromTokenABI, bytecode: reputationFromTokenBytecode } = require('@daostack/arc/build/contracts/ReputationFromToken.json')
+    Schemes.ReputationFromToken = []
     for (let i in migrationParams.ReputationFromToken) {
       spinner.start('Migrating ReputationFromToken...')
       const reputationFromTokenContract = new web3.eth.Contract(reputationFromTokenABI, undefined, opts)
@@ -452,11 +453,12 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
       schemes.push(reputationFromToken.options.address)
       params.push('0x0000000000000000000000000000000000000000000000000000000000000000')
       permissions.push('0x00000001')
-      Schemes.ReputationFromToken = reputationFromToken.options.address
+      Schemes.ReputationFromToken.push(reputationFromToken.options.address)
     }
   }
 
   for (const schemeName in migrationParams.CustomSchemes) {
+    Schemes[schemeName] = []
     for (let i in migrationParams.CustomSchemes[schemeName]) {
       let scheme = migrationParams.CustomSchemes[schemeName][i]
       const path = require('path')
@@ -513,7 +515,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
       schemes.push(schemeContract.options.address)
       params.push(schemeParamsHash)
       permissions.push(scheme.permissions)
-      Schemes[schemeName] = schemeContract.options.address
+      Schemes[schemeName].push(schemeContract.options.address)
     }
   }
 
