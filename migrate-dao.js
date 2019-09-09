@@ -462,7 +462,16 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
     for (let i in migrationParams.CustomSchemes[schemeName]) {
       let scheme = migrationParams.CustomSchemes[schemeName][i]
       const path = require('path')
-      let { abi, bytecode } = require(path.resolve(`${customabislocation}/${schemeName}.json`))
+
+      let contractJson
+      if (scheme.fromArc) {
+        contractJson = require(`@daostack/arc/build/contracts/${schemeName}.json`)
+      } else {
+        contractJson = require(path.resolve(`${customabislocation}/${schemeName}.json`))
+      }
+      let abi = contractJson.abi
+      let bytecode = contractJson.bytecode
+      //  let { abi, bytecode } = require(path.resolve(`${abilocation}/${schemeName}.json`))
       let schemeContract
       if (scheme.address === undefined) {
         spinner.start(`Migrating ${schemeName}...`)
@@ -501,6 +510,8 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
         for (let i in scheme.params) {
           if (scheme.params[i].voteParams !== undefined) {
             schemeParams.push(votingMachinesParams[scheme.params[i].voteParams])
+          } else if (scheme.params[i] === 'GenesisProtocolAddress') {
+            schemeParams.push(GenesisProtocol)
           } else {
             schemeParams.push(scheme.params[i])
           }
