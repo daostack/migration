@@ -29,9 +29,9 @@
     "GlobalConstraintRegistrar": true,
     "UpgradeScheme": true
   },
-  "CustomSchemes": {
-    "GenericScheme": [{
-      "isUniversal": false,
+  "CustomSchemes": [
+     {
+      "name": "GenericScheme",
       "params": [
         "GenesisProtocolAddress",
         {"voteParams": 0},
@@ -40,8 +40,19 @@
       "permissions": "0x00000010",
       "alias" : "GenericSchemeAlias",
       "fromArc": true
-    }]
-  },
+    },
+    {
+      "name": "GenericScheme",
+      "isUniversal": false,
+      "params": [
+        "GenesisProtocolAddress",
+        {"voteParams": 0},
+        "0x0000000000000000000000000000000000000000"
+      ],
+      "permissions": "0x00000010",
+      "alias" : "GenericSchemeAlias2",
+      "fromArc": true
+    }],
   "unregisterOwner": true,
   "useUController": false,
   "useDaoCreator": false,

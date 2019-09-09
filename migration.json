@@ -207,17 +207,23 @@
         "Schemes": {}
       },
       "0.0.1-rc.24": {
-        "name": "Ruminative Ninja",
-        "Avatar": "0xdDc226267137188F78E117bc9B12c38b80beaDa7",
-        "DAOToken": "0x84F46628D78e7de013279c33e7B262488ce4421D",
-        "Reputation": "0x5C77030836e21C78b1013E443ACf816974E6315b",
-        "Controller": "0x56Ebc21A300882B23Adf6a2677D2993A34A9F8e5",
-        "Schemes": {
-          "GenericScheme": {
-            "alias": "GenericScheme",
-            "address": "0x2FEdDFaa7Ad25E111806eE1555458C4b61FF331C"
+        "name": "Defamatory Designer",
+        "Avatar": "0xb0fe9E2Bb72e4Ec53e30F708414F4bE4D06352e6",
+        "DAOToken": "0xC20a36EB5F3750829f71A421426b68D29810588C",
+        "Reputation": "0x9c4A615FcD0E4c40FD3614D43a009725c9E53308",
+        "Controller": "0x267639506101BbF4f91127a5211069f5ab70c518",
+        "Schemes": [
+          {
+            "name": "GenericScheme",
+            "alias": "GenericSchemeAlias",
+            "address": "0xF6ae1A8bD48307609353388fFB0ab91dC7cc28C1"
+          },
+          {
+            "name": "GenericScheme",
+            "alias": "GenericSchemeAlias2",
+            "address": "0x39033d82B422eAF9DF2e9B53799586809aCA671B"
           }
-        }
+        ]
       }
     },
     "test": {
