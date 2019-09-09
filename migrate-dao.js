@@ -366,7 +366,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
       const genericSchemeSetParams = genericScheme.methods.setParameters(
         migrationParams.UGenericScheme[i].voteParams === undefined ? votingMachinesParams[0] : votingMachinesParams[migrationParams.UGenericScheme[i].voteParams],
         migrationParams.UGenericScheme[i].votingMachine === undefined ? GenesisProtocol : migrationParams.UGenericScheme[i].votingMachine,
-        migrationParams.genericScheme[i].targetContract
+        migrationParams.UGenericScheme[i].targetContract
       )
       genericSchemeParams = await genericSchemeSetParams.call()
       tx = await genericSchemeSetParams.send({ nonce: ++nonce })
