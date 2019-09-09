@@ -505,21 +505,20 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
             schemeParams.push(scheme.params[i])
           }
         }
-          const schemeSetParams = schemeContract.methods.initialize(...schemeParams)
-          schemeParamsHash = await schemeSetParams.call()
-          if (schemeParamsHash.Result === undefined) {
-            schemeParamsHash = '0x0000000000000000000000000000000000000000000000000000000000000000';
-          }
-          tx = await schemeSetParams.send({ nonce: ++nonce })
-          await logTx(tx, `${schemeName} initialized.`)
-
+        const schemeSetParams = schemeContract.methods.initialize(...schemeParams)
+        schemeParamsHash = await schemeSetParams.call()
+        if (schemeParamsHash.Result === undefined) {
+          schemeParamsHash = '0x0000000000000000000000000000000000000000000000000000000000000000'
+        }
+        tx = await schemeSetParams.send({ nonce: ++nonce })
+        await logTx(tx, `${schemeName} initialized.`)
       }
 
       schemeNames.push(schemeName)
       schemes.push(schemeContract.options.address)
       params.push(schemeParamsHash)
       permissions.push(scheme.permissions)
-      Schemes[schemeName] =  { alias : scheme.alias , address:schemeContract.options.address };
+      Schemes[schemeName] = { alias: scheme.alias, address: schemeContract.options.address }
     }
   }
 
