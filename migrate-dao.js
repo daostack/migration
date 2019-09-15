@@ -511,7 +511,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
         } else if (customeScheme.params[i].StandAloneContract !== undefined) {
           schemeParams.push(StandAloneContracts[customeScheme.params[i].StandAloneContract].address)
         } else if (customeScheme.params[i] === 'AvatarAddress') {
-          schemeParams.push(avatar.options.address)  
+          schemeParams.push(avatar.options.address)
         } else {
           schemeParams.push(customeScheme.params[i])
         }
