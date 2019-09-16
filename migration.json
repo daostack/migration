@@ -576,6 +576,25 @@
         "OrganizationRegister": "0xcedf1C9b9c4cD570279b7aD676536fD5e75b46d3",
         "Redeemer": "0xf1A9210B0e3C217d8c2AAEfaCD14a352B2a7B58A",
         "GenericScheme": "0x5663cA36e790f1f55198404F35Ba3AFB64949150"
+      },
+      "0.0.1-rc.24": {
+        "GEN": "0x543Ff227F64Aa17eA132Bf9886cAb5DB55DCAddf",
+        "DAORegistry": "0xE9f949fee2ae09a408C9b902031bC2A1BFF3AEe2",
+        "ControllerCreator": "0x718091921A541eea8be66f3fc8e62d4D81DB3356",
+        "DaoCreator": "0xA36fe4eFe9C4A1b3d68F1562212dF1739dE23dBD",
+        "UController": "0xec196EA922adb119346e765BC6602063d387E867",
+        "GenesisProtocol": "0x7648665cda324511b71e002E9C62da98a8E68505",
+        "SchemeRegistrar": "0x2c411266902c001351F49Ad63646f32B542D905E",
+        "UpgradeScheme": "0x5095db2074DD50BFB217Be6b362002B4bf5f310D",
+        "GlobalConstraintRegistrar": "0xAFE854A1b86B3f26ACDE92cD8b34F593c5aE6970",
+        "ContributionReward": "0x8Ff49219E74e076Cf4f1b244A47875D7009e2595",
+        "AbsoluteVote": "0xe82267aAa8E95b49447EF6aa74F7f64E3Df5B71d",
+        "QuorumVote": "0x0Ced285247A16987Bcc4C5705ad1Ad669FEf9002",
+        "TokenCapGC": "0x349900Ed029559448d9E28D65c3e79C27685920f",
+        "VoteInOrganizationScheme": "0xFD102d7e07136744068264Df7f00d74b8aF01e0c",
+        "OrganizationRegister": "0xbF9D0eb0419CDfc72CC674aa0f64D85FB2AEc7E8",
+        "Redeemer": "0xc1597A0Ca76AA007B3f3Ad783a6A60562F709e25",
+        "UGenericScheme": "0x72dB54E63B3004a4bd030E5E0333579C1d54B863"
       }
     },
     "dao": {
