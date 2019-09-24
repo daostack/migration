@@ -11,7 +11,6 @@ async function assignGlobalVariables (web3, spinner, opts, logTx, previousMigrat
 }
 
 async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams, logTx, previousMigration }) {
-
   // sanitize the parameters
   sanitize(migrationParams)
 

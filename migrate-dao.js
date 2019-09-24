@@ -2,10 +2,9 @@ const utils = require('./utils.js')
 const sanitize = require('./sanitize')
 
 async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logTx, previousMigration, customabislocation }) {
-
   // sanitize the parameters
   sanitize(migrationParams)
-  
+
   let base = previousMigration.base
   if (!(await confirm('About to migrate new DAO. Continue?'))) {
     return
