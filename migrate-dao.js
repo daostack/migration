@@ -1,5 +1,11 @@
 const utils = require('./utils.js')
+const sanitize = require('./sanitize')
+
 async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logTx, previousMigration, customabislocation }) {
+
+  // sanitize the parameters
+  sanitize(migrationParams)
+  
   let base = previousMigration.base
   if (!(await confirm('About to migrate new DAO. Continue?'))) {
     return
@@ -480,7 +486,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
       schemeContract = await schemeDeployedContract
       await logTx(tx, `${schemeContract.options.address} => ${customeScheme.name}`)
     } else {
-      schemeContract = new web3.eth.Contract(abi, customeScheme.name.address, opts)
+      schemeContract = new web3.eth.Contract(abi, customeScheme.address, opts)
     }
 
     let schemeParamsHash = '0x0000000000000000000000000000000000000000000000000000000000000000'
