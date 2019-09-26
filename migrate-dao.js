@@ -462,7 +462,6 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
     }
   }
 
-
   if (migrationParams.CustomSchemes) {
     for (var i = 0, len = migrationParams.CustomSchemes.length; i < len; i++) {
       let customeScheme = migrationParams.CustomSchemes[i]
