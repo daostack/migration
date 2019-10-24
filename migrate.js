@@ -27,6 +27,7 @@ const defaults = {
   quiet: false,
   disableconfs: false,
   force: false,
+  restart: false,
   provider: 'http://localhost:8545',
   // this is the private key used by ganache when running with `--deterministic`
   privateKey: '0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d',
@@ -40,7 +41,7 @@ const defaults = {
  * A wrapper function that performs tasks common to all migration commands.
  */
 const wrapCommand = fn => async options => {
-  let { quiet, disableconfs, force, provider, gasPrice, privateKey, mnemonic, prevmigration, output, params, customabislocation } = { ...defaults, ...options }
+  let { quiet, disableconfs, force, restart, provider, gasPrice, privateKey, mnemonic, prevmigration, output, params, customabislocation } = { ...defaults, ...options }
   const emptySpinner = new Proxy({}, { get: () => () => { } }) // spinner that does nothing
   const spinner = quiet ? emptySpinner : ora()
 
@@ -59,6 +60,17 @@ const wrapCommand = fn => async options => {
         { name: 'confirmation', message: msg, type: 'confirm', default: def }
       ])
       return confirmation
+    }
+  }
+
+  if (restart) {
+    let stateFile = path.join(__dirname, 'deployment-state.json')
+    if (fs.existsSync(stateFile)) {
+      try {
+        fs.unlinkSync(stateFile)
+      } catch (err) {
+        console.error(err)
+      }
     }
   }
 
@@ -186,6 +198,12 @@ function cli () {
       describe: 'force deploy everything',
       type: 'boolean',
       default: defaults.force
+    })
+    .option('restart', {
+      alias: 't',
+      describe: 'delete previous deployment state and starts with clean state',
+      type: 'boolean',
+      default: defaults.restart
     })
     .option('prev-migration', {
       alias: 'r',
