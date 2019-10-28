@@ -63,17 +63,6 @@ const wrapCommand = fn => async options => {
     }
   }
 
-  if (restart) {
-    let stateFile = path.join(__dirname, 'deployment-state.json')
-    if (fs.existsSync(stateFile)) {
-      try {
-        fs.unlinkSync(stateFile)
-      } catch (err) {
-        console.error(err)
-      }
-    }
-  }
-
   const web3 = new Web3(provider)
   gasPrice = gasPrice || web3.utils.fromWei(await web3.eth.getGasPrice(), 'gwei')
 
@@ -134,6 +123,8 @@ const wrapCommand = fn => async options => {
     existingFile = {}
   }
 
+  let stateFile = path.join(__dirname, 'deployment-state.json')
+
   // run the actucal command
   const result = await fn({
     web3,
@@ -143,7 +134,26 @@ const wrapCommand = fn => async options => {
     migrationParams: { ...params, ...params[network] },
     logTx,
     previousMigration: { ...existingFile[network] },
-    customabislocation
+    customabislocation,
+    restart,
+    setState: function setState (state) {
+      fs.writeFileSync(stateFile, JSON.stringify(state, undefined, 2), 'utf-8')
+    },
+    getState: function getState () {
+      if (fs.existsSync(stateFile)) {
+        return JSON.parse(fs.readFileSync(stateFile))
+      }
+      return {}
+    },
+    cleanState: function cleanState () {
+      if (fs.existsSync(stateFile)) {
+        try {
+          fs.unlinkSync(stateFile)
+        } catch (err) {
+          console.error(err)
+        }
+      }
+    }
   })
 
   // obtain time and balance after command
