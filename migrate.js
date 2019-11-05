@@ -10,6 +10,7 @@ const moment = require('moment')
 const migrateBase = require('./migrate-base')
 const migrateDAO = require('./migrate-dao')
 const migrateDemoTest = require('./migrate-demo-test')
+const allocateRep = require('./rep-allocation')
 const path = require('path')
 
 async function migrate (opts) {
@@ -255,6 +256,7 @@ function cli () {
     .command('base', 'Migrate an example DAO', yargs => yargs, wrapCommand(migrateBase))
     .command('dao', 'Migrate base contracts', yargs => yargs, wrapCommand(migrateDAO))
     .command('demo', 'Migrate base contracts', yargs => yargs, wrapCommand(migrateDemoTest))
+    .command('repAlloc', 'Allocate reputation', yargs => yargs, wrapCommand(allocateRep))
     .showHelpOnFail(false)
     .completion()
     .wrap(120)
@@ -270,6 +272,7 @@ if (require.main === module) {
     migrateBase: wrapCommand(migrateBase),
     migrateDAO: wrapCommand(migrateDAO),
     migrateDemoTest: wrapCommand(migrateDemoTest),
+    repAlloc: wrapCommand(allocateRep),
     migrateScript: wrapCommand,
     cli
   }
