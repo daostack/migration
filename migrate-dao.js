@@ -335,7 +335,7 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
         opts
       )
       spinner.start('Registering DAO in DAOTracker')
-      tx = await daoTracker.methods.track(avatar.options.address, deploymentState.Controller).send({ nonce: ++nonce })
+      tx = await daoTracker.methods.track(avatar.options.address, deploymentState.Controller, arcVersion).send({ nonce: ++nonce })
       await logTx(tx, 'Finished Registering DAO in DAOTracker')
       deploymentState.trackedDAO = true
       setState(deploymentState)
