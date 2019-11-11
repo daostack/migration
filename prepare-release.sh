@@ -10,6 +10,8 @@ rm -r node_modules
 rm package-lock.json
 npm install
 npm ci
+# Edit default Arc version in migrate.js file
+read -n 1 -s -r -p $'Please edit default Arc version in migrate.js file to the latest version.\nPress any key to continue release.\n'
 # initial Arc vrsion to use
 readonly INITIAL_VERSION=16
 # get latest Arc version

@@ -24,7 +24,7 @@ async function migrate (opts) {
 }
 
 const defaults = {
-  arcVersion: 'latest',
+  arcVersion: '0.0.1-rc.32',
   quiet: false,
   disableconfs: false,
   force: false,
