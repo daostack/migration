@@ -1,9 +1,7 @@
-async function migrateBase ({ web3, spinner, confirm, opts, logTx, previousMigration }) {
+async function migrateBase ({ arcVersion, web3, spinner, confirm, opts, logTx, previousMigration }) {
   if (!(await confirm('About to migrate base contracts. Continue?'))) {
     return
   }
-
-  let arcVersion = require('./package.json').dependencies['@daostack/arc']
 
   const addresses = {}
   const network = await web3.eth.net.getNetworkType()

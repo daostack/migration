@@ -1,8 +1,8 @@
 const utils = require('./utils.js')
 const sanitize = require('./sanitize')
 
-async function assignGlobalVariables (web3, spinner, opts, logTx, previousMigration) {
-  this.arcVersion = require('./package.json').dependencies['@daostack/arc']
+async function assignGlobalVariables (arcVersion, web3, spinner, opts, logTx, previousMigration) {
+  this.arcVersion = arcVersion
   this.web3 = web3
   this.spinner = spinner
   this.opts = opts
@@ -10,7 +10,7 @@ async function assignGlobalVariables (web3, spinner, opts, logTx, previousMigrat
   this.base = previousMigration.base[this.arcVersion]
 }
 
-async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams, logTx, previousMigration }) {
+async function migrateDemoTest ({ arcVersion, web3, spinner, confirm, opts, migrationParams, logTx, previousMigration }) {
   // sanitize the parameters
   sanitize(migrationParams)
 
@@ -18,7 +18,7 @@ async function migrateDemoTest ({ web3, spinner, confirm, opts, migrationParams,
     return
   }
 
-  assignGlobalVariables(web3, spinner, opts, logTx, previousMigration)
+  assignGlobalVariables(arcVersion, web3, spinner, opts, logTx, previousMigration)
 
   if (!this.base) {
     const msg = `Couldn't find existing base migration ('migration.json' > 'base').`

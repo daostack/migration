@@ -24,6 +24,7 @@ async function migrate (opts) {
 }
 
 const defaults = {
+  arcVersion: 'latest',
   quiet: false,
   disableconfs: false,
   force: false,
@@ -41,7 +42,7 @@ const defaults = {
  * A wrapper function that performs tasks common to all migration commands.
  */
 const wrapCommand = fn => async options => {
-  let { quiet, disableconfs, force, restart, provider, gasPrice, privateKey, mnemonic, prevmigration, output, params, customabislocation } = { ...defaults, ...options }
+  let { arcVersion, quiet, disableconfs, force, restart, provider, gasPrice, privateKey, mnemonic, prevmigration, output, params, customabislocation } = { ...defaults, ...options }
   const emptySpinner = new Proxy({}, { get: () => () => { } }) // spinner that does nothing
   const spinner = quiet ? emptySpinner : ora()
 
@@ -49,6 +50,18 @@ const wrapCommand = fn => async options => {
     const msg = `Migration failed with error: ` + reason
     spinner.fail(msg)
   })
+
+  if (arcVersion !== require('./package.json').dependencies['@daostack/arc']) {
+    const util = require('util')
+    const exec = util.promisify(require('child_process').exec)
+
+    const { stdout, stderr } = await exec('npm install @daostack/arc@' + arcVersion)
+    if (stderr !== '') {
+      console.log('Errors:\n' + stderr)
+    } else {
+      console.log('Installing Arc version: ' + arcVersion + '.\nLogs:\n' + stdout)
+    }
+  }
 
   const confirm = async (msg, def) => {
     if (force) {
@@ -127,6 +140,7 @@ const wrapCommand = fn => async options => {
 
   // run the actucal command
   const result = await fn({
+    arcVersion,
     web3,
     spinner,
     confirm,
@@ -180,6 +194,12 @@ const wrapCommand = fn => async options => {
 function cli () {
   /* eslint no-unused-expressions: "off" */
   yargs
+    .option('arc-version', {
+      alias: 'a',
+      describe: 'specify an Arc version to use for deployment.',
+      type: 'string',
+      default: defaults.arcVersion
+    })
     .option('provider', {
       alias: 'p',
       type: 'string',

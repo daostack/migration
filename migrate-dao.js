@@ -1,7 +1,7 @@
 const utils = require('./utils.js')
 const sanitize = require('./sanitize')
 
-async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logTx, previousMigration, customabislocation, restart, getState, setState, cleanState }) {
+async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migrationParams, logTx, previousMigration, customabislocation, restart, getState, setState, cleanState }) {
   if (restart) {
     cleanState()
   }
@@ -14,8 +14,6 @@ async function migrateDAO ({ web3, spinner, confirm, opts, migrationParams, logT
   if (!(await confirm('About to migrate new DAO. Continue?'))) {
     return
   }
-
-  let arcVersion = require('./package.json').dependencies['@daostack/arc']
 
   if (!base[arcVersion]) {
     const msg = `Couldn't find existing base migration ('migration.json' > 'base').`
