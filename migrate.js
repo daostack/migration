@@ -24,7 +24,7 @@ async function migrate (opts) {
 }
 
 const defaults = {
-  arcVersion: '0.0.1-rc.32',
+  arcVersion: require('./package.json').dependencies['@daostack/arc'],
   quiet: false,
   disableconfs: false,
   force: false,
@@ -50,18 +50,6 @@ const wrapCommand = fn => async options => {
     const msg = `Migration failed with error: ` + reason
     spinner.fail(msg)
   })
-
-  if (arcVersion !== require('./package.json').dependencies['@daostack/arc']) {
-    const util = require('util')
-    const exec = util.promisify(require('child_process').exec)
-
-    const { stdout, stderr } = await exec('npm install @daostack/arc@' + arcVersion)
-    if (stderr !== '') {
-      console.log('Errors:\n' + stderr)
-    } else {
-      console.log('Installing Arc version: ' + arcVersion + '.\nLogs:\n' + stdout)
-    }
-  }
 
   const confirm = async (msg, def) => {
     if (force) {

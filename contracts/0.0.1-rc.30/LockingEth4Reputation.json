@@ -1,0 +1,2695 @@
+{
+  "contractName": "LockingEth4Reputation",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "redeemEnableTime",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "lockingStartTime",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "totalLocked",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "avatar",
+      "outputs": [
+        {
+          "internalType": "contract Avatar",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getAgreementHash",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "scores",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "lockers",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "releaseTime",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_beneficiary",
+          "type": "address"
+        }
+      ],
+      "name": "redeem",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "reputation",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "lockingEndTime",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "reputationRewardLeft",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "maxLockingPeriod",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "totalScore",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "lockingsCounter",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "totalLockedLeft",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "reputationReward",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "_beneficiary",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "Redeem",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "_lockingId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "_beneficiary",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "Release",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "_locker",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "_lockingId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_period",
+          "type": "uint256"
+        }
+      ],
+      "name": "Lock",
+      "type": "event"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "contract Avatar",
+          "name": "_avatar",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_reputationReward",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_lockingStartTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_lockingEndTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_redeemEnableTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_maxLockingPeriod",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "_agreementHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "initialize",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address payable",
+          "name": "_beneficiary",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "_lockingId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "release",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_period",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "_agreementHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "lock",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "lockingId",
+          "type": "bytes32"
+        }
+      ],
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.11+commit.c082d0b4\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"redeemEnableTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_period\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"_agreementHash\",\"type\":\"bytes32\"}],\"name\":\"lock\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"lockingId\",\"type\":\"bytes32\"}],\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"lockingStartTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"totalLocked\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"avatar\",\"outputs\":[{\"internalType\":\"contract Avatar\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"contract Avatar\",\"name\":\"_avatar\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_reputationReward\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_lockingStartTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_lockingEndTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_redeemEnableTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_maxLockingPeriod\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"_agreementHash\",\"type\":\"bytes32\"}],\"name\":\"initialize\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getAgreementHash\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"scores\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"lockers\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"releaseTime\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_beneficiary\",\"type\":\"address\"}],\"name\":\"redeem\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"reputation\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"lockingEndTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"reputationRewardLeft\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"maxLockingPeriod\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"totalScore\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"lockingsCounter\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"totalLockedLeft\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address payable\",\"name\":\"_beneficiary\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_lockingId\",\"type\":\"bytes32\"}],\"name\":\"release\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"reputationReward\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_beneficiary\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"Redeem\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"_lockingId\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_beneficiary\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"Release\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_locker\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"_lockingId\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_period\",\"type\":\"uint256\"}],\"name\":\"Lock\",\"type\":\"event\"}],\"devdoc\":{\"methods\":{\"getAgreementHash()\":{\"details\":\"getAgreementHash\",\"return\":\"bytes32 agreementHash\"},\"initialize(address,uint256,uint256,uint256,uint256,uint256,bytes32)\":{\"details\":\"initialize\",\"params\":{\"_avatar\":\"the avatar to mint reputation from\",\"_lockingEndTime\":\"the locking end time.       locking is disable after this time.\",\"_lockingStartTime\":\"locking starting period time.\",\"_maxLockingPeriod\":\"maximum locking period allowed.\",\"_redeemEnableTime\":\"redeem enable time .       redeem reputation can be done after this time.\",\"_reputationReward\":\"the total reputation this contract will reward       for eth locking\"}},\"lock(uint256,bytes32)\":{\"details\":\"lock function\",\"params\":{\"_period\":\"the locking period\"},\"return\":\"lockingId the unique Id\"},\"redeem(address)\":{\"details\":\"redeem reputation function\",\"params\":{\"_beneficiary\":\"the beneficiary for the release\"},\"return\":\"uint256 reputation rewarded\"},\"release(address,bytes32)\":{\"details\":\"release locked eth\",\"params\":{\"_beneficiary\":\"the release _beneficiary\",\"_lockingId\":\"the locking id\"},\"return\":\"bool\"}},\"title\":\"A scheme for locking ETH for reputation\"},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/oren/daostack/arc/contracts/schemes/LockingEth4Reputation.sol\":\"LockingEth4Reputation\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/oren/daostack/arc/contracts/controller/Avatar.sol\":{\"keccak256\":\"0x7b923a99aadcc35d7bf6ca9418bbf8bfb3f7ead25d1392417165c14d5a787dfb\",\"urls\":[\"bzz-raw://c28cb4b20c68250f90f42edd184041bdba20b1b5d043f45bae40faa3063b0d28\",\"dweb:/ipfs/QmRWimL7nVm4WSuRdL4WQshJj6A9YUsg8HeQf2xgUMo3uE\"]},\"/Users/oren/daostack/arc/contracts/controller/ControllerInterface.sol\":{\"keccak256\":\"0xdca54dc94b201a3e26317c74c80a8d2ea877c33deee66d51152383f868e7b31d\",\"urls\":[\"bzz-raw://804a9a7a0669cf669188f4114576f896e6f4967c894f6b07a7aacd249d6b8a35\",\"dweb:/ipfs/QmZMQtAzfSoGhc9xZ9DLgkBqzktkbCYNyNNiNkKa4NLM4Z\"]},\"/Users/oren/daostack/arc/contracts/controller/DAOToken.sol\":{\"keccak256\":\"0x842d9e1022c6642dff6045faa9bcffd1d0a725222da2eccfc1ac7baebe4f6e9d\",\"urls\":[\"bzz-raw://e7490ab9380644d6d6878514bfe9489677ef0b53a251673909f8ca9f2de5d0e6\",\"dweb:/ipfs/QmYcWTVaYfgP2hfkhpgLSmEj5HdBsynM74m3tBmmoBRRj6\"]},\"/Users/oren/daostack/arc/contracts/globalConstraints/GlobalConstraintInterface.sol\":{\"keccak256\":\"0x465050085fe219b0be1c9160d3e6eee78281f67a13450ef859f0dd8d1ff6f79b\",\"urls\":[\"bzz-raw://79051c01efdb71be6e7b81946514f02c0d333865e921d374ac742aa4c9c7b0d6\",\"dweb:/ipfs/QmZtcUwi4mYmKHEUp1gLRt7qNU2LxjtAAFtteR7jPfxgMf\"]},\"/Users/oren/daostack/arc/contracts/libs/SafeERC20.sol\":{\"keccak256\":\"0x239e96086fb1c5e34c4b5089e63b5353732aed25be966035de3b2430d8f010eb\",\"urls\":[\"bzz-raw://21bedbb8c902b1b63b052ae19c476c9afe1ed3e0f0a4ec84559fb928bff52da5\",\"dweb:/ipfs/QmWojPqwMZSSH35MZYbhj8Ca8eoHydFBwNbUY96vLcYUYW\"]},\"/Users/oren/daostack/arc/contracts/schemes/Agreement.sol\":{\"keccak256\":\"0x8d48354b7ee9bbd8ac5b085d62b2b90096a4ba50677b4c374a0eeda6391906ff\",\"urls\":[\"bzz-raw://9d560093479e9d92be00a6604db2c81a45e1d11700c498f7f95849d7502ede42\",\"dweb:/ipfs/QmcLWmc1NoW64ZwqRcXEcJYY8sEc116ZvthLHjyWdrAzDu\"]},\"/Users/oren/daostack/arc/contracts/schemes/Locking4Reputation.sol\":{\"keccak256\":\"0xa4ebbee2b99b3cedea5463cd004919fad2758c8340728b326290a19317426289\",\"urls\":[\"bzz-raw://628e3f12adfbc7476a912af3df6ddd66e53cd92f4d077dd5ec236854e36dae84\",\"dweb:/ipfs/QmRk85wiVkV8255JCAGtFsRVQPLzCuLbWzcZSQqCCno7f6\"]},\"/Users/oren/daostack/arc/contracts/schemes/LockingEth4Reputation.sol\":{\"keccak256\":\"0x9e14e2a9b182308de507fb2565ee36ff702395d883dc420c35b6c93e84d6eac7\",\"urls\":[\"bzz-raw://df8af65346f57b0346151ea38f12b13d21705ce8e847caa12c334f2e393f1a06\",\"dweb:/ipfs/QmcaFNi1xJ83HSTn5iJY1qFBhHqCf6DDSXt4dSHoKNfpWb\"]},\"@daostack/infra/contracts/Reputation.sol\":{\"keccak256\":\"0x3d226dac0fe7d758f0287fb28bc25fcec1f69d19888ae3a550fa49856d61c482\",\"urls\":[\"bzz-raw://8856852c8fe0ba1c9aab326f0a9a6e7f31a238de2778fa5188e6fc399f7eb352\",\"dweb:/ipfs/QmVH4ppR9Dk7v8yxaSgeArdMv9gBBVoQxEf4E3UsqQ4rY2\"]},\"openzeppelin-solidity/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x4ccf2d7b51873db1ccfd54ca2adae5eac3b184f9699911ed4490438419f1c690\",\"urls\":[\"bzz-raw://d62d769b2219d5de39013093412623e624fa887f871826ea3bae6052ee893610\",\"dweb:/ipfs/QmV3yVktya1s617QmuzQR2CfuJgUi3dR2xEZY9ecmqZ2G1\"]},\"openzeppelin-solidity/contracts/ownership/Ownable.sol\":{\"keccak256\":\"0xf79fb10e8235770eb4aea7249034076a3cc9f9119ad944fc48705bae9c9d20dc\",\"urls\":[\"bzz-raw://cd3429aa9a4878dcf6c73faa32c3722f4013d4be012ece543b246faa6b50f55c\",\"dweb:/ipfs/QmS55hgTvNEAKinus19m65CB4wcymN8EiUPFpRx5tYJ1i2\"]},\"openzeppelin-solidity/contracts/token/ERC20/ERC20.sol\":{\"keccak256\":\"0x852793a3c2f86d336a683b30d688ec3dcfc57451af5a2bf5975cda3b7191a901\",\"urls\":[\"bzz-raw://4f5b57664069671648fb81f55b0082faecdf1b2f159eec6b1fa6cef9b7d73bc5\",\"dweb:/ipfs/QmcyytaLs7zFdb4Uu7C5PmQRhQdB3wA3fUdkV6mkYfdDFH\"]},\"openzeppelin-solidity/contracts/token/ERC20/ERC20Burnable.sol\":{\"keccak256\":\"0xa5ebf3344a36eb60e723e0764d85251c496e15e4b2d737b56415502b559a1765\",\"urls\":[\"bzz-raw://c543fd1fc299b7d32c658c86118ff2d0e7897a7c8b9d5f576fe6c0271c28961b\",\"dweb:/ipfs/QmNMrjLnsC4JP54aXLHhpra5NPTAs8rrd2bgXfYYYdJMhS\"]},\"openzeppelin-solidity/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x90e8c2521653bbb1768b05889c5760031e688d9cd361f167489b89215e201b95\",\"urls\":[\"bzz-raw://d0abb99bb8bfc2bc0a89902b8ed1dc0442ad08cc78cee64c291b3df6a27bcccc\",\"dweb:/ipfs/QmP5NaEwZthQeM2ESz4WTT3osrP7jhbvu7ocbttBi2JAw6\"]},\"openzeppelin-solidity/contracts/utils/Address.sol\":{\"keccak256\":\"0xf3358e5819ca73357abd6c90bdfffd0474af54364897f6b3e3234c4b71fbe9a1\",\"urls\":[\"bzz-raw://75ae8d04454d1511a2ed986cc8585736f05c5c25280683b3d24712a9f414a4bf\",\"dweb:/ipfs/Qmb3kNCoBUZdah1AgBBD4zMk898j5Qw8ahT1w5cCMYp5Y3\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5061110c806100206000396000f3fe6080604052600436106101095760003560e01c806395a2251f11610095578063c006719f11610064578063c006719f14610318578063c3201add1461032d578063c348a24b14610342578063d7c2eec714610357578063ed1ff6d8146103a457610109565b806395a2251f146102a6578063a8c33017146102d9578063afe0e33c146102ee578063bf0df4451461030357610109565b80635aef7de6116100dc5780635aef7de614610182578063650e81f2146101b3578063696da9211461020c57806376dd110f14610221578063838057421461025457610109565b80633d1678f41461010e578063496a36f21461013557806355bfec8814610158578063568914121461016d575b600080fd5b34801561011a57600080fd5b506101236103b9565b60408051918252519081900360200190f35b6101236004803603604081101561014b57600080fd5b50803590602001356103bf565b34801561016457600080fd5b506101236103d9565b34801561017957600080fd5b506101236103df565b34801561018e57600080fd5b506101976103e5565b604080516001600160a01b039092168252519081900360200190f35b3480156101bf57600080fd5b5061020a600480360360e08110156101d657600080fd5b506001600160a01b038135169060208101359060408101359060608101359060808101359060a08101359060c001356103f4565b005b34801561021857600080fd5b5061012361040c565b34801561022d57600080fd5b506101236004803603602081101561024457600080fd5b50356001600160a01b0316610412565b34801561026057600080fd5b5061028d6004803603604081101561027757600080fd5b506001600160a01b038135169060200135610424565b6040805192835260208301919091528051918290030190f35b3480156102b257600080fd5b50610123600480360360208110156102c957600080fd5b50356001600160a01b0316610448565b3480156102e557600080fd5b506101236106f0565b3480156102fa57600080fd5b506101236106f6565b34801561030f57600080fd5b506101236106fc565b34801561032457600080fd5b50610123610702565b34801561033957600080fd5b50610123610708565b34801561034e57600080fd5b5061012361070e565b34801561036357600080fd5b506103906004803603604081101561037a57600080fd5b506001600160a01b038135169060200135610714565b604080519115158252519081900360200190f35b3480156103b057600080fd5b50610123610765565b600d5481565b60006103d03484336001808761076b565b90505b92915050565b600c5481565b60045481565b6001546001600160a01b031681565b61040387878787878787610b3f565b50505050505050565b60005490565b60036020526000908152604090205481565b60026020908152600092835260408084209091529082529020805460019091015482565b6000600d544211610499576040805162461bcd60e51b81526020600482015260166024820152756e6f77203e2072656465656d456e61626c6554696d6560501b604482015290519081900360640190fd5b6001600160a01b0382166000908152600360205260409020546104f9576040805162461bcd60e51b8152602060048201526013602482015272073636f72652073686f756c64206265203e203606c1b604482015290519081900360640190fd5b6001600160a01b038216600090815260036020526040812080549082905560085490919061052e90839063ffffffff610caf16565b905061054560065482610d0890919063ffffffff16565b60095490935061055b908463ffffffff610d7216565b60095560015460408051638da5cb5b60e01b815290516001600160a01b0390921691638da5cb5b91600480820192602092909190829003018186803b1580156105a357600080fd5b505afa1580156105b7573d6000803e3d6000fd5b505050506040513d60208110156105cd57600080fd5b50516001546040805163757cca5960e11b8152600481018790526001600160a01b03888116602483015292831660448201529051919092169163eaf994b29160648083019260209291908290030181600087803b15801561062d57600080fd5b505af1158015610641573d6000803e3d6000fd5b505050506040513d602081101561065757600080fd5b50516106aa576040805162461bcd60e51b815260206004820152601e60248201527f6d696e742072657075746174696f6e2073686f756c6420737563636565640000604482015290519081900360640190fd5b6040805184815290516001600160a01b038616917f222838db2794d11532d940e8dec38ae307ed0b63cd97c233322e221f998767a6919081900360200190a25050919050565b600a5481565b60095481565b600b5481565b60065481565b60075481565b60055481565b6000806107218484610dcf565b6040519091506001600160a01b0385169082156108fc029083906000818181858888f1935050505015801561075a573d6000803e3d6000fd5b506001949350505050565b60085481565b60008160005481146107ae5760405162461bcd60e51b81526004018080602001828103825260288152602001806110626028913960400191505060405180910390fd5b60008811610803576040805162461bcd60e51b815260206004820152601c60248201527f6c6f636b696e6720616d6f756e742073686f756c64206265203e203000000000604482015290519081900360640190fd5b600b548711156108445760405162461bcd60e51b815260040180806020018281038252602c81526020018061108a602c913960400191505060405180910390fd5b60008711610899576040805162461bcd60e51b815260206004820152601c60248201527f6c6f636b696e6720706572696f642073686f756c64206265203e203000000000604482015290519081900360640190fd5b600a544211156108da5760405162461bcd60e51b8152600401808060200182810382526030815260200180610fd76030913960400191505060405180910390fd5b600c5442101561091b5760405162461bcd60e51b8152600401808060200182810382526028815260200180610faf6028913960400191505060405180910390fd5b600754604080513060601b60208083019190915260348083018590528351808403909101815260549092019092528051910120925061096190600163ffffffff610efa16565b6007556001600160a01b0386166000908152600260209081526040808320858452909152902088815542880160018201556004546109a5908a63ffffffff610efa16565b6004556005546109bb908a63ffffffff610efa16565b60055560006109f0866109e4896109d88d8f63ffffffff610caf16565b9063ffffffff610caf16565b9063ffffffff610d0816565b905060008111610a3b576040805162461bcd60e51b8152602060048201526011602482015270073636f7265206d757374206d65203e203607c1b604482015290519081900360640190fd5b6001600160a01b038816600090815260036020526040902054610a64908263ffffffff610efa16565b6001600160a01b03891660009081526003602052604090208190556008549081810281610a8d57fe5b0414610ad4576040805162461bcd60e51b81526020600482015260116024820152700e6c6dee4ca40d2e640e8dede40d0d2ced607b1b604482015290519081900360640190fd5b600654610ae7908263ffffffff610efa16565b600655604080518b8152602081018b9052815186926001600160a01b038c16927fd173f98f4a2080eab40a0bff4d9a575753270cb2401c74efdec1feb0ba31b426929081900390910190a35050509695505050505050565b6001546001600160a01b031615610b9d576040805162461bcd60e51b815260206004820152601b60248201527f63616e2062652063616c6c6564206f6e6c79206f6e652074696d650000000000604482015290519081900360640190fd5b6001600160a01b038716610bf0576040805162461bcd60e51b81526020600482015260156024820152746176617461722063616e6e6f74206265207a65726f60581b604482015290519081900360640190fd5b848411610c2e5760405162461bcd60e51b815260040180806020018281038252603a815260200180611028603a913960400191505060405180910390fd5b83831015610c6d5760405162461bcd60e51b81526004018080602001828103825260228152602001806110b66022913960400191505060405180910390fd5b60088690556009869055600a849055600b829055600180546001600160a01b0319166001600160a01b038916179055600c859055600d83905561040381610f54565b600082610cbe575060006103d3565b82820282848281610ccb57fe5b04146103d05760405162461bcd60e51b81526004018080602001828103825260218152602001806110076021913960400191505060405180910390fd5b6000808211610d5e576040805162461bcd60e51b815260206004820152601a60248201527f536166654d6174683a206469766973696f6e206279207a65726f000000000000604482015290519081900360640190fd5b6000828481610d6957fe5b04949350505050565b600082821115610dc9576040805162461bcd60e51b815260206004820152601e60248201527f536166654d6174683a207375627472616374696f6e206f766572666c6f770000604482015290519081900360640190fd5b50900390565b6001600160a01b038216600090815260026020908152604080832084845290915281208054610e3c576040805162461bcd60e51b81526020600482015260146024820152730616d6f756e742073686f756c64206265203e20360641b604482015290519081900360640190fd5b80546000825560018201549092504211610e9d576040805162461bcd60e51b815260206004820152601a60248201527f636865636b20746865206c6f636b20706572696f642070617373000000000000604482015290519081900360640190fd5b600554610eb0908363ffffffff610d7216565b6005556040805183815290516001600160a01b0386169185917fcb7ab693259d2332e08e7666832578144deb74443e37a762847e848793fc29819181900360200190a35092915050565b6000828201838110156103d0576040805162461bcd60e51b815260206004820152601b60248201527f536166654d6174683a206164646974696f6e206f766572666c6f770000000000604482015290519081900360640190fd5b60005415610fa9576040805162461bcd60e51b815260206004820152601b60248201527f43616e206e6f74207365742061677265656d656e742074776963650000000000604482015290519081900360640190fd5b60005556fe6c6f636b2073686f756c64207374617274206166746572206c6f636b696e67537461727454696d656c6f636b2073686f756c642062652077697468696e2074686520616c6c6f776564206c6f636b696e6720706572696f64536166654d6174683a206d756c7469706c69636174696f6e206f766572666c6f776c6f636b696e6720656e642074696d652073686f756c642062652067726561746572207468616e206c6f636b696e672073746172742074696d6553656e646572206d7573742073656e64207468652072696768742061677265656d656e74486173686c6f636b696e6720706572696f642073686f756c64206265203c3d206d61784c6f636b696e67506572696f6472656465656d456e61626c6554696d65203e3d206c6f636b696e67456e6454696d65a265627a7a723158205f03709cabeae1bc11442f396f10bd5bfb59a8b106e402a3b539b5436510ff6a64736f6c634300050b0032",
+  "deployedBytecode": "0x6080604052600436106101095760003560e01c806395a2251f11610095578063c006719f11610064578063c006719f14610318578063c3201add1461032d578063c348a24b14610342578063d7c2eec714610357578063ed1ff6d8146103a457610109565b806395a2251f146102a6578063a8c33017146102d9578063afe0e33c146102ee578063bf0df4451461030357610109565b80635aef7de6116100dc5780635aef7de614610182578063650e81f2146101b3578063696da9211461020c57806376dd110f14610221578063838057421461025457610109565b80633d1678f41461010e578063496a36f21461013557806355bfec8814610158578063568914121461016d575b600080fd5b34801561011a57600080fd5b506101236103b9565b60408051918252519081900360200190f35b6101236004803603604081101561014b57600080fd5b50803590602001356103bf565b34801561016457600080fd5b506101236103d9565b34801561017957600080fd5b506101236103df565b34801561018e57600080fd5b506101976103e5565b604080516001600160a01b039092168252519081900360200190f35b3480156101bf57600080fd5b5061020a600480360360e08110156101d657600080fd5b506001600160a01b038135169060208101359060408101359060608101359060808101359060a08101359060c001356103f4565b005b34801561021857600080fd5b5061012361040c565b34801561022d57600080fd5b506101236004803603602081101561024457600080fd5b50356001600160a01b0316610412565b34801561026057600080fd5b5061028d6004803603604081101561027757600080fd5b506001600160a01b038135169060200135610424565b6040805192835260208301919091528051918290030190f35b3480156102b257600080fd5b50610123600480360360208110156102c957600080fd5b50356001600160a01b0316610448565b3480156102e557600080fd5b506101236106f0565b3480156102fa57600080fd5b506101236106f6565b34801561030f57600080fd5b506101236106fc565b34801561032457600080fd5b50610123610702565b34801561033957600080fd5b50610123610708565b34801561034e57600080fd5b5061012361070e565b34801561036357600080fd5b506103906004803603604081101561037a57600080fd5b506001600160a01b038135169060200135610714565b604080519115158252519081900360200190f35b3480156103b057600080fd5b50610123610765565b600d5481565b60006103d03484336001808761076b565b90505b92915050565b600c5481565b60045481565b6001546001600160a01b031681565b61040387878787878787610b3f565b50505050505050565b60005490565b60036020526000908152604090205481565b60026020908152600092835260408084209091529082529020805460019091015482565b6000600d544211610499576040805162461bcd60e51b81526020600482015260166024820152756e6f77203e2072656465656d456e61626c6554696d6560501b604482015290519081900360640190fd5b6001600160a01b0382166000908152600360205260409020546104f9576040805162461bcd60e51b8152602060048201526013602482015272073636f72652073686f756c64206265203e203606c1b604482015290519081900360640190fd5b6001600160a01b038216600090815260036020526040812080549082905560085490919061052e90839063ffffffff610caf16565b905061054560065482610d0890919063ffffffff16565b60095490935061055b908463ffffffff610d7216565b60095560015460408051638da5cb5b60e01b815290516001600160a01b0390921691638da5cb5b91600480820192602092909190829003018186803b1580156105a357600080fd5b505afa1580156105b7573d6000803e3d6000fd5b505050506040513d60208110156105cd57600080fd5b50516001546040805163757cca5960e11b8152600481018790526001600160a01b03888116602483015292831660448201529051919092169163eaf994b29160648083019260209291908290030181600087803b15801561062d57600080fd5b505af1158015610641573d6000803e3d6000fd5b505050506040513d602081101561065757600080fd5b50516106aa576040805162461bcd60e51b815260206004820152601e60248201527f6d696e742072657075746174696f6e2073686f756c6420737563636565640000604482015290519081900360640190fd5b6040805184815290516001600160a01b038616917f222838db2794d11532d940e8dec38ae307ed0b63cd97c233322e221f998767a6919081900360200190a25050919050565b600a5481565b60095481565b600b5481565b60065481565b60075481565b60055481565b6000806107218484610dcf565b6040519091506001600160a01b0385169082156108fc029083906000818181858888f1935050505015801561075a573d6000803e3d6000fd5b506001949350505050565b60085481565b60008160005481146107ae5760405162461bcd60e51b81526004018080602001828103825260288152602001806110626028913960400191505060405180910390fd5b60008811610803576040805162461bcd60e51b815260206004820152601c60248201527f6c6f636b696e6720616d6f756e742073686f756c64206265203e203000000000604482015290519081900360640190fd5b600b548711156108445760405162461bcd60e51b815260040180806020018281038252602c81526020018061108a602c913960400191505060405180910390fd5b60008711610899576040805162461bcd60e51b815260206004820152601c60248201527f6c6f636b696e6720706572696f642073686f756c64206265203e203000000000604482015290519081900360640190fd5b600a544211156108da5760405162461bcd60e51b8152600401808060200182810382526030815260200180610fd76030913960400191505060405180910390fd5b600c5442101561091b5760405162461bcd60e51b8152600401808060200182810382526028815260200180610faf6028913960400191505060405180910390fd5b600754604080513060601b60208083019190915260348083018590528351808403909101815260549092019092528051910120925061096190600163ffffffff610efa16565b6007556001600160a01b0386166000908152600260209081526040808320858452909152902088815542880160018201556004546109a5908a63ffffffff610efa16565b6004556005546109bb908a63ffffffff610efa16565b60055560006109f0866109e4896109d88d8f63ffffffff610caf16565b9063ffffffff610caf16565b9063ffffffff610d0816565b905060008111610a3b576040805162461bcd60e51b8152602060048201526011602482015270073636f7265206d757374206d65203e203607c1b604482015290519081900360640190fd5b6001600160a01b038816600090815260036020526040902054610a64908263ffffffff610efa16565b6001600160a01b03891660009081526003602052604090208190556008549081810281610a8d57fe5b0414610ad4576040805162461bcd60e51b81526020600482015260116024820152700e6c6dee4ca40d2e640e8dede40d0d2ced607b1b604482015290519081900360640190fd5b600654610ae7908263ffffffff610efa16565b600655604080518b8152602081018b9052815186926001600160a01b038c16927fd173f98f4a2080eab40a0bff4d9a575753270cb2401c74efdec1feb0ba31b426929081900390910190a35050509695505050505050565b6001546001600160a01b031615610b9d576040805162461bcd60e51b815260206004820152601b60248201527f63616e2062652063616c6c6564206f6e6c79206f6e652074696d650000000000604482015290519081900360640190fd5b6001600160a01b038716610bf0576040805162461bcd60e51b81526020600482015260156024820152746176617461722063616e6e6f74206265207a65726f60581b604482015290519081900360640190fd5b848411610c2e5760405162461bcd60e51b815260040180806020018281038252603a815260200180611028603a913960400191505060405180910390fd5b83831015610c6d5760405162461bcd60e51b81526004018080602001828103825260228152602001806110b66022913960400191505060405180910390fd5b60088690556009869055600a849055600b829055600180546001600160a01b0319166001600160a01b038916179055600c859055600d83905561040381610f54565b600082610cbe575060006103d3565b82820282848281610ccb57fe5b04146103d05760405162461bcd60e51b81526004018080602001828103825260218152602001806110076021913960400191505060405180910390fd5b6000808211610d5e576040805162461bcd60e51b815260206004820152601a60248201527f536166654d6174683a206469766973696f6e206279207a65726f000000000000604482015290519081900360640190fd5b6000828481610d6957fe5b04949350505050565b600082821115610dc9576040805162461bcd60e51b815260206004820152601e60248201527f536166654d6174683a207375627472616374696f6e206f766572666c6f770000604482015290519081900360640190fd5b50900390565b6001600160a01b038216600090815260026020908152604080832084845290915281208054610e3c576040805162461bcd60e51b81526020600482015260146024820152730616d6f756e742073686f756c64206265203e20360641b604482015290519081900360640190fd5b80546000825560018201549092504211610e9d576040805162461bcd60e51b815260206004820152601a60248201527f636865636b20746865206c6f636b20706572696f642070617373000000000000604482015290519081900360640190fd5b600554610eb0908363ffffffff610d7216565b6005556040805183815290516001600160a01b0386169185917fcb7ab693259d2332e08e7666832578144deb74443e37a762847e848793fc29819181900360200190a35092915050565b6000828201838110156103d0576040805162461bcd60e51b815260206004820152601b60248201527f536166654d6174683a206164646974696f6e206f766572666c6f770000000000604482015290519081900360640190fd5b60005415610fa9576040805162461bcd60e51b815260206004820152601b60248201527f43616e206e6f74207365742061677265656d656e742074776963650000000000604482015290519081900360640190fd5b60005556fe6c6f636b2073686f756c64207374617274206166746572206c6f636b696e67537461727454696d656c6f636b2073686f756c642062652077697468696e2074686520616c6c6f776564206c6f636b696e6720706572696f64536166654d6174683a206d756c7469706c69636174696f6e206f766572666c6f776c6f636b696e6720656e642074696d652073686f756c642062652067726561746572207468616e206c6f636b696e672073746172742074696d6553656e646572206d7573742073656e64207468652072696768742061677265656d656e74486173686c6f636b696e6720706572696f642073686f756c64206265203c3d206d61784c6f636b696e67506572696f6472656465656d456e61626c6554696d65203e3d206c6f636b696e67456e6454696d65a265627a7a723158205f03709cabeae1bc11442f396f10bd5bfb59a8b106e402a3b539b5436510ff6a64736f6c634300050b0032",
+  "sourceMap": "121:1789:18:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;121:1789:18;;;;;;;",
+  "deployedSourceMap": "121:1789:18:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1166:31:17;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1166:31:17;;;:::i;:::-;;;;;;;;;;;;;;;;1721:186:18;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;1721:186:18;;;;;;;:::i;1129:31:17:-;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1129:31:17;;;:::i;816:26::-;;8:9:-1;5:2;;;30:1;27;20:12;5:2;816:26:17;;;:::i;561:20::-;;8:9:-1;5:2;;;30:1;27;20:12;5:2;561:20:17;;;:::i;:::-;;;;-1:-1:-1;;;;;561:20:17;;;;;;;;;;;;;;728:477:18;;8:9:-1;5:2;;;30:1;27;20:12;5:2;728:477:18;;;;;;13:3:-1;8;5:12;2:2;;;30:1;27;20:12;2:2;-1:-1;;;;;;728:477:18;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;408:101:9;;8:9:-1;5:2;;;30:1;27;20:12;5:2;408:101:9;;;:::i;771:38:17:-;;8:9:-1;5:2;;;30:1;27;20:12;5:2;771:38:17;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;771:38:17;-1:-1:-1;;;;;771:38:17;;:::i;649:59::-;;8:9:-1;5:2;;;30:1;27;20:12;5:2;649:59:17;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;;;;;;649:59:17;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;1361:807;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1361:807:17;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;1361:807:17;-1:-1:-1;;;;;1361:807:17;;:::i;1057:29::-;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1057:29:17;;;:::i;1016:35::-;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1016:35:17;;;:::i;1092:31::-;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1092:31:17;;;:::i;884:25::-;;8:9:-1;5:2;;;30:1;27;20:12;5:2;884:25:17;;;:::i;915:30::-;;8:9:-1;5:2;;;30:1;27;20:12;5:2;915:30:17;;;:::i;848:::-;;8:9:-1;5:2;;;30:1;27;20:12;5:2;848:30:17;;;:::i;1370:223:18:-;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1370:223:18;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;;;;;;1370:223:18;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;979:31:17;;8:9:-1;5:2;;;30:1;27;20:12;5:2;979:31:17;;;:::i;1166:::-;;;;:::o;1721:186:18:-;1799:17;1835:65;1847:9;1858:7;1867:10;1879:1;1882;1885:14;1835:11;:65::i;:::-;1828:72;;1721:186;;;;;:::o;1129:31:17:-;;;;:::o;816:26::-;;;;:::o;561:20::-;;;-1:-1:-1;;;;;561:20:17;;:::o;728:477:18:-;1006:192;1033:7;1050:17;1077;1104:15;1129:17;1156;1183:14;1006:17;:192::i;:::-;728:477;;;;;;;:::o;408:101:9:-;459:7;489:13;408:101;:::o;771:38:17:-;;;;;;;;;;;;;:::o;649:59::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;1361:807::-;1414:18;1524:16;;1506:15;:34;1498:69;;;;;-1:-1:-1;;;1498:69:17;;;;;;;;;;;;-1:-1:-1;;;1498:69:17;;;;;;;;;;;;;;;-1:-1:-1;;;;;1585:20:17;;1608:1;1585:20;;;:6;:20;;;;;;1577:56;;;;;-1:-1:-1;;;1577:56:17;;;;;;;;;;;;-1:-1:-1;;;1577:56:17;;;;;;;;;;;;;;;-1:-1:-1;;;;;1659:20:17;;1643:13;1659:20;;;:6;:20;;;;;;;1689:24;;;;1755:16;;1659:20;;1643:13;1745:27;;1659:20;;1745:27;:9;:27;:::i;:::-;1723:49;;1795:27;1811:10;;1795:11;:15;;:27;;;;:::i;:::-;1904:20;;1782:40;;-1:-1:-1;1904:36:17;;1782:40;1904:36;:24;:36;:::i;:::-;1881:20;:59;1996:6;;:14;;;-1:-1:-1;;;1996:14:17;;;;-1:-1:-1;;;;;1996:6:17;;;;:12;;:14;;;;;;;;;;;;;;;:6;:14;;;5:2:-1;;;;30:1;27;20:12;5:2;1996:14:17;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;1996:14:17;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;1996:14:17;2070:6;;1967:111;;;-1:-1:-1;;;1967:111:17;;;;;;;;-1:-1:-1;;;;;1967:111:17;;;;;;;2070:6;;;1967:111;;;;;;:68;;;;;;;:111;;;;;1996:14;;1967:111;;;;;;;2070:6;1967:68;:111;;;5:2:-1;;;;30:1;27;20:12;5:2;1967:111:17;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;1967:111:17;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;1967:111:17;1950:163;;;;;-1:-1:-1;;;1950:163:17;;;;;;;;;;;;;;;;;;;;;;;;;;;;2129:32;;;;;;;;-1:-1:-1;;;;;2129:32:17;;;;;;;;;;;;;1361:807;;;;;:::o;1057:29::-;;;;:::o;1016:35::-;;;;:::o;1092:31::-;;;;:::o;884:25::-;;;;:::o;915:30::-;;;;:::o;848:::-;;;;:::o;1370:223:18:-;1452:4;1468:14;1485:40;1500:12;1514:10;1485:14;:40::i;:::-;1535:29;;1468:57;;-1:-1:-1;;;;;;1535:21:18;;;:29;;;;;1468:57;;1535:29;;;;1468:57;1535:21;:29;;;;;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;-1:-1;1582:4:18;;1370:223;-1:-1:-1;;;;1370:223:18:o;979:31:17:-;;;;:::o;3160:1683::-;3408:17;3376:14;244:13:9;;226:14;:31;218:84;;;;-1:-1:-1;;;218:84:9;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;3463:1:17;3453:7;:11;3445:52;;;;;-1:-1:-1;;;3445:52:17;;;;;;;;;;;;;;;;;;;;;;;;;;;;3526:16;;3515:7;:27;;3507:84;;;;-1:-1:-1;;;3507:84:17;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;3619:1;3609:7;:11;3601:52;;;;;-1:-1:-1;;;3601:52:17;;;;;;;;;;;;;;;;;;;;;;;;;;;;3732:14;;3725:3;:21;;3717:82;;;;-1:-1:-1;;;3717:82:17;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;3878:16;;3871:3;:23;;3863:76;;;;-1:-1:-1;;;3863:76:17;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;4004:15;;3972:48;;;3997:4;3972:48;;;;;;;;;;;;;;;;;;;26:21:-1;;;22:32;;;6:49;;3972:48:17;;;;;;;3962:59;;;;;;-1:-1:-1;4049:22:17;;4069:1;4049:22;:19;:22;:::i;:::-;4031:15;:40;-1:-1:-1;;;;;4106:16:17;;4082:21;4106:16;;;:7;:16;;;;;;;;:27;;;;;;;;4143:23;;;4251:3;:13;;4230:18;;;:34;4288:11;;:24;;4159:7;4288:24;:15;:24;:::i;:::-;4274:11;:38;4340:15;;:28;;4360:7;4340:28;:19;:28;:::i;:::-;4322:15;:46;4378:13;4394:54;4435:12;4394:36;4419:10;4394:20;:7;4406;4394:20;:11;:20;:::i;:::-;:24;:36;:24;:36;:::i;:::-;:40;:54;:40;:54;:::i;:::-;4378:70;;4474:1;4466:5;:9;4458:39;;;;;-1:-1:-1;;;4458:39:17;;;;;;;;;;;;-1:-1:-1;;;4458:39:17;;;;;;;;;;;;;;;-1:-1:-1;;;;;4525:15:17;;;;;;:6;:15;;;;;;:26;;4545:5;4525:26;:19;:26;:::i;:::-;-1:-1:-1;;;;;4507:15:17;;;;;;:6;:15;;;;;:44;;;4688:16;;;4633:34;;;4507:44;4632:52;;;;;:72;4624:110;;;;;-1:-1:-1;;;4624:110:17;;;;;;;;;;;;-1:-1:-1;;;4624:110:17;;;;;;;;;;;;;;;4757:10;;:21;;4772:5;4757:21;:14;:21;:::i;:::-;4744:10;:34;4794:42;;;;;;;;;;;;;;4808:9;;-1:-1:-1;;;;;4794:42:17;;;;;;;;;;;;;;312:1:9;;3160:1683:17;;;;;;;;;:::o;5397:969::-;5684:6;;-1:-1:-1;;;;;5684:6:17;:19;5676:59;;;;;-1:-1:-1;;;5676:59:17;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;5753:20:17;;5745:54;;;;;-1:-1:-1;;;5745:54:17;;;;;;;;;;;;-1:-1:-1;;;5745:54:17;;;;;;;;;;;;;;;5835:17;5817:15;:35;5809:106;;;;-1:-1:-1;;;5809:106:17;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;5954:15;5933:17;:36;;5925:83;;;;-1:-1:-1;;;5925:83:17;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;6019:16;:36;;;6065:20;:40;;;6115:14;:32;;;6157:16;:36;;;6203:6;:16;;-1:-1:-1;;;;;;6203:16:17;-1:-1:-1;;;;;6203:16:17;;;;;6229;:36;;;6275:16;:36;;;6321:38;6344:14;6321:22;:38::i;1693:458:65:-;1751:7;1991:6;1987:45;;-1:-1:-1;2020:1:65;2013:8;;1987:45;2054:5;;;2058:1;2054;:5;:1;2077:5;;;;;:10;2069:56;;;;-1:-1:-1;;;2069:56:65;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2606:326;2664:7;2761:1;2757;:5;2749:44;;;;;-1:-1:-1;;;2749:44:65;;;;;;;;;;;;;;;;;;;;;;;;;;;;2803:9;2819:1;2815;:5;;;;;;;2606:326;-1:-1:-1;;;;2606:326:65:o;1274:179::-;1332:7;1364:1;1359;:6;;1351:49;;;;;-1:-1:-1;;;1351:49:65;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;1422:5:65;;;1274:179::o;2349:537:17:-;-1:-1:-1;;;;;2476:21:17;;2426:14;2476:21;;;:7;:21;;;;;;;;:33;;;;;;;;2527:13;;2519:50;;;;;-1:-1:-1;;;2519:50:17;;;;;;;;;;;;-1:-1:-1;;;2519:50:17;;;;;;;;;;;;;;;2588:13;;;2611:17;;-1:-1:-1;2718:18:17;;;2588:13;;-1:-1:-1;2700:15:17;:36;2692:75;;;;;-1:-1:-1;;;2692:75:17;;;;;;;;;;;;;;;;;;;;;;;;;;;;2795:15;;:27;;2815:6;2795:27;:19;:27;:::i;:::-;2777:15;:45;2838:41;;;;;;;;-1:-1:-1;;;;;2838:41:17;;;2846:10;;2838:41;;;;;;;;;2349:537;;;;;:::o;834:176:65:-;892:7;923:5;;;946:6;;;;938:46;;;;;-1:-1:-1;;;938:46:65;;;;;;;;;;;;;;;;;;;;;;;;;;;659:187:9;765:1;740:13;:27;732:67;;;;;-1:-1:-1;;;732:67:9;;;;;;;;;;;;;;;;;;;;;;;;;;;;809:13;:30;659:187::o",
+  "source": "pragma solidity ^0.5.11;\n\nimport \"./Locking4Reputation.sol\";\n\n/**\n * @title A scheme for locking ETH for reputation\n */\n\ncontract LockingEth4Reputation is Locking4Reputation {\n\n    /**\n     * @dev initialize\n     * @param _avatar the avatar to mint reputation from\n     * @param _reputationReward the total reputation this contract will reward\n     *        for eth locking\n     * @param _lockingStartTime locking starting period time.\n     * @param _lockingEndTime the locking end time.\n     *        locking is disable after this time.\n     * @param _redeemEnableTime redeem enable time .\n     *        redeem reputation can be done after this time.\n     * @param _maxLockingPeriod maximum locking period allowed.\n     */\n    function initialize(\n        Avatar _avatar,\n        uint256 _reputationReward,\n        uint256 _lockingStartTime,\n        uint256 _lockingEndTime,\n        uint256 _redeemEnableTime,\n        uint256 _maxLockingPeriod,\n        bytes32 _agreementHash )\n    external\n    {\n        super._initialize(\n        _avatar,\n        _reputationReward,\n        _lockingStartTime,\n        _lockingEndTime,\n        _redeemEnableTime,\n        _maxLockingPeriod,\n        _agreementHash);\n    }\n\n    /**\n     * @dev release locked eth\n     * @param _beneficiary the release _beneficiary\n     * @param _lockingId the locking id\n     * @return bool\n     */\n    function release(address payable _beneficiary, bytes32 _lockingId) public returns(bool) {\n        uint256 amount = super._release(_beneficiary, _lockingId);\n        _beneficiary.transfer(amount);\n\n        return true;\n    }\n\n    /**\n     * @dev lock function\n     * @param _period the locking period\n     * @return lockingId the unique Id\n     */\n    function lock(uint256 _period, bytes32 _agreementHash) public payable returns(bytes32 lockingId) {\n        return super._lock(msg.value, _period, msg.sender, 1, 1, _agreementHash);\n    }\n\n}\n",
+  "sourcePath": "/Users/oren/daostack/arc/contracts/schemes/LockingEth4Reputation.sol",
+  "ast": {
+    "absolutePath": "/Users/oren/daostack/arc/contracts/schemes/LockingEth4Reputation.sol",
+    "exportedSymbols": {
+      "LockingEth4Reputation": [
+        7127
+      ]
+    },
+    "id": 7128,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 7045,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".11"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:18"
+      },
+      {
+        "absolutePath": "/Users/oren/daostack/arc/contracts/schemes/Locking4Reputation.sol",
+        "file": "./Locking4Reputation.sol",
+        "id": 7046,
+        "nodeType": "ImportDirective",
+        "scope": 7128,
+        "sourceUnit": 7044,
+        "src": "26:34:18",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 7047,
+              "name": "Locking4Reputation",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 7043,
+              "src": "155:18:18",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Locking4Reputation_$7043",
+                "typeString": "contract Locking4Reputation"
+              }
+            },
+            "id": 7048,
+            "nodeType": "InheritanceSpecifier",
+            "src": "155:18:18"
+          }
+        ],
+        "contractDependencies": [
+          4320,
+          7043
+        ],
+        "contractKind": "contract",
+        "documentation": "@title A scheme for locking ETH for reputation",
+        "fullyImplemented": true,
+        "id": 7127,
+        "linearizedBaseContracts": [
+          7127,
+          7043,
+          4320
+        ],
+        "name": "LockingEth4Reputation",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 7077,
+              "nodeType": "Block",
+              "src": "996:209:18",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 7068,
+                        "name": "_avatar",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7050,
+                        "src": "1033:7:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Avatar_$337",
+                          "typeString": "contract Avatar"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 7069,
+                        "name": "_reputationReward",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7052,
+                        "src": "1050:17:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 7070,
+                        "name": "_lockingStartTime",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7054,
+                        "src": "1077:17:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 7071,
+                        "name": "_lockingEndTime",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7056,
+                        "src": "1104:15:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 7072,
+                        "name": "_redeemEnableTime",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7058,
+                        "src": "1129:17:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 7073,
+                        "name": "_maxLockingPeriod",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7060,
+                        "src": "1156:17:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 7074,
+                        "name": "_agreementHash",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7062,
+                        "src": "1183:14:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_contract$_Avatar_$337",
+                          "typeString": "contract Avatar"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 7065,
+                        "name": "super",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 20401,
+                        "src": "1006:5:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_super$_LockingEth4Reputation_$7127",
+                          "typeString": "contract super LockingEth4Reputation"
+                        }
+                      },
+                      "id": 7067,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "_initialize",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 7042,
+                      "src": "1006:17:18",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_contract$_Avatar_$337_$_t_uint256_$_t_uint256_$_t_uint256_$_t_uint256_$_t_uint256_$_t_bytes32_$returns$__$",
+                        "typeString": "function (contract Avatar,uint256,uint256,uint256,uint256,uint256,bytes32)"
+                      }
+                    },
+                    "id": 7075,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1006:192:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 7076,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1006:192:18"
+                }
+              ]
+            },
+            "documentation": "@dev initialize\n@param _avatar the avatar to mint reputation from\n@param _reputationReward the total reputation this contract will reward\n       for eth locking\n@param _lockingStartTime locking starting period time.\n@param _lockingEndTime the locking end time.\n       locking is disable after this time.\n@param _redeemEnableTime redeem enable time .\n       redeem reputation can be done after this time.\n@param _maxLockingPeriod maximum locking period allowed.",
+            "id": 7078,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "initialize",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 7063,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 7050,
+                  "name": "_avatar",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7078,
+                  "src": "757:14:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Avatar_$337",
+                    "typeString": "contract Avatar"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 7049,
+                    "name": "Avatar",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 337,
+                    "src": "757:6:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Avatar_$337",
+                      "typeString": "contract Avatar"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 7052,
+                  "name": "_reputationReward",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7078,
+                  "src": "781:25:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7051,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "781:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 7054,
+                  "name": "_lockingStartTime",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7078,
+                  "src": "816:25:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7053,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "816:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 7056,
+                  "name": "_lockingEndTime",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7078,
+                  "src": "851:23:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7055,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "851:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 7058,
+                  "name": "_redeemEnableTime",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7078,
+                  "src": "884:25:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7057,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "884:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 7060,
+                  "name": "_maxLockingPeriod",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7078,
+                  "src": "919:25:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7059,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "919:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 7062,
+                  "name": "_agreementHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7078,
+                  "src": "954:22:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 7061,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "954:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "747:231:18"
+            },
+            "returnParameters": {
+              "id": 7064,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "996:0:18"
+            },
+            "scope": 7127,
+            "src": "728:477:18",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 7103,
+              "nodeType": "Block",
+              "src": "1458:135:18",
+              "statements": [
+                {
+                  "assignments": [
+                    7088
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 7088,
+                      "name": "amount",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 7103,
+                      "src": "1468:14:18",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "typeName": {
+                        "id": 7087,
+                        "name": "uint256",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1468:7:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 7094,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 7091,
+                        "name": "_beneficiary",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7080,
+                        "src": "1500:12:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 7092,
+                        "name": "_lockingId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7082,
+                        "src": "1514:10:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        },
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 7089,
+                        "name": "super",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 20401,
+                        "src": "1485:5:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_super$_LockingEth4Reputation_$7127",
+                          "typeString": "contract super LockingEth4Reputation"
+                        }
+                      },
+                      "id": 7090,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "_release",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 6786,
+                      "src": "1485:14:18",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_bytes32_$returns$_t_uint256_$",
+                        "typeString": "function (address,bytes32) returns (uint256)"
+                      }
+                    },
+                    "id": 7093,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1485:40:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1468:57:18"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 7098,
+                        "name": "amount",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7088,
+                        "src": "1557:6:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 7095,
+                        "name": "_beneficiary",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7080,
+                        "src": "1535:12:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      "id": 7097,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "transfer",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "1535:21:18",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_transfer_nonpayable$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256)"
+                      }
+                    },
+                    "id": 7099,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1535:29:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 7100,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1535:29:18"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "74727565",
+                    "id": 7101,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "bool",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "1582:4:18",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "value": "true"
+                  },
+                  "functionReturnParameters": 7086,
+                  "id": 7102,
+                  "nodeType": "Return",
+                  "src": "1575:11:18"
+                }
+              ]
+            },
+            "documentation": "@dev release locked eth\n@param _beneficiary the release _beneficiary\n@param _lockingId the locking id\n@return bool",
+            "id": 7104,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "release",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 7083,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 7080,
+                  "name": "_beneficiary",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7104,
+                  "src": "1387:28:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  },
+                  "typeName": {
+                    "id": 7079,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1387:15:18",
+                    "stateMutability": "payable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 7082,
+                  "name": "_lockingId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7104,
+                  "src": "1417:18:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 7081,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1417:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1386:50:18"
+            },
+            "returnParameters": {
+              "id": 7086,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 7085,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7104,
+                  "src": "1452:4:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 7084,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1452:4:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1451:6:18"
+            },
+            "scope": 7127,
+            "src": "1370:223:18",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 7125,
+              "nodeType": "Block",
+              "src": "1818:89:18",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 7115,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 20314,
+                          "src": "1847:3:18",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 7116,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "value",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "1847:9:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 7117,
+                        "name": "_period",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7106,
+                        "src": "1858:7:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 7118,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 20314,
+                          "src": "1867:3:18",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 7119,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "1867:10:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "31",
+                        "id": 7120,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "number",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1879:1:18",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_rational_1_by_1",
+                          "typeString": "int_const 1"
+                        },
+                        "value": "1"
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "31",
+                        "id": 7121,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "number",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1882:1:18",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_rational_1_by_1",
+                          "typeString": "int_const 1"
+                        },
+                        "value": "1"
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 7122,
+                        "name": "_agreementHash",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7108,
+                        "src": "1885:14:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        },
+                        {
+                          "typeIdentifier": "t_rational_1_by_1",
+                          "typeString": "int_const 1"
+                        },
+                        {
+                          "typeIdentifier": "t_rational_1_by_1",
+                          "typeString": "int_const 1"
+                        },
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 7113,
+                        "name": "super",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 20401,
+                        "src": "1835:5:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_super$_LockingEth4Reputation_$7127",
+                          "typeString": "contract super LockingEth4Reputation"
+                        }
+                      },
+                      "id": 7114,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "_lock",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 6958,
+                      "src": "1835:11:18",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_uint256_$_t_uint256_$_t_address_$_t_uint256_$_t_uint256_$_t_bytes32_$returns$_t_bytes32_$",
+                        "typeString": "function (uint256,uint256,address,uint256,uint256,bytes32) returns (bytes32)"
+                      }
+                    },
+                    "id": 7123,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1835:65:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "functionReturnParameters": 7112,
+                  "id": 7124,
+                  "nodeType": "Return",
+                  "src": "1828:72:18"
+                }
+              ]
+            },
+            "documentation": "@dev lock function\n@param _period the locking period\n@return lockingId the unique Id",
+            "id": 7126,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "lock",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 7109,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 7106,
+                  "name": "_period",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7126,
+                  "src": "1735:15:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7105,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1735:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 7108,
+                  "name": "_agreementHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7126,
+                  "src": "1752:22:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 7107,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1752:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1734:41:18"
+            },
+            "returnParameters": {
+              "id": 7112,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 7111,
+                  "name": "lockingId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7126,
+                  "src": "1799:17:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 7110,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1799:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1798:19:18"
+            },
+            "scope": 7127,
+            "src": "1721:186:18",
+            "stateMutability": "payable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 7128,
+        "src": "121:1789:18"
+      }
+    ],
+    "src": "0:1911:18"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/oren/daostack/arc/contracts/schemes/LockingEth4Reputation.sol",
+    "exportedSymbols": {
+      "LockingEth4Reputation": [
+        7127
+      ]
+    },
+    "id": 7128,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 7045,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".11"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:18"
+      },
+      {
+        "absolutePath": "/Users/oren/daostack/arc/contracts/schemes/Locking4Reputation.sol",
+        "file": "./Locking4Reputation.sol",
+        "id": 7046,
+        "nodeType": "ImportDirective",
+        "scope": 7128,
+        "sourceUnit": 7044,
+        "src": "26:34:18",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 7047,
+              "name": "Locking4Reputation",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 7043,
+              "src": "155:18:18",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Locking4Reputation_$7043",
+                "typeString": "contract Locking4Reputation"
+              }
+            },
+            "id": 7048,
+            "nodeType": "InheritanceSpecifier",
+            "src": "155:18:18"
+          }
+        ],
+        "contractDependencies": [
+          4320,
+          7043
+        ],
+        "contractKind": "contract",
+        "documentation": "@title A scheme for locking ETH for reputation",
+        "fullyImplemented": true,
+        "id": 7127,
+        "linearizedBaseContracts": [
+          7127,
+          7043,
+          4320
+        ],
+        "name": "LockingEth4Reputation",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 7077,
+              "nodeType": "Block",
+              "src": "996:209:18",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 7068,
+                        "name": "_avatar",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7050,
+                        "src": "1033:7:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Avatar_$337",
+                          "typeString": "contract Avatar"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 7069,
+                        "name": "_reputationReward",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7052,
+                        "src": "1050:17:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 7070,
+                        "name": "_lockingStartTime",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7054,
+                        "src": "1077:17:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 7071,
+                        "name": "_lockingEndTime",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7056,
+                        "src": "1104:15:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 7072,
+                        "name": "_redeemEnableTime",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7058,
+                        "src": "1129:17:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 7073,
+                        "name": "_maxLockingPeriod",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7060,
+                        "src": "1156:17:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 7074,
+                        "name": "_agreementHash",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7062,
+                        "src": "1183:14:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_contract$_Avatar_$337",
+                          "typeString": "contract Avatar"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 7065,
+                        "name": "super",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 20401,
+                        "src": "1006:5:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_super$_LockingEth4Reputation_$7127",
+                          "typeString": "contract super LockingEth4Reputation"
+                        }
+                      },
+                      "id": 7067,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "_initialize",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 7042,
+                      "src": "1006:17:18",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_contract$_Avatar_$337_$_t_uint256_$_t_uint256_$_t_uint256_$_t_uint256_$_t_uint256_$_t_bytes32_$returns$__$",
+                        "typeString": "function (contract Avatar,uint256,uint256,uint256,uint256,uint256,bytes32)"
+                      }
+                    },
+                    "id": 7075,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1006:192:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 7076,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1006:192:18"
+                }
+              ]
+            },
+            "documentation": "@dev initialize\n@param _avatar the avatar to mint reputation from\n@param _reputationReward the total reputation this contract will reward\n       for eth locking\n@param _lockingStartTime locking starting period time.\n@param _lockingEndTime the locking end time.\n       locking is disable after this time.\n@param _redeemEnableTime redeem enable time .\n       redeem reputation can be done after this time.\n@param _maxLockingPeriod maximum locking period allowed.",
+            "id": 7078,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "initialize",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 7063,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 7050,
+                  "name": "_avatar",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7078,
+                  "src": "757:14:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Avatar_$337",
+                    "typeString": "contract Avatar"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 7049,
+                    "name": "Avatar",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 337,
+                    "src": "757:6:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Avatar_$337",
+                      "typeString": "contract Avatar"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 7052,
+                  "name": "_reputationReward",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7078,
+                  "src": "781:25:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7051,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "781:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 7054,
+                  "name": "_lockingStartTime",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7078,
+                  "src": "816:25:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7053,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "816:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 7056,
+                  "name": "_lockingEndTime",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7078,
+                  "src": "851:23:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7055,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "851:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 7058,
+                  "name": "_redeemEnableTime",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7078,
+                  "src": "884:25:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7057,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "884:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 7060,
+                  "name": "_maxLockingPeriod",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7078,
+                  "src": "919:25:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7059,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "919:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 7062,
+                  "name": "_agreementHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7078,
+                  "src": "954:22:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 7061,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "954:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "747:231:18"
+            },
+            "returnParameters": {
+              "id": 7064,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "996:0:18"
+            },
+            "scope": 7127,
+            "src": "728:477:18",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 7103,
+              "nodeType": "Block",
+              "src": "1458:135:18",
+              "statements": [
+                {
+                  "assignments": [
+                    7088
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 7088,
+                      "name": "amount",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 7103,
+                      "src": "1468:14:18",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "typeName": {
+                        "id": 7087,
+                        "name": "uint256",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1468:7:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 7094,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 7091,
+                        "name": "_beneficiary",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7080,
+                        "src": "1500:12:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 7092,
+                        "name": "_lockingId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7082,
+                        "src": "1514:10:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        },
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 7089,
+                        "name": "super",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 20401,
+                        "src": "1485:5:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_super$_LockingEth4Reputation_$7127",
+                          "typeString": "contract super LockingEth4Reputation"
+                        }
+                      },
+                      "id": 7090,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "_release",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 6786,
+                      "src": "1485:14:18",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_bytes32_$returns$_t_uint256_$",
+                        "typeString": "function (address,bytes32) returns (uint256)"
+                      }
+                    },
+                    "id": 7093,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1485:40:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1468:57:18"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 7098,
+                        "name": "amount",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7088,
+                        "src": "1557:6:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 7095,
+                        "name": "_beneficiary",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7080,
+                        "src": "1535:12:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      "id": 7097,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "transfer",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "1535:21:18",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_transfer_nonpayable$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256)"
+                      }
+                    },
+                    "id": 7099,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1535:29:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 7100,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1535:29:18"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "74727565",
+                    "id": 7101,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "bool",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "1582:4:18",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "value": "true"
+                  },
+                  "functionReturnParameters": 7086,
+                  "id": 7102,
+                  "nodeType": "Return",
+                  "src": "1575:11:18"
+                }
+              ]
+            },
+            "documentation": "@dev release locked eth\n@param _beneficiary the release _beneficiary\n@param _lockingId the locking id\n@return bool",
+            "id": 7104,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "release",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 7083,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 7080,
+                  "name": "_beneficiary",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7104,
+                  "src": "1387:28:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  },
+                  "typeName": {
+                    "id": 7079,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1387:15:18",
+                    "stateMutability": "payable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 7082,
+                  "name": "_lockingId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7104,
+                  "src": "1417:18:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 7081,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1417:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1386:50:18"
+            },
+            "returnParameters": {
+              "id": 7086,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 7085,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7104,
+                  "src": "1452:4:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 7084,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1452:4:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1451:6:18"
+            },
+            "scope": 7127,
+            "src": "1370:223:18",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 7125,
+              "nodeType": "Block",
+              "src": "1818:89:18",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 7115,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 20314,
+                          "src": "1847:3:18",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 7116,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "value",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "1847:9:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 7117,
+                        "name": "_period",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7106,
+                        "src": "1858:7:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 7118,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 20314,
+                          "src": "1867:3:18",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 7119,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "1867:10:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "31",
+                        "id": 7120,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "number",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1879:1:18",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_rational_1_by_1",
+                          "typeString": "int_const 1"
+                        },
+                        "value": "1"
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "31",
+                        "id": 7121,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "number",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1882:1:18",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_rational_1_by_1",
+                          "typeString": "int_const 1"
+                        },
+                        "value": "1"
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 7122,
+                        "name": "_agreementHash",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7108,
+                        "src": "1885:14:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        },
+                        {
+                          "typeIdentifier": "t_rational_1_by_1",
+                          "typeString": "int_const 1"
+                        },
+                        {
+                          "typeIdentifier": "t_rational_1_by_1",
+                          "typeString": "int_const 1"
+                        },
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 7113,
+                        "name": "super",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 20401,
+                        "src": "1835:5:18",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_super$_LockingEth4Reputation_$7127",
+                          "typeString": "contract super LockingEth4Reputation"
+                        }
+                      },
+                      "id": 7114,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "_lock",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 6958,
+                      "src": "1835:11:18",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_uint256_$_t_uint256_$_t_address_$_t_uint256_$_t_uint256_$_t_bytes32_$returns$_t_bytes32_$",
+                        "typeString": "function (uint256,uint256,address,uint256,uint256,bytes32) returns (bytes32)"
+                      }
+                    },
+                    "id": 7123,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1835:65:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "functionReturnParameters": 7112,
+                  "id": 7124,
+                  "nodeType": "Return",
+                  "src": "1828:72:18"
+                }
+              ]
+            },
+            "documentation": "@dev lock function\n@param _period the locking period\n@return lockingId the unique Id",
+            "id": 7126,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "lock",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 7109,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 7106,
+                  "name": "_period",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7126,
+                  "src": "1735:15:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7105,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1735:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 7108,
+                  "name": "_agreementHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7126,
+                  "src": "1752:22:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 7107,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1752:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1734:41:18"
+            },
+            "returnParameters": {
+              "id": 7112,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 7111,
+                  "name": "lockingId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7126,
+                  "src": "1799:17:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 7110,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1799:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1798:19:18"
+            },
+            "scope": 7127,
+            "src": "1721:186:18",
+            "stateMutability": "payable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 7128,
+        "src": "121:1789:18"
+      }
+    ],
+    "src": "0:1911:18"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.11+commit.c082d0b4.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.14",
+  "updatedAt": "2019-10-16T07:39:11.651Z",
+  "devdoc": {
+    "methods": {
+      "getAgreementHash()": {
+        "details": "getAgreementHash",
+        "return": "bytes32 agreementHash"
+      },
+      "initialize(address,uint256,uint256,uint256,uint256,uint256,bytes32)": {
+        "details": "initialize",
+        "params": {
+          "_avatar": "the avatar to mint reputation from",
+          "_lockingEndTime": "the locking end time.       locking is disable after this time.",
+          "_lockingStartTime": "locking starting period time.",
+          "_maxLockingPeriod": "maximum locking period allowed.",
+          "_redeemEnableTime": "redeem enable time .       redeem reputation can be done after this time.",
+          "_reputationReward": "the total reputation this contract will reward       for eth locking"
+        }
+      },
+      "lock(uint256,bytes32)": {
+        "details": "lock function",
+        "params": {
+          "_period": "the locking period"
+        },
+        "return": "lockingId the unique Id"
+      },
+      "redeem(address)": {
+        "details": "redeem reputation function",
+        "params": {
+          "_beneficiary": "the beneficiary for the release"
+        },
+        "return": "uint256 reputation rewarded"
+      },
+      "release(address,bytes32)": {
+        "details": "release locked eth",
+        "params": {
+          "_beneficiary": "the release _beneficiary",
+          "_lockingId": "the locking id"
+        },
+        "return": "bool"
+      }
+    },
+    "title": "A scheme for locking ETH for reputation"
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

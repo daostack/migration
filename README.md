@@ -369,7 +369,6 @@ Example migration parameters object:
 
 ### Commands
 
-- `prune-arc-build` - prune unnecessary heavy data from Arc build JSON files.
 - `cleandb` - rm the existing local db.
 - `ganache` - run a ganache instance with local db.
 - `migrate ...` - run migration (same arguments as cli)

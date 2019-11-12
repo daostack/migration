@@ -1,0 +1,775 @@
+{
+  "contractName": "AgreementMock",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getAgreementHash",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_agreementHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "setAgreementHashTest",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_agreementHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "test",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.4+commit.9549d8ff\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"getAgreementHash\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_agreementHash\",\"type\":\"bytes32\"}],\"name\":\"setAgreementHashTest\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_agreementHash\",\"type\":\"bytes32\"}],\"name\":\"test\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"getAgreementHash()\":{\"details\":\"getAgreementHash\",\"return\":\"bytes32 agreementHash\"}}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/oren/daostack/arc/contracts/test/AgreementMock.sol\":\"AgreementMock\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/oren/daostack/arc/contracts/schemes/Agreement.sol\":{\"keccak256\":\"0x5c5aae71ecbfc3125cb33d1e5780b0bb9df6e3fabf2c03def44dba2f2375ec8a\",\"urls\":[\"bzzr://484e0d67ab6c9f595e179cc0fda53ef637481570734fa7c7594e5bd5337dafde\"]},\"/Users/oren/daostack/arc/contracts/test/AgreementMock.sol\":{\"keccak256\":\"0x26d91c5e8c07703132446d2783cb1cb7534e6e1525db140f709aabd5308a38e1\",\"urls\":[\"bzzr://d544a5f435f7a6ebd66dde1bac99b5e95fea6e9c6392c50303beeb99e667b870\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5061020c806100206000396000f3fe608060405234801561001057600080fd5b506004361061005d577c01000000000000000000000000000000000000000000000000000000006000350463696da921811461006257806398d3642e1461007c578063993723211461009b575b600080fd5b61006a6100cc565b60408051918252519081900360200190f35b6100996004803603602081101561009257600080fd5b50356100d2565b005b6100b8600480360360208110156100b157600080fd5b50356100de565b604080519115158252519081900360200190f35b60005490565b6100db81610144565b50565b600080548290811461013b576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260288152602001806101b96028913960400191505060405180910390fd5b50600192915050565b600054156101b357604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152601b60248201527f43616e206e6f74207365742061677265656d656e742074776963650000000000604482015290519081900360640190fd5b60005556fe53656e646572206d7573742073656e64207468652072696768742061677265656d656e7448617368a165627a7a7230582016a19a667a36d94f329dfc95b8d1f6c3c5b25b2cffe3c82002b546888f2322880029",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061005d577c01000000000000000000000000000000000000000000000000000000006000350463696da921811461006257806398d3642e1461007c578063993723211461009b575b600080fd5b61006a6100cc565b60408051918252519081900360200190f35b6100996004803603602081101561009257600080fd5b50356100d2565b005b6100b8600480360360208110156100b157600080fd5b50356100de565b604080519115158252519081900360200190f35b60005490565b6100db81610144565b50565b600080548290811461013b576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260288152602001806101b96028913960400191505060405180910390fd5b50600192915050565b600054156101b357604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152601b60248201527f43616e206e6f74207365742061677265656d656e742074776963650000000000604482015290519081900360640190fd5b60005556fe53656e646572206d7573742073656e64207468652072696768742061677265656d656e7448617368a165627a7a7230582016a19a667a36d94f329dfc95b8d1f6c3c5b25b2cffe3c82002b546888f2322880029",
+  "sourceMap": "62:293:24:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;62:293:24;;;;;;;",
+  "deployedSourceMap": "62:293:24:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;62:293:24;;;;;;;;;;;;;;;;;;;;;;;;;;;;;407:101:9;;;:::i;:::-;;;;;;;;;;;;;;;;105:120:24;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;105:120:24;;:::i;:::-;;231:122;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;231:122:24;;:::i;:::-;;;;;;;;;;;;;;;;;;407:101:9;458:7;488:13;407:101;:::o;105:120:24:-;180:38;203:14;180:22;:38::i;:::-;105:120;:::o;231:122::-;315:4;243:13:9;;286:14:24;;225:31:9;;217:84;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;342:4:24;;231:122;-1:-1:-1;;231:122:24:o;658:187:9:-;764:1;739:13;:27;731:67;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;808:13;:30;658:187::o",
+  "source": "pragma solidity ^0.5.4;\n\nimport \"../schemes/Agreement.sol\";\n\n\ncontract AgreementMock is Agreement {\n\n    function setAgreementHashTest(bytes32 _agreementHash) public\n    {\n        super.setAgreementHash(_agreementHash);\n    }\n\n    function test(bytes32 _agreementHash) public onlyAgree(_agreementHash) view returns(bool)\n    {\n        return true;\n    }\n}\n",
+  "sourcePath": "/Users/oren/daostack/arc/contracts/test/AgreementMock.sol",
+  "ast": {
+    "absolutePath": "/Users/oren/daostack/arc/contracts/test/AgreementMock.sol",
+    "exportedSymbols": {
+      "AgreementMock": [
+        6556
+      ]
+    },
+    "id": 6557,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 6527,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:24"
+      },
+      {
+        "absolutePath": "/Users/oren/daostack/arc/contracts/schemes/Agreement.sol",
+        "file": "../schemes/Agreement.sol",
+        "id": 6528,
+        "nodeType": "ImportDirective",
+        "scope": 6557,
+        "sourceUnit": 4321,
+        "src": "25:34:24",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 6529,
+              "name": "Agreement",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 4320,
+              "src": "88:9:24",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Agreement_$4320",
+                "typeString": "contract Agreement"
+              }
+            },
+            "id": 6530,
+            "nodeType": "InheritanceSpecifier",
+            "src": "88:9:24"
+          }
+        ],
+        "contractDependencies": [
+          4320
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 6556,
+        "linearizedBaseContracts": [
+          6556,
+          4320
+        ],
+        "name": "AgreementMock",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 6541,
+              "nodeType": "Block",
+              "src": "170:55:24",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 6538,
+                        "name": "_agreementHash",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 6532,
+                        "src": "203:14:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 6535,
+                        "name": "super",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 18648,
+                        "src": "180:5:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_super$_AgreementMock_$6556",
+                          "typeString": "contract super AgreementMock"
+                        }
+                      },
+                      "id": 6537,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "setAgreementHash",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 4319,
+                      "src": "180:22:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_bytes32_$returns$__$",
+                        "typeString": "function (bytes32)"
+                      }
+                    },
+                    "id": 6539,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "180:38:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 6540,
+                  "nodeType": "ExpressionStatement",
+                  "src": "180:38:24"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 6542,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setAgreementHashTest",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 6533,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6532,
+                  "name": "_agreementHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6542,
+                  "src": "135:22:24",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 6531,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "135:7:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "134:24:24"
+            },
+            "returnParameters": {
+              "id": 6534,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "170:0:24"
+            },
+            "scope": 6556,
+            "src": "105:120:24",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 6554,
+              "nodeType": "Block",
+              "src": "325:28:24",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "74727565",
+                    "id": 6552,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "bool",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "342:4:24",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "value": "true"
+                  },
+                  "functionReturnParameters": 6551,
+                  "id": 6553,
+                  "nodeType": "Return",
+                  "src": "335:11:24"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 6555,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 6547,
+                    "name": "_agreementHash",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 6544,
+                    "src": "286:14:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  }
+                ],
+                "id": 6548,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 6546,
+                  "name": "onlyAgree",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 4292,
+                  "src": "276:9:24",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$_t_bytes32_$",
+                    "typeString": "modifier (bytes32)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "276:25:24"
+              }
+            ],
+            "name": "test",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 6545,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6544,
+                  "name": "_agreementHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6555,
+                  "src": "245:22:24",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 6543,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "245:7:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "244:24:24"
+            },
+            "returnParameters": {
+              "id": 6551,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6550,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6555,
+                  "src": "315:4:24",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 6549,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "315:4:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "314:6:24"
+            },
+            "scope": 6556,
+            "src": "231:122:24",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 6557,
+        "src": "62:293:24"
+      }
+    ],
+    "src": "0:356:24"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/oren/daostack/arc/contracts/test/AgreementMock.sol",
+    "exportedSymbols": {
+      "AgreementMock": [
+        6556
+      ]
+    },
+    "id": 6557,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 6527,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:24"
+      },
+      {
+        "absolutePath": "/Users/oren/daostack/arc/contracts/schemes/Agreement.sol",
+        "file": "../schemes/Agreement.sol",
+        "id": 6528,
+        "nodeType": "ImportDirective",
+        "scope": 6557,
+        "sourceUnit": 4321,
+        "src": "25:34:24",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 6529,
+              "name": "Agreement",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 4320,
+              "src": "88:9:24",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Agreement_$4320",
+                "typeString": "contract Agreement"
+              }
+            },
+            "id": 6530,
+            "nodeType": "InheritanceSpecifier",
+            "src": "88:9:24"
+          }
+        ],
+        "contractDependencies": [
+          4320
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 6556,
+        "linearizedBaseContracts": [
+          6556,
+          4320
+        ],
+        "name": "AgreementMock",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 6541,
+              "nodeType": "Block",
+              "src": "170:55:24",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 6538,
+                        "name": "_agreementHash",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 6532,
+                        "src": "203:14:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 6535,
+                        "name": "super",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 18648,
+                        "src": "180:5:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_super$_AgreementMock_$6556",
+                          "typeString": "contract super AgreementMock"
+                        }
+                      },
+                      "id": 6537,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "setAgreementHash",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 4319,
+                      "src": "180:22:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_bytes32_$returns$__$",
+                        "typeString": "function (bytes32)"
+                      }
+                    },
+                    "id": 6539,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "180:38:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 6540,
+                  "nodeType": "ExpressionStatement",
+                  "src": "180:38:24"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 6542,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setAgreementHashTest",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 6533,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6532,
+                  "name": "_agreementHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6542,
+                  "src": "135:22:24",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 6531,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "135:7:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "134:24:24"
+            },
+            "returnParameters": {
+              "id": 6534,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "170:0:24"
+            },
+            "scope": 6556,
+            "src": "105:120:24",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 6554,
+              "nodeType": "Block",
+              "src": "325:28:24",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "74727565",
+                    "id": 6552,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "bool",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "342:4:24",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "value": "true"
+                  },
+                  "functionReturnParameters": 6551,
+                  "id": 6553,
+                  "nodeType": "Return",
+                  "src": "335:11:24"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 6555,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 6547,
+                    "name": "_agreementHash",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 6544,
+                    "src": "286:14:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  }
+                ],
+                "id": 6548,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 6546,
+                  "name": "onlyAgree",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 4292,
+                  "src": "276:9:24",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$_t_bytes32_$",
+                    "typeString": "modifier (bytes32)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "276:25:24"
+              }
+            ],
+            "name": "test",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 6545,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6544,
+                  "name": "_agreementHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6555,
+                  "src": "245:22:24",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 6543,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "245:7:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "244:24:24"
+            },
+            "returnParameters": {
+              "id": 6551,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6550,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6555,
+                  "src": "315:4:24",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 6549,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "315:4:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "314:6:24"
+            },
+            "scope": 6556,
+            "src": "231:122:24",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 6557,
+        "src": "62:293:24"
+      }
+    ],
+    "src": "0:356:24"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.4+commit.9549d8ff.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.9",
+  "updatedAt": "2019-07-24T14:52:18.814Z",
+  "devdoc": {
+    "methods": {
+      "getAgreementHash()": {
+        "details": "getAgreementHash",
+        "return": "bytes32 agreementHash"
+      }
+    }
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

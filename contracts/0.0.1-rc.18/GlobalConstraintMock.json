@@ -1,0 +1,3015 @@
+{
+  "contractName": "GlobalConstraintMock",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "currentCallPhase",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "testParams",
+      "outputs": [
+        {
+          "name": "pre",
+          "type": "bool"
+        },
+        {
+          "name": "post",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "method",
+          "type": "bytes32"
+        },
+        {
+          "name": "pre",
+          "type": "bool"
+        },
+        {
+          "name": "post",
+          "type": "bool"
+        }
+      ],
+      "name": "setConstraint",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        },
+        {
+          "name": "",
+          "type": "bytes32"
+        },
+        {
+          "name": "method",
+          "type": "bytes32"
+        }
+      ],
+      "name": "pre",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        },
+        {
+          "name": "",
+          "type": "bytes32"
+        },
+        {
+          "name": "method",
+          "type": "bytes32"
+        }
+      ],
+      "name": "post",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "when",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.4+commit.9549d8ff\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"currentCallPhase\",\"outputs\":[{\"name\":\"\",\"type\":\"uint8\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"method\",\"type\":\"bytes32\"},{\"name\":\"pre\",\"type\":\"bool\"},{\"name\":\"post\",\"type\":\"bool\"}],\"name\":\"setConstraint\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"testParams\",\"outputs\":[{\"name\":\"pre\",\"type\":\"bool\"},{\"name\":\"post\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"address\"},{\"name\":\"\",\"type\":\"bytes32\"},{\"name\":\"method\",\"type\":\"bytes32\"}],\"name\":\"post\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"address\"},{\"name\":\"\",\"type\":\"bytes32\"},{\"name\":\"method\",\"type\":\"bytes32\"}],\"name\":\"pre\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"when\",\"outputs\":[{\"name\":\"\",\"type\":\"uint8\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/oren/daostack/arc/contracts/test/GlobalConstraintMock.sol\":\"GlobalConstraintMock\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/oren/daostack/arc/contracts/globalConstraints/GlobalConstraintInterface.sol\":{\"keccak256\":\"0xc006c4591ec10b845a56e13f6791db2c428610953034686d52b2a934b6c8f36f\",\"urls\":[\"bzzr://d1f293a0bbaa292296a83977cb36a14048db404a32e3f6aa9bd79ea61ac3c4c3\"]},\"/Users/oren/daostack/arc/contracts/test/GlobalConstraintMock.sol\":{\"keccak256\":\"0x0e96a1c3b39abe0809f7de75d7fd014dcc728aabffa7258bab3cba8b6f025860\",\"urls\":[\"bzzr://8bd1efb872b7de0a32ceff0615512cc47ae070e290d887ad00dcb18300c49a00\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506102c8806100206000396000f3fe608060405234801561001057600080fd5b506004361061007e577c010000000000000000000000000000000000000000000000000000000060003504632414112b8114610083578063696a7253146100af57806373d2ea39146100f05780638043154d14610128578063c1786ab214610167578063e2b0caef146101a6575b600080fd5b61008b6101ae565b6040518082600281111561009b57fe5b60ff16815260200191505060405180910390f35b6100dc600480360360608110156100c557600080fd5b5080359060208101351515906040013515156101b7565b604080519115158252519081900360200190f35b61010d6004803603602081101561010657600080fd5b5035610240565b60408051921515835290151560208301528051918290030190f35b6100dc6004803603606081101561013e57600080fd5b5073ffffffffffffffffffffffffffffffffffffffff813516906020810135906040013561025e565b6100dc6004803603606081101561017d57600080fd5b5073ffffffffffffffffffffffffffffffffffffffff813516906020810135906040013561027b565b61008b610293565b60015460ff1681565b6000838152602081905260408120805460ff19168415801591821761ff00191661010086151502179092556101ea575081155b1561020857600180546002919060ff191681835b0217905550610236565b82151561022257600180546000919060ff191681836101fe565b811515610236576001805460ff1916811790555b5060019392505050565b60006020819052908152604090205460ff8082169161010090041682565b600090815260208190526040902054610100900460ff1692915050565b60009081526020819052604090205460ff1692915050565b60015460ff169056fea165627a7a72305820a36c772ed586a0a4ccb2b43c70dbbdef2c1dcbdd2c6dcb82fbad0a33218958c30029",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061007e577c010000000000000000000000000000000000000000000000000000000060003504632414112b8114610083578063696a7253146100af57806373d2ea39146100f05780638043154d14610128578063c1786ab214610167578063e2b0caef146101a6575b600080fd5b61008b6101ae565b6040518082600281111561009b57fe5b60ff16815260200191505060405180910390f35b6100dc600480360360608110156100c557600080fd5b5080359060208101351515906040013515156101b7565b604080519115158252519081900360200190f35b61010d6004803603602081101561010657600080fd5b5035610240565b60408051921515835290151560208301528051918290030190f35b6100dc6004803603606081101561013e57600080fd5b5073ffffffffffffffffffffffffffffffffffffffff813516906020810135906040013561025e565b6100dc6004803603606081101561017d57600080fd5b5073ffffffffffffffffffffffffffffffffffffffff813516906020810135906040013561027b565b61008b610293565b60015460ff1681565b6000838152602081905260408120805460ff19168415801591821761ff00191661010086151502179092556101ea575081155b1561020857600180546002919060ff191681835b0217905550610236565b82151561022257600180546000919060ff191681836101fe565b811515610236576001805460ff1916811790555b5060019392505050565b60006020819052908152604090205460ff8082169161010090041682565b600090815260208190526040902054610100900460ff1692915050565b60009081526020819052604090205460ff1692915050565b60015460ff169056fea165627a7a72305820a36c772ed586a0a4ccb2b43c70dbbdef2c1dcbdd2c6dcb82fbad0a33218958c30029",
+  "sourceMap": "88:1142:26:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;88:1142:26;;;;;;;",
+  "deployedSourceMap": "88:1142:26:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;88:1142:26;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;245:59;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;311:546;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;311:546:26;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;192:46;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;192:46:26;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;988:121;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;988:121:26;;;;;;;;;;;;;;:::i;863:119::-;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;863:119:26;;;;;;;;;;;;;;:::i;1115:113::-;;;:::i;245:59::-;;;;;;:::o;311:546::-;386:4;402:18;;;;;;;;;;:28;;-1:-1:-1;;402:28:26;;;;;;;;-1:-1:-1;;440:30:26;402:28;440:30;;;;;;;;485:13;;;494:4;493:5;485:13;481:349;;;514:16;:65;;533:46;;514:16;-1:-1:-1;;514:65:26;:16;533:46;514:65;;;;;;481:349;;;615:3;614:4;610:210;;;638:16;:58;;657:39;;638:16;-1:-1:-1;;638:58:26;:16;657:39;638:58;;610:210;722:4;721:5;717:103;;;765:40;746:59;;-1:-1:-1;;746:59:26;;;;;717:103;-1:-1:-1;846:4:26;311:546;;;;;:::o;192:46::-;;;;;;;;;;;;;;;;;;;;;;;:::o;988:121::-;1056:4;1079:18;;;;;;;;;;:23;;;;;;;988:121;-1:-1:-1;;988:121:26:o;863:119::-;930:4;953:18;;;;;;;;;;:22;;;;863:119;-1:-1:-1;;863:119:26:o;1115:113::-;1205:16;;;;1115:113;:::o",
+  "source": "pragma solidity ^0.5.4;\n\nimport \"../globalConstraints/GlobalConstraintInterface.sol\";\n\n\ncontract GlobalConstraintMock {\n\n    struct TestParam {\n        bool pre;\n        bool post;\n    }\n\n    mapping (bytes32=>TestParam) public testParams;\n\n    GlobalConstraintInterface.CallPhase public currentCallPhase;\n\n    function setConstraint(bytes32 method, bool pre, bool post) public returns(bool) {\n        testParams[method].pre = pre;\n        testParams[method].post = post;\n\n        if (!pre && !post) {\n            currentCallPhase = GlobalConstraintInterface.CallPhase.PreAndPost;\n        } else {\n            if (!pre) {\n                currentCallPhase = GlobalConstraintInterface.CallPhase.Pre;\n            } else if (!post) {\n                currentCallPhase = GlobalConstraintInterface.CallPhase.Post;\n            }\n        }\n        return true;\n    }\n\n    function pre(address, bytes32, bytes32 method) public view returns(bool) {\n        return testParams[method].pre;\n    }\n\n    function post(address, bytes32, bytes32 method) public view returns(bool) {\n        return testParams[method].post;\n    }\n\n    function when() public view returns(GlobalConstraintInterface.CallPhase) {\n        return currentCallPhase;\n    }\n}\n",
+  "sourcePath": "/Users/oren/daostack/arc/contracts/test/GlobalConstraintMock.sol",
+  "ast": {
+    "absolutePath": "/Users/oren/daostack/arc/contracts/test/GlobalConstraintMock.sol",
+    "exportedSymbols": {
+      "GlobalConstraintMock": [
+        6536
+      ]
+    },
+    "id": 6537,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 6419,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:26"
+      },
+      {
+        "absolutePath": "/Users/oren/daostack/arc/contracts/globalConstraints/GlobalConstraintInterface.sol",
+        "file": "../globalConstraints/GlobalConstraintInterface.sol",
+        "id": 6420,
+        "nodeType": "ImportDirective",
+        "scope": 6537,
+        "sourceUnit": 3926,
+        "src": "25:60:26",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 6536,
+        "linearizedBaseContracts": [
+          6536
+        ],
+        "name": "GlobalConstraintMock",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "GlobalConstraintMock.TestParam",
+            "id": 6425,
+            "members": [
+              {
+                "constant": false,
+                "id": 6422,
+                "name": "pre",
+                "nodeType": "VariableDeclaration",
+                "scope": 6425,
+                "src": "152:8:26",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 6421,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "152:4:26",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 6424,
+                "name": "post",
+                "nodeType": "VariableDeclaration",
+                "scope": 6425,
+                "src": "170:9:26",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 6423,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "170:4:26",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "TestParam",
+            "nodeType": "StructDefinition",
+            "scope": 6536,
+            "src": "125:61:26",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 6429,
+            "name": "testParams",
+            "nodeType": "VariableDeclaration",
+            "scope": 6536,
+            "src": "192:46:26",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_TestParam_$6425_storage_$",
+              "typeString": "mapping(bytes32 => struct GlobalConstraintMock.TestParam)"
+            },
+            "typeName": {
+              "id": 6428,
+              "keyType": {
+                "id": 6426,
+                "name": "bytes32",
+                "nodeType": "ElementaryTypeName",
+                "src": "201:7:26",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "192:28:26",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_TestParam_$6425_storage_$",
+                "typeString": "mapping(bytes32 => struct GlobalConstraintMock.TestParam)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 6427,
+                "name": "TestParam",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 6425,
+                "src": "210:9:26",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_TestParam_$6425_storage_ptr",
+                  "typeString": "struct GlobalConstraintMock.TestParam"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 6431,
+            "name": "currentCallPhase",
+            "nodeType": "VariableDeclaration",
+            "scope": 6536,
+            "src": "245:59:26",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_enum$_CallPhase_$3897",
+              "typeString": "enum GlobalConstraintInterface.CallPhase"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 6430,
+              "name": "GlobalConstraintInterface.CallPhase",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 3897,
+              "src": "245:35:26",
+              "typeDescriptions": {
+                "typeIdentifier": "t_enum$_CallPhase_$3897",
+                "typeString": "enum GlobalConstraintInterface.CallPhase"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 6492,
+              "nodeType": "Block",
+              "src": "392:465:26",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 6447,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "baseExpression": {
+                          "argumentTypes": null,
+                          "id": 6442,
+                          "name": "testParams",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 6429,
+                          "src": "402:10:26",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_TestParam_$6425_storage_$",
+                            "typeString": "mapping(bytes32 => struct GlobalConstraintMock.TestParam storage ref)"
+                          }
+                        },
+                        "id": 6444,
+                        "indexExpression": {
+                          "argumentTypes": null,
+                          "id": 6443,
+                          "name": "method",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 6433,
+                          "src": "413:6:26",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bytes32",
+                            "typeString": "bytes32"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "402:18:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_TestParam_$6425_storage",
+                          "typeString": "struct GlobalConstraintMock.TestParam storage ref"
+                        }
+                      },
+                      "id": 6445,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "pre",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 6422,
+                      "src": "402:22:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 6446,
+                      "name": "pre",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 6435,
+                      "src": "427:3:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "402:28:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 6448,
+                  "nodeType": "ExpressionStatement",
+                  "src": "402:28:26"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 6454,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "baseExpression": {
+                          "argumentTypes": null,
+                          "id": 6449,
+                          "name": "testParams",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 6429,
+                          "src": "440:10:26",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_TestParam_$6425_storage_$",
+                            "typeString": "mapping(bytes32 => struct GlobalConstraintMock.TestParam storage ref)"
+                          }
+                        },
+                        "id": 6451,
+                        "indexExpression": {
+                          "argumentTypes": null,
+                          "id": 6450,
+                          "name": "method",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 6433,
+                          "src": "451:6:26",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bytes32",
+                            "typeString": "bytes32"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "440:18:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_TestParam_$6425_storage",
+                          "typeString": "struct GlobalConstraintMock.TestParam storage ref"
+                        }
+                      },
+                      "id": 6452,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "post",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 6424,
+                      "src": "440:23:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 6453,
+                      "name": "post",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 6437,
+                      "src": "466:4:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "440:30:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 6455,
+                  "nodeType": "ExpressionStatement",
+                  "src": "440:30:26"
+                },
+                {
+                  "condition": {
+                    "argumentTypes": null,
+                    "commonType": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "id": 6460,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "argumentTypes": null,
+                      "id": 6457,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "UnaryOperation",
+                      "operator": "!",
+                      "prefix": true,
+                      "src": "485:4:26",
+                      "subExpression": {
+                        "argumentTypes": null,
+                        "id": 6456,
+                        "name": "pre",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 6435,
+                        "src": "486:3:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "&&",
+                    "rightExpression": {
+                      "argumentTypes": null,
+                      "id": 6459,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "UnaryOperation",
+                      "operator": "!",
+                      "prefix": true,
+                      "src": "493:5:26",
+                      "subExpression": {
+                        "argumentTypes": null,
+                        "id": 6458,
+                        "name": "post",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 6437,
+                        "src": "494:4:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "485:13:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": {
+                    "id": 6488,
+                    "nodeType": "Block",
+                    "src": "596:234:26",
+                    "statements": [
+                      {
+                        "condition": {
+                          "argumentTypes": null,
+                          "id": 6469,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "UnaryOperation",
+                          "operator": "!",
+                          "prefix": true,
+                          "src": "614:4:26",
+                          "subExpression": {
+                            "argumentTypes": null,
+                            "id": 6468,
+                            "name": "pre",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 6435,
+                            "src": "615:3:26",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bool",
+                              "typeString": "bool"
+                            }
+                          },
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "falseBody": {
+                          "condition": {
+                            "argumentTypes": null,
+                            "id": 6478,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "nodeType": "UnaryOperation",
+                            "operator": "!",
+                            "prefix": true,
+                            "src": "721:5:26",
+                            "subExpression": {
+                              "argumentTypes": null,
+                              "id": 6477,
+                              "name": "post",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 6437,
+                              "src": "722:4:26",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_bool",
+                                "typeString": "bool"
+                              }
+                            },
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bool",
+                              "typeString": "bool"
+                            }
+                          },
+                          "falseBody": null,
+                          "id": 6486,
+                          "nodeType": "IfStatement",
+                          "src": "717:103:26",
+                          "trueBody": {
+                            "id": 6485,
+                            "nodeType": "Block",
+                            "src": "728:92:26",
+                            "statements": [
+                              {
+                                "expression": {
+                                  "argumentTypes": null,
+                                  "id": 6483,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "leftHandSide": {
+                                    "argumentTypes": null,
+                                    "id": 6479,
+                                    "name": "currentCallPhase",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 6431,
+                                    "src": "746:16:26",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_enum$_CallPhase_$3897",
+                                      "typeString": "enum GlobalConstraintInterface.CallPhase"
+                                    }
+                                  },
+                                  "nodeType": "Assignment",
+                                  "operator": "=",
+                                  "rightHandSide": {
+                                    "argumentTypes": null,
+                                    "expression": {
+                                      "argumentTypes": null,
+                                      "expression": {
+                                        "argumentTypes": null,
+                                        "id": 6480,
+                                        "name": "GlobalConstraintInterface",
+                                        "nodeType": "Identifier",
+                                        "overloadedDeclarations": [],
+                                        "referencedDeclaration": 3925,
+                                        "src": "765:25:26",
+                                        "typeDescriptions": {
+                                          "typeIdentifier": "t_type$_t_contract$_GlobalConstraintInterface_$3925_$",
+                                          "typeString": "type(contract GlobalConstraintInterface)"
+                                        }
+                                      },
+                                      "id": 6481,
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": false,
+                                      "lValueRequested": false,
+                                      "memberName": "CallPhase",
+                                      "nodeType": "MemberAccess",
+                                      "referencedDeclaration": 3897,
+                                      "src": "765:35:26",
+                                      "typeDescriptions": {
+                                        "typeIdentifier": "t_type$_t_enum$_CallPhase_$3897_$",
+                                        "typeString": "type(enum GlobalConstraintInterface.CallPhase)"
+                                      }
+                                    },
+                                    "id": 6482,
+                                    "isConstant": false,
+                                    "isLValue": false,
+                                    "isPure": true,
+                                    "lValueRequested": false,
+                                    "memberName": "Post",
+                                    "nodeType": "MemberAccess",
+                                    "referencedDeclaration": null,
+                                    "src": "765:40:26",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_enum$_CallPhase_$3897",
+                                      "typeString": "enum GlobalConstraintInterface.CallPhase"
+                                    }
+                                  },
+                                  "src": "746:59:26",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_enum$_CallPhase_$3897",
+                                    "typeString": "enum GlobalConstraintInterface.CallPhase"
+                                  }
+                                },
+                                "id": 6484,
+                                "nodeType": "ExpressionStatement",
+                                "src": "746:59:26"
+                              }
+                            ]
+                          }
+                        },
+                        "id": 6487,
+                        "nodeType": "IfStatement",
+                        "src": "610:210:26",
+                        "trueBody": {
+                          "id": 6476,
+                          "nodeType": "Block",
+                          "src": "620:91:26",
+                          "statements": [
+                            {
+                              "expression": {
+                                "argumentTypes": null,
+                                "id": 6474,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": false,
+                                "lValueRequested": false,
+                                "leftHandSide": {
+                                  "argumentTypes": null,
+                                  "id": 6470,
+                                  "name": "currentCallPhase",
+                                  "nodeType": "Identifier",
+                                  "overloadedDeclarations": [],
+                                  "referencedDeclaration": 6431,
+                                  "src": "638:16:26",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_enum$_CallPhase_$3897",
+                                    "typeString": "enum GlobalConstraintInterface.CallPhase"
+                                  }
+                                },
+                                "nodeType": "Assignment",
+                                "operator": "=",
+                                "rightHandSide": {
+                                  "argumentTypes": null,
+                                  "expression": {
+                                    "argumentTypes": null,
+                                    "expression": {
+                                      "argumentTypes": null,
+                                      "id": 6471,
+                                      "name": "GlobalConstraintInterface",
+                                      "nodeType": "Identifier",
+                                      "overloadedDeclarations": [],
+                                      "referencedDeclaration": 3925,
+                                      "src": "657:25:26",
+                                      "typeDescriptions": {
+                                        "typeIdentifier": "t_type$_t_contract$_GlobalConstraintInterface_$3925_$",
+                                        "typeString": "type(contract GlobalConstraintInterface)"
+                                      }
+                                    },
+                                    "id": 6472,
+                                    "isConstant": false,
+                                    "isLValue": false,
+                                    "isPure": false,
+                                    "lValueRequested": false,
+                                    "memberName": "CallPhase",
+                                    "nodeType": "MemberAccess",
+                                    "referencedDeclaration": 3897,
+                                    "src": "657:35:26",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_type$_t_enum$_CallPhase_$3897_$",
+                                      "typeString": "type(enum GlobalConstraintInterface.CallPhase)"
+                                    }
+                                  },
+                                  "id": 6473,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "memberName": "Pre",
+                                  "nodeType": "MemberAccess",
+                                  "referencedDeclaration": null,
+                                  "src": "657:39:26",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_enum$_CallPhase_$3897",
+                                    "typeString": "enum GlobalConstraintInterface.CallPhase"
+                                  }
+                                },
+                                "src": "638:58:26",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_enum$_CallPhase_$3897",
+                                  "typeString": "enum GlobalConstraintInterface.CallPhase"
+                                }
+                              },
+                              "id": 6475,
+                              "nodeType": "ExpressionStatement",
+                              "src": "638:58:26"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "id": 6489,
+                  "nodeType": "IfStatement",
+                  "src": "481:349:26",
+                  "trueBody": {
+                    "id": 6467,
+                    "nodeType": "Block",
+                    "src": "500:90:26",
+                    "statements": [
+                      {
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 6465,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftHandSide": {
+                            "argumentTypes": null,
+                            "id": 6461,
+                            "name": "currentCallPhase",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 6431,
+                            "src": "514:16:26",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_enum$_CallPhase_$3897",
+                              "typeString": "enum GlobalConstraintInterface.CallPhase"
+                            }
+                          },
+                          "nodeType": "Assignment",
+                          "operator": "=",
+                          "rightHandSide": {
+                            "argumentTypes": null,
+                            "expression": {
+                              "argumentTypes": null,
+                              "expression": {
+                                "argumentTypes": null,
+                                "id": 6462,
+                                "name": "GlobalConstraintInterface",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 3925,
+                                "src": "533:25:26",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_type$_t_contract$_GlobalConstraintInterface_$3925_$",
+                                  "typeString": "type(contract GlobalConstraintInterface)"
+                                }
+                              },
+                              "id": 6463,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberName": "CallPhase",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 3897,
+                              "src": "533:35:26",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_enum$_CallPhase_$3897_$",
+                                "typeString": "type(enum GlobalConstraintInterface.CallPhase)"
+                              }
+                            },
+                            "id": 6464,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "memberName": "PreAndPost",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": null,
+                            "src": "533:46:26",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_enum$_CallPhase_$3897",
+                              "typeString": "enum GlobalConstraintInterface.CallPhase"
+                            }
+                          },
+                          "src": "514:65:26",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_enum$_CallPhase_$3897",
+                            "typeString": "enum GlobalConstraintInterface.CallPhase"
+                          }
+                        },
+                        "id": 6466,
+                        "nodeType": "ExpressionStatement",
+                        "src": "514:65:26"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "74727565",
+                    "id": 6490,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "bool",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "846:4:26",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "value": "true"
+                  },
+                  "functionReturnParameters": 6441,
+                  "id": 6491,
+                  "nodeType": "Return",
+                  "src": "839:11:26"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 6493,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setConstraint",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 6438,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6433,
+                  "name": "method",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6493,
+                  "src": "334:14:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 6432,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "334:7:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 6435,
+                  "name": "pre",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6493,
+                  "src": "350:8:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 6434,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "350:4:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 6437,
+                  "name": "post",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6493,
+                  "src": "360:9:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 6436,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "360:4:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "333:37:26"
+            },
+            "returnParameters": {
+              "id": 6441,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6440,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6493,
+                  "src": "386:4:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 6439,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "386:4:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "385:6:26"
+            },
+            "scope": 6536,
+            "src": "311:546:26",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 6509,
+              "nodeType": "Block",
+              "src": "936:46:26",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 6504,
+                        "name": "testParams",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 6429,
+                        "src": "953:10:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_TestParam_$6425_storage_$",
+                          "typeString": "mapping(bytes32 => struct GlobalConstraintMock.TestParam storage ref)"
+                        }
+                      },
+                      "id": 6506,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 6505,
+                        "name": "method",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 6499,
+                        "src": "964:6:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "953:18:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_TestParam_$6425_storage",
+                        "typeString": "struct GlobalConstraintMock.TestParam storage ref"
+                      }
+                    },
+                    "id": 6507,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "pre",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 6422,
+                    "src": "953:22:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 6503,
+                  "id": 6508,
+                  "nodeType": "Return",
+                  "src": "946:29:26"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 6510,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "pre",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 6500,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6495,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6510,
+                  "src": "876:7:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 6494,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "876:7:26",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 6497,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6510,
+                  "src": "885:7:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 6496,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "885:7:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 6499,
+                  "name": "method",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6510,
+                  "src": "894:14:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 6498,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "894:7:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "875:34:26"
+            },
+            "returnParameters": {
+              "id": 6503,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6502,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6510,
+                  "src": "930:4:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 6501,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "930:4:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "929:6:26"
+            },
+            "scope": 6536,
+            "src": "863:119:26",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 6526,
+              "nodeType": "Block",
+              "src": "1062:47:26",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 6521,
+                        "name": "testParams",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 6429,
+                        "src": "1079:10:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_TestParam_$6425_storage_$",
+                          "typeString": "mapping(bytes32 => struct GlobalConstraintMock.TestParam storage ref)"
+                        }
+                      },
+                      "id": 6523,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 6522,
+                        "name": "method",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 6516,
+                        "src": "1090:6:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "1079:18:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_TestParam_$6425_storage",
+                        "typeString": "struct GlobalConstraintMock.TestParam storage ref"
+                      }
+                    },
+                    "id": 6524,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "post",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 6424,
+                    "src": "1079:23:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 6520,
+                  "id": 6525,
+                  "nodeType": "Return",
+                  "src": "1072:30:26"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 6527,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "post",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 6517,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6512,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6527,
+                  "src": "1002:7:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 6511,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1002:7:26",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 6514,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6527,
+                  "src": "1011:7:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 6513,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1011:7:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 6516,
+                  "name": "method",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6527,
+                  "src": "1020:14:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 6515,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1020:7:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1001:34:26"
+            },
+            "returnParameters": {
+              "id": 6520,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6519,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6527,
+                  "src": "1056:4:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 6518,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1056:4:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1055:6:26"
+            },
+            "scope": 6536,
+            "src": "988:121:26",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 6534,
+              "nodeType": "Block",
+              "src": "1188:40:26",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 6532,
+                    "name": "currentCallPhase",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 6431,
+                    "src": "1205:16:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_CallPhase_$3897",
+                      "typeString": "enum GlobalConstraintInterface.CallPhase"
+                    }
+                  },
+                  "functionReturnParameters": 6531,
+                  "id": 6533,
+                  "nodeType": "Return",
+                  "src": "1198:23:26"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 6535,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "when",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 6528,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1128:2:26"
+            },
+            "returnParameters": {
+              "id": 6531,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6530,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6535,
+                  "src": "1151:35:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_CallPhase_$3897",
+                    "typeString": "enum GlobalConstraintInterface.CallPhase"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 6529,
+                    "name": "GlobalConstraintInterface.CallPhase",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 3897,
+                    "src": "1151:35:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_CallPhase_$3897",
+                      "typeString": "enum GlobalConstraintInterface.CallPhase"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1150:37:26"
+            },
+            "scope": 6536,
+            "src": "1115:113:26",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 6537,
+        "src": "88:1142:26"
+      }
+    ],
+    "src": "0:1231:26"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/oren/daostack/arc/contracts/test/GlobalConstraintMock.sol",
+    "exportedSymbols": {
+      "GlobalConstraintMock": [
+        6536
+      ]
+    },
+    "id": 6537,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 6419,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:26"
+      },
+      {
+        "absolutePath": "/Users/oren/daostack/arc/contracts/globalConstraints/GlobalConstraintInterface.sol",
+        "file": "../globalConstraints/GlobalConstraintInterface.sol",
+        "id": 6420,
+        "nodeType": "ImportDirective",
+        "scope": 6537,
+        "sourceUnit": 3926,
+        "src": "25:60:26",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 6536,
+        "linearizedBaseContracts": [
+          6536
+        ],
+        "name": "GlobalConstraintMock",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "GlobalConstraintMock.TestParam",
+            "id": 6425,
+            "members": [
+              {
+                "constant": false,
+                "id": 6422,
+                "name": "pre",
+                "nodeType": "VariableDeclaration",
+                "scope": 6425,
+                "src": "152:8:26",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 6421,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "152:4:26",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 6424,
+                "name": "post",
+                "nodeType": "VariableDeclaration",
+                "scope": 6425,
+                "src": "170:9:26",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 6423,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "170:4:26",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "TestParam",
+            "nodeType": "StructDefinition",
+            "scope": 6536,
+            "src": "125:61:26",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 6429,
+            "name": "testParams",
+            "nodeType": "VariableDeclaration",
+            "scope": 6536,
+            "src": "192:46:26",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_TestParam_$6425_storage_$",
+              "typeString": "mapping(bytes32 => struct GlobalConstraintMock.TestParam)"
+            },
+            "typeName": {
+              "id": 6428,
+              "keyType": {
+                "id": 6426,
+                "name": "bytes32",
+                "nodeType": "ElementaryTypeName",
+                "src": "201:7:26",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "192:28:26",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_TestParam_$6425_storage_$",
+                "typeString": "mapping(bytes32 => struct GlobalConstraintMock.TestParam)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 6427,
+                "name": "TestParam",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 6425,
+                "src": "210:9:26",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_TestParam_$6425_storage_ptr",
+                  "typeString": "struct GlobalConstraintMock.TestParam"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 6431,
+            "name": "currentCallPhase",
+            "nodeType": "VariableDeclaration",
+            "scope": 6536,
+            "src": "245:59:26",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_enum$_CallPhase_$3897",
+              "typeString": "enum GlobalConstraintInterface.CallPhase"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 6430,
+              "name": "GlobalConstraintInterface.CallPhase",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 3897,
+              "src": "245:35:26",
+              "typeDescriptions": {
+                "typeIdentifier": "t_enum$_CallPhase_$3897",
+                "typeString": "enum GlobalConstraintInterface.CallPhase"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 6492,
+              "nodeType": "Block",
+              "src": "392:465:26",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 6447,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "baseExpression": {
+                          "argumentTypes": null,
+                          "id": 6442,
+                          "name": "testParams",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 6429,
+                          "src": "402:10:26",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_TestParam_$6425_storage_$",
+                            "typeString": "mapping(bytes32 => struct GlobalConstraintMock.TestParam storage ref)"
+                          }
+                        },
+                        "id": 6444,
+                        "indexExpression": {
+                          "argumentTypes": null,
+                          "id": 6443,
+                          "name": "method",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 6433,
+                          "src": "413:6:26",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bytes32",
+                            "typeString": "bytes32"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "402:18:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_TestParam_$6425_storage",
+                          "typeString": "struct GlobalConstraintMock.TestParam storage ref"
+                        }
+                      },
+                      "id": 6445,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "pre",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 6422,
+                      "src": "402:22:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 6446,
+                      "name": "pre",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 6435,
+                      "src": "427:3:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "402:28:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 6448,
+                  "nodeType": "ExpressionStatement",
+                  "src": "402:28:26"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 6454,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "baseExpression": {
+                          "argumentTypes": null,
+                          "id": 6449,
+                          "name": "testParams",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 6429,
+                          "src": "440:10:26",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_TestParam_$6425_storage_$",
+                            "typeString": "mapping(bytes32 => struct GlobalConstraintMock.TestParam storage ref)"
+                          }
+                        },
+                        "id": 6451,
+                        "indexExpression": {
+                          "argumentTypes": null,
+                          "id": 6450,
+                          "name": "method",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 6433,
+                          "src": "451:6:26",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bytes32",
+                            "typeString": "bytes32"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "440:18:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_TestParam_$6425_storage",
+                          "typeString": "struct GlobalConstraintMock.TestParam storage ref"
+                        }
+                      },
+                      "id": 6452,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "post",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 6424,
+                      "src": "440:23:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 6453,
+                      "name": "post",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 6437,
+                      "src": "466:4:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "440:30:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 6455,
+                  "nodeType": "ExpressionStatement",
+                  "src": "440:30:26"
+                },
+                {
+                  "condition": {
+                    "argumentTypes": null,
+                    "commonType": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "id": 6460,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "argumentTypes": null,
+                      "id": 6457,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "UnaryOperation",
+                      "operator": "!",
+                      "prefix": true,
+                      "src": "485:4:26",
+                      "subExpression": {
+                        "argumentTypes": null,
+                        "id": 6456,
+                        "name": "pre",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 6435,
+                        "src": "486:3:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "&&",
+                    "rightExpression": {
+                      "argumentTypes": null,
+                      "id": 6459,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "UnaryOperation",
+                      "operator": "!",
+                      "prefix": true,
+                      "src": "493:5:26",
+                      "subExpression": {
+                        "argumentTypes": null,
+                        "id": 6458,
+                        "name": "post",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 6437,
+                        "src": "494:4:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "485:13:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": {
+                    "id": 6488,
+                    "nodeType": "Block",
+                    "src": "596:234:26",
+                    "statements": [
+                      {
+                        "condition": {
+                          "argumentTypes": null,
+                          "id": 6469,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "UnaryOperation",
+                          "operator": "!",
+                          "prefix": true,
+                          "src": "614:4:26",
+                          "subExpression": {
+                            "argumentTypes": null,
+                            "id": 6468,
+                            "name": "pre",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 6435,
+                            "src": "615:3:26",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bool",
+                              "typeString": "bool"
+                            }
+                          },
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "falseBody": {
+                          "condition": {
+                            "argumentTypes": null,
+                            "id": 6478,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "nodeType": "UnaryOperation",
+                            "operator": "!",
+                            "prefix": true,
+                            "src": "721:5:26",
+                            "subExpression": {
+                              "argumentTypes": null,
+                              "id": 6477,
+                              "name": "post",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 6437,
+                              "src": "722:4:26",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_bool",
+                                "typeString": "bool"
+                              }
+                            },
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bool",
+                              "typeString": "bool"
+                            }
+                          },
+                          "falseBody": null,
+                          "id": 6486,
+                          "nodeType": "IfStatement",
+                          "src": "717:103:26",
+                          "trueBody": {
+                            "id": 6485,
+                            "nodeType": "Block",
+                            "src": "728:92:26",
+                            "statements": [
+                              {
+                                "expression": {
+                                  "argumentTypes": null,
+                                  "id": 6483,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "leftHandSide": {
+                                    "argumentTypes": null,
+                                    "id": 6479,
+                                    "name": "currentCallPhase",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 6431,
+                                    "src": "746:16:26",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_enum$_CallPhase_$3897",
+                                      "typeString": "enum GlobalConstraintInterface.CallPhase"
+                                    }
+                                  },
+                                  "nodeType": "Assignment",
+                                  "operator": "=",
+                                  "rightHandSide": {
+                                    "argumentTypes": null,
+                                    "expression": {
+                                      "argumentTypes": null,
+                                      "expression": {
+                                        "argumentTypes": null,
+                                        "id": 6480,
+                                        "name": "GlobalConstraintInterface",
+                                        "nodeType": "Identifier",
+                                        "overloadedDeclarations": [],
+                                        "referencedDeclaration": 3925,
+                                        "src": "765:25:26",
+                                        "typeDescriptions": {
+                                          "typeIdentifier": "t_type$_t_contract$_GlobalConstraintInterface_$3925_$",
+                                          "typeString": "type(contract GlobalConstraintInterface)"
+                                        }
+                                      },
+                                      "id": 6481,
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": false,
+                                      "lValueRequested": false,
+                                      "memberName": "CallPhase",
+                                      "nodeType": "MemberAccess",
+                                      "referencedDeclaration": 3897,
+                                      "src": "765:35:26",
+                                      "typeDescriptions": {
+                                        "typeIdentifier": "t_type$_t_enum$_CallPhase_$3897_$",
+                                        "typeString": "type(enum GlobalConstraintInterface.CallPhase)"
+                                      }
+                                    },
+                                    "id": 6482,
+                                    "isConstant": false,
+                                    "isLValue": false,
+                                    "isPure": true,
+                                    "lValueRequested": false,
+                                    "memberName": "Post",
+                                    "nodeType": "MemberAccess",
+                                    "referencedDeclaration": null,
+                                    "src": "765:40:26",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_enum$_CallPhase_$3897",
+                                      "typeString": "enum GlobalConstraintInterface.CallPhase"
+                                    }
+                                  },
+                                  "src": "746:59:26",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_enum$_CallPhase_$3897",
+                                    "typeString": "enum GlobalConstraintInterface.CallPhase"
+                                  }
+                                },
+                                "id": 6484,
+                                "nodeType": "ExpressionStatement",
+                                "src": "746:59:26"
+                              }
+                            ]
+                          }
+                        },
+                        "id": 6487,
+                        "nodeType": "IfStatement",
+                        "src": "610:210:26",
+                        "trueBody": {
+                          "id": 6476,
+                          "nodeType": "Block",
+                          "src": "620:91:26",
+                          "statements": [
+                            {
+                              "expression": {
+                                "argumentTypes": null,
+                                "id": 6474,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": false,
+                                "lValueRequested": false,
+                                "leftHandSide": {
+                                  "argumentTypes": null,
+                                  "id": 6470,
+                                  "name": "currentCallPhase",
+                                  "nodeType": "Identifier",
+                                  "overloadedDeclarations": [],
+                                  "referencedDeclaration": 6431,
+                                  "src": "638:16:26",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_enum$_CallPhase_$3897",
+                                    "typeString": "enum GlobalConstraintInterface.CallPhase"
+                                  }
+                                },
+                                "nodeType": "Assignment",
+                                "operator": "=",
+                                "rightHandSide": {
+                                  "argumentTypes": null,
+                                  "expression": {
+                                    "argumentTypes": null,
+                                    "expression": {
+                                      "argumentTypes": null,
+                                      "id": 6471,
+                                      "name": "GlobalConstraintInterface",
+                                      "nodeType": "Identifier",
+                                      "overloadedDeclarations": [],
+                                      "referencedDeclaration": 3925,
+                                      "src": "657:25:26",
+                                      "typeDescriptions": {
+                                        "typeIdentifier": "t_type$_t_contract$_GlobalConstraintInterface_$3925_$",
+                                        "typeString": "type(contract GlobalConstraintInterface)"
+                                      }
+                                    },
+                                    "id": 6472,
+                                    "isConstant": false,
+                                    "isLValue": false,
+                                    "isPure": false,
+                                    "lValueRequested": false,
+                                    "memberName": "CallPhase",
+                                    "nodeType": "MemberAccess",
+                                    "referencedDeclaration": 3897,
+                                    "src": "657:35:26",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_type$_t_enum$_CallPhase_$3897_$",
+                                      "typeString": "type(enum GlobalConstraintInterface.CallPhase)"
+                                    }
+                                  },
+                                  "id": 6473,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "memberName": "Pre",
+                                  "nodeType": "MemberAccess",
+                                  "referencedDeclaration": null,
+                                  "src": "657:39:26",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_enum$_CallPhase_$3897",
+                                    "typeString": "enum GlobalConstraintInterface.CallPhase"
+                                  }
+                                },
+                                "src": "638:58:26",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_enum$_CallPhase_$3897",
+                                  "typeString": "enum GlobalConstraintInterface.CallPhase"
+                                }
+                              },
+                              "id": 6475,
+                              "nodeType": "ExpressionStatement",
+                              "src": "638:58:26"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "id": 6489,
+                  "nodeType": "IfStatement",
+                  "src": "481:349:26",
+                  "trueBody": {
+                    "id": 6467,
+                    "nodeType": "Block",
+                    "src": "500:90:26",
+                    "statements": [
+                      {
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 6465,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftHandSide": {
+                            "argumentTypes": null,
+                            "id": 6461,
+                            "name": "currentCallPhase",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 6431,
+                            "src": "514:16:26",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_enum$_CallPhase_$3897",
+                              "typeString": "enum GlobalConstraintInterface.CallPhase"
+                            }
+                          },
+                          "nodeType": "Assignment",
+                          "operator": "=",
+                          "rightHandSide": {
+                            "argumentTypes": null,
+                            "expression": {
+                              "argumentTypes": null,
+                              "expression": {
+                                "argumentTypes": null,
+                                "id": 6462,
+                                "name": "GlobalConstraintInterface",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 3925,
+                                "src": "533:25:26",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_type$_t_contract$_GlobalConstraintInterface_$3925_$",
+                                  "typeString": "type(contract GlobalConstraintInterface)"
+                                }
+                              },
+                              "id": 6463,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberName": "CallPhase",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 3897,
+                              "src": "533:35:26",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_enum$_CallPhase_$3897_$",
+                                "typeString": "type(enum GlobalConstraintInterface.CallPhase)"
+                              }
+                            },
+                            "id": 6464,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "memberName": "PreAndPost",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": null,
+                            "src": "533:46:26",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_enum$_CallPhase_$3897",
+                              "typeString": "enum GlobalConstraintInterface.CallPhase"
+                            }
+                          },
+                          "src": "514:65:26",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_enum$_CallPhase_$3897",
+                            "typeString": "enum GlobalConstraintInterface.CallPhase"
+                          }
+                        },
+                        "id": 6466,
+                        "nodeType": "ExpressionStatement",
+                        "src": "514:65:26"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "hexValue": "74727565",
+                    "id": 6490,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "bool",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "846:4:26",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "value": "true"
+                  },
+                  "functionReturnParameters": 6441,
+                  "id": 6491,
+                  "nodeType": "Return",
+                  "src": "839:11:26"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 6493,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setConstraint",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 6438,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6433,
+                  "name": "method",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6493,
+                  "src": "334:14:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 6432,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "334:7:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 6435,
+                  "name": "pre",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6493,
+                  "src": "350:8:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 6434,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "350:4:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 6437,
+                  "name": "post",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6493,
+                  "src": "360:9:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 6436,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "360:4:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "333:37:26"
+            },
+            "returnParameters": {
+              "id": 6441,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6440,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6493,
+                  "src": "386:4:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 6439,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "386:4:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "385:6:26"
+            },
+            "scope": 6536,
+            "src": "311:546:26",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 6509,
+              "nodeType": "Block",
+              "src": "936:46:26",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 6504,
+                        "name": "testParams",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 6429,
+                        "src": "953:10:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_TestParam_$6425_storage_$",
+                          "typeString": "mapping(bytes32 => struct GlobalConstraintMock.TestParam storage ref)"
+                        }
+                      },
+                      "id": 6506,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 6505,
+                        "name": "method",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 6499,
+                        "src": "964:6:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "953:18:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_TestParam_$6425_storage",
+                        "typeString": "struct GlobalConstraintMock.TestParam storage ref"
+                      }
+                    },
+                    "id": 6507,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "pre",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 6422,
+                    "src": "953:22:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 6503,
+                  "id": 6508,
+                  "nodeType": "Return",
+                  "src": "946:29:26"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 6510,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "pre",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 6500,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6495,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6510,
+                  "src": "876:7:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 6494,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "876:7:26",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 6497,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6510,
+                  "src": "885:7:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 6496,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "885:7:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 6499,
+                  "name": "method",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6510,
+                  "src": "894:14:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 6498,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "894:7:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "875:34:26"
+            },
+            "returnParameters": {
+              "id": 6503,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6502,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6510,
+                  "src": "930:4:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 6501,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "930:4:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "929:6:26"
+            },
+            "scope": 6536,
+            "src": "863:119:26",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 6526,
+              "nodeType": "Block",
+              "src": "1062:47:26",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 6521,
+                        "name": "testParams",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 6429,
+                        "src": "1079:10:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_TestParam_$6425_storage_$",
+                          "typeString": "mapping(bytes32 => struct GlobalConstraintMock.TestParam storage ref)"
+                        }
+                      },
+                      "id": 6523,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 6522,
+                        "name": "method",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 6516,
+                        "src": "1090:6:26",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "1079:18:26",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_TestParam_$6425_storage",
+                        "typeString": "struct GlobalConstraintMock.TestParam storage ref"
+                      }
+                    },
+                    "id": 6524,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "post",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 6424,
+                    "src": "1079:23:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 6520,
+                  "id": 6525,
+                  "nodeType": "Return",
+                  "src": "1072:30:26"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 6527,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "post",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 6517,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6512,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6527,
+                  "src": "1002:7:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 6511,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1002:7:26",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 6514,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6527,
+                  "src": "1011:7:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 6513,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1011:7:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 6516,
+                  "name": "method",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6527,
+                  "src": "1020:14:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 6515,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1020:7:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1001:34:26"
+            },
+            "returnParameters": {
+              "id": 6520,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6519,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6527,
+                  "src": "1056:4:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 6518,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1056:4:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1055:6:26"
+            },
+            "scope": 6536,
+            "src": "988:121:26",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 6534,
+              "nodeType": "Block",
+              "src": "1188:40:26",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 6532,
+                    "name": "currentCallPhase",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 6431,
+                    "src": "1205:16:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_CallPhase_$3897",
+                      "typeString": "enum GlobalConstraintInterface.CallPhase"
+                    }
+                  },
+                  "functionReturnParameters": 6531,
+                  "id": 6533,
+                  "nodeType": "Return",
+                  "src": "1198:23:26"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 6535,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "when",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 6528,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1128:2:26"
+            },
+            "returnParameters": {
+              "id": 6531,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6530,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6535,
+                  "src": "1151:35:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_CallPhase_$3897",
+                    "typeString": "enum GlobalConstraintInterface.CallPhase"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 6529,
+                    "name": "GlobalConstraintInterface.CallPhase",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 3897,
+                    "src": "1151:35:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_CallPhase_$3897",
+                      "typeString": "enum GlobalConstraintInterface.CallPhase"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1150:37:26"
+            },
+            "scope": 6536,
+            "src": "1115:113:26",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 6537,
+        "src": "88:1142:26"
+      }
+    ],
+    "src": "0:1231:26"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.4+commit.9549d8ff.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.6",
+  "updatedAt": "2019-05-02T12:00:21.265Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

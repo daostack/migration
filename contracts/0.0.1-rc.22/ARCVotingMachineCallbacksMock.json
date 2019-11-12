@@ -1,0 +1,932 @@
+{
+  "contractName": "ARCVotingMachineCallbacksMock",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        },
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "proposalsInfo",
+      "outputs": [
+        {
+          "name": "blockNumber",
+          "type": "uint256"
+        },
+        {
+          "name": "avatar",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_stakingToken",
+          "type": "address"
+        },
+        {
+          "name": "_proposalId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "balanceOfStakingToken",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_owner",
+          "type": "address"
+        },
+        {
+          "name": "_proposalId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "reputationOf",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_proposalId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getTotalReputationSupply",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_stakingToken",
+          "type": "address"
+        },
+        {
+          "name": "_beneficiary",
+          "type": "address"
+        },
+        {
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "name": "_proposalId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "stakingTokenTransfer",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "name": "_beneficiary",
+          "type": "address"
+        },
+        {
+          "name": "_proposalId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "mintReputation",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "name": "_beneficiary",
+          "type": "address"
+        },
+        {
+          "name": "_proposalId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "burnReputation",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_proposalId",
+          "type": "bytes32"
+        },
+        {
+          "name": "_avatar",
+          "type": "address"
+        },
+        {
+          "name": "_votingMachine",
+          "type": "address"
+        }
+      ],
+      "name": "propose",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.4+commit.9549d8ff\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"address\"},{\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"proposalsInfo\",\"outputs\":[{\"name\":\"blockNumber\",\"type\":\"uint256\"},{\"name\":\"avatar\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_stakingToken\",\"type\":\"address\"},{\"name\":\"_proposalId\",\"type\":\"bytes32\"}],\"name\":\"balanceOfStakingToken\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_owner\",\"type\":\"address\"},{\"name\":\"_proposalId\",\"type\":\"bytes32\"}],\"name\":\"reputationOf\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_proposalId\",\"type\":\"bytes32\"}],\"name\":\"getTotalReputationSupply\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_proposalId\",\"type\":\"bytes32\"},{\"name\":\"_avatar\",\"type\":\"address\"},{\"name\":\"_votingMachine\",\"type\":\"address\"}],\"name\":\"propose\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_stakingToken\",\"type\":\"address\"},{\"name\":\"_beneficiary\",\"type\":\"address\"},{\"name\":\"_amount\",\"type\":\"uint256\"},{\"name\":\"_proposalId\",\"type\":\"bytes32\"}],\"name\":\"stakingTokenTransfer\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_amount\",\"type\":\"uint256\"},{\"name\":\"_beneficiary\",\"type\":\"address\"},{\"name\":\"_proposalId\",\"type\":\"bytes32\"}],\"name\":\"mintReputation\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_amount\",\"type\":\"uint256\"},{\"name\":\"_beneficiary\",\"type\":\"address\"},{\"name\":\"_proposalId\",\"type\":\"bytes32\"}],\"name\":\"burnReputation\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/oren/daostack/arc/contracts/test/ARCGenesisProtocolCallbacksMock.sol\":\"ARCVotingMachineCallbacksMock\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/oren/daostack/arc/contracts/controller/Avatar.sol\":{\"keccak256\":\"0x4e4fb9d3bc21f42fbfc6a01e9f8aa483a59e9f447b0d604f55b587a81ec09ef4\",\"urls\":[\"bzzr://b0af60e651a75274a028dc4b53d06091a46ca0efa3bfb4153879e76cf86a49dc\"]},\"/Users/oren/daostack/arc/contracts/controller/ControllerInterface.sol\":{\"keccak256\":\"0x933e92612c90f292c7b59908958b003f1a13d90b97bed0572b566353c20974dc\",\"urls\":[\"bzzr://e8050774c20b9b22636b47cdd353eaf5df72e0bca8f2b8569365be30f4eaef0c\"]},\"/Users/oren/daostack/arc/contracts/controller/DAOToken.sol\":{\"keccak256\":\"0x9b213e4e3ceeffcfc1c962a43b70b8d763d8091a2dd713fc1989b97bb68786e6\",\"urls\":[\"bzzr://7ba306fdbad344e01474e3ae9c37b27b64efdc1cb17ffc0f3ec1c4427fde359d\"]},\"/Users/oren/daostack/arc/contracts/globalConstraints/GlobalConstraintInterface.sol\":{\"keccak256\":\"0xc006c4591ec10b845a56e13f6791db2c428610953034686d52b2a934b6c8f36f\",\"urls\":[\"bzzr://d1f293a0bbaa292296a83977cb36a14048db404a32e3f6aa9bd79ea61ac3c4c3\"]},\"/Users/oren/daostack/arc/contracts/libs/SafeERC20.sol\":{\"keccak256\":\"0xf6727d432f67046145b078f40c1cc4f6be7b0d12a6678ecaf457edf7550d244c\",\"urls\":[\"bzzr://cd706a2dc7540d093b591a280b464256c596ddad598b68886e6db2e7958f9916\"]},\"/Users/oren/daostack/arc/contracts/test/ARCGenesisProtocolCallbacksMock.sol\":{\"keccak256\":\"0x7ba1d6a65040f84b6eb05a273b4841bc9bc9e1ec929d662c6dd3ee564829e885\",\"urls\":[\"bzzr://364583ed0f624248f3e452ef6d2be3fddaf37143da3643cd4b91d705baa1ba04\"]},\"/Users/oren/daostack/arc/contracts/universalSchemes/UniversalScheme.sol\":{\"keccak256\":\"0xcfdb7d336d21b3b16a31125d3bd8c88f7c4c944510f4488162247badb6411017\",\"urls\":[\"bzzr://6cd99ec0b19ae06f7845a3ca56d2dc43ec122cfa809969248e6742e0c56076ca\"]},\"/Users/oren/daostack/arc/contracts/universalSchemes/UniversalSchemeInterface.sol\":{\"keccak256\":\"0x956b0dbe20b6aeea74565a9204f72fba1580874d27cd63955f93e9491cabb6b1\",\"urls\":[\"bzzr://29eac5d525cc39129df30c5b8deada4350d40c5261a85ce0b29c12fe80b10b15\"]},\"/Users/oren/daostack/arc/contracts/votingMachines/VotingMachineCallbacks.sol\":{\"keccak256\":\"0x4052c6f57add891f5f6514a7837f54955ac1f3ad4654fa45d864e4aad19864ba\",\"urls\":[\"bzzr://b013e9ee810bf43f6de254cc61dceb59a9cf102d795d4abc527c2989ff5df568\"]},\"@daostack/infra/contracts/Reputation.sol\":{\"keccak256\":\"0x3d226dac0fe7d758f0287fb28bc25fcec1f69d19888ae3a550fa49856d61c482\",\"urls\":[\"bzzr://7f219e1874d4f1aea860cc665b75015797f55f149e9bf490abab5d7ad2adfeb9\"]},\"@daostack/infra/contracts/libs/RealMath.sol\":{\"keccak256\":\"0x3ee79c4b483da327916ac36f9d5cc6a1f2f0363db3ad06793ec67f46e1f653db\",\"urls\":[\"bzzr://548cdb33afa45d2d4bfb0ed3f557257f77c7d9ae142326d04584e20d00c153d3\"]},\"@daostack/infra/contracts/votingMachines/GenesisProtocol.sol\":{\"keccak256\":\"0x0321da6019e0e1a7fc4e1ca484d7d5d376805abb17f9eb9c46a6731e9dfe58dc\",\"urls\":[\"bzzr://4cf93479ffb97b0f90d2974a0404136bfda093edb9e4b6dd3d9737a29202ee63\"]},\"@daostack/infra/contracts/votingMachines/GenesisProtocolLogic.sol\":{\"keccak256\":\"0xfea638b11db020fed40daf661f626ec94f3adba9728f9a9fde40dcc371910dcf\",\"urls\":[\"bzzr://8ee66ecd78ab82cf87a7f9beb15434950ff9752a059731b3b579ab27af97be81\"]},\"@daostack/infra/contracts/votingMachines/IntVoteInterface.sol\":{\"keccak256\":\"0x877991da94b1fe9c2accf69367b32fff474c4e4f7897e9cf5a61fa5d1378908f\",\"urls\":[\"bzzr://a7bb7b3a39a1553cb39378801976c8b192b801f9627098385eca24e62440826b\"]},\"@daostack/infra/contracts/votingMachines/ProposalExecuteInterface.sol\":{\"keccak256\":\"0xb80a153793e1723b35e70ba1c3800975fbc1fae63c989cfb8134a4e58085e181\",\"urls\":[\"bzzr://e5ff7e9f77e596fff366bb31326a7d2ca82d0fdeed1d612c09589eb9fb69d9bf\"]},\"@daostack/infra/contracts/votingMachines/VotingMachineCallbacksInterface.sol\":{\"keccak256\":\"0xec215d305f0aa5a5193b6f0302a1aa6bb84e85460167f80b261faf9d30564563\",\"urls\":[\"bzzr://baae21ef9ee3e315191aece7767d3a9ab62810aff5063ad144cb2120eebdabf0\"]},\"openzeppelin-solidity/contracts/cryptography/ECDSA.sol\":{\"keccak256\":\"0xb48974d92a87053dc1d6c5389f3d1b2ad522dec23afcb508eaa935d98dfdc0b6\",\"urls\":[\"bzzr://e665a84309432c27a26e622665dd97ff29d4d6ad7ad655d6e2c50226a5e99b56\"]},\"openzeppelin-solidity/contracts/math/Math.sol\":{\"keccak256\":\"0x37605dd0606b349cfb1b679892e1bb0ef4ddc16dedb06e229cc4402610a7a848\",\"urls\":[\"bzzr://c2253b0f57a80ee1ab7d90192aec144310e9c9a420d2ca2fcfd5999ae66e8f33\"]},\"openzeppelin-solidity/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x965012d27b4262d7a41f5028cbb30c51ebd9ecd4be8fb30380aaa7a3c64fbc8b\",\"urls\":[\"bzzr://41ca38f6b0fa4b77b0feec43e422cfbec48b7eb38a41edf0b85c77e8d9a296b1\"]},\"openzeppelin-solidity/contracts/ownership/Ownable.sol\":{\"keccak256\":\"0x980de387a1a020a498f53d00f89fecebb12c949a17e8f160093c0303ede2b786\",\"urls\":[\"bzzr://08894efa2a557982070beda6a81a032407e70532d24bdafe80d39660c74904d9\"]},\"openzeppelin-solidity/contracts/token/ERC20/ERC20.sol\":{\"keccak256\":\"0xba431353cb4fe70777ac026231eb5468e41aa1e81240a2b8136917acc5fff4dc\",\"urls\":[\"bzzr://80cd02a56e6e33504318124d0d645c82e615cc8a4b5829cc9d82d17635c644c8\"]},\"openzeppelin-solidity/contracts/token/ERC20/ERC20Burnable.sol\":{\"keccak256\":\"0xa3e68fd7f987c8fbdaf4867d428a69a15f3cf2f69709a5b0a0fbef750b0e6fbc\",\"urls\":[\"bzzr://f4ebb7c5b9e429b98b07e2caca6156c13c3724e9b1191cca8423ab8427bc6265\"]},\"openzeppelin-solidity/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x079c4e23ee448f529e43bfa3c4e8fb4be52cd0318ee923a276835bedf45b93d8\",\"urls\":[\"bzzr://48248e86f64407a95f241d6c5c8cfea6b4d4ebf4ebb467e5c98c8af3868fafe4\"]},\"openzeppelin-solidity/contracts/utils/Address.sol\":{\"keccak256\":\"0x5c731061b804fa256fc8c05150eafe5d20b6bb94541a8f187912bf84f7033f34\",\"urls\":[\"bzzr://63fc4af0d7a99a770925b96a6cf48f25fc00d30274266f82db05f30baa238267\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50610bd5806100206000396000f3fe608060405234801561001057600080fd5b506004361061008c5760003560e060020a90048063b8752ba31161005f578063b8752ba314610165578063bea75f281461019b578063d29b5d2f146101eb578063f81f8bf61461021d5761008c565b806360bdbb3f146100915780636b8eb403146100de5780639588378e1461011c578063b551c37314610148575b600080fd5b6100bd600480360360408110156100a757600080fd5b50600160a060020a03813516906020013561024f565b60408051928352600160a060020a0390911660208301528051918290030190f35b61010a600480360360408110156100f457600080fd5b50600160a060020a038135169060200135610279565b60408051918252519081900360200190f35b61010a6004803603604081101561013257600080fd5b50600160a060020a03813516906020013561033e565b61010a6004803603602081101561015e57600080fd5b503561046a565b6101996004803603606081101561017b57600080fd5b50803590600160a060020a03602082013581169160400135166105c2565b005b6101d7600480360360808110156101b157600080fd5b50600160a060020a03813581169160208101359091169060408101359060600135610627565b604080519115158252519081900360200190f35b6101d76004803603606081101561020157600080fd5b50803590600160a060020a03602082013516906040013561080e565b6101d76004803603606081101561023357600080fd5b50803590600160a060020a0360208201351690604001356109ec565b600060208181529281526040808220909352908152208054600190910154600160a060020a031682565b33600090815260208181526040808320848452909152812060010154600160a060020a03168015156102af576000915050610338565b83600160a060020a03166370a08231826040518263ffffffff1660e060020a0281526004018082600160a060020a0316600160a060020a0316815260200191505060206040518083038186803b15801561030857600080fd5b505afa15801561031c573d6000803e3d6000fd5b505050506040513d602081101561033257600080fd5b50519150505b92915050565b6000610348610b92565b503360009081526020818152604080832085845282529182902082518084019093528054835260010154600160a060020a03169082018190521515610391576000915050610338565b8060200151600160a060020a03166389ae1c906040518163ffffffff1660e060020a02815260040160206040518083038186803b1580156103d157600080fd5b505afa1580156103e5573d6000803e3d6000fd5b505050506040513d60208110156103fb57600080fd5b50518151604080517f4ee2cd7e000000000000000000000000000000000000000000000000000000008152600160a060020a038881166004830152602482019390935290519190921691634ee2cd7e916044808301926020929190829003018186803b15801561030857600080fd5b6000610474610b92565b503360009081526020818152604080832085845282529182902082518084019093528054835260010154600160a060020a031690820181905215156104bd5760009150506105bd565b8060200151600160a060020a03166389ae1c906040518163ffffffff1660e060020a02815260040160206040518083038186803b1580156104fd57600080fd5b505afa158015610511573d6000803e3d6000fd5b505050506040513d602081101561052757600080fd5b50518151604080517f981b24d0000000000000000000000000000000000000000000000000000000008152600481019290925251600160a060020a039092169163981b24d091602480820192602092909190829003018186803b15801561058d57600080fd5b505afa1580156105a1573d6000803e3d6000fd5b505050506040513d60208110156105b757600080fd5b50519150505b919050565b604080518082018252438152600160a060020a039384166020808301918252938516600090815280855283812096815295909352932092518355516001909201805473ffffffffffffffffffffffffffffffffffffffff191692909116919091179055565b336000908152602081815260408083208484529091528120600101548290600160a060020a031615156106bb57604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152601260248201527f6f6e6c7920566f74696e674d616368696e650000000000000000000000000000604482015290519081900360640190fd5b33600090815260208181526040808320868452909152902060010154600160a060020a03168015156106f1576000925050610805565b80600160a060020a0316638da5cb5b6040518163ffffffff1660e060020a02815260040160206040518083038186803b15801561072d57600080fd5b505afa158015610741573d6000803e3d6000fd5b505050506040513d602081101561075757600080fd5b5051604080517fb9a04cdd000000000000000000000000000000000000000000000000000000008152600160a060020a038a8116600483015289811660248301526044820189905284811660648301529151919092169163b9a04cdd9160848083019260209291908290030181600087803b1580156107d557600080fd5b505af11580156107e9573d6000803e3d6000fd5b505050506040513d60208110156107ff57600080fd5b50519250505b50949350505050565b336000908152602081815260408083208484529091528120600101548290600160a060020a031615156108a257604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152601260248201527f6f6e6c7920566f74696e674d616368696e650000000000000000000000000000604482015290519081900360640190fd5b33600090815260208181526040808320868452909152902060010154600160a060020a03168015156108d85760009250506109e4565b80600160a060020a0316638da5cb5b6040518163ffffffff1660e060020a02815260040160206040518083038186803b15801561091457600080fd5b505afa158015610928573d6000803e3d6000fd5b505050506040513d602081101561093e57600080fd5b5051604080517feaf994b200000000000000000000000000000000000000000000000000000000815260048101899052600160a060020a03888116602483015284811660448301529151919092169163eaf994b29160648083019260209291908290030181600087803b1580156109b457600080fd5b505af11580156109c8573d6000803e3d6000fd5b505050506040513d60208110156109de57600080fd5b50519250505b509392505050565b336000908152602081815260408083208484529091528120600101548290600160a060020a03161515610a8057604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152601260248201527f6f6e6c7920566f74696e674d616368696e650000000000000000000000000000604482015290519081900360640190fd5b33600090815260208181526040808320868452909152902060010154600160a060020a0316801515610ab65760009250506109e4565b80600160a060020a0316638da5cb5b6040518163ffffffff1660e060020a02815260040160206040518083038186803b158015610af257600080fd5b505afa158015610b06573d6000803e3d6000fd5b505050506040513d6020811015610b1c57600080fd5b5051604080517f6e94d27800000000000000000000000000000000000000000000000000000000815260048101899052600160a060020a038881166024830152848116604483015291519190921691636e94d2789160648083019260209291908290030181600087803b1580156109b457600080fd5b60408051808201909152600080825260208201529056fea165627a7a72305820783f2ad248a1f9f1527200c3513a0bb78cd2290545360d60f6b0ab2ee187a70a0029",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061008c5760003560e060020a90048063b8752ba31161005f578063b8752ba314610165578063bea75f281461019b578063d29b5d2f146101eb578063f81f8bf61461021d5761008c565b806360bdbb3f146100915780636b8eb403146100de5780639588378e1461011c578063b551c37314610148575b600080fd5b6100bd600480360360408110156100a757600080fd5b50600160a060020a03813516906020013561024f565b60408051928352600160a060020a0390911660208301528051918290030190f35b61010a600480360360408110156100f457600080fd5b50600160a060020a038135169060200135610279565b60408051918252519081900360200190f35b61010a6004803603604081101561013257600080fd5b50600160a060020a03813516906020013561033e565b61010a6004803603602081101561015e57600080fd5b503561046a565b6101996004803603606081101561017b57600080fd5b50803590600160a060020a03602082013581169160400135166105c2565b005b6101d7600480360360808110156101b157600080fd5b50600160a060020a03813581169160208101359091169060408101359060600135610627565b604080519115158252519081900360200190f35b6101d76004803603606081101561020157600080fd5b50803590600160a060020a03602082013516906040013561080e565b6101d76004803603606081101561023357600080fd5b50803590600160a060020a0360208201351690604001356109ec565b600060208181529281526040808220909352908152208054600190910154600160a060020a031682565b33600090815260208181526040808320848452909152812060010154600160a060020a03168015156102af576000915050610338565b83600160a060020a03166370a08231826040518263ffffffff1660e060020a0281526004018082600160a060020a0316600160a060020a0316815260200191505060206040518083038186803b15801561030857600080fd5b505afa15801561031c573d6000803e3d6000fd5b505050506040513d602081101561033257600080fd5b50519150505b92915050565b6000610348610b92565b503360009081526020818152604080832085845282529182902082518084019093528054835260010154600160a060020a03169082018190521515610391576000915050610338565b8060200151600160a060020a03166389ae1c906040518163ffffffff1660e060020a02815260040160206040518083038186803b1580156103d157600080fd5b505afa1580156103e5573d6000803e3d6000fd5b505050506040513d60208110156103fb57600080fd5b50518151604080517f4ee2cd7e000000000000000000000000000000000000000000000000000000008152600160a060020a038881166004830152602482019390935290519190921691634ee2cd7e916044808301926020929190829003018186803b15801561030857600080fd5b6000610474610b92565b503360009081526020818152604080832085845282529182902082518084019093528054835260010154600160a060020a031690820181905215156104bd5760009150506105bd565b8060200151600160a060020a03166389ae1c906040518163ffffffff1660e060020a02815260040160206040518083038186803b1580156104fd57600080fd5b505afa158015610511573d6000803e3d6000fd5b505050506040513d602081101561052757600080fd5b50518151604080517f981b24d0000000000000000000000000000000000000000000000000000000008152600481019290925251600160a060020a039092169163981b24d091602480820192602092909190829003018186803b15801561058d57600080fd5b505afa1580156105a1573d6000803e3d6000fd5b505050506040513d60208110156105b757600080fd5b50519150505b919050565b604080518082018252438152600160a060020a039384166020808301918252938516600090815280855283812096815295909352932092518355516001909201805473ffffffffffffffffffffffffffffffffffffffff191692909116919091179055565b336000908152602081815260408083208484529091528120600101548290600160a060020a031615156106bb57604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152601260248201527f6f6e6c7920566f74696e674d616368696e650000000000000000000000000000604482015290519081900360640190fd5b33600090815260208181526040808320868452909152902060010154600160a060020a03168015156106f1576000925050610805565b80600160a060020a0316638da5cb5b6040518163ffffffff1660e060020a02815260040160206040518083038186803b15801561072d57600080fd5b505afa158015610741573d6000803e3d6000fd5b505050506040513d602081101561075757600080fd5b5051604080517fb9a04cdd000000000000000000000000000000000000000000000000000000008152600160a060020a038a8116600483015289811660248301526044820189905284811660648301529151919092169163b9a04cdd9160848083019260209291908290030181600087803b1580156107d557600080fd5b505af11580156107e9573d6000803e3d6000fd5b505050506040513d60208110156107ff57600080fd5b50519250505b50949350505050565b336000908152602081815260408083208484529091528120600101548290600160a060020a031615156108a257604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152601260248201527f6f6e6c7920566f74696e674d616368696e650000000000000000000000000000604482015290519081900360640190fd5b33600090815260208181526040808320868452909152902060010154600160a060020a03168015156108d85760009250506109e4565b80600160a060020a0316638da5cb5b6040518163ffffffff1660e060020a02815260040160206040518083038186803b15801561091457600080fd5b505afa158015610928573d6000803e3d6000fd5b505050506040513d602081101561093e57600080fd5b5051604080517feaf994b200000000000000000000000000000000000000000000000000000000815260048101899052600160a060020a03888116602483015284811660448301529151919092169163eaf994b29160648083019260209291908290030181600087803b1580156109b457600080fd5b505af11580156109c8573d6000803e3d6000fd5b505050506040513d60208110156109de57600080fd5b50519250505b509392505050565b336000908152602081815260408083208484529091528120600101548290600160a060020a03161515610a8057604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152601260248201527f6f6e6c7920566f74696e674d616368696e650000000000000000000000000000604482015290519081900360640190fd5b33600090815260208181526040808320868452909152902060010154600160a060020a0316801515610ab65760009250506109e4565b80600160a060020a0316638da5cb5b6040518163ffffffff1660e060020a02815260040160206040518083038186803b158015610af257600080fd5b505afa158015610b06573d6000803e3d6000fd5b505050506040513d6020811015610b1c57600080fd5b5051604080517f6e94d27800000000000000000000000000000000000000000000000000000000815260048101899052600160a060020a038881166024830152848116604483015291519190921691636e94d2789160648083019260209291908290030181600087803b1580156109b457600080fd5b60408051808201909152600080825260208201529056fea165627a7a72305820783f2ad248a1f9f1527200c3513a0bb78cd2290545360d60f6b0ab2ee187a70a0029",
+  "sourceMap": "82:311:22:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;82:311:22;;;;;;;",
+  "deployedSourceMap": "82:311:22:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;82:311:22;;;;;;;;-1:-1:-1;;;82:311:22;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;598:73:45;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;;;;;;598:73:45;;;;;;;;:::i;:::-;;;;;;;-1:-1:-1;;;;;598:73:45;;;;;;;;;;;;;;;;2000:346;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;;;;;;2000:346:45;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;2693:345;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;;;;;;2693:345:45;;;;;;;;:::i;2352:335::-;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;2352:335:45;;:::i;154:237:22:-;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;154:237:22;;;-1:-1:-1;;;;;154:237:22;;;;;;;;;;;;:::i;:::-;;1510:484:45;;;;;;13:3:-1;8;5:12;2:2;;;30:1;27;20:12;2:2;-1:-1;;;;;;1510:484:45;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;678:410;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;678:410:45;;;-1:-1:-1;;;;;678:410:45;;;;;;;;;;:::i;1094:::-;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;1094:410:45;;;-1:-1:-1;;;;;1094:410:45;;;;;;;;;;:::i;598:73::-;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;598:73:45;;:::o;2000:346::-;2145:10;2096:7;2131:25;;;;;;;;;;;:38;;;;;;;;:45;;;-1:-1:-1;;;;;2131:45:45;2190:58;;2186:97;;;2271:1;2264:8;;;;;2186:97;2299:13;-1:-1:-1;;;;;2299:23:45;;2331:6;2299:40;;;;;-1:-1:-1;;;2299:40:45;;;;;;;-1:-1:-1;;;;;2299:40:45;-1:-1:-1;;;;;2299:40:45;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2299:40:45;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;2299:40:45;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;2299:40:45;;-1:-1:-1;;2000:346:45;;;;;:::o;2693:345::-;2774:7;2793:28;;:::i;:::-;-1:-1:-1;2838:10:45;2824:13;:25;;;;;;;;;;;:38;;;;;;;;;2793:69;;;;;;;;;;;;;;;-1:-1:-1;;;;;2793:69:45;;;;;;;2876:28;2872:67;;;2927:1;2920:8;;;;;2872:67;2955:8;:15;;;-1:-1:-1;;;;;2955:32:45;;:34;;;;;-1:-1:-1;;;2955:34:45;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2955:34:45;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;2955:34:45;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;2955:34:45;3010:20;;2955:76;;;;;;-1:-1:-1;;;;;2955:76:45;;;;;;;;;;;;;;;;:46;;;;;;;:76;;;;;:34;;:76;;;;;;;:46;:76;;;5:2:-1;;;;30:1;27;20:12;2352:335:45;2429:7;2448:28;;:::i;:::-;-1:-1:-1;2493:10:45;2479:13;:25;;;;;;;;;;;:38;;;;;;;;;2448:69;;;;;;;;;;;;;;;-1:-1:-1;;;;;2448:69:45;;;;;;;2531:28;2527:67;;;2582:1;2575:8;;;;;2527:67;2610:8;:15;;;-1:-1:-1;;;;;2610:32:45;;:34;;;;;-1:-1:-1;;;2610:34:45;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;2610:34:45;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;2610:34:45;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;2610:34:45;2659:20;;2610:70;;;;;;;;;;;;;;-1:-1:-1;;;;;2610:48:45;;;;;;:70;;;;;:34;;:70;;;;;;;;:48;:70;;;5:2:-1;;;;30:1;27;20:12;5:2;2610:70:45;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;2610:70:45;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;2610:70:45;;-1:-1:-1;;2352:335:45;;;;:::o;154:237:22:-;294:90;;;;;;;;333:12;294:90;;-1:-1:-1;;;;;294:90:22;;;;;;;;;;249:29;;;-1:-1:-1;249:29:22;;;;;;;;;:42;;;;;;;;;:135;;;;;;;;;;;-1:-1:-1;;249:135:22;;;;;;;;;;;154:237::o;1510:484:45:-;443:10;1715:4;429:25;;;;;;;;;;;:38;;;;;;;;:45;;;1690:11;;-1:-1:-1;;;;;429:45:45;:67;;421:98;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1765:10;1735:13;1751:25;;;;;;;;;;;:38;;;;;;;;:45;;;-1:-1:-1;;;;;1751:45:45;1810:19;;1806:62;;;1852:5;1845:12;;;;;1806:62;1904:6;-1:-1:-1;;;;;1904:12:45;;:14;;;;;-1:-1:-1;;;1904:14:45;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1904:14:45;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;1904:14:45;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;1904:14:45;1884:103;;;;;;-1:-1:-1;;;;;1884:103:45;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:57;;;;;;;:103;;;;;1904:14;;1884:103;;;;;;;-1:-1:-1;1884:57:45;:103;;;5:2:-1;;;;30:1;27;20:12;5:2;1884:103:45;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;1884:103:45;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;1884:103:45;;-1:-1:-1;;529:1:45;1510:484;;;;;;;:::o;678:410::-;443:10;822:4;429:25;;;;;;;;;;;:38;;;;;;;;:45;;;797:11;;-1:-1:-1;;;;;429:45:45;:67;;421:98;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;872:10;842:13;858:25;;;;;;;;;;;:38;;;;;;;;:45;;;-1:-1:-1;;;;;858:45:45;917:19;;913:62;;;959:5;952:12;;;;;913:62;1011:6;-1:-1:-1;;;;;1011:12:45;;:14;;;;;-1:-1:-1;;;1011:14:45;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1011:14:45;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;1011:14:45;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;1011:14:45;991:90;;;;;;;;;;;;-1:-1:-1;;;;;991:90:45;;;;;;;;;;;;;;;;:50;;;;;;;:90;;;;;1011:14;;991:90;;;;;;;-1:-1:-1;991:50:45;:90;;;5:2:-1;;;;30:1;27;20:12;5:2;991:90:45;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;991:90:45;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;991:90:45;;-1:-1:-1;;529:1:45;678:410;;;;;;:::o;1094:::-;443:10;1238:4;429:25;;;;;;;;;;;:38;;;;;;;;:45;;;1213:11;;-1:-1:-1;;;;;429:45:45;:67;;421:98;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1288:10;1258:13;1274:25;;;;;;;;;;;:38;;;;;;;;:45;;;-1:-1:-1;;;;;1274:45:45;1333:19;;1329:62;;;1375:5;1368:12;;;;;1329:62;1427:6;-1:-1:-1;;;;;1427:12:45;;:14;;;;;-1:-1:-1;;;1427:14:45;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1427:14:45;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;1427:14:45;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;1427:14:45;1407:90;;;;;;;;;;;;-1:-1:-1;;;;;1407:90:45;;;;;;;;;;;;;;;;:50;;;;;;;:90;;;;;1427:14;;1407:90;;;;;;;-1:-1:-1;1407:50:45;:90;;;5:2:-1;;;;30:1;27;20:12;82:311:22;;;;;;;;;;-1:-1:-1;82:311:22;;;;;;;;:::o",
+  "source": "pragma solidity ^0.5.4;\n\nimport \"../votingMachines/VotingMachineCallbacks.sol\";\n\n\ncontract ARCVotingMachineCallbacksMock is VotingMachineCallbacks {\n\n    function propose(bytes32 _proposalId, Avatar _avatar, address _votingMachine) public {\n        proposalsInfo[_votingMachine][_proposalId] = ProposalInfo({\n            blockNumber:block.number,\n            avatar:_avatar\n        });\n    }\n}\n",
+  "sourcePath": "/Users/oren/daostack/arc/contracts/test/ARCGenesisProtocolCallbacksMock.sol",
+  "ast": {
+    "absolutePath": "/Users/oren/daostack/arc/contracts/test/ARCGenesisProtocolCallbacksMock.sol",
+    "exportedSymbols": {
+      "ARCVotingMachineCallbacksMock": [
+        6405
+      ]
+    },
+    "id": 6406,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 6379,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:22"
+      },
+      {
+        "absolutePath": "/Users/oren/daostack/arc/contracts/votingMachines/VotingMachineCallbacks.sol",
+        "file": "../votingMachines/VotingMachineCallbacks.sol",
+        "id": 6380,
+        "nodeType": "ImportDirective",
+        "scope": 6406,
+        "sourceUnit": 12086,
+        "src": "25:54:22",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 6381,
+              "name": "VotingMachineCallbacks",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 12085,
+              "src": "124:22:22",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_VotingMachineCallbacks_$12085",
+                "typeString": "contract VotingMachineCallbacks"
+              }
+            },
+            "id": 6382,
+            "nodeType": "InheritanceSpecifier",
+            "src": "124:22:22"
+          }
+        ],
+        "contractDependencies": [
+          12085,
+          17466
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 6405,
+        "linearizedBaseContracts": [
+          6405,
+          12085,
+          17466
+        ],
+        "name": "ARCVotingMachineCallbacksMock",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 6403,
+              "nodeType": "Block",
+              "src": "239:152:22",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 6401,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "baseExpression": {
+                          "argumentTypes": null,
+                          "id": 6391,
+                          "name": "proposalsInfo",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 11825,
+                          "src": "249:13:22",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_bytes32_$_t_struct$_ProposalInfo_$11796_storage_$_$",
+                            "typeString": "mapping(address => mapping(bytes32 => struct VotingMachineCallbacks.ProposalInfo storage ref))"
+                          }
+                        },
+                        "id": 6394,
+                        "indexExpression": {
+                          "argumentTypes": null,
+                          "id": 6392,
+                          "name": "_votingMachine",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 6388,
+                          "src": "263:14:22",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "249:29:22",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_ProposalInfo_$11796_storage_$",
+                          "typeString": "mapping(bytes32 => struct VotingMachineCallbacks.ProposalInfo storage ref)"
+                        }
+                      },
+                      "id": 6395,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 6393,
+                        "name": "_proposalId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 6384,
+                        "src": "279:11:22",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "249:42:22",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_ProposalInfo_$11796_storage",
+                        "typeString": "struct VotingMachineCallbacks.ProposalInfo storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 6397,
+                            "name": "block",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 18409,
+                            "src": "333:5:22",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_block",
+                              "typeString": "block"
+                            }
+                          },
+                          "id": 6398,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "number",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "333:12:22",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "id": 6399,
+                          "name": "_avatar",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 6386,
+                          "src": "366:7:22",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_Avatar_$337",
+                            "typeString": "contract Avatar"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 6396,
+                        "name": "ProposalInfo",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 11796,
+                        "src": "294:12:22",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_struct$_ProposalInfo_$11796_storage_ptr_$",
+                          "typeString": "type(struct VotingMachineCallbacks.ProposalInfo storage pointer)"
+                        }
+                      },
+                      "id": 6400,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "structConstructorCall",
+                      "lValueRequested": false,
+                      "names": [
+                        "blockNumber",
+                        "avatar"
+                      ],
+                      "nodeType": "FunctionCall",
+                      "src": "294:90:22",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_ProposalInfo_$11796_memory",
+                        "typeString": "struct VotingMachineCallbacks.ProposalInfo memory"
+                      }
+                    },
+                    "src": "249:135:22",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_ProposalInfo_$11796_storage",
+                      "typeString": "struct VotingMachineCallbacks.ProposalInfo storage ref"
+                    }
+                  },
+                  "id": 6402,
+                  "nodeType": "ExpressionStatement",
+                  "src": "249:135:22"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 6404,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "propose",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 6389,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6384,
+                  "name": "_proposalId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6404,
+                  "src": "171:19:22",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 6383,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "171:7:22",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 6386,
+                  "name": "_avatar",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6404,
+                  "src": "192:14:22",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Avatar_$337",
+                    "typeString": "contract Avatar"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 6385,
+                    "name": "Avatar",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 337,
+                    "src": "192:6:22",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Avatar_$337",
+                      "typeString": "contract Avatar"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 6388,
+                  "name": "_votingMachine",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6404,
+                  "src": "208:22:22",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 6387,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "208:7:22",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "170:61:22"
+            },
+            "returnParameters": {
+              "id": 6390,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "239:0:22"
+            },
+            "scope": 6405,
+            "src": "154:237:22",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 6406,
+        "src": "82:311:22"
+      }
+    ],
+    "src": "0:394:22"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/oren/daostack/arc/contracts/test/ARCGenesisProtocolCallbacksMock.sol",
+    "exportedSymbols": {
+      "ARCVotingMachineCallbacksMock": [
+        6405
+      ]
+    },
+    "id": 6406,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 6379,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:22"
+      },
+      {
+        "absolutePath": "/Users/oren/daostack/arc/contracts/votingMachines/VotingMachineCallbacks.sol",
+        "file": "../votingMachines/VotingMachineCallbacks.sol",
+        "id": 6380,
+        "nodeType": "ImportDirective",
+        "scope": 6406,
+        "sourceUnit": 12086,
+        "src": "25:54:22",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 6381,
+              "name": "VotingMachineCallbacks",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 12085,
+              "src": "124:22:22",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_VotingMachineCallbacks_$12085",
+                "typeString": "contract VotingMachineCallbacks"
+              }
+            },
+            "id": 6382,
+            "nodeType": "InheritanceSpecifier",
+            "src": "124:22:22"
+          }
+        ],
+        "contractDependencies": [
+          12085,
+          17466
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 6405,
+        "linearizedBaseContracts": [
+          6405,
+          12085,
+          17466
+        ],
+        "name": "ARCVotingMachineCallbacksMock",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 6403,
+              "nodeType": "Block",
+              "src": "239:152:22",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 6401,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "baseExpression": {
+                          "argumentTypes": null,
+                          "id": 6391,
+                          "name": "proposalsInfo",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 11825,
+                          "src": "249:13:22",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_bytes32_$_t_struct$_ProposalInfo_$11796_storage_$_$",
+                            "typeString": "mapping(address => mapping(bytes32 => struct VotingMachineCallbacks.ProposalInfo storage ref))"
+                          }
+                        },
+                        "id": 6394,
+                        "indexExpression": {
+                          "argumentTypes": null,
+                          "id": 6392,
+                          "name": "_votingMachine",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 6388,
+                          "src": "263:14:22",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "249:29:22",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_ProposalInfo_$11796_storage_$",
+                          "typeString": "mapping(bytes32 => struct VotingMachineCallbacks.ProposalInfo storage ref)"
+                        }
+                      },
+                      "id": 6395,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 6393,
+                        "name": "_proposalId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 6384,
+                        "src": "279:11:22",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "249:42:22",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_ProposalInfo_$11796_storage",
+                        "typeString": "struct VotingMachineCallbacks.ProposalInfo storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 6397,
+                            "name": "block",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 18409,
+                            "src": "333:5:22",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_block",
+                              "typeString": "block"
+                            }
+                          },
+                          "id": 6398,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "number",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "333:12:22",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "id": 6399,
+                          "name": "_avatar",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 6386,
+                          "src": "366:7:22",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_Avatar_$337",
+                            "typeString": "contract Avatar"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 6396,
+                        "name": "ProposalInfo",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 11796,
+                        "src": "294:12:22",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_struct$_ProposalInfo_$11796_storage_ptr_$",
+                          "typeString": "type(struct VotingMachineCallbacks.ProposalInfo storage pointer)"
+                        }
+                      },
+                      "id": 6400,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "structConstructorCall",
+                      "lValueRequested": false,
+                      "names": [
+                        "blockNumber",
+                        "avatar"
+                      ],
+                      "nodeType": "FunctionCall",
+                      "src": "294:90:22",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_ProposalInfo_$11796_memory",
+                        "typeString": "struct VotingMachineCallbacks.ProposalInfo memory"
+                      }
+                    },
+                    "src": "249:135:22",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_ProposalInfo_$11796_storage",
+                      "typeString": "struct VotingMachineCallbacks.ProposalInfo storage ref"
+                    }
+                  },
+                  "id": 6402,
+                  "nodeType": "ExpressionStatement",
+                  "src": "249:135:22"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 6404,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "propose",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 6389,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6384,
+                  "name": "_proposalId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6404,
+                  "src": "171:19:22",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 6383,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "171:7:22",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 6386,
+                  "name": "_avatar",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6404,
+                  "src": "192:14:22",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Avatar_$337",
+                    "typeString": "contract Avatar"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 6385,
+                    "name": "Avatar",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 337,
+                    "src": "192:6:22",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Avatar_$337",
+                      "typeString": "contract Avatar"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 6388,
+                  "name": "_votingMachine",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 6404,
+                  "src": "208:22:22",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 6387,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "208:7:22",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "170:61:22"
+            },
+            "returnParameters": {
+              "id": 6390,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "239:0:22"
+            },
+            "scope": 6405,
+            "src": "154:237:22",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 6406,
+        "src": "82:311:22"
+      }
+    ],
+    "src": "0:394:22"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.4+commit.9549d8ff.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.9",
+  "updatedAt": "2019-07-22T12:12:20.003Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
