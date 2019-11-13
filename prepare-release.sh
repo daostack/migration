@@ -20,6 +20,14 @@ do
 if [ "$version" == "20" ] || [ "$version" == "26" ]; then
 continue
 fi
+echo "Installing Arc version $version..."
+npm install "@daostack/arc@0.0.1-rc.$version"
+# prune arc build
+echo "Pruning Arc build..."
+npm run prune-arc-build -- "$@"
+# generate abis
+echo "Generating abis..."
+npm run generate-abis
 # migrating Arc version to ganache
 echo "Migrating ganache..."
 npm run migrate -- --force --restart --arc-version "0.0.1-rc.$version" "$@"
