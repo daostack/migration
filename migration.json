@@ -267,23 +267,23 @@
       },
       "0.0.1-rc.32": {
         "GEN": "0xe78A0F7E598Cc8b0Bb87894B0F60dD2a88d6a8Ab",
-        "DAORegistry": "0x4b7284ac4714e27F9098c57F54306ed74454D05F",
-        "DAOTracker": "0xbc673F7aa2C02ee7d222259F61eB5a03FA5DEC67",
-        "ControllerCreator": "0x38d2AD56A9F589c2d6f0a330291F79BfF9B13C6d",
-        "DaoCreator": "0xffF3D978a59b8c5Dba74833C92622985E2d975B2",
-        "UController": "0x810832dFf9a7330a3f3bAD9E0E8f0DCA93A5cfB2",
-        "GenesisProtocol": "0x52538ef9Bf93187C0AcdCddA27610d0f81A17227",
-        "SchemeRegistrar": "0x978D9248Ae3E19888E0a86eb14AF53A4d9415070",
-        "UpgradeScheme": "0xAE168F3314BDaf82ABeCFc9799f5dCAfA05F25a0",
-        "GlobalConstraintRegistrar": "0xdBE36A7251e7564b4fE86c45EB1Fe8B7C832Cf54",
-        "ContributionReward": "0x753dE14163A81656a1c7112A3a521bb2924FF004",
-        "AbsoluteVote": "0x357C2673aF582b225D9ACbf057e7b56E0B53b622",
-        "QuorumVote": "0x4b1d2F1d0Efa26af0a8F8bB1Bca68601aB778021",
-        "TokenCapGC": "0xaE96738db1879c99Ebe8197Bb947EdBA4FE07d09",
-        "VoteInOrganizationScheme": "0x2378DcB1668568bEbBb2a0Bcff9542559A0efe8C",
-        "OrganizationRegister": "0xB053CcD75d70e1715600611011C7290D00A3f54d",
-        "Redeemer": "0x9149A56A976302231c2FcF29083e0a7B2720e6f1",
-        "UGenericScheme": "0x07FAC7699FcE8fFbbE9c159F7a8Df4d0eDb07f22"
+        "DAORegistry": "0x67B5656d60a809915323Bf2C40A8bEF15A152e3e",
+        "DAOTracker": "0x2612Af3A521c2df9EAF28422Ca335b04AdF3ac66",
+        "ControllerCreator": "0xA57B8a5584442B467b4689F1144D269d096A3daF",
+        "DaoCreator": "0x26b4AFb60d6C903165150C6F0AA14F8016bE4aec",
+        "UController": "0x630589690929E9cdEFDeF0734717a9eF3Ec7Fcfe",
+        "GenesisProtocol": "0x0E696947A06550DEf604e82C26fd9E493e576337",
+        "SchemeRegistrar": "0xDb56f2e9369E0D7bD191099125a3f6C370F8ed15",
+        "UpgradeScheme": "0xA94B7f0465E98609391C623d0560C5720a3f2D33",
+        "GlobalConstraintRegistrar": "0x6eD79Aa1c71FD7BdBC515EfdA3Bd4e26394435cC",
+        "ContributionReward": "0xb09bCc172050fBd4562da8b229Cf3E45Dc3045A6",
+        "AbsoluteVote": "0xFC628dd79137395F3C9744e33b1c5DE554D94882",
+        "QuorumVote": "0x5f8e26fAcC23FA4cbd87b8d9Dbbd33D5047abDE1",
+        "TokenCapGC": "0x21a59654176f2689d12E828B77a783072CD26680",
+        "VoteInOrganizationScheme": "0xD86C8F0327494034F60e25074420BcCF560D5610",
+        "OrganizationRegister": "0x4bf749ec68270027C5910220CEAB30Cc284c7BA2",
+        "Redeemer": "0xaD888d0Ade988EbEe74B8D4F39BF29a8d0fe8A8D",
+        "UGenericScheme": "0x7C728214be9A0049e6a86f2137ec61030D0AA964"
       }
     },
     "dao": {
@@ -491,21 +491,21 @@
         "arcVersion": "0.0.1-rc.31"
       },
       "0.0.1-rc.32": {
-        "name": "Corpulent Pancake",
-        "Avatar": "0x0d3B4393A6105ab549DE0c07b590245dbCf6C752",
-        "DAOToken": "0xCEE49e7eBB1A252A0194B19f1Eaa23a7641fCeFC",
-        "Reputation": "0xde51E943caC7450ADA3dC31A2b66D139aE57958b",
-        "Controller": "0x9B8dF962ac65Ff2C08803443Cdbf30B60c633DFC",
+        "name": "Withering Colorist",
+        "Avatar": "0x0734573916DD216c93e64840124b06ea2d0165cc",
+        "DAOToken": "0x28fD7412821557E8639783E194b1A563E35e095B",
+        "Reputation": "0x4B1C3bf101aB31ae7274eb50fFc06b5Bfe5D5d29",
+        "Controller": "0x98c84Ae91D084e36c3A6d4AED19A2dBfF656D46A",
         "Schemes": [
           {
             "name": "GenericScheme",
             "alias": "GenericSchemeAlias",
-            "address": "0xA03408EF1e3C6929e364Bd7db24F62D50842D7F3"
+            "address": "0x1c678f22F55e62f76820D744571c980c511495Ed"
           },
           {
             "name": "GenericScheme",
             "alias": "GenericSchemeAlias2",
-            "address": "0x72D9Ca808747b01e97c38C9Fc95E99FdC0a8Ab1b"
+            "address": "0x4a35d1434D34Ac7842381362924E6399ca63Da5A"
           }
         ],
         "arcVersion": "0.0.1-rc.32"
