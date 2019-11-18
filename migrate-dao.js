@@ -1,7 +1,7 @@
 const utils = require('./utils.js')
 const sanitize = require('./sanitize')
 
-async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migrationParams, logTx, previousMigration, customAbisLocation, restart, getState, setState, cleanState }) {
+async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migrationParams, logTx, previousMigration, customAbisLocation, restart, getState, setState, cleanState, sendTx }) {
   if (restart) {
     cleanState()
   }
@@ -26,7 +26,6 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
   spinner.start('Migrating DAO...')
   let contributionRewardParams, genericSchemeParams, schemeRegistrarParams, globalConstraintRegistrarParams, upgradeSchemeParams
   let tx
-  let nonce = await web3.eth.getTransactionCount(web3.eth.defaultAccount) - 1
 
   const {
     UController,
@@ -133,8 +132,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
         '0'
       )
 
-      tx = await forgeOrg.send({ nonce: ++nonce })
-
+      tx = (await sendTx(forgeOrg)).receipt
       await logTx(tx, 'Created new organization.')
     }
 
@@ -148,7 +146,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
     while (deploymentState.foundersToAddCount > 0) {
       spinner.start('Adding founders...')
       let currentBatchCount = deploymentState.foundersToAddCount < foundersBatchSize ? deploymentState.foundersToAddCount : foundersBatchSize
-      tx = await daoCreator.methods.addFounders(
+      tx = (await sendTx(daoCreator.methods.addFounders(
         deploymentState.Avatar,
         founderAddresses.slice(deploymentState.foundersAdditionCounter * foundersBatchSize + initFoundersBatchSize,
           deploymentState.foundersAdditionCounter * foundersBatchSize + currentBatchCount + initFoundersBatchSize),
@@ -156,7 +154,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
           deploymentState.foundersAdditionCounter * foundersBatchSize + currentBatchCount + initFoundersBatchSize),
         repDist.slice(deploymentState.foundersAdditionCounter * foundersBatchSize + initFoundersBatchSize,
           deploymentState.foundersAdditionCounter * foundersBatchSize + currentBatchCount + initFoundersBatchSize)
-      ).send({ nonce: ++nonce })
+      ))).receipt
       await logTx(tx, 'Finished adding founders.')
 
       deploymentState.foundersToAddCount -= foundersBatchSize
@@ -196,19 +194,18 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
   } else {
     if (deploymentState.DAOToken === undefined) {
       spinner.start('Deploying DAO Token')
-      daoToken = new web3.eth.Contract(
+      let { receipt, result } = await sendTx(new web3.eth.Contract(
         require(`./contracts/${arcVersion}/DAOToken.json`).abi,
         undefined,
         opts
       ).deploy({
         data: require(`./contracts/${arcVersion}/DAOToken.json`).bytecode,
         arguments: [tokenName, tokenSymbol, 0]
-      }).send({ nonce: ++nonce })
+      }))
+      daoToken = result
+      await logTx(receipt, `${daoToken.options.address} => DAOToken`)
 
-      tx = await new Promise(resolve => daoToken.on('receipt', resolve))
-      let c = await daoToken
-      await logTx(tx, `${c.options.address} => DAOToken`)
-      deploymentState.DAOToken = c.options.address
+      deploymentState.DAOToken = daoToken.options.address
       setState(deploymentState, network)
     }
     daoToken = new web3.eth.Contract(
@@ -219,18 +216,17 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
 
     if (deploymentState.Reputation === undefined) {
       spinner.start('Deploying Reputation')
-      reputation = new web3.eth.Contract(
+      let { receipt, result } = await sendTx(new web3.eth.Contract(
         require(`./contracts/${arcVersion}/Reputation.json`).abi,
         undefined,
         opts
       ).deploy({
         data: require(`./contracts/${arcVersion}/Reputation.json`).bytecode
-      }).send({ nonce: ++nonce })
+      }))
+      reputation = result
+      await logTx(receipt, `${reputation.options.address} => Reputation`)
 
-      tx = await new Promise(resolve => reputation.on('receipt', resolve))
-      let c = await reputation
-      await logTx(tx, `${c.options.address} => Reputation`)
-      deploymentState.Reputation = c.options.address
+      deploymentState.Reputation = reputation.options.address
       setState(deploymentState, network)
     }
     reputation = new web3.eth.Contract(
@@ -241,19 +237,18 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
 
     if (deploymentState.Avatar === undefined) {
       spinner.start('Deploying Avatar.')
-      avatar = new web3.eth.Contract(
+      let { receipt, result } = await sendTx(new web3.eth.Contract(
         require(`./contracts/${arcVersion}/Avatar.json`).abi,
         undefined,
         opts
       ).deploy({
         data: require(`./contracts/${arcVersion}/Avatar.json`).bytecode,
         arguments: [orgName, daoToken.options.address, reputation.options.address]
-      }).send({ nonce: ++nonce })
+      }))
+      avatar = result
+      await logTx(receipt, `${avatar.options.address} => Avatar`)
 
-      tx = await new Promise(resolve => avatar.on('receipt', resolve))
-      let c = await avatar
-      await logTx(tx, `${c.options.address} => Avatar`)
-      deploymentState.Avatar = c.options.address
+      deploymentState.Avatar = avatar.options.address
       setState(deploymentState, network)
     }
     avatar = new web3.eth.Contract(
@@ -274,7 +269,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
       let founder = founders[deploymentState.foundersReputationMintedCounter]
 
       if (founder.reputation > 0) {
-        tx = await reputation.methods.mint(founder.address, web3.utils.toWei(`${founder.reputation}`)).send({ nonce: ++nonce })
+        tx = (await sendTx(reputation.methods.mint(founder.address, web3.utils.toWei(`${founder.reputation}`)))).receipt
         await logTx(tx, `Minted ${founder.reputation} reputation to ${founder.address}`)
       }
     }
@@ -292,7 +287,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
       let founder = founders[deploymentState.foundersTokenMintedCounter]
 
       if (founder.tokens > 0) {
-        tx = await daoToken.methods.mint(founder.address, web3.utils.toWei(`${founder.tokens}`)).send({ nonce: ++nonce })
+        tx = (await sendTx(daoToken.methods.mint(founder.address, web3.utils.toWei(`${founder.tokens}`)))).receipt
         await logTx(tx, `Minted ${founder.tokens} tokens to ${founder.address}`)
       }
     }
@@ -305,20 +300,18 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
     } else {
       if (deploymentState.Controller === undefined) {
         spinner.start('Deploying Controller')
-        controller = new web3.eth.Contract(
+        let { receipt, result } = await sendTx(new web3.eth.Contract(
           require(`./contracts/${arcVersion}/Controller.json`).abi,
           undefined,
           opts
         ).deploy({
           data: require(`./contracts/${arcVersion}/Controller.json`).bytecode,
           arguments: [avatar.options.address]
-        }).send({ nonce: ++nonce })
+        }))
+        controller = result
+        await logTx(receipt, `${controller.options.address} => Controller`)
 
-        tx = await new Promise(resolve => controller.on('receipt', resolve))
-        let c = await controller
-        await logTx(tx, `${c.options.address} => Controller`)
-
-        deploymentState.Controller = c.options.address
+        deploymentState.Controller = controller.options.address
         setState(deploymentState, network)
       }
       controller = new web3.eth.Contract(
@@ -335,10 +328,9 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
         opts
       )
       spinner.start('Registering DAO in DAOTracker')
-      tx = (Number(arcVersion.slice(-2)) >= 32
+      tx = (await sendTx((Number(arcVersion.slice(-2)) >= 32
         ? await daoTracker.methods.track(avatar.options.address, deploymentState.Controller, arcVersion)
-        : await daoTracker.methods.track(avatar.options.address, deploymentState.Controller))
-        .send({ nonce: ++nonce })
+        : await daoTracker.methods.track(avatar.options.address, deploymentState.Controller)))).receipt
       await logTx(tx, 'Finished Registering DAO in DAOTracker')
       deploymentState.trackedDAO = true
       setState(deploymentState, network)
@@ -346,7 +338,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
 
     if (deploymentState.transferredAvatarOwnership !== true) {
       spinner.start('Transfer Avatar to Controller ownership')
-      tx = await avatar.methods.transferOwnership(deploymentState.Controller).send({ nonce: ++nonce })
+      tx = (await sendTx(avatar.methods.transferOwnership(deploymentState.Controller))).receipt
       await logTx(tx, 'Finished transferring Avatar to Controller ownership')
       deploymentState.transferredAvatarOwnership = true
       setState(deploymentState, network)
@@ -354,7 +346,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
 
     if (deploymentState.transferredReputationOwnership !== true) {
       spinner.start('Transfer Reputation to Controller ownership')
-      tx = await reputation.methods.transferOwnership(deploymentState.Controller).send({ nonce: ++nonce })
+      tx = (await sendTx(reputation.methods.transferOwnership(deploymentState.Controller))).receipt
       await logTx(tx, 'Finished transferring Reputation to Controller ownership')
       deploymentState.transferredReputationOwnership = true
       setState(deploymentState, network)
@@ -362,7 +354,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
 
     if (deploymentState.transferredDAOTokenOwnership !== true) {
       spinner.start('Transfer DAOToken to Controller ownership')
-      tx = await daoToken.methods.transferOwnership(deploymentState.Controller).send({ nonce: ++nonce })
+      tx = (await sendTx(daoToken.methods.transferOwnership(deploymentState.Controller))).receipt
       await logTx(tx, 'Finished transferring DAOToken to Controller ownership')
       deploymentState.transferredDAOTokenOwnership = true
       setState(deploymentState, network)
@@ -370,7 +362,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
 
     if (migrationParams.useUController && deploymentState.registeredAvatarToUController !== true) {
       spinner.start('Register Avatar to UController')
-      tx = await controller.methods.newOrganization(avatar.options.address).send({ nonce: ++nonce })
+      tx = (await sendTx(controller.methods.newOrganization(avatar.options.address))).receipt
       await logTx(tx, 'Finished registerring Avatar')
       deploymentState.registeredAvatarToUController = true
       setState(deploymentState, network)
@@ -386,7 +378,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
 
     if (deploymentState.proposedRegisteringDAO !== true) {
       spinner.start('Proposing DAO in DAORegistry')
-      tx = await daoRegistry.methods.propose(avatar.options.address).send({ nonce: ++nonce })
+      tx = (await sendTx(daoRegistry.methods.propose(avatar.options.address))).receipt
       deploymentState.proposedRegisteringDAO = true
       setState(deploymentState, network)
       await logTx(tx, 'Finished Proposing DAO in DAORegistry')
@@ -394,7 +386,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
     if (deploymentState.registeredRegisteringDAO !== true) {
       spinner.start('Registering DAO in DAORegistry')
       let DAOname = await avatar.methods.orgName().call()
-      tx = await daoRegistry.methods.register(avatar.options.address, DAOname).send({ nonce: ++nonce })
+      tx = (await sendTx(daoRegistry.methods.register(avatar.options.address, DAOname))).receipt
       deploymentState.registeredRegisteringDAO = true
       setState(deploymentState, network)
       await logTx(tx, 'Finished Registering DAO in DAORegistry')
@@ -443,7 +435,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
       let votingMachinesParams = await genesisProtocolSetParams.call()
       const votingMachineCheckParams = await genesisProtocol.methods.parameters(votingMachinesParams).call()
       if (votingMachineCheckParams.minimumDaoBounty === 0) {
-        tx = await genesisProtocolSetParams.send({ nonce: ++nonce })
+        tx = (await sendTx(genesisProtocolSetParams)).receipt
         await logTx(tx,
           'GenesisProtocol parameters set. | Params Hash: ' +
           votingMachinesParams + '\nParameters:\n' +
@@ -484,7 +476,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
 
       const schemeRegistrarCheckParams = await schemeRegistrar.methods.parameters(schemeRegistrarParams).call()
       if (schemeRegistrarCheckParams.intVote === '0x0000000000000000000000000000000000000000') {
-        tx = await schemeRegistrarSetParams.send({ nonce: ++nonce })
+        tx = (await sendTx(schemeRegistrarSetParams)).receipt
         await logTx(tx,
           'Scheme Registrar parameters set. | Params Hash: ' +
           schemeRegistrarParams + '\nParameters:\n' +
@@ -522,7 +514,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
 
       const contributionRewardCheckParams = await contributionReward.methods.parameters(contributionRewardParams).call()
       if (contributionRewardCheckParams.intVote === '0x0000000000000000000000000000000000000000') {
-        tx = await contributionRewardSetParams.send({ nonce: ++nonce })
+        tx = (await sendTx(contributionRewardSetParams)).receipt
         await logTx(tx,
           'Contribution Reward parameters set. | Params Hash: ' +
           contributionRewardParams + '\nParameters:' +
@@ -559,7 +551,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
 
       const genericSchemeCheckParams = await genericScheme.methods.parameters(genericSchemeParams).call()
       if (genericSchemeCheckParams.intVote === '0x0000000000000000000000000000000000000000') {
-        tx = await genericSchemeSetParams.send({ nonce: ++nonce })
+        tx = (await sendTx(genericSchemeSetParams)).receipt
         await logTx(tx,
           'Generic Scheme parameters set. | Params Hash: ' +
           genericSchemeParams + '\nParameters:\n' +
@@ -599,7 +591,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
 
       const globalConstraintRegistrarCheckParams = await globalConstraintRegistrar.methods.parameters(globalConstraintRegistrarParams).call()
       if (globalConstraintRegistrarCheckParams.intVote === '0x0000000000000000000000000000000000000000') {
-        tx = await globalConstraintRegistrarSetParams.send({ nonce: ++nonce })
+        tx = (await sendTx(globalConstraintRegistrarSetParams)).receipt
         await logTx(tx,
           'Global Constraints Registrar parameters set. | Params Hash: ' +
           globalConstraintRegistrarParams + '\nParameters:\n' +
@@ -639,7 +631,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
 
       const upgradeSchemeCheckParams = await upgradeScheme.methods.parameters(upgradeSchemeParams).call()
       if (upgradeSchemeCheckParams.intVote === '0x0000000000000000000000000000000000000000') {
-        tx = await upgradeSchemeSetParams.send({ nonce: ++nonce })
+        tx = (await sendTx(upgradeSchemeSetParams)).receipt
         await logTx(tx,
           'Upgrade Scheme parameters set. | Params Hash: ' +
           upgradeSchemeParams + '\nParameters:\n' +
@@ -677,17 +669,14 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
       }
       let abi = contractJson.abi
       let bytecode = contractJson.bytecode
-      let standAloneContract
 
       spinner.start(`Migrating ${standAlone.name}...`)
       const StandAloneContract = new web3.eth.Contract(abi, undefined, opts)
-      const standAloneDeployedContract = StandAloneContract.deploy({
+      const { receipt, result: standAloneContract } = await sendTx(StandAloneContract.deploy({
         data: bytecode,
         arguments: null
-      }).send({ nonce: ++nonce })
-      tx = await new Promise(resolve => standAloneDeployedContract.on('receipt', resolve))
-      standAloneContract = await standAloneDeployedContract
-      await logTx(tx, `${standAloneContract.options.address} => ${standAlone.name}`)
+      }))
+      await logTx(receipt, `${standAloneContract.options.address} => ${standAlone.name}`)
 
       if (standAlone.params !== undefined) {
         spinner.start(`Initializing ${standAlone.name}...`)
@@ -701,7 +690,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
         }
         const contractSetParams = standAloneContract.methods.initialize(...contractParams)
 
-        tx = await contractSetParams.send({ nonce: ++nonce })
+        tx = (await sendTx(contractSetParams)).receipt
         await logTx(tx, `${standAlone.name} initialized.`)
       }
 
@@ -720,7 +709,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
           }
           const functionCall = standAloneContract.methods[standAlone.runFunctions[i].functionName](...functionParams)
 
-          tx = await functionCall.send({ nonce: ++nonce })
+          tx = (await sendTx(functionCall)).receipt
           await logTx(tx, `${standAlone.name} called function ${standAlone.runFunctions[i].functionName}.`)
         }
       }
@@ -754,13 +743,12 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
       if (customeScheme.address === undefined) {
         spinner.start(`Migrating ${customeScheme.name}...`)
         const SchemeContract = new web3.eth.Contract(abi, undefined, opts)
-        const schemeDeployedContract = SchemeContract.deploy({
+        let { receipt, result } = await sendTx(SchemeContract.deploy({
           data: bytecode,
           arguments: null
-        }).send({ nonce: ++nonce })
-        tx = await new Promise(resolve => schemeDeployedContract.on('receipt', resolve))
-        schemeContract = await schemeDeployedContract
-        await logTx(tx, `${schemeContract.options.address} => ${customeScheme.name}`)
+        }))
+        schemeContract = result
+        await logTx(receipt, `${schemeContract.options.address} => ${customeScheme.name}`)
       } else {
         schemeContract = new web3.eth.Contract(abi, customeScheme.address, opts)
       }
@@ -780,7 +768,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
         }
         const schemeSetParams = schemeContract.methods.setParameters(...schemeParams)
         schemeParamsHash = await schemeSetParams.call()
-        tx = await schemeSetParams.send({ nonce: ++nonce })
+        tx = (await sendTx(schemeSetParams)).receipt
         await logTx(tx,
           customeScheme.name + ' parameters set. | Params Hash: ' +
           schemeParamsHash + '\nParameters:\n' +
@@ -807,7 +795,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
         if (schemeParamsHash.Result === undefined) {
           schemeParamsHash = '0x0000000000000000000000000000000000000000000000000000000000000000'
         }
-        tx = await schemeSetParams.send({ nonce: ++nonce })
+        tx = (await sendTx(schemeSetParams)).receipt
         await logTx(tx, `${customeScheme.name} initialized.`)
       } else {
         continue
@@ -827,7 +815,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
   if (deploymentState.schemesSet !== true) {
     if (migrationParams.useDaoCreator === true) {
       spinner.start('Setting DAO schemes...')
-      tx = await daoCreator.methods.setSchemes(avatar.options.address, deploymentState.schemes, deploymentState.params, deploymentState.permissions, 'metaData').send({ nonce: ++nonce })
+      tx = (await sendTx(daoCreator.methods.setSchemes(avatar.options.address, deploymentState.schemes, deploymentState.params, deploymentState.permissions, 'metaData'))).receipt
       await logTx(tx, 'DAO schemes set.')
       deploymentState.schemesSet = true
       setState(deploymentState, network)
@@ -837,7 +825,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
         deploymentState.schemesSetCounter = i
         setState(deploymentState, network)
         spinner.start('Registering ' + deploymentState.schemeNames[i] + ' to the DAO...')
-        tx = await controller.methods.registerScheme(deploymentState.schemes[i], deploymentState.params[i], deploymentState.permissions[i], avatar.options.address).send({ nonce: ++nonce })
+        tx = (await sendTx(controller.methods.registerScheme(deploymentState.schemes[i], deploymentState.params[i], deploymentState.permissions[i], avatar.options.address))).receipt
         await logTx(tx, deploymentState.schemeNames[i] + ' was successfully registered to the DAO.')
       }
       deploymentState.schemesSet = true
