@@ -1,7 +1,7 @@
 const utils = require('./utils.js')
 const sanitize = require('./sanitize')
 
-async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migrationParams, logTx, previousMigration, customAbisLocation, restart, getState, setState, cleanState }) {
+async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migrationParams, logTx, previousMigration, customAbisLocation, restart, getState, setState, cleanState, getArcVersionNumber }) {
   const network = await web3.eth.net.getNetworkType()
   if (restart) {
     cleanState(network)
@@ -67,8 +67,8 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
   )
 
   const genericScheme = new web3.eth.Contract(
-    Number(arcVersion.slice(-2)) >= 24 ? require(`./contracts/${arcVersion}/UGenericScheme.json`).abi : require(`./contracts/${arcVersion}/GenericScheme.json`).abi,
-    Number(arcVersion.slice(-2)) >= 24 ? UGenericScheme : GenericScheme,
+    getArcVersionNumber(arcVersion) >= 24 ? require(`./contracts/${arcVersion}/UGenericScheme.json`).abi : require(`./contracts/${arcVersion}/GenericScheme.json`).abi,
+    getArcVersionNumber(arcVersion) >= 24 ? UGenericScheme : GenericScheme,
     opts
   )
 
@@ -328,14 +328,14 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
       )
     }
 
-    if (migrationParams.noTrack !== true && Number(arcVersion.slice(-2)) >= 29 && deploymentState.trackedDAO !== true) {
+    if (migrationParams.noTrack !== true && getArcVersionNumber(arcVersion) >= 29 && deploymentState.trackedDAO !== true) {
       const daoTracker = new web3.eth.Contract(
         require(`./contracts/${arcVersion}/DAOTracker.json`).abi,
         DAOTracker,
         opts
       )
       spinner.start('Registering DAO in DAOTracker')
-      tx = (Number(arcVersion.slice(-2)) >= 32
+      tx = (getArcVersionNumber(arcVersion) >= 32
         ? await daoTracker.methods.track(avatar.options.address, deploymentState.Controller, arcVersion)
         : await daoTracker.methods.track(avatar.options.address, deploymentState.Controller))
         .send({ nonce: ++nonce })
@@ -568,7 +568,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
       }
 
       deploymentState.schemeNames.push('Generic Scheme')
-      deploymentState.schemes.push(Number(arcVersion.slice(-2)) >= 24 ? UGenericScheme : GenericScheme)
+      deploymentState.schemes.push(getArcVersionNumber(arcVersion) >= 24 ? UGenericScheme : GenericScheme)
       deploymentState.params.push(genericSchemeParams)
       deploymentState.permissions.push('0x00000010')
       setState(deploymentState, network)

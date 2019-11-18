@@ -173,6 +173,9 @@ const wrapCommand = fn => async options => {
           console.error(err)
         }
       }
+    },
+    getArcVersionNumber: function getArcVersionNumber (arcVersion) {
+      return Number(arcVersion.slice(-2))
     }
   })
 
