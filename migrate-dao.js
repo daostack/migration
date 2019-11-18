@@ -408,51 +408,52 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
     deploymentState.permissions = []
     deploymentState.votingMachinesParams = []
   }
-
-  if (deploymentState.registeredGenesisProtocolParamsCount === undefined) {
-    deploymentState.registeredGenesisProtocolParamsCount = 0
-  }
-  for (deploymentState.registeredGenesisProtocolParamsCount;
-    deploymentState.registeredGenesisProtocolParamsCount < migrationParams.VotingMachinesParams.length;
-    deploymentState.registeredGenesisProtocolParamsCount++) {
-    spinner.start('Setting GenesisProtocol parameters...')
-    setState(deploymentState, network)
-    if (migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].votingParamsHash !== undefined) {
-      deploymentState.votingMachinesParams.push(migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].votingParamsHash)
+  if (migrationParams.VotingMachinesParams !== undefined && migrationParams.VotingMachinesParams.length > 0) {
+    if (deploymentState.registeredGenesisProtocolParamsCount === undefined) {
+      deploymentState.registeredGenesisProtocolParamsCount = 0
+    }
+    for (deploymentState.registeredGenesisProtocolParamsCount;
+      deploymentState.registeredGenesisProtocolParamsCount < migrationParams.VotingMachinesParams.length;
+      deploymentState.registeredGenesisProtocolParamsCount++) {
+      spinner.start('Setting GenesisProtocol parameters...')
       setState(deploymentState, network)
-      continue
-    }
-    let parameters = [
-      [
-        migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].queuedVoteRequiredPercentage.toString(),
-        migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].queuedVotePeriodLimit.toString(),
-        migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].boostedVotePeriodLimit.toString(),
-        migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].preBoostedVotePeriodLimit.toString(),
-        migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].thresholdConst.toString(),
-        migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].quietEndingPeriod.toString(),
-        web3.utils.toWei(migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].proposingRepReward.toString()),
-        migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].votersReputationLossRatio.toString(),
-        web3.utils.toWei(migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].minimumDaoBounty.toString()),
-        migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].daoBountyConst.toString(),
-        migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].activationTime.toString()
-      ],
-      migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].voteOnBehalf
-    ]
-    const genesisProtocolSetParams = genesisProtocol.methods.setParameters(...parameters)
+      if (migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].votingParamsHash !== undefined) {
+        deploymentState.votingMachinesParams.push(migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].votingParamsHash)
+        setState(deploymentState, network)
+        continue
+      }
+      let parameters = [
+        [
+          migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].queuedVoteRequiredPercentage.toString(),
+          migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].queuedVotePeriodLimit.toString(),
+          migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].boostedVotePeriodLimit.toString(),
+          migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].preBoostedVotePeriodLimit.toString(),
+          migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].thresholdConst.toString(),
+          migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].quietEndingPeriod.toString(),
+          web3.utils.toWei(migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].proposingRepReward.toString()),
+          migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].votersReputationLossRatio.toString(),
+          web3.utils.toWei(migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].minimumDaoBounty.toString()),
+          migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].daoBountyConst.toString(),
+          migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].activationTime.toString()
+        ],
+        migrationParams.VotingMachinesParams[deploymentState.registeredGenesisProtocolParamsCount].voteOnBehalf
+      ]
+      const genesisProtocolSetParams = genesisProtocol.methods.setParameters(...parameters)
 
-    let votingMachinesParams = await genesisProtocolSetParams.call()
-    const votingMachineCheckParams = await genesisProtocol.methods.parameters(votingMachinesParams).call()
-    if (votingMachineCheckParams.minimumDaoBounty === 0) {
-      tx = await genesisProtocolSetParams.send({ nonce: ++nonce })
-      await logTx(tx,
-        'GenesisProtocol parameters set. | Params Hash: ' +
-        votingMachinesParams + '\nParameters:\n' +
-        parameters.toString().replace(/,/g, ',\n')
-      )
-    }
+      let votingMachinesParams = await genesisProtocolSetParams.call()
+      const votingMachineCheckParams = await genesisProtocol.methods.parameters(votingMachinesParams).call()
+      if (votingMachineCheckParams.minimumDaoBounty === 0) {
+        tx = await genesisProtocolSetParams.send({ nonce: ++nonce })
+        await logTx(tx,
+          'GenesisProtocol parameters set. | Params Hash: ' +
+          votingMachinesParams + '\nParameters:\n' +
+          parameters.toString().replace(/,/g, ',\n')
+        )
+      }
 
-    deploymentState.votingMachinesParams.push(votingMachinesParams)
-    setState(deploymentState, network)
+      deploymentState.votingMachinesParams.push(votingMachinesParams)
+      setState(deploymentState, network)
+    }
   }
   deploymentState.registeredGenesisProtocolParamsCount++
   setState(deploymentState, network)
