@@ -377,6 +377,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
         setState(deploymentState, network)
         await logTx(tx, 'Finished Registering DAO in DAORegistry')
       }
+    }
   }
 
   if (deploymentState.schemeNames === undefined) {
