@@ -377,7 +377,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
     }
   }
 
-  if (network === 'private') {
+  if (migrationParams.proposeToRegistry !== false) {
     const daoRegistry = new web3.eth.Contract(
       require(`./contracts/${arcVersion}/DAORegistry.json`).abi,
       DAORegistry,
@@ -391,13 +391,15 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
       setState(deploymentState, network)
       await logTx(tx, 'Finished Proposing DAO in DAORegistry')
     }
-    if (deploymentState.registeredRegisteringDAO !== true) {
-      spinner.start('Registering DAO in DAORegistry')
-      let DAOname = await avatar.methods.orgName().call()
-      tx = await daoRegistry.methods.register(avatar.options.address, DAOname).send({ nonce: ++nonce })
-      deploymentState.registeredRegisteringDAO = true
-      setState(deploymentState, network)
-      await logTx(tx, 'Finished Registering DAO in DAORegistry')
+    if (network === 'private') {
+      if (deploymentState.registeredRegisteringDAO !== true) {
+        spinner.start('Registering DAO in DAORegistry')
+        let DAOname = await avatar.methods.orgName().call()
+        tx = await daoRegistry.methods.register(avatar.options.address, DAOname).send({ nonce: ++nonce })
+        deploymentState.registeredRegisteringDAO = true
+        setState(deploymentState, network)
+        await logTx(tx, 'Finished Registering DAO in DAORegistry')
+      }
     }
   }
 
