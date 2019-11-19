@@ -130,7 +130,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
         '0'
       )
 
-      tx = (await sendTx(forgeOrg), 'Creating a new organization...').receipt
+      tx = (await sendTx(forgeOrg, 'Creating a new organization...')).receipt
       await logTx(tx, 'Created new organization.')
     }
 
