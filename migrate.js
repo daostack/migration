@@ -9,22 +9,19 @@ const HDWallet = require('hdwallet-accounts')
 const moment = require('moment')
 const migrateBase = require('./migrate-base')
 const migrateDAO = require('./migrate-dao')
-const migrateDemoTest = require('./migrate-demo-test')
 const path = require('path')
 
 async function migrate (opts) {
   const base = await migrateBase(opts)
   const dao = await migrateDAO({ ...opts, previousMigration: { ...opts.previousMigration, ...base } })
-  const demo = await migrateDemoTest({ ...opts, previousMigration: { ...opts.previousMigration, ...base } })
   return {
     ...base,
-    ...dao,
-    ...demo
+    ...dao
   }
 }
 
 const defaults = {
-  arcVersion: require('./package.json').dependencies['@daostack/arc'],
+  arcVersion: require('./package.json').dependencies['arc-experimental'],
   quiet: false,
   disableconfs: false,
   force: false,
@@ -175,7 +172,7 @@ const wrapCommand = fn => async options => {
       }
     },
     getArcVersionNumber: function getArcVersionNumber (arcVersion) {
-      return Number(arcVersion.slice(-2))
+      return Number(arcVersion.slice(-1))
     },
     sendTx: async function sendTx (tx, msg) {
       spinner.start(msg)
@@ -311,10 +308,9 @@ function cli () {
       describe: 'path to the folder containing the truffle build data for custom schemes',
       default: defaults.customAbisLocation
     })
-    .command('$0', 'Migrate base contracts and an example DAO', yargs => yargs, wrapCommand(migrate))
-    .command('base', 'Migrate an example DAO', yargs => yargs, wrapCommand(migrateBase))
-    .command('dao', 'Migrate base contracts', yargs => yargs, wrapCommand(migrateDAO))
-    .command('demo', 'Migrate base contracts', yargs => yargs, wrapCommand(migrateDemoTest))
+    .command('$0', 'Migrate Arc package, base contracts and an example DAO', yargs => yargs, wrapCommand(migrate))
+    .command('base', 'Migrate base contracts', yargs => yargs, wrapCommand(migrateBase))
+    .command('dao', 'Migrate an example DAO', yargs => yargs, wrapCommand(migrateDAO))
     .showHelpOnFail(false)
     .completion()
     .wrap(120)
@@ -329,7 +325,6 @@ if (require.main === module) {
     migrate: wrapCommand(migrate),
     migrateBase: wrapCommand(migrateBase),
     migrateDAO: wrapCommand(migrateDAO),
-    migrateDemoTest: wrapCommand(migrateDemoTest),
     migrateScript: wrapCommand,
     cli
   }
