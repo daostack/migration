@@ -59,12 +59,31 @@ async function migrateBase ({ arcVersion, web3, spinner, confirm, opts, logTx, p
   // OpenZepplin App and Package setup
   let packageName = 'DAOstack'
 
-  const Package = await deploy(require(`./contracts/${arcVersion}/Package.json`))
+  let Package = await deploy(require(`./contracts/${arcVersion}/Package.json`))
   let packageContract = new web3.eth.Contract(
     require(`./contracts/${arcVersion}/Package.json`).abi,
     Package,
     opts
   )
+
+  if (await packageContract.methods.hasVersion([0, 0, getArcVersionNumber(arcVersion)]).call()) {
+    if (!(
+      await confirm(
+        `Package ${packageName} version 0.0.${getArcVersionNumber(arcVersion)} already exists. Would you like to deploy a new Package contract?`,
+        false
+      )
+    )) {
+      return
+    }
+    delete previousMigration.package
+    Package = await deploy(require(`./contracts/${arcVersion}/Package.json`))
+    packageContract = new web3.eth.Contract(
+      require(`./contracts/${arcVersion}/Package.json`).abi,
+      Package,
+      opts
+    )
+  }
+
   const ImplementationDirectory = await deploy(require(`./contracts/${arcVersion}/ImplementationDirectory.json`))
   let implementationDirectory = new web3.eth.Contract(
     require(`./contracts/${arcVersion}/ImplementationDirectory.json`).abi,
@@ -77,9 +96,9 @@ async function migrateBase ({ arcVersion, web3, spinner, confirm, opts, logTx, p
       [0, 0, getArcVersionNumber(arcVersion)],
       ImplementationDirectory,
       web3.utils.hexToBytes(web3.utils.utf8ToHex(arcURL))
-    ), `Adding version ${[0, 0, getArcVersionNumber(arcVersion)]} to ${packageName} Package`)
+    ), `Adding version 0.0.${getArcVersionNumber(arcVersion)} to ${packageName} Package`)
   ).receipt
-  await logTx(tx, `Added version ${[0, 0, getArcVersionNumber(arcVersion)]} to ${packageName} Package`)
+  await logTx(tx, `Added version 0.0.${getArcVersionNumber(arcVersion)} to ${packageName} Package`)
   let App = await deploy(require(`./contracts/${arcVersion}/App.json`))
   let app = new web3.eth.Contract(
     require(`./contracts/${arcVersion}/App.json`).abi,
@@ -89,8 +108,8 @@ async function migrateBase ({ arcVersion, web3, spinner, confirm, opts, logTx, p
 
   tx = (await sendTx(
     app.methods.setPackage(packageName, Package, [0, 0, getArcVersionNumber(arcVersion)]),
-    `Setting App package to version ${[0, 0, getArcVersionNumber(arcVersion)]}`)).receipt
-  await logTx(tx, `App package version has been set to ${[0, 0, getArcVersionNumber(arcVersion)]}`)
+    `Setting App package to version 0.0.${getArcVersionNumber(arcVersion)}`)).receipt
+  await logTx(tx, `App package version has been set to 0.0.${getArcVersionNumber(arcVersion)}`)
 
   // Setup the GEN token contract
   let GENToken = '0x543Ff227F64Aa17eA132Bf9886cAb5DB55DCAddf'
