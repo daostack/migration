@@ -1,6 +1,6 @@
 const glob = require('glob')
 
-async function migrateBase ({ arcVersion, web3, spinner, confirm, opts, logTx, previousMigration, getArcVersionNumber, sendTx }) {
+async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMigration, getArcVersionNumber, sendTx }) {
   let tx
   if (!(await confirm('About to migrate arc package. Continue?'))) {
     return
@@ -117,20 +117,22 @@ async function migrateBase ({ arcVersion, web3, spinner, confirm, opts, logTx, p
   if (network === 'private') {
     GENToken = await deploy(require(`./contracts/${arcVersion}/DAOToken.json`))
 
-    const GENTokenContract = await new web3.eth.Contract(
+    const GENTokenContract = new web3.eth.Contract(
       require(`./contracts/${arcVersion}/DAOToken.json`).abi,
       GENToken,
       opts
     )
 
-    tx = (
-      await sendTx(GENTokenContract.methods.initialize(
-        'DAOstack',
-        'GEN',
-        web3.utils.toWei('100000000'),
-        web3.eth.defaultAccount),
-      'Initializing GEN...')).receipt
-    await logTx(tx, 'Finished initializing GEN')
+    if (!((await GENTokenContract.methods.symbol().call()) === 'GEN')) {
+      tx = (
+        await sendTx(GENTokenContract.methods.initialize(
+          'DAOstack',
+          'GEN',
+          web3.utils.toWei('100000000'),
+          web3.eth.defaultAccount),
+        'Initializing GEN...')).receipt
+      await logTx(tx, 'Finished initializing GEN')
+    }
 
     web3.eth.accounts.wallet.clear()
 
@@ -257,7 +259,7 @@ async function migrateBase ({ arcVersion, web3, spinner, confirm, opts, logTx, p
       break
   }
 
-  if (addresses['DAOTrackerInstance'] === undefined) {
+  if (!previousMigration.package[arcVersion] || previousMigration.package[arcVersion]['DAOTrackerInstance'] === undefined) {
     let initData = await new web3.eth.Contract(require(`./contracts/${arcVersion}/DAOTracker.json`).abi)
       .methods.initialize(adminAddress).encodeABI()
     let daoTrackerTx = app.methods.create(
@@ -272,9 +274,23 @@ async function migrateBase ({ arcVersion, web3, spinner, confirm, opts, logTx, p
     await logTx(tx, 'Finished Deploying DAOTracker')
 
     addresses['DAOTrackerInstance'] = DAOTracker
+  } else {
+    let daoTracker = new web3.eth.Contract(
+      require(`./contracts/${arcVersion}/AdminUpgradeabilityProxy.json`).abi,
+      previousMigration.package[arcVersion]['DAOTrackerInstance'],
+      opts
+    )
+    tx = (await sendTx(
+      daoTracker.methods.upgradeTo(addresses['DAOTracker']),
+      `Upgrading DAOTracker contract to version 0.0.${getArcVersionNumber(arcVersion)}...`,
+      web3.eth.accounts.wallet[1].address)
+    ).receipt
+    await logTx(tx, `Finished upgrading DAOTracker to version 0.0.${getArcVersionNumber(arcVersion)}`)
+
+    addresses['DAOTrackerInstance'] = previousMigration.package[arcVersion]['DAOTrackerInstance']
   }
 
-  if (addresses['DAOFactoryInstance'] === undefined) {
+  if (!previousMigration.package[arcVersion] || previousMigration.package[arcVersion]['DAOFactoryInstance'] === undefined) {
     let initData = await new web3.eth.Contract(require(`./contracts/${arcVersion}/DAOFactory.json`).abi)
       .methods.initialize(App, addresses['DAOTrackerInstance']).encodeABI()
 
@@ -290,6 +306,20 @@ async function migrateBase ({ arcVersion, web3, spinner, confirm, opts, logTx, p
     await logTx(tx, 'Finished Deploying DAOFactory')
 
     addresses['DAOFactoryInstance'] = DAOFactory
+  } else {
+    let daoFactory = new web3.eth.Contract(
+      require(`./contracts/${arcVersion}/AdminUpgradeabilityProxy.json`).abi,
+      previousMigration.package[arcVersion]['DAOFactoryInstance'],
+      opts
+    )
+    tx = (await sendTx(
+      daoFactory.methods.upgradeTo(addresses['DAOFactory']),
+      `Upgrading DAOFactory contract to version 0.0.${getArcVersionNumber(arcVersion)}...`,
+      web3.eth.accounts.wallet[1].address)
+    ).receipt
+    await logTx(tx, `Finished upgrading DAOFactory to version 0.0.${getArcVersionNumber(arcVersion)}`)
+
+    addresses['DAOFactoryInstance'] = previousMigration.package[arcVersion]['DAOFactoryInstance']
   }
 
   let migration = { 'package': previousMigration.package || {} }

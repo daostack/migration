@@ -174,10 +174,10 @@ const wrapCommand = fn => async options => {
     getArcVersionNumber: function getArcVersionNumber (arcVersion) {
       return Number(arcVersion.slice(-1))
     },
-    sendTx: async function sendTx (tx, msg) {
+    sendTx: async function sendTx (tx, msg, from = web3.eth.defaultAccount) {
       spinner.start(msg)
       let gas = 0
-      let nonce = await web3.eth.getTransactionCount(web3.eth.defaultAccount)
+      let nonce = await web3.eth.getTransactionCount(from)
       const blockLimit = await web3.eth.getBlock('latest').gasLimit
       try {
         gas = (await tx.estimateGas())
@@ -188,13 +188,13 @@ const wrapCommand = fn => async options => {
         gas = blockLimit - 100000
       }
 
-      let result = tx.send({ gas, nonce })
+      let result = tx.send({ from, gas, nonce })
       let receipt = await new Promise(resolve => result.on('receipt', resolve).on('error', async error => {
         spinner.fail('Transaction failed: ' + error)
         if (await confirm('Would you like to retry sending the transaction?')) {
           resolve('failed')
         } else {
-          spinner.fail('DAO Migration has failed.')
+          spinner.fail('Migration process has failed.')
         }
       }))
 
