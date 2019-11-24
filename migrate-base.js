@@ -11,7 +11,7 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
   const addresses = {}
   const network = await web3.eth.net.getNetworkType()
 
-  async function deploy ({ contractName, abi, bytecode, deployedBytecode }, deps, ...args) {
+  async function shouldDeploy (contractName, deployedBytecode, deps) {
     if (contractName !== 'ImplementationDirectory') {
       deps = deps || []
       for (let existing in previousMigration.package) {
@@ -44,7 +44,12 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
         }
       }
     }
-
+  }
+  async function deploy ({ contractName, abi, bytecode, deployedBytecode }, deps, ...args) {
+    let existingAddress = await shouldDeploy(contractName, deployedBytecode, deps)
+    if (existingAddress) {
+      return existingAddress
+    }
     let { receipt, result } = await sendTx(new web3.eth.Contract(abi, undefined, opts).deploy({
       data: bytecode,
       arguments: args
@@ -257,7 +262,8 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
       break
   }
 
-  if (!previousMigration.package[arcVersion] || previousMigration.package[arcVersion]['DAOTrackerInstance'] === undefined) {
+  addresses['DAOTrackerInstance'] = shouldDeploy('DAOTrackerInstance', require(`./contracts/${arcVersion}/AdminUpgradeabilityProxy.json`).deployedBytecode)
+  if (!(await addresses['DAOTrackerInstance'])) {
     let initData = await new web3.eth.Contract(require(`./contracts/${arcVersion}/DAOTracker.json`).abi)
       .methods.initialize(adminAddress).encodeABI()
     let daoTrackerTx = app.methods.create(
@@ -275,7 +281,7 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
   } else {
     let daoTracker = new web3.eth.Contract(
       require(`./contracts/${arcVersion}/AdminUpgradeabilityProxy.json`).abi,
-      previousMigration.package[arcVersion]['DAOTrackerInstance'],
+      addresses['DAOTrackerInstance'],
       opts
     )
     tx = (await sendTx(
@@ -288,7 +294,8 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     addresses['DAOTrackerInstance'] = previousMigration.package[arcVersion]['DAOTrackerInstance']
   }
 
-  if (!previousMigration.package[arcVersion] || previousMigration.package[arcVersion]['DAOFactoryInstance'] === undefined) {
+  addresses['DAOFactoryInstance'] = shouldDeploy('DAOFactoryInstance', require(`./contracts/${arcVersion}/AdminUpgradeabilityProxy.json`).deployedBytecode)
+  if (!(await addresses['DAOFactoryInstance'])) {
     let initData = await new web3.eth.Contract(require(`./contracts/${arcVersion}/DAOFactory.json`).abi)
       .methods.initialize(App, addresses['DAOTrackerInstance']).encodeABI()
 
@@ -307,7 +314,7 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
   } else {
     let daoFactory = new web3.eth.Contract(
       require(`./contracts/${arcVersion}/AdminUpgradeabilityProxy.json`).abi,
-      previousMigration.package[arcVersion]['DAOFactoryInstance'],
+      addresses['DAOFactoryInstance'],
       opts
     )
     tx = (await sendTx(
