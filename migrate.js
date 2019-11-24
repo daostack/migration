@@ -9,24 +9,19 @@ const HDWallet = require('hdwallet-accounts')
 const moment = require('moment')
 const migrateBase = require('./migrate-base')
 const migrateDAO = require('./migrate-dao')
-const migrateDemoTest = require('./migrate-demo-test')
-const updateDAORegistry = require('./helper-scripts/dao-registry')
-const allocateReputation = require('./helper-scripts/rep-allocation')
 const path = require('path')
 
 async function migrate (opts) {
   const base = await migrateBase(opts)
   const dao = await migrateDAO({ ...opts, previousMigration: { ...opts.previousMigration, ...base } })
-  const demo = await migrateDemoTest({ ...opts, previousMigration: { ...opts.previousMigration, ...base } })
   return {
     ...base,
-    ...dao,
-    ...demo
+    ...dao
   }
 }
 
 const defaults = {
-  arcVersion: require('./package.json').dependencies['@daostack/arc'],
+  arcVersion: require('./package.json').dependencies['@daostack/arc-experimental'],
   quiet: false,
   disableconfs: false,
   force: false,
@@ -184,12 +179,12 @@ const wrapCommand = fn => async options => {
       }
     },
     getArcVersionNumber: function getArcVersionNumber (arcVersion) {
-      return Number(arcVersion.slice(-2))
+      return Number(arcVersion.slice(-1))
     },
-    sendTx: async function sendTx (tx, msg) {
+    sendTx: async function sendTx (tx, msg, from = web3.eth.defaultAccount) {
       spinner.start(msg)
       let gas = 0
-      let nonce = await web3.eth.getTransactionCount(web3.eth.defaultAccount)
+      let nonce = await web3.eth.getTransactionCount(from)
       const blockLimit = await web3.eth.getBlock('latest').gasLimit
       try {
         gas = (await tx.estimateGas())
@@ -200,13 +195,13 @@ const wrapCommand = fn => async options => {
         gas = blockLimit - 100000
       }
 
-      let result = tx.send({ gas, nonce })
+      let result = tx.send({ from, gas, nonce })
       let receipt = await new Promise(resolve => result.on('receipt', resolve).on('error', async error => {
         spinner.fail('Transaction failed: ' + error)
         if (await confirm('Would you like to retry sending the transaction?')) {
           resolve('failed')
         } else {
-          spinner.fail('DAO Migration has failed.')
+          spinner.fail('Migration process has failed.')
         }
       }))
 
@@ -326,12 +321,9 @@ function cli () {
       describe: 'path to the folder containing the truffle build data for custom schemes',
       default: defaults.customAbisLocation
     })
-    .command('$0', 'Migrate base contracts and an example DAO', yargs => yargs, wrapCommand(migrate))
-    .command('base', 'Migrate an example DAO', yargs => yargs, wrapCommand(migrateBase))
-    .command('dao', 'Migrate base contracts', yargs => yargs, wrapCommand(migrateDAO))
-    .command('demo', 'Migrate base contracts', yargs => yargs, wrapCommand(migrateDemoTest))
-    .command('update-registry', 'Update DAORegistry DAOs', yargs => yargs, wrapCommand(updateDAORegistry))
-    .command('allocate-reputation', 'Allocate reputation in RepAllocation scheme', yargs => yargs, wrapCommand(allocateReputation))
+    .command('$0', 'Migrate Arc package, base contracts and an example DAO', yargs => yargs, wrapCommand(migrate))
+    .command('base', 'Migrate base contracts', yargs => yargs, wrapCommand(migrateBase))
+    .command('dao', 'Migrate an example DAO', yargs => yargs, wrapCommand(migrateDAO))
     .showHelpOnFail(false)
     .completion()
     .wrap(120)
@@ -346,9 +338,6 @@ if (require.main === module) {
     migrate: wrapCommand(migrate),
     migrateBase: wrapCommand(migrateBase),
     migrateDAO: wrapCommand(migrateDAO),
-    migrateDemoTest: wrapCommand(migrateDemoTest),
-    updateDAORegistry: wrapCommand(updateDAORegistry),
-    allocateReputation: wrapCommand(allocateReputation),
     migrateScript: wrapCommand,
     cli
   }

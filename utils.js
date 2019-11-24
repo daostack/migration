@@ -17,15 +17,10 @@ exports.generateRnadomName = function () {
   return capitalize(randomEl(adjectives)) + ' ' + capitalize(randomEl(nouns))
 }
 
-exports.importAbi = function (abiPath) {
-  let abi = require(`${abiPath}`)
-  if (abi.rootVersion) {
-    const abiName = abiPath.substring(abiPath.lastIndexOf('/') + 1)
-    const abiFolder = path.dirname(abiPath)
-    const rootPath = path.join(
-      abiFolder, `../${abi.rootVersion}/${abiName}`
-    )
-    abi = require(`./${rootPath}`)
-  }
-  return abi
+exports.concatBytes = function (bytes1, bytes2) {
+  return bytes1 + (bytes2.slice(2))
+}
+
+exports.getBytesLength = function (web3, bytes) {
+  return Number(bytes.slice(2).length) / 2
 }

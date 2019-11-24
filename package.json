@@ -1,6 +1,6 @@
 {
-  "name": "@daostack/migration",
-  "version": "0.0.1-rc.41-v1",
+  "name": "@daostack/migration-experimental",
+  "version": "0.0.1-rc.2-v0",
   "description": "A repo for handling DAOstack contract migrations",
   "main": "index.js",
   "bin": {
@@ -26,15 +26,16 @@
     "docker:build": "docker build . -t daostack/migration-experimental:$(cat package.json | jq -r '.version')",
     "docker:push": "docker push daostack/migration-experimental:$(cat package.json | jq -r '.version')",
     "prepare-release": "./prepare-release.sh",
+    "postinstall": "npm run prune-arc-build && npm run generate-abis",
     "release": "./release.sh",
     "prune-arc-build": "node ./pruneArcBuild.js",
-    "postinstall": "npm run prune-arc-build && npm run generate-abis",
-    "verify.initialize": "npm explore @daostack/arc -- npm install openzeppelin-solidity @daostack/infra --no-save && npm explore @daostack/infra -- npm install openzeppelin-solidity --no-save && npm explore @daostack/arc-hive -- npm install openzeppelin-solidity --no-save",
+    "verify.initialize": "npm explore @daostack/arc-experimental -- npm install openzeppelin-solidity @daostack/infra-experimental --no-save && npm explore @daostack/infra-experimental -- npm install openzeppelin-solidity --no-save && npm explore @daostack/arc-hive -- npm install openzeppelin-solidity --no-save",
     "verify.build": "node node_modules/typescript/bin/tsc verify.ts -sourceMap",
     "verify.help": "node verify.js -h",
     "verify.lint": "tslint -c tslint.json verify.ts",
     "verify.lint.andFix": "npm run verify.lint -- --fix",
-    "verify": "node verify.js"
+    "verify": "node verify.js",
+    "build-arc-gh": "npm explore @daostack/arc -- npm i && npm explore @daostack/arc-experimental -- npm run build && npm run prune-arc-build"
   },
   "repository": {
     "type": "git",
@@ -47,7 +48,7 @@
   },
   "homepage": "https://github.com/daostack/migration#readme",
   "dependencies": {
-    "@daostack/arc": "0.0.1-rc.41",
+    "@daostack/arc-experimental": "0.0.1-rc.2",
     "@daostack/arc-hive": "0.0.1-rc.4",
     "ethereumjs-wallet": "^0.6.3",
     "fstream": "^1.0.12",

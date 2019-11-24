@@ -1,12 +1,11 @@
 {
-  "ContributionReward": [{}],
-  "SchemeRegistrar": [{}],
-  "GlobalConstraintRegistrar": [{}],
-  "UpgradeScheme": [{}],
-  "StandAloneContracts":[
+  "StandAloneContracts": [
     {
        "name": "Wallet",
        "fromArc": true,
+       "params": [
+         "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1"
+       ],
        "runFunctions": [
           { 
              "functionName": "transferOwnership",
@@ -46,46 +45,67 @@
       "activationTime": 0
     }
   ],
-  "schemes": {
-    "ContributionReward": true,
-    "SchemeRegistrar": true,
-    "GlobalConstraintRegistrar": true,
-    "UpgradeScheme": true
-  },
-  "CustomSchemes": [
-     {
+  "Schemes": [
+    {
+      "name": "ContributionReward",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 }
+      ],
+      "permissions": "0x00000000",
+      "alias" : "ContributionRewardAlias"
+    },
+    {
+      "name": "SchemeRegistrar",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        { "voteParams": 0 }
+      ],
+      "permissions": "0x0000001F",
+      "alias" : "SchemeRegistrarAlias"
+    },
+    {
+      "name": "GlobalConstraintRegistrar",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 }
+      ],
+      "permissions": "0x00000004",
+      "alias" : "GlobalConstraintRegistrarAlias"
+    },
+    {
+      "name": "UpgradeScheme",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 }
+      ],
+      "permissions": "0x0000000A",
+      "alias" : "UpgradeSchemeAlias"
+    },
+    {
       "name": "GenericScheme",
       "schemeName":"GenericScheme",
       "isUniversal":false,
       "params": [
         "GenesisProtocolAddress",
-        {"voteParams": 0},
+        { "voteParams": 0 },
         "0x0000000000000000000000000000000000000000"
       ],
       "permissions": "0x00000010",
-      "alias" : "GenericSchemeAlias",
-      "fromArc": true
+      "alias" : "GenericSchemeAlias"
     },
     {
-      "name":"ContributionRewardExt",
-      "schemeName":"ContributionRewardExt",
-      "address": { "StandAloneContract": 1 },
-      "isUniversal":false,
-      "params":[
-         "GenesisProtocolAddress",
-         { "voteParams":0 },
-         { "StandAloneContract": 2 }
+      "name": "GenericScheme",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        "0x0000000000000000000000000000000000000001"
       ],
-      "permissions":"0x00000000",
-      "alias":"ContributionRewardExt",
-      "fromArc":true,
-      "arcVersion": "0.0.1-rc.40"
-   }
+      "permissions": "0x00000010",
+      "alias" : "GenericSchemeAlias2"
+    }
   ],
-  "unregisterOwner": true,
-  "useUController": false,
-  "useDaoCreator": true,
-  "noTrack": false,
   "founders": [
     {
       "address": "0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1",

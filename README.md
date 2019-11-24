@@ -254,17 +254,6 @@ Example migration parameters object:
   "tokenName": "The DAO Token", // Sets the name of your DAO token
   "tokenSymbol": "TDT", // Sets the name of your DAO token symbol
 
-  // Needed only if you would like to use Contribution Reward scheme in your DAO
-  "ContributionReward": [{
-    "voteParams": 0 // The index of the parameters in the voting machines parameters array
-  }],
-  // Needed only if you would like to use Generic Scheme scheme in your DAO
-  "GenericScheme": [{
-    // The address of the contract the Generic Scheme can call.
-    "targetContract": "0x0000000000000000000000000000000000000000"
-    "votingMachine": "0x00000000000000000000votingmachineaddress" // The address of your voting machine (default is Genesis Protocol address)
-    "voteParams": 1 // The index of the parameters in the voting machines parameters array (default is 0)
-  }],
   // Allow you to deploy and call any contract you might need during the migration
   "StandAloneContracts":[
      {
@@ -296,51 +285,65 @@ Example migration parameters object:
      }
   ],
 
-  // Allows you to register and deploy custom schemes
-  "CustomSchemes": {
-     // You should have an contract build file with identical name inside `custom-abis` folder
-    "MyCustomScheme": [
-      {
-        // If true will call setParameters() else will call initialized() with the avatar address as a first parameter
-        "isUniversal": true,
-        // Parameters to use in the setParameters() / initialized() method
-        "params": [
-          // An object like this { "voteParams": X } is transformed as the voting params hash like "voteParams": 0 in the supported schemes
-          { "voteParams": 0 },
-          // This will be converted to the actual Genesis Protocol address
-          "GenesisProtocolAddress",
-          // You can also add literal parameters like so
-          "anotherParam"
-        ],
-        // If the scheme is deployed set the address here, if not remove the field and the script will deploy the scheme
-        // Can also use an address from the Standalone contracts like so: "address": { "StandAloneContract": 0 }
-        "address": "0xaddress...",
-        // The permissions your scheme need from the controller
-        "permissions": "0x00000001",
-        // Optional. Allows to use a specific Arc version for the CustomScheme contract, default: Arc version of the DAO.
-        "arcVersion": "0.0.1-rc.30"
-      },
-      {
-        "name": "ContinuousLocking4Reputation",
-        "schemeName": "ContinuousLocking4Reputation",
-        "isUniversal": false,
-        "params": [
-          "CONTINUES_LOCKING_REP_ALLOCATION", // How much Reputation should the scheme allocate.
-          "START_TIME", // Start time for the locking as UNIX Timestamp (in seconds).
-          "BATCH_TIME", // Time per batch (in seconds)
-          "REDEEM_TIME", // Start time for redeeming as UNIX Timestamp (in seconds).
-          "BATCHES_COUNT", // Number of batches
-          "REP_REWARD_CONST_A", // repRewardConstA
-          "REP_REWARD_CONST_B", // repRewardConstB
-          "BATCHES_INDEX_CAP", // batchesIndexCap
-          "TOKEN_ADDRESS", // Address of the token to lock.
-          "AGREEMENT_HASH" // IPFS hash of user agreement. Can be arbitrary (for example: "0x1000000000000000000000000000000000000000000000000000000000000000") if not used.
-        ],
-        "permissions": "0x00000010",
-        "alias": "InfiniteReputation4Token",
-        "fromArc": true
-      }
-    ]
+  // Allows you to register and deploy schemes
+  "Schemes": {
+     {
+      "name": "ContributionReward",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 }
+      ],
+      "permissions": "0x00000000",
+      "alias" : "ContributionRewardAlias"
+    },
+    {
+      "name": "SchemeRegistrar",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        { "voteParams": 0 }
+      ],
+      "permissions": "0x0000001F",
+      "alias" : "SchemeRegistrarAlias"
+    },
+    {
+      "name": "GlobalConstraintRegistrar",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 }
+      ],
+      "permissions": "0x00000004",
+      "alias" : "GlobalConstraintRegistrarAlias"
+    },
+    {
+      "name": "UpgradeScheme",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 }
+      ],
+      "permissions": "0x0000000A",
+      "alias" : "UpgradeSchemeAlias"
+    },
+    {
+      "name": "GenericScheme",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        "0x0000000000000000000000000000000000000000"
+      ],
+      "permissions": "0x00000010",
+      "alias" : "GenericSchemeAlias"
+    },
+    {
+      "name": "GenericScheme",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        "0x0000000000000000000000000000000000000001"
+      ],
+      "permissions": "0x00000010",
+      "alias" : "GenericSchemeAlias2"
+    }
   },
   // Parameters list your DAO will use with the voting machines
   // You can add here either Genesis Protocol parameters which will set the parameters in the GP voting machine or add a pre-set parameters hash to any voting machine
@@ -363,26 +366,6 @@ Example migration parameters object:
       "votingParamsHash": "0x000000000000000000000000000000paramshash" // If you want to use a different voting machine params you can set the parameters hash here
     }
   ],
-  // Select the schemes you would like your DAO to have
-  "schemes": {
-    "ContributionReward": true,
-    "GenericScheme": false,
-    "SchemeRegistrar": true,
-    "GlobalConstraintRegistrar": true,
-    "UpgradeScheme": true
-  },
-  // If true, the permission of the account which was used to deploy the DAO will
-  // be revoked at the end of the deployment process
-  "unregisterOwner": true,
-  // True if should use Universal Controller (default false).
-  "useUController": false,
-  // True if should use the DAO Creator to deploy the DAO (default false).
-  "useDaoCreator": false,
-  // If not using DaoCreator, set to true to prevent automatic tracking on DAOTracker, otherwise the DAO will be tracked as part of the script
-  "noTrack": false,
-  // Allows to specify which Arc version should be used to deploy the dao.
-  // This will override the version specified in the CLI flag.
-  "arcVersion": "0.0.1-rc.30",
   // List of addresses to mint initial tokens and reputation to
   "founders": [
     {
