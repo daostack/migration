@@ -21,7 +21,7 @@ async function migrate (opts) {
 }
 
 const defaults = {
-  arcVersion: require('./package.json').dependencies['arc-experimental'],
+  arcVersion: require('./package.json').dependencies['@daostack/arc-experimental'],
   quiet: false,
   disableconfs: false,
   force: false,

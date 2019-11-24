@@ -162,7 +162,7 @@ const processContracts = async (): Promise<any> => {
         spinner = ora();
         spinner.start(`${contractName} at ${addresses[contractName]}`);
 
-        let foundIn = './node_modules/arc-experimental';
+        let foundIn = './node_modules/@daostack/arc-experimental';
         process.chdir(path.join(__dirname, foundIn));
 
         let solFilePath = glob.sync(`./contracts/**/${contractName}.sol`);

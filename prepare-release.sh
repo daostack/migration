@@ -13,12 +13,12 @@ npm ci
 # initial Arc vrsion to use
 readonly INITIAL_VERSION=2
 # get latest Arc version
-readonly ARC=$(cat package.json | jq -r '.dependencies."arc-experimental"' | rev | cut -d'.' -f 1 | rev)
+readonly ARC=$(cat package.json | jq -r '.dependencies."@daostack/arc-experimental"' | rev | cut -d'.' -f 1 | rev)
 # migrate ganache
 for (( version=$INITIAL_VERSION; version<=$ARC; version++ ))
 do
 echo "Installing Arc version $version..."
-npm install "arc-experimental@0.0.1-rc.$version"
+npm install "@daostack/arc-experimental@0.0.1-rc.$version"
 # prune arc build
 echo "Pruning Arc build..."
 npm run prune-arc-build -- "$@"

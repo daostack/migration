@@ -2,7 +2,7 @@ const glob = require('glob')
 var fs = require('fs')
 const ora = require('ora')
 
-const files = glob.sync('./node_modules/arc-experimental/build/contracts/*.json', {
+const files = glob.sync('./node_modules/@daostack/arc-experimental/build/contracts/*.json', {
   nodir: true
 })
 
