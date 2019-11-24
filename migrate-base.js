@@ -1,6 +1,7 @@
 const glob = require('glob')
 
-async function migrateBase ({ arcVersion, web3, spinner, confirm, opts, logTx, previousMigration, getArcVersionNumber }) {
+async function migrateBase ({ arcVersion, web3, spinner, confirm, opts, logTx, previousMigration, getArcVersionNumber, sendTx }) {
+  let tx
   if (!(await confirm('About to migrate arc package. Continue?'))) {
     return
   }
@@ -46,19 +47,13 @@ async function migrateBase ({ arcVersion, web3, spinner, confirm, opts, logTx, p
       }
     }
 
-    spinner.start(`Migrating ${contractName}...`)
-    const contract = new web3.eth.Contract(abi, undefined, opts)
-    const deployContract = contract.deploy({
+    let { receipt, result } = await sendTx(new web3.eth.Contract(abi, undefined, opts).deploy({
       data: bytecode,
       arguments: args
-    }).send({
-      from: web3.eth.defaultAccount
-    })
-    const tx = await new Promise(resolve => deployContract.on('receipt', resolve))
-    const c = await deployContract
-    await logTx(tx, `${c.options.address} => ${contractName}`)
-    addresses[contractName === 'DAOToken' ? 'GEN' : contractName] = c.options.address
-    return c.options.address
+    }), `Migrating ${contractName}...`)
+    await logTx(receipt, `${result.options.address} => ${contractName}`)
+    addresses[contractName === 'DAOToken' ? 'GEN' : contractName] = result.options.address
+    return result.options.address
   }
 
   // OpenZepplin App and Package setup
@@ -77,7 +72,14 @@ async function migrateBase ({ arcVersion, web3, spinner, confirm, opts, logTx, p
     opts
   )
 
-  await packageContract.methods.addVersion([0, 0, getArcVersionNumber(arcVersion)], ImplementationDirectory, web3.utils.hexToBytes(web3.utils.utf8ToHex(arcURL))).send()
+  tx = (await sendTx(
+    packageContract.methods.addVersion(
+      [0, 0, getArcVersionNumber(arcVersion)],
+      ImplementationDirectory,
+      web3.utils.hexToBytes(web3.utils.utf8ToHex(arcURL))
+    ), `Adding version ${[0, 0, getArcVersionNumber(arcVersion)]} to ${packageName} Package`)
+  ).receipt
+  await logTx(tx, `Added version ${[0, 0, getArcVersionNumber(arcVersion)]} to ${packageName} Package`)
   let App = await deploy(require(`./contracts/${arcVersion}/App.json`))
   let app = new web3.eth.Contract(
     require(`./contracts/${arcVersion}/App.json`).abi,
@@ -85,7 +87,10 @@ async function migrateBase ({ arcVersion, web3, spinner, confirm, opts, logTx, p
     opts
   )
 
-  await app.methods.setPackage(packageName, Package, [0, 0, getArcVersionNumber(arcVersion)]).send()
+  tx = (await sendTx(
+    app.methods.setPackage(packageName, Package, [0, 0, getArcVersionNumber(arcVersion)]),
+    `Setting App package to version ${[0, 0, getArcVersionNumber(arcVersion)]}`)).receipt
+  await logTx(tx, `App package version has been set to ${[0, 0, getArcVersionNumber(arcVersion)]}`)
 
   // Setup the GEN token contract
   let GENToken = '0x543Ff227F64Aa17eA132Bf9886cAb5DB55DCAddf'
@@ -99,8 +104,13 @@ async function migrateBase ({ arcVersion, web3, spinner, confirm, opts, logTx, p
       opts
     )
 
-    spinner.info('Initializing GEN...')
-    let tx = await GENTokenContract.methods.initialize('DAOstack', 'GEN', web3.utils.toWei('100000000'), web3.eth.defaultAccount).send()
+    tx = (
+      await sendTx(GENTokenContract.methods.initialize(
+        'DAOstack',
+        'GEN',
+        web3.utils.toWei('100000000'),
+        web3.eth.defaultAccount),
+      'Initializing GEN...')).receipt
     await logTx(tx, 'Finished initializing GEN')
 
     web3.eth.accounts.wallet.clear()
@@ -120,7 +130,16 @@ async function migrateBase ({ arcVersion, web3, spinner, confirm, opts, logTx, p
 
     for (let i = 0; i < privateKeys.length; i++) {
       web3.eth.accounts.wallet.add(web3.eth.accounts.privateKeyToAccount(privateKeys[i]))
-      await GENTokenContract.methods.mint(web3.eth.accounts.wallet[i].address, web3.utils.toWei('1000')).send()
+      tx = (
+        await sendTx(
+          GENTokenContract.methods.mint(
+            web3.eth.accounts.wallet[i].address,
+            web3.utils.toWei('1000')
+          ),
+          `Minting 1000 GEN to test account: ${web3.eth.accounts.wallet[i].address}`
+        )
+      ).receipt
+      await logTx(tx, `Minted 1000 GEN to test account: ${web3.eth.accounts.wallet[i].address}`)
     }
   } else {
     addresses['GEN'] = GENToken
@@ -196,8 +215,10 @@ async function migrateBase ({ arcVersion, web3, spinner, confirm, opts, logTx, p
       Contract = await deploy(require(`${file}`))
     }
 
-    spinner.info(`Registering ${contractName}...`)
-    let tx = await implementationDirectory.methods.setImplementation(contractName, Contract).send()
+    tx = (await sendTx(
+      implementationDirectory.methods.setImplementation(contractName, Contract),
+      `Registering ${contractName}...`
+    )).receipt
     await logTx(tx, `Finished Registering Implementation Contract: ${contractName}`)
   }
 
@@ -228,8 +249,7 @@ async function migrateBase ({ arcVersion, web3, spinner, confirm, opts, logTx, p
     )
     let DAOTracker = await daoTrackerTx.call()
 
-    spinner.info('Deploying DAOTracker...')
-    let tx = await daoTrackerTx.send()
+    tx = (await sendTx(daoTrackerTx, 'Deploying DAOTracker...')).receipt
     await logTx(tx, 'Finished Deploying DAOTracker')
 
     addresses['DAOTrackerInstance'] = DAOTracker
@@ -247,8 +267,7 @@ async function migrateBase ({ arcVersion, web3, spinner, confirm, opts, logTx, p
     )
     let DAOFactory = await daoFactoryTx.call()
 
-    spinner.info('Deploying DAOFactory...')
-    let tx = await daoFactoryTx.send()
+    tx = (await sendTx(daoFactoryTx, 'Deploying DAOFactory...')).receipt
     await logTx(tx, 'Finished Deploying DAOFactory')
 
     addresses['DAOFactoryInstance'] = DAOFactory
