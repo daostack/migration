@@ -1,5 +1,5 @@
 {
-  "name": "@daostack/migration",
+  "name": "@daostack/migration-experimental",
   "version": "0.0.1-rc.33-v1",
   "description": "A repo for handling DAOstack contract migrations",
   "main": "index.js",
