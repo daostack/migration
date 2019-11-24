@@ -11,17 +11,14 @@ rm package-lock.json
 npm install
 npm ci
 # initial Arc vrsion to use
-readonly INITIAL_VERSION=16
+readonly INITIAL_VERSION=2
 # get latest Arc version
-readonly ARC=$(cat package.json | jq -r '.dependencies."@daostack/arc"' | rev | cut -d'.' -f 1 | rev)
+readonly ARC=$(cat package.json | jq -r '.dependencies."@daostack/arc-experimental"' | rev | cut -d'.' -f 1 | rev)
 # migrate ganache
 for (( version=$INITIAL_VERSION; version<=$ARC; version++ ))
 do
-if [ "$version" == "20" ] || [ "$version" == "26" ]; then
-continue
-fi
 echo "Installing Arc version $version..."
-npm install "@daostack/arc@0.0.1-rc.$version"
+npm install "@daostack/arc-experimental@0.0.1-rc.$version"
 # prune arc build
 echo "Pruning Arc build..."
 npm run prune-arc-build -- "$@"
@@ -30,7 +27,7 @@ echo "Generating abis..."
 npm run generate-abis
 # migrating Arc version to ganache
 echo "Migrating ganache..."
-npm run migrate -- --force --restart --arc-version "0.0.1-rc.$version" "$@"
+npm run migrate -- --disable-confs --restart --arc-version "0.0.1-rc.$version" "$@"
 done
 if [ ! -z "$kovan_private_key" ]; then
 # migrate kovan
