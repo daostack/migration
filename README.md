@@ -342,15 +342,6 @@ Example migration parameters object:
     "GlobalConstraintRegistrar": true,
     "UpgradeScheme": true
   },
-  // If true, the permission of the account which was used to deploy the DAO will
-  // be revoked at the end of the deployment process
-  "unregisterOwner": true,
-  // True if should use Universal Controller (default false).
-  "useUController": false,
-  // True if should use the DAO Creator to deploy the DAO (default false).
-  "useDaoCreator": false,
-  // If not using DaoCreator, set to true to prevent automatic tracking on DAOTracker, otherwise the DAO will be tracked as part of the script
-  "noTrack": false,
   // List of addresses to mint initial tokens and reputation to
   "founders": [
     {

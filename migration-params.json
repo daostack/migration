@@ -1,5 +1,5 @@
 {
-  "StandAloneContracts":[
+  "StandAloneContracts": [
     {
        "name": "Wallet",
        "fromArc": true,
@@ -15,7 +15,7 @@
           }
        ]
     }
- ],
+  ],
   "VotingMachinesParams": [
     {
       "boostedVotePeriodLimit": 600,
@@ -89,11 +89,8 @@
       ],
       "permissions": "0x00000010",
       "alias" : "GenericSchemeAlias2"
-    }],
-  "unregisterOwner": true,
-  "useUController": false,
-  "useDaoCreator": false,
-  "noTrack": false,
+    }
+  ],
   "founders": [
     {
       "address": "0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1",
