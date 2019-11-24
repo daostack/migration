@@ -7,9 +7,9 @@ const inquirer = require('inquirer')
 async function setVersion () {
   const spinner = ora()
   const packageJson = require('./package.json')
-  const arcVersion = packageJson.dependencies['@daostack/arc'] || packageJson.devDependencies['@daostack/arc']
+  const arcVersion = packageJson.dependencies['@daostack/arc-experimental'] || packageJson.devDependencies['@daostack/arc-experimental']
   spinner.info(`Current package version is '${packageJson.version}'`)
-  spinner.info(`@daostack/arc version is '${arcVersion}'`)
+  spinner.info(`@daostack/arc-experimental version is '${arcVersion}'`)
   const { migrationVersion } = await inquirer.prompt([
     {
       type: 'input',

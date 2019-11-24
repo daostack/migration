@@ -1,15 +1,11 @@
 {
-  "ContributionReward": [{}],
-  "UGenericScheme": [{
-    "targetContract": "0x0000000000000000000000000000000000000000"
-  }],
-  "SchemeRegistrar": [{}],
-  "GlobalConstraintRegistrar": [{}],
-  "UpgradeScheme": [{}],
-  "StandAloneContracts":[
+  "StandAloneContracts": [
     {
        "name": "Wallet",
        "fromArc": true,
+       "params": [
+         "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1"
+       ],
        "runFunctions": [
           { 
              "functionName": "transferOwnership",
@@ -19,7 +15,7 @@
           }
        ]
     }
- ],
+  ],
   "VotingMachinesParams": [
     {
       "boostedVotePeriodLimit": 600,
@@ -36,41 +32,65 @@
       "activationTime": 0
     }
   ],
-  "schemes": {
-    "ContributionReward": true,
-    "UGenericScheme": true,
-    "SchemeRegistrar": true,
-    "GlobalConstraintRegistrar": true,
-    "UpgradeScheme": true
-  },
-  "CustomSchemes": [
-     {
-      "name": "GenericScheme",
+  "Schemes": [
+    {
+      "name": "ContributionReward",
       "params": [
         "GenesisProtocolAddress",
-        {"voteParams": 0},
-        "0x0000000000000000000000000000000000000000"
+        { "voteParams": 0 }
       ],
-      "permissions": "0x00000010",
-      "alias" : "GenericSchemeAlias",
-      "fromArc": true
+      "permissions": "0x00000000",
+      "alias" : "ContributionRewardAlias"
+    },
+    {
+      "name": "SchemeRegistrar",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        { "voteParams": 0 }
+      ],
+      "permissions": "0x0000001F",
+      "alias" : "SchemeRegistrarAlias"
+    },
+    {
+      "name": "GlobalConstraintRegistrar",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 }
+      ],
+      "permissions": "0x00000004",
+      "alias" : "GlobalConstraintRegistrarAlias"
+    },
+    {
+      "name": "UpgradeScheme",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 }
+      ],
+      "permissions": "0x0000000A",
+      "alias" : "UpgradeSchemeAlias"
     },
     {
       "name": "GenericScheme",
-      "isUniversal": false,
       "params": [
         "GenesisProtocolAddress",
-        {"voteParams": 0},
+        { "voteParams": 0 },
+        "0x0000000000000000000000000000000000000000"
+      ],
+      "permissions": "0x00000010",
+      "alias" : "GenericSchemeAlias"
+    },
+    {
+      "name": "GenericScheme",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
         "0x0000000000000000000000000000000000000001"
       ],
       "permissions": "0x00000010",
-      "alias" : "GenericSchemeAlias2",
-      "fromArc": true
-    }],
-  "unregisterOwner": true,
-  "useUController": false,
-  "useDaoCreator": false,
-  "noTrack": false,
+      "alias" : "GenericSchemeAlias2"
+    }
+  ],
   "founders": [
     {
       "address": "0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1",

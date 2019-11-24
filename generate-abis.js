@@ -6,7 +6,7 @@ const path = require('path')
  */
 async function generateAbis (bases) {
   for (let i in bases) {
-    let arcVersion = require('./package.json').dependencies['@daostack/arc']
+    let arcVersion = require('./package.json').dependencies['@daostack/arc-experimental']
     const base = require('path').dirname(require.resolve(bases[i]))
     if (!fs.existsSync('./contracts/' + arcVersion)) {
       fs.mkdirSync('./contracts/' + arcVersion, { recursive: true })
@@ -25,9 +25,9 @@ async function generateAbis (bases) {
 
 if (require.main === module) {
   generateAbis([
-    '@daostack/infra/build/contracts/ERC827.json',
+    '@daostack/infra-experimental/build/contracts/ERC827.json',
     '@daostack/arc-hive/build/contracts/DAORegistry.json',
-    '@daostack/arc/build/contracts/UController.json'
+    '@daostack/arc-experimental/build/contracts/Controller.json'
   ]).catch(err => {
     console.log(err)
     process.exit(1)
