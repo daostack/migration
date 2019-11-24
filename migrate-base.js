@@ -18,31 +18,29 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
         existing = previousMigration.package[existing]
         const sameDeps = deps.reduce((acc, dep) => addresses[dep] === existing[dep] && acc, true)
 
-        const entryName = (contractName === 'DAOToken') ? contractName = 'GEN' : contractName
-
-        const code = existing[entryName] && (await web3.eth.getCode(existing[contractName]))
-        const sameCode = existing[entryName] && deployedBytecode === code
+        const code = existing[contractName] && (await web3.eth.getCode(existing[contractName]))
+        const sameCode = existing[contractName] && deployedBytecode === code
 
         if (
-          entryName === 'GEN' &&
-          existing[entryName] &&
+          contractName === 'GEN' &&
+          existing[contractName] &&
           code !== '0x' &&
           (!(await confirm(`Found existing GEN (DAOToken) contract, Deploy new instance?`, false)) || network === 'private')
         ) {
-          addresses[entryName] = existing[entryName]
-          return existing[entryName]
+          addresses[contractName] = existing[contractName]
+          return existing[contractName]
         } else if (
           sameCode &&
           sameDeps &&
           !(await confirm(
-            `Found existing '${entryName}' instance with same bytecode and ${
+            `Found existing '${contractName}' instance with same bytecode and ${
               !deps.length ? 'no ' : ''
-            }dependencies on other contracts at '${existing[entryName]}'. Deploy new instance?`,
+            }dependencies on other contracts at '${existing[contractName]}'. Deploy new instance?`,
             false
           ))
         ) {
-          addresses[entryName] = existing[entryName]
-          return existing[entryName]
+          addresses[contractName] = existing[contractName]
+          return existing[contractName]
         }
       }
     }
@@ -52,7 +50,7 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
       arguments: args
     }), `Migrating ${contractName}...`)
     await logTx(receipt, `${result.options.address} => ${contractName}`)
-    addresses[contractName === 'DAOToken' ? 'GEN' : contractName] = result.options.address
+    addresses[contractName] = result.options.address
     return result.options.address
   }
 
@@ -115,7 +113,7 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
   let GENToken = '0x543Ff227F64Aa17eA132Bf9886cAb5DB55DCAddf'
 
   if (network === 'private') {
-    GENToken = await deploy(require(`./contracts/${arcVersion}/DAOToken.json`))
+    GENToken = await deploy({ ...require(`./contracts/${arcVersion}/DAOToken.json`), contractName: 'GEN' })
 
     const GENTokenContract = new web3.eth.Contract(
       require(`./contracts/${arcVersion}/DAOToken.json`).abi,
