@@ -1,0 +1,525 @@
+{
+  "contractName": "ExternalTokenLockerMock",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "lockedTokenBalances",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "lock",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b5060f18061001f6000396000f30060806040526004361060485763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416638b525d0c8114604d578063dd46706414608a575b600080fd5b348015605857600080fd5b50607873ffffffffffffffffffffffffffffffffffffffff6004351660a1565b60408051918252519081900360200190f35b348015609557600080fd5b50609f60043560b3565b005b60006020819052908152604090205481565b336000908152602081905260409020555600a165627a7a72305820434c279568d9956782021b15b6f2993667bae01298f360b46cb411d1dcf6c6630029",
+  "deployedBytecode": "0x60806040526004361060485763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416638b525d0c8114604d578063dd46706414608a575b600080fd5b348015605857600080fd5b50607873ffffffffffffffffffffffffffffffffffffffff6004351660a1565b60408051918252519081900360200190f35b348015609557600080fd5b50609f60043560b3565b005b60006020819052908152604090205481565b336000908152602081905260409020555600a165627a7a72305820434c279568d9956782021b15b6f2993667bae01298f360b46cb411d1dcf6c6630029",
+  "sourceMap": "27:216:25:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;27:216:25;;;;;;;",
+  "deployedSourceMap": "27:216:25:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;89:52;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;89:52:25;;;;;;;;;;;;;;;;;;;;;;;148:93;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;148:93:25;;;;;;;89:52;;;;;;;;;;;;;;:::o;148:93::-;213:10;193:19;:31;;;;;;;;;;:41;148:93::o",
+  "source": "pragma solidity ^0.4.24;\n\n\ncontract ExternalTokenLockerMock {\n\n    // user => amount\n    mapping (address => uint) public lockedTokenBalances;\n\n    function lock(uint _amount) public {\n        lockedTokenBalances[msg.sender] = _amount;\n    }\n}\n",
+  "sourcePath": "/home/adam/cryptoDev/Ethereum/daostack/arc/contracts/test/ExternalTokenLockerMock.sol",
+  "ast": {
+    "absolutePath": "/home/adam/cryptoDev/Ethereum/daostack/arc/contracts/test/ExternalTokenLockerMock.sol",
+    "exportedSymbols": {
+      "ExternalTokenLockerMock": [
+        12167
+      ]
+    },
+    "id": 12168,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 12149,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:25"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 12167,
+        "linearizedBaseContracts": [
+          12167
+        ],
+        "name": "ExternalTokenLockerMock",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 12153,
+            "name": "lockedTokenBalances",
+            "nodeType": "VariableDeclaration",
+            "scope": 12167,
+            "src": "89:52:25",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
+              "typeString": "mapping(address => uint256)"
+            },
+            "typeName": {
+              "id": 12152,
+              "keyType": {
+                "id": 12150,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "98:7:25",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "89:25:25",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
+                "typeString": "mapping(address => uint256)"
+              },
+              "valueType": {
+                "id": 12151,
+                "name": "uint",
+                "nodeType": "ElementaryTypeName",
+                "src": "109:4:25",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 12165,
+              "nodeType": "Block",
+              "src": "183:58:25",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 12163,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 12158,
+                        "name": "lockedTokenBalances",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 12153,
+                        "src": "193:19:25",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
+                          "typeString": "mapping(address => uint256)"
+                        }
+                      },
+                      "id": 12161,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 12159,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 18999,
+                          "src": "213:3:25",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 12160,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "213:10:25",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "193:31:25",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 12162,
+                      "name": "_amount",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 12155,
+                      "src": "227:7:25",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "193:41:25",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 12164,
+                  "nodeType": "ExpressionStatement",
+                  "src": "193:41:25"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 12166,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "lock",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 12156,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12155,
+                  "name": "_amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 12166,
+                  "src": "162:12:25",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 12154,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "162:4:25",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "161:14:25"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 12157,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "183:0:25"
+            },
+            "scope": 12167,
+            "src": "148:93:25",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 12168,
+        "src": "27:216:25"
+      }
+    ],
+    "src": "0:244:25"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/adam/cryptoDev/Ethereum/daostack/arc/contracts/test/ExternalTokenLockerMock.sol",
+    "exportedSymbols": {
+      "ExternalTokenLockerMock": [
+        12167
+      ]
+    },
+    "id": 12168,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 12149,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:25"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 12167,
+        "linearizedBaseContracts": [
+          12167
+        ],
+        "name": "ExternalTokenLockerMock",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 12153,
+            "name": "lockedTokenBalances",
+            "nodeType": "VariableDeclaration",
+            "scope": 12167,
+            "src": "89:52:25",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
+              "typeString": "mapping(address => uint256)"
+            },
+            "typeName": {
+              "id": 12152,
+              "keyType": {
+                "id": 12150,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "98:7:25",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "89:25:25",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
+                "typeString": "mapping(address => uint256)"
+              },
+              "valueType": {
+                "id": 12151,
+                "name": "uint",
+                "nodeType": "ElementaryTypeName",
+                "src": "109:4:25",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 12165,
+              "nodeType": "Block",
+              "src": "183:58:25",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 12163,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 12158,
+                        "name": "lockedTokenBalances",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 12153,
+                        "src": "193:19:25",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
+                          "typeString": "mapping(address => uint256)"
+                        }
+                      },
+                      "id": 12161,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 12159,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 18999,
+                          "src": "213:3:25",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 12160,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "213:10:25",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "193:31:25",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 12162,
+                      "name": "_amount",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 12155,
+                      "src": "227:7:25",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "193:41:25",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 12164,
+                  "nodeType": "ExpressionStatement",
+                  "src": "193:41:25"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 12166,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "lock",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 12156,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 12155,
+                  "name": "_amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 12166,
+                  "src": "162:12:25",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 12154,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "162:4:25",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "161:14:25"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 12157,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "183:0:25"
+            },
+            "scope": 12167,
+            "src": "148:93:25",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 12168,
+        "src": "27:216:25"
+      }
+    ],
+    "src": "0:244:25"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-08-20T08:30:24.300Z"
+}

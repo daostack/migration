@@ -1,0 +1,347 @@
+{
+  "contractName": "ProposalExecuteInterface",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_proposalId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "int256",
+          "name": "_decision",
+          "type": "int256"
+        }
+      ],
+      "name": "executeProposal",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.11+commit.c082d0b4\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_proposalId\",\"type\":\"bytes32\"},{\"internalType\":\"int256\",\"name\":\"_decision\",\"type\":\"int256\"}],\"name\":\"executeProposal\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/oren/daostack/infra/contracts/votingMachines/ProposalExecuteInterface.sol\":\"ProposalExecuteInterface\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/oren/daostack/infra/contracts/votingMachines/ProposalExecuteInterface.sol\":{\"keccak256\":\"0x2533e7b1e0ac8adb4c04968a4c5a02e56d1c9ae406a38c8591c36a24a3572f7c\",\"urls\":[\"bzz-raw://86c6cb4c9fae74235d2b5b602759c4459d739c1e69bf9ca39573a5f878f20106\",\"dweb:/ipfs/QmVtX6HGDGJzRs7CV9cLyNnS3egNYTcFWpCEQSDQb9YEoN\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.5.11;\n\ninterface ProposalExecuteInterface {\n    function executeProposal(bytes32 _proposalId, int _decision) external returns(bool);\n}\n",
+  "sourcePath": "/Users/oren/daostack/infra/contracts/votingMachines/ProposalExecuteInterface.sol",
+  "ast": {
+    "absolutePath": "/Users/oren/daostack/infra/contracts/votingMachines/ProposalExecuteInterface.sol",
+    "exportedSymbols": {
+      "ProposalExecuteInterface": [
+        5573
+      ]
+    },
+    "id": 5574,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 5563,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".11"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:14"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 5573,
+        "linearizedBaseContracts": [
+          5573
+        ],
+        "name": "ProposalExecuteInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 5572,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "executeProposal",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5568,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5565,
+                  "name": "_proposalId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5572,
+                  "src": "92:19:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 5564,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "92:7:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5567,
+                  "name": "_decision",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5572,
+                  "src": "113:13:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  },
+                  "typeName": {
+                    "id": 5566,
+                    "name": "int",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "113:3:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "91:36:14"
+            },
+            "returnParameters": {
+              "id": 5571,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5570,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5572,
+                  "src": "145:4:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 5569,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "145:4:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "144:6:14"
+            },
+            "scope": 5573,
+            "src": "67:84:14",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 5574,
+        "src": "26:127:14"
+      }
+    ],
+    "src": "0:154:14"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/oren/daostack/infra/contracts/votingMachines/ProposalExecuteInterface.sol",
+    "exportedSymbols": {
+      "ProposalExecuteInterface": [
+        5573
+      ]
+    },
+    "id": 5574,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 5563,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".11"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:14"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 5573,
+        "linearizedBaseContracts": [
+          5573
+        ],
+        "name": "ProposalExecuteInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 5572,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "executeProposal",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5568,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5565,
+                  "name": "_proposalId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5572,
+                  "src": "92:19:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 5564,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "92:7:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5567,
+                  "name": "_decision",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5572,
+                  "src": "113:13:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int256",
+                    "typeString": "int256"
+                  },
+                  "typeName": {
+                    "id": 5566,
+                    "name": "int",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "113:3:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int256",
+                      "typeString": "int256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "91:36:14"
+            },
+            "returnParameters": {
+              "id": 5571,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5570,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5572,
+                  "src": "145:4:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 5569,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "145:4:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "144:6:14"
+            },
+            "scope": 5573,
+            "src": "67:84:14",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 5574,
+        "src": "26:127:14"
+      }
+    ],
+    "src": "0:154:14"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.11+commit.c082d0b4.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.14",
+  "updatedAt": "2019-10-22T12:36:36.384Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
