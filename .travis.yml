@@ -8,7 +8,7 @@ node_js:
 before_install:
 
 install:
-  - npm ci
+  - npm i
   - nohup npm run ganache &
 
 script:
