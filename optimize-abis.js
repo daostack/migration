@@ -15,15 +15,15 @@ async function optimizeAbis () {
     const prevVersion = versionDirs[i - 1]
 
     // For each ABI
-    const abis = fs.readdirSync(`./contracts/${version}`);
+    const abis = fs.readdirSync(`./contracts/${version}`)
     for (const abi of abis) {
       try {
         const abiJson = JSON.parse(fs.readFileSync(`./contracts/${version}/${abi}`, 'utf-8'))
-        let rootVersion = prevVersion;
+        let rootVersion = prevVersion
         let rootAbiJson = JSON.parse(fs.readFileSync(`./contracts/${rootVersion}/${abi}`, 'utf-8'))
 
         if (rootAbiJson.rootVersion) {
-          rootVersion = rootAbiJson.rootVersion;
+          rootVersion = rootAbiJson.rootVersion
           rootAbiJson = JSON.parse(fs.readFileSync(`./contracts/${rootVersion}/${abi}`, 'utf-8'))
         }
 
@@ -43,8 +43,8 @@ async function optimizeAbis () {
 if (require.main === module) {
   optimizeAbis()
     .catch(err => {
-      console.log(err);
-      process.exit(1);
+      console.log(err)
+      process.exit(1)
     })
 } else {
   module.exports = optimizeAbis
