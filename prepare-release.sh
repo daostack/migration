@@ -28,6 +28,9 @@ npm run prune-arc-build -- "$@"
 # generate abis
 echo "Generating abis..."
 npm run generate-abis
+# optimize abis
+echo "Optimizing abis..."
+npm run optimize-abis
 # migrating Arc version to ganache
 echo "Migrating ganache..."
 npm run migrate -- --force --restart --arc-version "0.0.1-rc.$version" "$@"

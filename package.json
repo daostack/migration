@@ -11,6 +11,7 @@
   },
   "scripts": {
     "generate-abis": "node ./generate-abis.js",
+    "optimize-abis": "node ./optimize-abis.js",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
     "cleandb": "rimraf db",
@@ -24,7 +25,7 @@
     "prepare-release": "./prepare-release.sh",
     "release": "./release.sh",
     "prune-arc-build": "node ./pruneArcBuild.js",
-    "postinstall": "npm run prune-arc-build && npm run generate-abis",
+    "postinstall": "npm run prune-arc-build && npm run generate-abis && npm run optimize-abis",
     "verify.initialize": "npm explore @daostack/arc -- npm install openzeppelin-solidity @daostack/infra --no-save && npm explore @daostack/infra -- npm install openzeppelin-solidity --no-save && npm explore @daostack/arc-hive -- npm install openzeppelin-solidity --no-save",
     "verify.build": "node node_modules/typescript/bin/tsc verify.ts -sourceMap",
     "verify.help": "node verify.js -h",
