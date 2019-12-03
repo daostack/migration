@@ -124,6 +124,7 @@ async function migrateDemoTest ({ arcVersion, web3, spinner, confirm, opts, migr
   }
 
   const Avatar = avatarAddress
+  const Controller = await avatar.methods.owner().call()
   const DAOToken = await avatar.methods.nativeToken().call()
   const Reputation = await avatar.methods.nativeReputation().call()
 
@@ -155,6 +156,7 @@ async function migrateDemoTest ({ arcVersion, web3, spinner, confirm, opts, migr
   let migration = { 'test': previousMigration.test || {} }
   migration.test[this.arcVersion] = {
     name: orgName,
+    Controller,
     Avatar,
     DAOToken,
     Reputation,
