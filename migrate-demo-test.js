@@ -37,7 +37,7 @@ async function migrateDemoTest ({ arcVersion, web3, spinner, confirm, opts, migr
   } = this.base
 
   const GENToken = await new this.web3.eth.Contract(
-    require(`./contracts/${this.arcVersion}/DAOToken.json`).abi,
+    utils.importAbi(`./contracts/${this.arcVersion}/DAOToken.json`).abi,
     GEN,
     this.opts
   )
@@ -100,7 +100,7 @@ async function migrateDemoTest ({ arcVersion, web3, spinner, confirm, opts, migr
   } = await submitDemoProposals(accounts, web3, avatarAddress, externalTokenAddress, ActionMock)
 
   const avatar = new this.web3.eth.Contract(
-    require(`./contracts/${this.arcVersion}/Avatar.json`).abi,
+    utils.importAbi(`./contracts/${this.arcVersion}/Avatar.json`).abi,
     avatarAddress,
     this.opts
   )
@@ -109,7 +109,7 @@ async function migrateDemoTest ({ arcVersion, web3, spinner, confirm, opts, migr
 
   if (network === 'private') {
     const daoRegistry = new this.web3.eth.Contract(
-      require(`./contracts/${this.arcVersion}/DAORegistry.json`).abi,
+      utils.importAbi(`./contracts/${this.arcVersion}/DAORegistry.json`).abi,
       DAORegistry,
       this.opts
     )
@@ -125,28 +125,28 @@ async function migrateDemoTest ({ arcVersion, web3, spinner, confirm, opts, migr
   const Reputation = await avatar.methods.nativeReputation().call()
 
   const DemoDAOToken = await new this.web3.eth.Contract(
-    require(`./contracts/${this.arcVersion}/DAOToken.json`).abi,
+    utils.importAbi(`./contracts/${this.arcVersion}/DAOToken.json`).abi,
     undefined,
     this.opts
   ).deploy({
-    data: require(`./contracts/${this.arcVersion}/DAOToken.json`).bytecode,
+    data: utils.importAbi(`./contracts/${this.arcVersion}/DAOToken.json`).bytecode,
     arguments: ['DemoToken', 'DTN', 0]
   }).send()
 
   const DemoReputation = await new this.web3.eth.Contract(
-    require(`./contracts/${this.arcVersion}/Reputation.json`).abi,
+    utils.importAbi(`./contracts/${this.arcVersion}/Reputation.json`).abi,
     undefined,
     this.opts
   ).deploy({
-    data: require(`./contracts/${this.arcVersion}/Reputation.json`).bytecode
+    data: utils.importAbi(`./contracts/${this.arcVersion}/Reputation.json`).bytecode
   }).send()
 
   const DemoAvatar = await new this.web3.eth.Contract(
-    require(`./contracts/${this.arcVersion}/Avatar.json`).abi,
+    utils.importAbi(`./contracts/${this.arcVersion}/Avatar.json`).abi,
     undefined,
     this.opts
   ).deploy({
-    data: require(`./contracts/${this.arcVersion}/Avatar.json`).bytecode,
+    data: utils.importAbi(`./contracts/${this.arcVersion}/Avatar.json`).bytecode,
     arguments: ['DemoAvatar', DemoDAOToken.options.address, DemoReputation.options.address]
   }).send()
   let migration = { 'test': previousMigration.test || {} }
@@ -174,11 +174,11 @@ async function migrateExternalToken () {
   this.spinner.start('Migrating External Token...')
 
   const externalToken = await new this.web3.eth.Contract(
-    require(`./contracts/${this.arcVersion}/DAOToken.json`).abi,
+    utils.importAbi(`./contracts/${this.arcVersion}/DAOToken.json`).abi,
     undefined,
     this.opts
   ).deploy({
-    data: require(`./contracts/${this.arcVersion}/DAOToken.json`).bytecode,
+    data: utils.importAbi(`./contracts/${this.arcVersion}/DAOToken.json`).bytecode,
     arguments: ['External', 'EXT', 0]
   }).send()
 
@@ -196,7 +196,7 @@ async function migrateDemoDao (orgName, tokenName, tokenSymbol, founders, tokenD
   let tx
 
   const daoCreator = new this.web3.eth.Contract(
-    require(`./contracts/${this.arcVersion}/DaoCreator.json`).abi,
+    utils.importAbi(`./contracts/${this.arcVersion}/DaoCreator.json`).abi,
     DaoCreator,
     this.opts
   )
@@ -222,7 +222,7 @@ async function migrateDemoDao (orgName, tokenName, tokenSymbol, founders, tokenD
 async function submitDemoProposals (accounts, web3, avatarAddress, externalTokenAddress, actionMockAddress) {
   const [PASS, FAIL] = [1, 2]
   const actionMock = await new this.web3.eth.Contract(
-    require(`./contracts/${this.arcVersion}/ActionMock.json`).abi,
+    utils.importAbi(`./contracts/${this.arcVersion}/ActionMock.json`).abi,
     actionMockAddress,
     this.opts
   )
@@ -366,11 +366,11 @@ async function migrateActionMock () {
   this.spinner.start('Deploying Action Mock...')
 
   const actionMock = await new this.web3.eth.Contract(
-    require(`./contracts/${this.arcVersion}/ActionMock.json`).abi,
+    utils.importAbi(`./contracts/${this.arcVersion}/ActionMock.json`).abi,
     undefined,
     this.opts
   ).deploy({
-    data: require(`./contracts/${this.arcVersion}/ActionMock.json`).bytecode
+    data: utils.importAbi(`./contracts/${this.arcVersion}/ActionMock.json`).bytecode
   }).send()
 
   return actionMock.options.address
@@ -387,7 +387,7 @@ async function setContributionRewardParams (gpParamsHash) {
   let tx
 
   const contributionReward = new this.web3.eth.Contract(
-    require(`./contracts/${this.arcVersion}/ContributionReward.json`).abi,
+    utils.importAbi(`./contracts/${this.arcVersion}/ContributionReward.json`).abi,
     ContributionReward,
     this.opts
   )
@@ -416,7 +416,7 @@ async function setUGenericSchemeParams (gpParamsHash, actionMock) {
   let tx
 
   const genericScheme = new this.web3.eth.Contract(
-    Number(this.arcVersion.slice(-2)) >= 24 ? require(`./contracts/${this.arcVersion}/UGenericScheme.json`).abi : require(`./contracts/${this.arcVersion}/GenericScheme.json`).abi,
+    Number(this.arcVersion.slice(-2)) >= 24 ? utils.importAbi(`./contracts/${this.arcVersion}/UGenericScheme.json`).abi : utils.importAbi(`./contracts/${this.arcVersion}/GenericScheme.json`).abi,
     Number(this.arcVersion.slice(-2)) >= 24 ? UGenericScheme : GenericScheme,
     this.opts
   )
@@ -449,7 +449,7 @@ async function setSchemeRegistrarParams (gpParamsHash) {
   let tx
 
   const schemeRegistrar = new this.web3.eth.Contract(
-    require(`./contracts/${this.arcVersion}/SchemeRegistrar.json`).abi,
+    utils.importAbi(`./contracts/${this.arcVersion}/SchemeRegistrar.json`).abi,
     SchemeRegistrar,
     this.opts
   )
@@ -477,7 +477,7 @@ async function setGenesisProtocolParams () {
   let tx
 
   const genesisProtocol = new this.web3.eth.Contract(
-    require(`./contracts/${this.arcVersion}/GenesisProtocol.json`).abi,
+    utils.importAbi(`./contracts/${this.arcVersion}/GenesisProtocol.json`).abi,
     GenesisProtocol,
     this.opts
   )
@@ -532,7 +532,7 @@ async function setSchemes (schemes, avatarAddress, metadata) {
   let tx
 
   const daoCreator = new this.web3.eth.Contract(
-    require(`./contracts/${this.arcVersion}/DaoCreator.json`).abi,
+    utils.importAbi(`./contracts/${this.arcVersion}/DaoCreator.json`).abi,
     DaoCreator,
     this.opts
   )
@@ -562,7 +562,7 @@ async function submitGSProposal ({
   let tx
 
   const genericScheme = new this.web3.eth.Contract(
-    Number(this.arcVersion.slice(-2)) >= 24 ? require(`./contracts/${this.arcVersion}/UGenericScheme.json`).abi : require(`./contracts/${this.arcVersion}/GenericScheme.json`).abi,
+    Number(this.arcVersion.slice(-2)) >= 24 ? utils.importAbi(`./contracts/${this.arcVersion}/UGenericScheme.json`).abi : utils.importAbi(`./contracts/${this.arcVersion}/GenericScheme.json`).abi,
     Number(this.arcVersion.slice(-2)) >= 24 ? UGenericScheme : GenericScheme,
     this.opts
   )
@@ -602,7 +602,7 @@ async function submitProposal ({
   let tx
 
   const contributionReward = new this.web3.eth.Contract(
-    require(`./contracts/${this.arcVersion}/ContributionReward.json`).abi,
+    utils.importAbi(`./contracts/${this.arcVersion}/ContributionReward.json`).abi,
     ContributionReward,
     this.opts
   )
@@ -633,7 +633,7 @@ async function voteOnProposal ({ proposalId, outcome, voter }) {
   let tx
 
   const genesisProtocol = new this.web3.eth.Contract(
-    require(`./contracts/${this.arcVersion}/GenesisProtocol.json`).abi,
+    utils.importAbi(`./contracts/${this.arcVersion}/GenesisProtocol.json`).abi,
     GenesisProtocol,
     this.opts
   )
@@ -655,7 +655,7 @@ async function stakeOnProposal ({ proposalId, outcome, staker, amount }) {
   let tx
 
   const genesisProtocol = new this.web3.eth.Contract(
-    require(`./contracts/${this.arcVersion}/GenesisProtocol.json`).abi,
+    utils.importAbi(`./contracts/${this.arcVersion}/GenesisProtocol.json`).abi,
     GenesisProtocol,
     this.opts
   )
