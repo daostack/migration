@@ -75,10 +75,39 @@ async function noBytecode () {
   }
 }
 
+/**
+ * Remove the whitespace from ABIs to reduce package size.
+ */
+async function noWhitespace () {
+  const versionDirs = fs.readdirSync('./contracts')
+
+  // For each version
+  for (let i = 0; i < versionDirs.length; ++i) {
+    const version = versionDirs[i]
+
+    // For each ABI
+    const abis = fs.readdirSync(`./contracts/${versionDirs[i]}`)
+    for (const abi of abis) {
+      const abiJson = JSON.parse(fs.readFileSync(`./contracts/${version}/${abi}`, 'utf-8'))
+
+      fs.writeFileSync(
+        `./contracts/${version}/${abi}`,
+        JSON.stringify(abiJson)
+      )
+    }
+  }
+}
+
 function cli () {
   yargs
     .command('no-duplicates', 'Remove all duplicate ABIs.', yargs => yargs, noDuplicates)
     .command('no-bytecode', 'Remove all bytecode from the ABIs.', yargs => yargs, noBytecode)
+    .command('no-whitespace', 'Remove all whitespace from the ABIs.', yargs => yargs, noWhitespace)
+    .command('$0', 'Remove duplicates, bytecode, and whitespace from the ABIs', yargs => yargs, async () => {
+      await noDuplicates();
+      await noBytecode();
+      await noWhitespace();
+    })
     .showHelpOnFail(false)
     .completion()
     .wrap(120)
