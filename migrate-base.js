@@ -1,4 +1,4 @@
-import utils from './utils'
+const utils = require('./utils')
 
 async function migrateBase ({ arcVersion, web3, spinner, confirm, opts, logTx, previousMigration, getArcVersionNumber }) {
   if (!(await confirm('About to migrate base contracts. Continue?'))) {
