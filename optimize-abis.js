@@ -69,7 +69,7 @@ async function noBytecode () {
 
       fs.writeFileSync(
         `./contracts/${version}/${abi}`,
-        JSON.stringify(abiJson)
+        JSON.stringify(abiJson, null, 2)
       )
     }
   }
