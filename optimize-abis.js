@@ -60,11 +60,11 @@ async function noBytecode () {
       const abiJson = JSON.parse(fs.readFileSync(`./contracts/${version}/${abi}`, 'utf-8'))
 
       if (abiJson.bytecode) {
-        delete abiJson.bytecode;
+        delete abiJson.bytecode
       }
 
       if (abiJson.deployedBytecode) {
-        delete abiJson.deployedBytecode;
+        delete abiJson.deployedBytecode
       }
 
       fs.writeFileSync(
@@ -99,14 +99,15 @@ async function noWhitespace () {
 }
 
 function cli () {
+  /* eslint no-unused-expressions: "off" */
   yargs
     .command('no-duplicates', 'Remove all duplicate ABIs.', yargs => yargs, noDuplicates)
     .command('no-bytecode', 'Remove all bytecode from the ABIs.', yargs => yargs, noBytecode)
     .command('no-whitespace', 'Remove all whitespace from the ABIs.', yargs => yargs, noWhitespace)
     .command('$0', 'Remove duplicates, bytecode, and whitespace from the ABIs', yargs => yargs, async () => {
-      await noDuplicates();
-      await noBytecode();
-      await noWhitespace();
+      await noDuplicates()
+      await noBytecode()
+      await noWhitespace()
     })
     .showHelpOnFail(false)
     .completion()
