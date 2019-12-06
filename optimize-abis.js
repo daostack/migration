@@ -77,28 +77,8 @@ async function noBytecode () {
 
 function cli () {
   yargs
-    .option('no-duplicates', {
-      alias: 'd',
-      describe: 'Remove all duplicate ABIs.',
-      type: 'boolean',
-      default: true
-    })
-    .option('no-bytecode', {
-      alias: 'b',
-      describe: 'Remove all bytecode from the ABIs.',
-      type: 'boolean',
-      default: false
-    })
-    .command('$0', 'Optimize the size of the contracts directory', yargs => yargs,
-      async (args) => {
-        if (args.noBytecode) {
-          await noBytecode();
-        }
-
-        if (args.noDuplicates) {
-          await noDuplicates();
-        }
-      })
+    .command('no-duplicates', 'Remove all duplicate ABIs.', yargs => yargs, noDuplicates)
+    .command('no-bytecode', 'Remove all bytecode from the ABIs.', yargs => yargs, noBytecode)
     .showHelpOnFail(false)
     .completion()
     .wrap(120)
