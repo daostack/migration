@@ -1,14 +1,14 @@
+const yargs = require('yargs')
 const fs = require('fs')
 const equal = require('fast-deep-equal')
 
 /**
- * Optimize the contracts directory by removing duplicate
- * ABIs, and replacing the duplicate with a pointer to 
- * the original (root ABI)
+ * Remove duplicate ABIs, and replacing the duplicate
+ * with a pointer to the original (root ABI)
  */
-async function optimizeAbis () {
+async function noDuplicates () {
   const versionDirs = fs.readdirSync('./contracts')
-  
+
   // For each version (skipping the first)
   for (let i = 1; i < versionDirs.length; ++i) {
     const version = versionDirs[i]
@@ -40,12 +40,77 @@ async function optimizeAbis () {
   }
 }
 
-if (require.main === module) {
-  optimizeAbis()
-    .catch(err => {
-      console.log(err)
-      process.exit(1)
+/**
+ * Remove the bytecode from the ABIs to reduce package size.
+ * This can be used by external projects that use this library
+ * for the creation of new DAOs, and do not require instantiating
+ * new contracts. An example is the DAOcreator, which uses the
+ * DaoCreator Contract to create new DAOs.
+ */
+async function noBytecode () {
+  const versionDirs = fs.readdirSync('./contracts')
+
+  // For each version
+  for (let i = 0; i < versionDirs.length; ++i) {
+    const version = versionDirs[i]
+
+    // For each ABI
+    const abis = fs.readdirSync(`./contracts/${versionDirs[i]}`)
+    for (const abi of abis) {
+      const abiJson = JSON.parse(fs.readFileSync(`./contracts/${version}/${abi}`, 'utf-8'))
+
+      if (abiJson.bytecode) {
+        delete abiJson.bytecode;
+      }
+
+      if (abiJson.deployedBytecode) {
+        delete abiJson.deployedBytecode;
+      }
+
+      fs.writeFileSync(
+        `./contracts/${version}/${abi}`,
+        JSON.stringify(abiJson)
+      )
+    }
+  }
+}
+
+function cli () {
+  yargs
+    .option('no-duplicates', {
+      alias: 'd',
+      describe: 'Remove all duplicate ABIs.',
+      type: 'boolean',
+      default: true
     })
+    .option('no-bytecode', {
+      alias: 'b',
+      describe: 'Remove all bytecode from the ABIs.',
+      type: 'boolean',
+      default: false
+    })
+    .command('$0', 'Optimize the size of the contracts directory', yargs => yargs,
+      async (args) => {
+        if (args.noBytecode) {
+          await noBytecode();
+        }
+
+        if (args.noDuplicates) {
+          await noDuplicates();
+        }
+      })
+    .showHelpOnFail(false)
+    .completion()
+    .wrap(120)
+    .strict()
+    .help().argv
+}
+
+if (require.main === module) {
+  cli()
 } else {
-  module.exports = optimizeAbis
+  module.exports = {
+    noDuplicates,
+    noBytecode
+  }
 }
