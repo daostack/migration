@@ -65,9 +65,9 @@ async function migrateDemoTest ({ arcVersion, web3, spinner, confirm, opts, migr
 
   const crParamsHash = await setContributionRewardParams(gpParamsHash) // FIXME
 
-  const ActionMock = await migrateActionMock()
+  const ActionMock = Number(this.arcVersion.slice(-2)) < 34 ? await migrateActionMock() : null
 
-  const gsParamsHash = await setUGenericSchemeParams(gpParamsHash, ActionMock) // FIXME
+  const gsParamsHash = Number(this.arcVersion.slice(-2)) < 34 ? await setUGenericSchemeParams(gpParamsHash, ActionMock) : null // FIXME
 
   const srParamsHash = await setSchemeRegistrarParams(gpParamsHash) // FIXME
 
@@ -78,16 +78,19 @@ async function migrateDemoTest ({ arcVersion, web3, spinner, confirm, opts, migr
       permissions: '0x00000000' /* no special params */
     },
     {
-      address: Number(this.arcVersion.slice(-2)) >= 24 ? this.base.UGenericScheme : this.base.GenericScheme,
-      params: gsParamsHash,
-      permissions: '0x00000010'
-    },
-    {
       address: this.base.SchemeRegistrar,
       params: srParamsHash,
       permissions: '0x0000001F'
     }
   ]
+
+  if (Number(this.arcVersion.slice(-2)) < 34) {
+    schemes.push({
+      address: Number(this.arcVersion.slice(-2)) >= 24 ? this.base.UGenericScheme : this.base.GenericScheme,
+      params: gsParamsHash,
+      permissions: '0x00000010'
+    })
+  }
 
   await setSchemes(schemes, avatarAddress, 'metaData')
 
@@ -121,6 +124,7 @@ async function migrateDemoTest ({ arcVersion, web3, spinner, confirm, opts, migr
   }
 
   const Avatar = avatarAddress
+  const Controller = await avatar.methods.owner().call()
   const DAOToken = await avatar.methods.nativeToken().call()
   const Reputation = await avatar.methods.nativeReputation().call()
 
@@ -152,6 +156,7 @@ async function migrateDemoTest ({ arcVersion, web3, spinner, confirm, opts, migr
   let migration = { 'test': previousMigration.test || {} }
   migration.test[this.arcVersion] = {
     name: orgName,
+    Controller,
     Avatar,
     DAOToken,
     Reputation,
@@ -189,7 +194,6 @@ async function migrateDemoDao (orgName, tokenName, tokenSymbol, founders, tokenD
   this.spinner.start('Creating a new organization...')
 
   const {
-    UController,
     DaoCreator
   } = this.base
 
@@ -201,14 +205,22 @@ async function migrateDemoDao (orgName, tokenName, tokenSymbol, founders, tokenD
     this.opts
   )
 
-  const forge = daoCreator.methods.forgeOrg(
+  const forge = Number(this.arcVersion.slice(-2)) < 34 ? daoCreator.methods.forgeOrg(
     orgName,
     tokenName,
     tokenSymbol,
     founders,
     tokenDist,
     repDist,
-    UController,
+    '0x0000000000000000000000000000000000000000',
+    cap
+  ) : daoCreator.methods.forgeOrg(
+    orgName,
+    tokenName,
+    tokenSymbol,
+    founders,
+    tokenDist,
+    repDist,
     cap
   )
 
@@ -227,12 +239,14 @@ async function submitDemoProposals (accounts, web3, avatarAddress, externalToken
     this.opts
   )
   let callData = await actionMock.methods.test2(avatarAddress).encodeABI()
-  let gsProposalId = await submitGSProposal({
-    avatarAddress: avatarAddress,
-    callData,
-    descHash: '0x000000000000000000000000000000000000000000000000000000000000abcd'
-  })
-
+  let gsProposalId = '0x0000000000000000000000000000000000000000000000000000000000000000'
+  if (Number(this.arcVersion.slice(-2)) < 34) {
+    gsProposalId = await submitGSProposal({
+      avatarAddress: avatarAddress,
+      callData,
+      descHash: '0x000000000000000000000000000000000000000000000000000000000000abcd'
+    })
+  }
   // QUEUED PROPOSAL //
   let queuedProposalId = await submitProposal({
     avatarAddress: avatarAddress,
@@ -547,6 +561,7 @@ async function setSchemes (schemes, avatarAddress, metadata) {
 
   await this.logTx(tx, 'Dao Creator Set Schemes.')
 }
+
 async function submitGSProposal ({
   avatarAddress,
   callData,
