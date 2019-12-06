@@ -120,6 +120,7 @@ if (require.main === module) {
 } else {
   module.exports = {
     noDuplicates,
-    noBytecode
+    noBytecode,
+    noWhitespace
   }
 }
