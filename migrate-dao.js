@@ -659,7 +659,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
       const path = require('path')
       let contractJson
       if (standAlone.fromArc) {
-        contractJson = utils.importAbi(`./${contractsDir}/${arcVersion}/${standAlone.name}.json`)
+        contractJson = utils.importAbi(`./${contractsDir}/${standAlone.arcVersion ? standAlone.arcVersion : arcVersion}/${standAlone.name}.json`)
       } else {
         contractJson = require(path.resolve(`${customAbisLocation}/${standAlone.name}.json`))
       }
@@ -707,7 +707,14 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
         }
       }
 
-      deploymentState.StandAloneContracts.push({ name: standAlone.name, alias: standAlone.alias, address: standAloneContract.options.address })
+      deploymentState.StandAloneContracts.push(
+        {
+          name: standAlone.name,
+          alias: standAlone.alias,
+          address: standAloneContract.options.address,
+          arcVersion: (standAlone.arcVersion ? standAlone.arcVersion : arcVersion)
+        }
+      )
       setState(deploymentState, network)
     }
     deploymentState.standAloneContractsCounter++
@@ -726,7 +733,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
       const path = require('path')
       let contractJson
       if (customeScheme.fromArc) {
-        contractJson = utils.importAbi(`./${contractsDir}/${arcVersion}/${customeScheme.name}.json`)
+        contractJson = utils.importAbi(`./${contractsDir}/${customeScheme.arcVersion ? customeScheme.arcVersion : arcVersion}/${customeScheme.name}.json`)
       } else {
         contractJson = require(path.resolve(`${customAbisLocation}/${customeScheme.name}.json`))
       }
@@ -742,6 +749,9 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
         schemeContract = result
         await logTx(receipt, `${schemeContract.options.address} => ${customeScheme.name}`)
       } else {
+        if (customeScheme.address.StandAloneContract !== undefined) {
+          customeScheme.address = deploymentState.StandAloneContracts[customeScheme.address.StandAloneContract].address
+        }
         schemeContract = new web3.eth.Contract(abi, customeScheme.address, opts)
       }
 
@@ -795,7 +805,14 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
       deploymentState.schemes.push(schemeContract.options.address)
       deploymentState.params.push(schemeParamsHash)
       deploymentState.permissions.push(customeScheme.permissions)
-      deploymentState.Schemes.push({ name: customeScheme.name, alias: customeScheme.alias, address: schemeContract.options.address })
+      deploymentState.Schemes.push(
+        {
+          name: customeScheme.name,
+          alias: customeScheme.alias,
+          address: schemeContract.options.address,
+          arcVersion: (customeScheme.arcVersion ? customeScheme.arcVersion : arcVersion)
+        }
+      )
       setState(deploymentState, network)
     }
     deploymentState.CustomSchemeCounter++
@@ -834,27 +851,19 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
     setState(deploymentState, network)
   }
 
-  console.log(
-    JSON.stringify({
-      name: orgName,
-      Avatar: avatar.options.address,
-      DAOToken: daoToken.options.address,
-      Reputation: reputation.options.address,
-      Controller: deploymentState.Controller,
-      Schemes: deploymentState.Schemes,
-      arcVersion
-    }, null, 2)
-  )
-  let migration = { 'dao': previousMigration.dao || {} }
-  migration.dao[arcVersion] = {
+  let dao = {
     name: orgName,
     Avatar: avatar.options.address,
     DAOToken: daoToken.options.address,
     Reputation: reputation.options.address,
     Controller: deploymentState.Controller,
     Schemes: deploymentState.Schemes,
+    StandAloneContracts: deploymentState.StandAloneContracts,
     arcVersion
   }
+  console.log(JSON.stringify(dao, null, 2))
+  let migration = { 'dao': previousMigration.dao || {} }
+  migration.dao[arcVersion] = dao
 
   cleanState(network)
   spinner.succeed('DAO Migration has Finished Successfully!')
