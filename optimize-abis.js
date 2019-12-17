@@ -55,7 +55,7 @@ async function noBytecode () {
     const version = versionDirs[i]
 
     // For each ABI
-    const abis = fs.readdirSync(`./contracts/${versionDirs[i]}`)
+    const abis = fs.readdirSync(`./contracts/${version}`)
     for (const abi of abis) {
       const abiJson = JSON.parse(fs.readFileSync(`./contracts/${version}/${abi}`, 'utf-8'))
 
