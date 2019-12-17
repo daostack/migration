@@ -1,13 +1,23 @@
 const yargs = require('yargs')
 const fs = require('fs')
+const fsExtra = require('fs-extra')
 const equal = require('fast-deep-equal')
+
+/**
+ * Initialize the contracts-optimized directory
+ */
+function initDirectory () {
+  fsExtra.copySync('./contracts', './contracts-optimized', {
+    overwrite: true
+  })
+}
 
 /**
  * Remove duplicate ABIs, and replacing the duplicate
  * with a pointer to the original (root ABI)
  */
 async function noDuplicates () {
-  const versionDirs = fs.readdirSync('./contracts')
+  const versionDirs = fs.readdirSync('./contracts-optimized')
 
   // For each version (skipping the first)
   for (let i = 1; i < versionDirs.length; ++i) {
@@ -15,23 +25,23 @@ async function noDuplicates () {
     const prevVersion = versionDirs[i - 1]
 
     // For each ABI
-    const abis = fs.readdirSync(`./contracts/${version}`)
+    const abis = fs.readdirSync(`./contracts-optimized/${version}`)
     for (const abi of abis) {
       try {
-        const abiJson = JSON.parse(fs.readFileSync(`./contracts/${version}/${abi}`, 'utf-8'))
+        const abiJson = JSON.parse(fs.readFileSync(`./contracts-optimized/${version}/${abi}`, 'utf-8'))
         let rootVersion = prevVersion
-        let rootAbiJson = JSON.parse(fs.readFileSync(`./contracts/${rootVersion}/${abi}`, 'utf-8'))
+        let rootAbiJson = JSON.parse(fs.readFileSync(`./contracts-optimized/${rootVersion}/${abi}`, 'utf-8'))
 
         if (rootAbiJson.rootVersion) {
           rootVersion = rootAbiJson.rootVersion
-          rootAbiJson = JSON.parse(fs.readFileSync(`./contracts/${rootVersion}/${abi}`, 'utf-8'))
+          rootAbiJson = JSON.parse(fs.readFileSync(`./contracts-optimized/${rootVersion}/${abi}`, 'utf-8'))
         }
 
         // Check to see if they're the same
         if (equal(abiJson, rootAbiJson)) {
           // Replace the duplicate with a "Root ABI Pointer"
           fs.writeFileSync(
-            `./contracts/${version}/${abi}`,
+            `./contracts-optimized/${version}/${abi}`,
             JSON.stringify({ rootVersion })
           )
         }
@@ -48,16 +58,16 @@ async function noDuplicates () {
  * DaoCreator Contract to create new DAOs.
  */
 async function noBytecode () {
-  const versionDirs = fs.readdirSync('./contracts')
+  const versionDirs = fs.readdirSync('./contracts-optimized')
 
   // For each version
   for (let i = 0; i < versionDirs.length; ++i) {
     const version = versionDirs[i]
 
     // For each ABI
-    const abis = fs.readdirSync(`./contracts/${version}`)
+    const abis = fs.readdirSync(`./contracts-optimized/${version}`)
     for (const abi of abis) {
-      const abiJson = JSON.parse(fs.readFileSync(`./contracts/${version}/${abi}`, 'utf-8'))
+      const abiJson = JSON.parse(fs.readFileSync(`./contracts-optimized/${version}/${abi}`, 'utf-8'))
 
       if (abiJson.bytecode) {
         delete abiJson.bytecode
@@ -68,7 +78,7 @@ async function noBytecode () {
       }
 
       fs.writeFileSync(
-        `./contracts/${version}/${abi}`,
+        `./contracts-optimized/${version}/${abi}`,
         JSON.stringify(abiJson, null, 2)
       )
     }
@@ -79,19 +89,19 @@ async function noBytecode () {
  * Remove the whitespace from ABIs to reduce package size.
  */
 async function noWhitespace () {
-  const versionDirs = fs.readdirSync('./contracts')
+  const versionDirs = fs.readdirSync('./contracts-optimized')
 
   // For each version
   for (let i = 0; i < versionDirs.length; ++i) {
     const version = versionDirs[i]
 
     // For each ABI
-    const abis = fs.readdirSync(`./contracts/${versionDirs[i]}`)
+    const abis = fs.readdirSync(`./contracts-optimized/${version}`)
     for (const abi of abis) {
-      const abiJson = JSON.parse(fs.readFileSync(`./contracts/${version}/${abi}`, 'utf-8'))
+      const abiJson = JSON.parse(fs.readFileSync(`./contracts-optimized/${version}/${abi}`, 'utf-8'))
 
       fs.writeFileSync(
-        `./contracts/${version}/${abi}`,
+        `./contracts-optimized/${version}/${abi}`,
         JSON.stringify(abiJson)
       )
     }
@@ -101,10 +111,12 @@ async function noWhitespace () {
 function cli () {
   /* eslint no-unused-expressions: "off" */
   yargs
+    .command('init', 'Initialize the contracts-optimized directory.', yargs => yargs, initDirectory)
     .command('no-duplicates', 'Remove all duplicate ABIs.', yargs => yargs, noDuplicates)
     .command('no-bytecode', 'Remove all bytecode from the ABIs.', yargs => yargs, noBytecode)
     .command('no-whitespace', 'Remove all whitespace from the ABIs.', yargs => yargs, noWhitespace)
     .command('$0', 'Remove duplicates, bytecode, and whitespace from the ABIs', yargs => yargs, async () => {
+      initDirectory()
       await noDuplicates()
       await noBytecode()
       await noWhitespace()
