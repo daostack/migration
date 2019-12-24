@@ -69,10 +69,10 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     opts
   )
 
-  if (await packageContract.methods.hasVersion([0, 0, getArcVersionNumber(arcVersion)]).call()) {
+  if (await packageContract.methods.hasVersion([0, 1, getArcVersionNumber(arcVersion)]).call()) {
     if (!(
       await confirm(
-        `Package ${packageName} version 0.0.${getArcVersionNumber(arcVersion)} already exists. Would you like to deploy a new Package contract?`,
+        `Package ${packageName} version 0.1.${getArcVersionNumber(arcVersion)} already exists. Would you like to deploy a new Package contract?`,
         false
       )
     )) {
@@ -96,12 +96,12 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
 
   tx = (await sendTx(
     packageContract.methods.addVersion(
-      [0, 0, getArcVersionNumber(arcVersion)],
+      [0, 1, getArcVersionNumber(arcVersion)],
       ImplementationDirectory,
       web3.utils.hexToBytes(web3.utils.utf8ToHex(arcURL))
-    ), `Adding version 0.0.${getArcVersionNumber(arcVersion)} to ${packageName} Package`)
+    ), `Adding version 0.1.${getArcVersionNumber(arcVersion)} to ${packageName} Package`)
   ).receipt
-  await logTx(tx, `Added version 0.0.${getArcVersionNumber(arcVersion)} to ${packageName} Package`)
+  await logTx(tx, `Added version 0.1.${getArcVersionNumber(arcVersion)} to ${packageName} Package`)
   let App = await deploy(require(`./contracts/${arcVersion}/App.json`))
   let app = new web3.eth.Contract(
     require(`./contracts/${arcVersion}/App.json`).abi,
@@ -110,9 +110,9 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
   )
 
   tx = (await sendTx(
-    app.methods.setPackage(packageName, Package, [0, 0, getArcVersionNumber(arcVersion)]),
-    `Setting App package to version 0.0.${getArcVersionNumber(arcVersion)}`)).receipt
-  await logTx(tx, `App package version has been set to 0.0.${getArcVersionNumber(arcVersion)}`)
+    app.methods.setPackage(packageName, Package, [0, 1, getArcVersionNumber(arcVersion)]),
+    `Setting App package to version 0.1.${getArcVersionNumber(arcVersion)}`)).receipt
+  await logTx(tx, `App package version has been set to 0.1.${getArcVersionNumber(arcVersion)}`)
 
   // Setup the GEN token contract
   let GENToken = '0x543Ff227F64Aa17eA132Bf9886cAb5DB55DCAddf'
@@ -188,8 +188,8 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     'Controller',
     'ControllerCreator',
     'DAOFactory',
+    'DAORegistry',
     'DAOToken',
-    'DAOTracker',
     'ExternalLocking4Reputation',
     'ExternalTokenLockerMock',
     'FixedReputationAllocation',
@@ -262,42 +262,42 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
       break
   }
 
-  addresses['DAOTrackerInstance'] = shouldDeploy('DAOTrackerInstance', require(`./contracts/${arcVersion}/AdminUpgradeabilityProxy.json`).deployedBytecode)
-  if (!(await addresses['DAOTrackerInstance'])) {
-    let initData = await new web3.eth.Contract(require(`./contracts/${arcVersion}/DAOTracker.json`).abi)
+  addresses['DAORegistryInstance'] = shouldDeploy('DAORegistryInstance', require(`./contracts/${arcVersion}/AdminUpgradeabilityProxy.json`).deployedBytecode)
+  if (!(await addresses['DAORegistryInstance'])) {
+    let initData = await new web3.eth.Contract(require(`./contracts/${arcVersion}/DAORegistry.json`).abi)
       .methods.initialize(adminAddress).encodeABI()
-    let daoTrackerTx = app.methods.create(
+    let daoRegistryTx = app.methods.create(
       packageName,
-      'DAOTracker',
+      'DAORegistry',
       adminAddress,
       initData
     )
-    let DAOTracker = await daoTrackerTx.call()
+    let DAORegistry = await daoRegistryTx.call()
 
-    tx = (await sendTx(daoTrackerTx, 'Deploying DAOTracker...')).receipt
-    await logTx(tx, 'Finished Deploying DAOTracker')
+    tx = (await sendTx(daoRegistryTx, 'Deploying DAORegistry...')).receipt
+    await logTx(tx, 'Finished Deploying DAORegistry')
 
-    addresses['DAOTrackerInstance'] = DAOTracker
+    addresses['DAORegistryInstance'] = DAORegistry
   } else {
-    let daoTracker = new web3.eth.Contract(
+    let daoRegistry = new web3.eth.Contract(
       require(`./contracts/${arcVersion}/AdminUpgradeabilityProxy.json`).abi,
-      addresses['DAOTrackerInstance'],
+      addresses['DAORegistryInstance'],
       opts
     )
     tx = (await sendTx(
-      daoTracker.methods.upgradeTo(addresses['DAOTracker']),
-      `Upgrading DAOTracker contract to version 0.0.${getArcVersionNumber(arcVersion)}...`,
+      daoRegistry.methods.upgradeTo(addresses['DAORegistry']),
+      `Upgrading DAORegistry contract to version 0.1.${getArcVersionNumber(arcVersion)}...`,
       web3.eth.accounts.wallet[1].address)
     ).receipt
-    await logTx(tx, `Finished upgrading DAOTracker to version 0.0.${getArcVersionNumber(arcVersion)}`)
+    await logTx(tx, `Finished upgrading DAORegistry to version 0.1.${getArcVersionNumber(arcVersion)}`)
 
-    addresses['DAOTrackerInstance'] = previousMigration.package[arcVersion]['DAOTrackerInstance']
+    addresses['DAORegistryInstance'] = previousMigration.package[arcVersion]['DAORegistryInstance']
   }
 
   addresses['DAOFactoryInstance'] = shouldDeploy('DAOFactoryInstance', require(`./contracts/${arcVersion}/AdminUpgradeabilityProxy.json`).deployedBytecode)
   if (!(await addresses['DAOFactoryInstance'])) {
     let initData = await new web3.eth.Contract(require(`./contracts/${arcVersion}/DAOFactory.json`).abi)
-      .methods.initialize(App, addresses['DAOTrackerInstance']).encodeABI()
+      .methods.initialize(App).encodeABI()
 
     let daoFactoryTx = app.methods.create(
       packageName,
@@ -319,10 +319,10 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     )
     tx = (await sendTx(
       daoFactory.methods.upgradeTo(addresses['DAOFactory']),
-      `Upgrading DAOFactory contract to version 0.0.${getArcVersionNumber(arcVersion)}...`,
+      `Upgrading DAOFactory contract to version 0.1.${getArcVersionNumber(arcVersion)}...`,
       web3.eth.accounts.wallet[1].address)
     ).receipt
-    await logTx(tx, `Finished upgrading DAOFactory to version 0.0.${getArcVersionNumber(arcVersion)}`)
+    await logTx(tx, `Finished upgrading DAOFactory to version 0.1.${getArcVersionNumber(arcVersion)}`)
 
     addresses['DAOFactoryInstance'] = previousMigration.package[arcVersion]['DAOFactoryInstance']
   }
