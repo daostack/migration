@@ -248,24 +248,27 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
 
   const TESTNET_ACCOUNT = '0x73Db6408abbea97C5DB8A2234C4027C315094936'
   const DAOSTACK_ACCOUNT = '0x85e7fa550b534656d04d143b9a23a11e05077da3'
-  let adminAddress
+  let adminAddress, daoRegistryAdminAddress
   switch (network) {
     case 'kovan':
     case 'rinkeby':
       adminAddress = TESTNET_ACCOUNT
+      daoRegistryAdminAddress = TESTNET_ACCOUNT // TODO: USE A DIFFERENT ACOUNT
       break
     case 'mainnet':
       adminAddress = DAOSTACK_ACCOUNT
+      daoRegistryAdminAddress = DAOSTACK_ACCOUNT // TODO: USE A DIFFERENT ACOUNT
       break
     case 'private':
       adminAddress = web3.eth.accounts.wallet[1].address
+      daoRegistryAdminAddress = web3.eth.accounts.wallet[0].address
       break
   }
 
   addresses['DAORegistryInstance'] = shouldDeploy('DAORegistryInstance', require(`./contracts/${arcVersion}/AdminUpgradeabilityProxy.json`).deployedBytecode)
   if (!(await addresses['DAORegistryInstance'])) {
     let initData = await new web3.eth.Contract(require(`./contracts/${arcVersion}/DAORegistry.json`).abi)
-      .methods.initialize(adminAddress).encodeABI()
+      .methods.initialize(daoRegistryAdminAddress).encodeABI()
     let daoRegistryTx = app.methods.create(
       packageName,
       'DAORegistry',
