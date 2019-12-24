@@ -1,6 +1,6 @@
 {
   "name": "@daostack/migration-experimental",
-  "version": "0.1.1-rc.0-v1",
+  "version": "0.1.1-rc.0-v2",
   "description": "A repo for handling DAOstack contract migrations",
   "main": "index.js",
   "bin": {
@@ -18,7 +18,6 @@
     "migrate": "node ./migrate.js",
     "migrate.base": "node ./migrate.js base",
     "migrate.dao": "node ./migrate.js dao",
-    "migrate.demo": "node ./migrate.js demo",
     "docker:build": "docker build . -t daostack/migration-experimental:$(cat package.json | jq -r '.version')",
     "docker:push": "docker push daostack/migration-experimental:$(cat package.json | jq -r '.version')",
     "prepare-release": "./prepare-release.sh",
@@ -44,7 +43,7 @@
   },
   "homepage": "https://github.com/daostack/migration#readme",
   "dependencies": {
-    "@daostack/arc-experimental": "^0.1.1-rc.0",
+    "@daostack/arc-experimental": "0.1.1-rc.0",
     "@daostack/arc-hive": "0.0.1-rc.5",
     "ethereumjs-wallet": "^0.6.3",
     "fstream": "^1.0.12",

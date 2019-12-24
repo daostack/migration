@@ -18,7 +18,7 @@ readonly ARC=$(cat package.json | jq -r '.dependencies."@daostack/arc-experiment
 for (( version=$INITIAL_VERSION; version<=$ARC; version++ ))
 do
 echo "Installing Arc version $version..."
-npm install "@daostack/arc-experimental@0.1.1-rc.$version"
+npm install "@daostack/arc-experimental@0.1.1-rc.$version" --save --save-exact
 # prune arc build
 echo "Pruning Arc build..."
 npm run prune-arc-build -- "$@"
