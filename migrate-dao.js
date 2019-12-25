@@ -295,7 +295,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
 
       deploymentState.schemeNames.push(web3.utils.fromAscii(scheme.name))
       deploymentState.schemesData = utils.concatBytes(deploymentState.schemesData, schemeData)
-      deploymentState.schemesInitilizeDataLens.push(utils.getBytesLength(web3, schemeData))
+      deploymentState.schemesInitilizeDataLens.push(utils.getBytesLength(schemeData))
       deploymentState.permissions.push(scheme.permissions)
       setState(deploymentState, network)
     }
