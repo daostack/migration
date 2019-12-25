@@ -21,6 +21,6 @@ exports.concatBytes = function (bytes1, bytes2) {
   return bytes1 + (bytes2.slice(2))
 }
 
-exports.getBytesLength = function (web3, bytes) {
+exports.getBytesLength = function (bytes) {
   return Number(bytes.slice(2).length) / 2
 }

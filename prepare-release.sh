@@ -11,7 +11,7 @@ echo "Installing NPM modules..."
 # npm install
 npm ci
 # initial Arc vrsion to use
-readonly INITIAL_VERSION=0
+readonly INITIAL_VERSION=1
 # get latest Arc version
 readonly ARC=$(cat package.json | jq -r '.dependencies."@daostack/arc-experimental"' | rev | cut -d'.' -f 1 | rev)
 # migrate ganache
