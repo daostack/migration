@@ -67,7 +67,7 @@ const options = {
 			// migration params as defined in the "Migration parameters" section below
 		},
 		private: {
-			// overide defaults on private network
+			// override defaults on private network
 		},
 		kovan: {
 			// override defaults on kovan
