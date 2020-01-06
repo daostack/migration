@@ -47,7 +47,7 @@ const options = {
   provider: 'http://localhost:8545',
   // gas price in GWei. If not specified, will use an automatically suggested price.
   gasPrice: 3.4,
-  // surpress console output
+  // suppress console output
   quiet: true,
   // disable confirmation messages
   disable-confs: true,
@@ -137,7 +137,7 @@ Options:
 
 4. Customize `your-new-dao-params.json` by setting up the DAO name, token, founders, schemes etc. To learn more about the customization options for the parameters please see the [Migration parameters](#migration-parameters) section below.
 
-5. Obtain a URL of an Ethereum node connected to your desired network. You can also use [Infure](https://infura.io) for that.
+5. Obtain a URL of an Ethereum node connected to your desired network. You can also use [Infura](https://infura.io) for that.
 
 6. Get some ether in your Ethereum account to pay for the mining fee of deploying the DAO. Make sure you have the private key for the account.
 
@@ -177,10 +177,10 @@ const options = {
       // migration params as defined in the "Migration parameters" section below
     },
     private: {
-      // overide defaults on private network
+      // override defaults on private network
     },
     kovan: {
-      // overide defaults on kovan
+      // override defaults on kovan
     }
   }
 };
@@ -283,7 +283,7 @@ Example migration parameters object:
      },
      {
       "name": "RepAllocation",
-      // If your contract has an initalize / constructor method which accepts arguments please add them here.
+      // If your contract has an initialize / constructor method which accepts arguments please add them here.
       "params": [
         100000,
         { "StandAloneContract": 0 }
