@@ -109,6 +109,11 @@ async function migrateDemoTest ({ arcVersion, web3, spinner, confirm, opts, migr
   )
 
   const network = await this.web3.eth.net.getNetworkType()
+  if (network === 'private') {
+    if (await web3.eth.net.getId() == 100) {
+         network = 'xdai'
+    }
+  }
 
   if (network === 'private') {
     const daoRegistry = new this.web3.eth.Contract(
