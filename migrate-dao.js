@@ -8,9 +8,8 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
   }
 
   if (network === 'private') {
-    if (await web3.eth.net.getId() == 100) {
-         network = 'xdai'
-         console.log(",,,,,")
+    if (await web3.eth.net.getId() === 100) {
+      network = 'xdai'
     }
   }
 

@@ -13,8 +13,8 @@ async function migrateBase ({ arcVersion, web3, spinner, confirm, opts, logTx, p
   const addresses = {}
   let network = await web3.eth.net.getNetworkType()
   if (network === 'private') {
-    if (await web3.eth.net.getId() == 100) {
-         network = 'xdai'
+    if (await web3.eth.net.getId() === 100) {
+      network = 'xdai'
     }
   }
   async function deploy ({ contractName, abi, bytecode, deployedBytecode }, deps, ...args) {

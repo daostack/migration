@@ -108,10 +108,10 @@ async function migrateDemoTest ({ arcVersion, web3, spinner, confirm, opts, migr
     this.opts
   )
 
-  const network = await this.web3.eth.net.getNetworkType()
+  let network = await this.web3.eth.net.getNetworkType()
   if (network === 'private') {
-    if (await web3.eth.net.getId() == 100) {
-         network = 'xdai'
+    if (await web3.eth.net.getId() === 100) {
+      network = 'xdai'
     }
   }
 

@@ -88,10 +88,10 @@ const wrapCommand = fn => async options => {
     }
   }
 
-  let network = await web3.eth.net.getNetworkType();
+  let network = await web3.eth.net.getNetworkType()
   if (network === 'private') {
-    if (await web3.eth.net.getId() == 100) {
-         network = 'xdai'
+    if (await web3.eth.net.getId() === 100) {
+      network = 'xdai'
     }
   }
   if (network === 'main') {
