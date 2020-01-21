@@ -722,7 +722,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
       }), `Migrating ${standAlone.name}...`)
       await logTx(receipt, `${standAloneContract.options.address} => ${standAlone.name}`)
 
-      if (!standAlone.constructor && standAlone.params !== undefined) {
+      if (standAlone.constructor !== true && standAlone.params !== undefined) {
         const contractSetParams = standAloneContract.methods.initialize(...contractParams)
 
         tx = (await sendTx(contractSetParams, `Initializing ${standAlone.name}...`)).receipt
