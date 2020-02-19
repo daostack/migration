@@ -10,7 +10,7 @@ const moment = require('moment')
 const migrateBase = require('./migrate-base')
 const migrateDAO = require('./migrate-dao')
 const migrateDemoTest = require('./migrate-demo-test')
-const updateDAORegistry = require('helper-scripts/dao-registry')
+const updateDAORegistry = require('./helper-scripts/dao-registry')
 const path = require('path')
 
 async function migrate (opts) {
