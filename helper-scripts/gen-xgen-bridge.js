@@ -1,4 +1,4 @@
-async function updateDAORegistry ({ web3, opts, logTx, sendTx, xgenToMove }) {
+async function moveGEN ({ web3, opts, logTx, sendTx, xgenToMove }) {
   let tx
 
   let weiValue = web3.utils.toWei(xgenToMove.toString())
@@ -70,4 +70,4 @@ async function updateDAORegistry ({ web3, opts, logTx, sendTx, xgenToMove }) {
   await logTx(tx, 'Finished moving' + xgenToMove + txMsg)
 }
 
-module.exports = updateDAORegistry
+module.exports = moveGEN
