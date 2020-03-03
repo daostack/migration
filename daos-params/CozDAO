@@ -56,18 +56,6 @@
   },
   "CustomSchemes": [
     {
-      "name": "ReputationFromToken",
-      "isUniversal": false,
-      "params": [
-        { "StandAloneContract": 2 },
-        "0x0000000000000000000000000000000000000000",
-        "0x0000000000000000000000000000000000000000"
-      ],
-      "alias": "ReputationFromToken",
-      "fromArc": true,
-      "permissions": "0x00000000"
-    },
-    {
       "name": "ContributionRewardExt",
       "schemeName": "ContributionRewardExt",
       "address": { "StandAloneContract": 0 },
