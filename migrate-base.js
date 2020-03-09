@@ -1,4 +1,5 @@
 const glob = require('glob')
+const utils = require('./utils.js')
 
 async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMigration, getArcVersionNumber, sendTx, optimizedAbis }) {
   let tx
@@ -14,7 +15,16 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
   const arcURL = `https://github.com/daostack/arc/releases/tag/${arcVersion}`
 
   const addresses = {}
-  const network = await web3.eth.net.getNetworkType()
+  let network = await web3.eth.net.getNetworkType()
+  if (network === 'main') {
+    network = 'mainnet'
+  } else if (network === 'private') {
+    if (await web3.eth.net.getId() === 100) {
+      network = 'xdai'
+    } else if (await web3.eth.net.getId() === 77) {
+      network = 'sokol'
+    }
+  }
 
   async function shouldDeploy (contractName, deployedBytecode, deps) {
     if (contractName !== 'ImplementationDirectory') {
@@ -188,8 +198,10 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     'ARCVotingMachineCallbacksMock',
     'Auction4Reputation',
     'Avatar',
+    'Competition',
     'ContinuousLocking4Reputation',
     'ContributionReward',
+    'ContributionRewardExt',
     'Controller',
     'ControllerCreator',
     'DAOFactory',

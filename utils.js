@@ -1,3 +1,5 @@
+const path = require('path')
+
 function randomEl (list) {
   var i = Math.floor(Math.random() * list.length)
   return list[i]
@@ -21,4 +23,17 @@ exports.concatBytes = function (bytes1, bytes2) {
 
 exports.getBytesLength = function (bytes) {
   return Number(bytes.slice(2).length) / 2
+}
+
+exports.importAbi = function (abiPath) {
+  let abi = require(`${abiPath}`)
+  if (abi.rootVersion) {
+    const abiName = abiPath.substring(abiPath.lastIndexOf('/') + 1)
+    const abiFolder = path.dirname(abiPath)
+    const rootPath = path.join(
+      abiFolder, `../${abi.rootVersion}/${abiName}`
+    )
+    abi = require(`./${rootPath}`)
+  }
+  return abi
 }
