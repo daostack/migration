@@ -60,7 +60,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
     opts
   )
 
-  let randomName = utils.generateRnadomName()
+  let randomName = utils.generateRandomName()
 
   if (deploymentState.orgName !== undefined) {
     randomName = deploymentState.orgName

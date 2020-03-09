@@ -59,7 +59,7 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     return result.options.address
   }
 
-  // OpenZepplin App and Package setup
+  // OpenZeppelin App and Package setup
   let packageName = 'DAOstack'
 
   let Package = await deploy(require(`./contracts/${arcVersion}/Package.json`))

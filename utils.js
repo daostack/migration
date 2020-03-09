@@ -1,5 +1,3 @@
-const path = require('path')
-
 function randomEl (list) {
   var i = Math.floor(Math.random() * list.length)
   return list[i]
@@ -13,7 +11,7 @@ const capitalize = (s) => {
   return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
-exports.generateRnadomName = function () {
+exports.generateRandomName = function () {
   return capitalize(randomEl(adjectives)) + ' ' + capitalize(randomEl(nouns))
 }
 

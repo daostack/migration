@@ -133,7 +133,7 @@ const wrapCommand = fn => async options => {
     return obj ? !(Object.entries(obj).length === 0 && obj.constructor === Object) : false
   }
 
-  // run the actucal command
+  // run the actual command
   const result = await fn({
     arcVersion,
     web3,
