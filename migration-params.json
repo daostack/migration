@@ -102,7 +102,21 @@
       ],
       "permissions": "0x00000010",
       "alias" : "GenericSchemeAlias2"
-    }
+    },
+    {
+      "name":"ContributionRewardExt",
+      "schemeName":"ContributionRewardExt",
+      "address": { "StandAloneContract": 1 },
+      "isUniversal":false,
+      "params":[
+         "GenesisProtocolAddress",
+         { "voteParams":0 },
+         { "StandAloneContract": 2 }
+      ],
+      "permissions":"0x00000000",
+      "alias":"ContributionRewardExt",
+      "fromArc":true
+   }
   ],
   "founders": [
     {
