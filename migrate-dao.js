@@ -49,7 +49,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
   } = arcPackage[arcVersion]
 
   const daoFactory = new web3.eth.Contract(
-    require(`./contracts/${arcVersion}/DAOFactory.json`).abi,
+    utils.importAbi(`./${contractsDir}/${arcVersion}/DAOFactory.json`).abi,
     DAOFactoryInstance,
     opts
   )
@@ -96,7 +96,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
   const foundersBatchSize = 100
   if (deploymentState.Avatar === undefined) {
     let foundersInitCount = founderAddresses.length < initFoundersBatchSize ? founderAddresses.length : initFoundersBatchSize
-    let tokenData = await new web3.eth.Contract(require(`./contracts/${arcVersion}/DAOToken.json`).abi)
+    let tokenData = await new web3.eth.Contract(utils.importAbi(`./${contractsDir}/${arcVersion}/DAOToken.json`).abi)
       .methods.initialize(tokenName, tokenSymbol, tokenCap, DAOFactoryInstance).encodeABI()
     const forgeOrg = daoFactory.methods.forgeOrg(
       orgName,
@@ -137,25 +137,25 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
   }
 
   avatar = new web3.eth.Contract(
-    require(`./contracts/${arcVersion}/Avatar.json`).abi,
+    utils.importAbi(`./${contractsDir}/${arcVersion}/Avatar.json`).abi,
     deploymentState.Avatar,
     opts
   )
 
   daoToken = new web3.eth.Contract(
-    require(`./contracts/${arcVersion}/DAOToken.json`).abi,
+    utils.importAbi(`./${contractsDir}/${arcVersion}/DAOToken.json`).abi,
     await avatar.methods.nativeToken().call(),
     opts
   )
 
   reputation = new web3.eth.Contract(
-    require(`./contracts/${arcVersion}/Reputation.json`).abi,
+    utils.importAbi(`./${contractsDir}/${arcVersion}/Reputation.json`).abi,
     await avatar.methods.nativeReputation().call(),
     opts
   )
 
   controller = new web3.eth.Contract(
-    require(`./contracts/${arcVersion}/Controller.json`).abi,
+    utils.importAbi(`./${contractsDir}/${arcVersion}/Controller.json`).abi,
     await avatar.methods.owner().call(),
     opts
   )
@@ -165,7 +165,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
     deploymentState.schemes = []
     deploymentState.schemeNames = []
     deploymentState.schemesData = '0x'
-    deploymentState.schemesInitilizeDataLens = []
+    deploymentState.schemesInitializeDataLens = []
     deploymentState.permissions = []
     deploymentState.votingMachinesParams = []
   }
@@ -218,6 +218,27 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
   }
   deploymentState.registeredGenesisProtocolParamsCount++
   setState(deploymentState, network)
+
+  let runFunctions = async function (object, contract) {
+    if (object.runFunctions !== undefined) {
+      for (let i in object.runFunctions) {
+        let functionParams = []
+        for (let j in object.runFunctions[i].params) {
+          if (object.runFunctions[i].params[j].StandAloneContract !== undefined) {
+            functionParams.push(deploymentState.StandAloneContracts[object.runFunctions[i].params[j].StandAloneContract].address)
+          } else if (object.runFunctions[i].params[j] === 'AvatarAddress') {
+            functionParams.push(avatar.options.address)
+          } else {
+            functionParams.push(object.runFunctions[i].params[j])
+          }
+        }
+        const functionCall = contract.methods[object.runFunctions[i].functionName](...functionParams)
+
+        tx = (await sendTx(functionCall, `Calling ${object.name} - ${object.runFunctions[i].functionName}...`)).receipt
+        await logTx(tx, `${object.name} called function ${object.runFunctions[i].functionName}.`)
+      }
+    }
+  }
 
   if (migrationParams.StandAloneContracts) {
     let len = migrationParams.StandAloneContracts.length
@@ -307,12 +328,12 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
         }
       }
 
-      let schemeData = await new web3.eth.Contract(require(`./contracts/${arcVersion}/${scheme.name}.json`).abi)
+      let schemeData = await new web3.eth.Contract(utils.importAbi(`./${contractsDir}/${arcVersion}/${scheme.name}.json`).abi)
         .methods.initialize(...schemeParams).encodeABI()
 
       deploymentState.schemeNames.push(web3.utils.fromAscii(scheme.name))
       deploymentState.schemesData = utils.concatBytes(deploymentState.schemesData, schemeData)
-      deploymentState.schemesInitilizeDataLens.push(utils.getBytesLength(schemeData))
+      deploymentState.schemesInitializeDataLens.push(utils.getBytesLength(schemeData))
       deploymentState.permissions.push(scheme.permissions)
       setState(deploymentState, network)
     }
@@ -326,7 +347,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
         avatar.options.address,
         deploymentState.schemeNames,
         deploymentState.schemesData,
-        deploymentState.schemesInitilizeDataLens,
+        deploymentState.schemesInitializeDataLens,
         deploymentState.permissions,
         migrationParams.metaData !== undefined ? migrationParams.metaData : 'metaData'
       ), 'Setting DAO schemes...')).receipt
