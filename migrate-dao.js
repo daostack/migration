@@ -274,17 +274,35 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
         }
       }
 
-      const { receipt, result: standAloneContract } = await sendTx(StandAloneContract.deploy({
-        data: bytecode,
-        arguments: standAlone.constructor ? contractParams : null
-      }), `Migrating ${standAlone.name}...`)
-      await logTx(receipt, `${standAloneContract.options.address} => ${standAlone.name}`)
+      // Allow create as proxy
+      let standAloneContract
+      if (standAlone.fromArc) {
+        const contractInitParams = (standAlone.params !== undefined && standAlone.params.length > 0)
+          ? StandAloneContract.methods.initialize(...contractParams).encodeABI()
+          : '0x'
+        let createStandAloneProxyInstance = daoFactory.methods.createInstance(
+          [0, 1, getArcVersionNumber(standAlone.arcVersion ? standAlone.arcVersion : arcVersion)],
+          standAlone.name,
+          avatar.options.address,
+          contractInitParams
+        )
+        tx = (await sendTx(createStandAloneProxyInstance, `Creating ${standAlone.name} Proxy Instance...`)).receipt
+        standAloneContract = new web3.eth.Contract(abi, tx.events.ProxyCreated.returnValues._proxy, opts)
+        await logTx(tx, `${standAloneContract.options.address} => ${standAlone.name}`)
+      } else {
+        const { receipt, result: standAloneContractRes } = await sendTx(StandAloneContract.deploy({
+          data: bytecode,
+          arguments: standAlone.constructor ? contractParams : null
+        }), `Migrating ${standAlone.name}...`)
+        standAloneContract = standAloneContractRes
+        await logTx(receipt, `${standAloneContract.options.address} => ${standAlone.name}`)
 
-      if (standAlone.constructor !== true && standAlone.params !== undefined) {
-        const contractSetParams = standAloneContract.methods.initialize(...contractParams)
+        if (standAlone.constructor !== true && standAlone.params !== undefined) {
+          const contractSetParams = standAloneContract.methods.initialize(...contractParams)
 
-        tx = (await sendTx(contractSetParams, `Initializing ${standAlone.name}...`)).receipt
-        await logTx(tx, `${standAlone.name} initialized.`)
+          tx = (await sendTx(contractSetParams, `Initializing ${standAlone.name}...`)).receipt
+          await logTx(tx, `${standAlone.name} initialized.`)
+        }
       }
 
       await runFunctions(standAlone, standAloneContract)
