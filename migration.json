@@ -56,7 +56,7 @@
     },
     "dao": {
       "0.1.1-rc.4": {
-        "name": "Adroit Carrot",
+        "name": "Cerulean Bunny",
         "Avatar": "0x019518168df29B1cb2E06894b63DC12d83e4774A",
         "DAOToken": "0xb5232C367925f39f90FFb210970086c71803B2D9",
         "Reputation": "0x897689B5227eAb6B7d5ED6b3147fCB571B68E9a4",
@@ -105,13 +105,8 @@
             "arcVersion": "0.1.1-rc.4"
           },
           {
-            "name": "ContributionRewardExt",
-            "address": "0xbCFC9461B73D7Fb423552d6cd594f406F7B0585D",
-            "arcVersion": "0.1.1-rc.4"
-          },
-          {
             "name": "Competition",
-            "address": "0x9A6448b4bab66F952F2431E14562Bcfab7840cE3",
+            "address": "0xbCFC9461B73D7Fb423552d6cd594f406F7B0585D",
             "arcVersion": "0.1.1-rc.4"
           }
         ],

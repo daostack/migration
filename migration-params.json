@@ -16,15 +16,8 @@
        ]
     },
     {
-      "name": "ContributionRewardExt",
-      "fromArc": true
-    },
-    {
       "name": "Competition",
-      "fromArc": true,
-      "params": [
-        { "StandAloneContract": 1 }
-      ]
+      "fromArc": true
     }
   ],
   "VotingMachinesParams": [
@@ -84,7 +77,6 @@
     {
       "name": "GenericScheme",
       "schemeName":"GenericScheme",
-      "isUniversal":false,
       "params": [
         "GenesisProtocolAddress",
         { "voteParams": 0 },
@@ -106,17 +98,25 @@
     {
       "name":"ContributionRewardExt",
       "schemeName":"ContributionRewardExt",
-      "address": { "StandAloneContract": 1 },
-      "isUniversal":false,
       "params":[
          "GenesisProtocolAddress",
          { "voteParams":0 },
-         { "StandAloneContract": 2 }
+         { "StandAloneContract": 1 }
       ],
       "permissions":"0x00000000",
       "alias":"ContributionRewardExt",
-      "fromArc":true
+      "useCompetition": true
    }
+  ],
+  "runFunctions": [
+    {  
+      "contract": { "StandAloneContract": 1 },
+      "contractName": "Competition",
+      "functionName": "initialize",
+      "params": [
+        { "Scheme": 6 }
+      ]
+    }
   ],
   "founders": [
     {
