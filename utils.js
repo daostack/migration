@@ -1,3 +1,5 @@
+const path = require('path')
+
 function randomEl (list) {
   var i = Math.floor(Math.random() * list.length)
   return list[i]
@@ -11,7 +13,7 @@ const capitalize = (s) => {
   return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
-exports.generateRnadomName = function () {
+exports.generateRandomName = function () {
   return capitalize(randomEl(adjectives)) + ' ' + capitalize(randomEl(nouns))
 }
 
@@ -21,4 +23,17 @@ exports.concatBytes = function (bytes1, bytes2) {
 
 exports.getBytesLength = function (bytes) {
   return Number(bytes.slice(2).length) / 2
+}
+
+exports.importAbi = function (abiPath) {
+  let abi = require(`${abiPath}`)
+  if (abi.rootVersion) {
+    const abiName = abiPath.substring(abiPath.lastIndexOf('/') + 1)
+    const abiFolder = path.dirname(abiPath)
+    const rootPath = path.join(
+      abiFolder, `../${abi.rootVersion}/${abiName}`
+    )
+    abi = require(`./${rootPath}`)
+  }
+  return abi
 }

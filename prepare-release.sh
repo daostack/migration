@@ -11,7 +11,7 @@ echo "Installing NPM modules..."
 # npm install
 npm ci
 # initial Arc vrsion to use
-readonly INITIAL_VERSION=3
+readonly INITIAL_VERSION=4
 # get latest Arc version
 readonly ARC=$(cat package.json | jq -r '.dependencies."@daostack/arc-experimental"' | rev | cut -d'.' -f 1 | rev)
 # migrate ganache
@@ -43,6 +43,16 @@ if [ ! -z "$mainnet_private_key" ]; then
 # migrate mainnet
 echo "Migrating mainnet..."
 npm run migrate -- --gasPrice 30 --provider $mainnet_provider --private-key $mainnet_private_key "$@"
+fi
+if [ ! -z "$xdai_private_key" ]; then
+# migrate xdai
+echo "Migrating xDai..."
+npm run migrate -- --gasPrice 5 --provider $xdai_provider --private-key $xdai_private_key "$@"
+fi
+if [ ! -z "$sokol_private_key" ]; then
+# migrate sokol
+echo "Migrating Sokol..."
+npm run migrate -- --gasPrice 5 --provider $sokol_provider --private-key $sokol_private_key "$@"
 fi
 # set version
 echo "Setting version..."

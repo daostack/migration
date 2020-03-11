@@ -26,6 +26,7 @@ const defaults = {
   disableconfs: false,
   force: false,
   restart: false,
+  optimizedabis: false,
   provider: 'http://localhost:8545',
   // this is the private key used by ganache when running with `--deterministic`
   privateKey: '0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d',
@@ -39,7 +40,7 @@ const defaults = {
  * A wrapper function that performs tasks common to all migration commands.
  */
 const wrapCommand = fn => async options => {
-  let { arcVersion, quiet, disableconfs, force, restart, provider, gasPrice, privateKey, mnemonic, prevmigration, output, params, customAbisLocation } = { ...defaults, ...options }
+  let { arcVersion, quiet, disableconfs, force, restart, optimizedabis, provider, gasPrice, privateKey, mnemonic, prevmigration, output, params, customAbisLocation } = { ...defaults, ...options }
   const emptySpinner = new Proxy({}, { get: () => () => { } }) // spinner that does nothing
   const spinner = quiet ? emptySpinner : ora()
 
@@ -60,10 +61,8 @@ const wrapCommand = fn => async options => {
       return confirmation
     }
   }
-
   const web3 = new Web3(provider)
   gasPrice = gasPrice || web3.utils.fromWei(await web3.eth.getGasPrice(), 'gwei')
-
   // set web3 default account
   try {
     const account = web3.eth.accounts.privateKeyToAccount(
@@ -87,6 +86,13 @@ const wrapCommand = fn => async options => {
   }
 
   let network = await web3.eth.net.getNetworkType()
+  if (network === 'private') {
+    if (await web3.eth.net.getId() === 100) {
+      network = 'xdai'
+    } else if (await web3.eth.net.getId() === 77) {
+      network = 'sokol'
+    }
+  }
   if (network === 'main') {
     network = 'mainnet'
   }
@@ -127,7 +133,7 @@ const wrapCommand = fn => async options => {
     return obj ? !(Object.entries(obj).length === 0 && obj.constructor === Object) : false
   }
 
-  // run the actucal command
+  // run the actual command
   const result = await fn({
     arcVersion,
     web3,
@@ -139,6 +145,7 @@ const wrapCommand = fn => async options => {
     previousMigration: { ...existingFile[network] },
     customAbisLocation,
     restart,
+    optimizedAbis: optimizedabis,
     setState: function setState (state, network) {
       let oldState = {}
       if (fs.existsSync(stateFile)) {
@@ -181,7 +188,7 @@ const wrapCommand = fn => async options => {
       const blockLimit = await web3.eth.getBlock('latest').gasLimit
       try {
         gas = (await tx.estimateGas())
-        if (gas * 1.1 < block - 100000) {
+        if (gas * 1.1 < blockLimit - 100000) {
           gas *= 1.1
         }
       } catch (error) {
@@ -271,6 +278,12 @@ function cli () {
       describe: 'delete previous deployment state and starts with clean state',
       type: 'boolean',
       default: defaults.restart
+    })
+    .option('optimized-abis', {
+      alias: 'z',
+      describe: 'load abis from the optimized contracts directory',
+      type: 'boolean',
+      default: defaults.optimizedabis
     })
     .option('prev-migration', {
       alias: 'r',

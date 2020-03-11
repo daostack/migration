@@ -1,15 +1,30 @@
 const glob = require('glob')
+const utils = require('./utils.js')
 
-async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMigration, getArcVersionNumber, sendTx }) {
+async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMigration, getArcVersionNumber, sendTx, optimizedAbis }) {
   let tx
   if (!(await confirm('About to migrate arc package. Continue?'))) {
     return
   }
 
+  let contractsDir = 'contracts'
+  if (optimizedAbis) {
+    contractsDir = 'contracts-optimized'
+  }
+
   const arcURL = `https://github.com/daostack/arc/releases/tag/${arcVersion}`
 
   const addresses = {}
-  const network = await web3.eth.net.getNetworkType()
+  let network = await web3.eth.net.getNetworkType()
+  if (network === 'main') {
+    network = 'mainnet'
+  } else if (network === 'private') {
+    if (await web3.eth.net.getId() === 100) {
+      network = 'xdai'
+    } else if (await web3.eth.net.getId() === 77) {
+      network = 'sokol'
+    }
+  }
 
   async function shouldDeploy (contractName, deployedBytecode, deps) {
     if (contractName !== 'ImplementationDirectory') {
@@ -59,12 +74,12 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     return result.options.address
   }
 
-  // OpenZepplin App and Package setup
+  // OpenZeppelin App and Package setup
   let packageName = 'DAOstack'
 
-  let Package = await deploy(require(`./contracts/${arcVersion}/Package.json`))
+  let Package = await deploy(utils.importAbi(`./${contractsDir}/${arcVersion}/Package.json`))
   let packageContract = new web3.eth.Contract(
-    require(`./contracts/${arcVersion}/Package.json`).abi,
+    utils.importAbi(`./${contractsDir}/${arcVersion}/Package.json`).abi,
     Package,
     opts
   )
@@ -79,17 +94,17 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
       return
     }
     delete previousMigration.package
-    Package = await deploy(require(`./contracts/${arcVersion}/Package.json`))
+    Package = await deploy(utils.importAbi(`./${contractsDir}/${arcVersion}/Package.json`))
     packageContract = new web3.eth.Contract(
-      require(`./contracts/${arcVersion}/Package.json`).abi,
+      utils.importAbi(`./${contractsDir}/${arcVersion}/Package.json`).abi,
       Package,
       opts
     )
   }
 
-  const ImplementationDirectory = await deploy(require(`./contracts/${arcVersion}/ImplementationDirectory.json`))
+  const ImplementationDirectory = await deploy(utils.importAbi(`./${contractsDir}/${arcVersion}/ImplementationDirectory.json`))
   let implementationDirectory = new web3.eth.Contract(
-    require(`./contracts/${arcVersion}/ImplementationDirectory.json`).abi,
+    utils.importAbi(`./${contractsDir}/${arcVersion}/ImplementationDirectory.json`).abi,
     ImplementationDirectory,
     opts
   )
@@ -102,9 +117,9 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     ), `Adding version 0.1.${getArcVersionNumber(arcVersion)} to ${packageName} Package`)
   ).receipt
   await logTx(tx, `Added version 0.1.${getArcVersionNumber(arcVersion)} to ${packageName} Package`)
-  let App = await deploy(require(`./contracts/${arcVersion}/App.json`))
+  let App = await deploy(utils.importAbi(`./${contractsDir}/${arcVersion}/App.json`))
   let app = new web3.eth.Contract(
-    require(`./contracts/${arcVersion}/App.json`).abi,
+    utils.importAbi(`./${contractsDir}/${arcVersion}/App.json`).abi,
     App,
     opts
   )
@@ -118,10 +133,10 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
   let GENToken = '0x543Ff227F64Aa17eA132Bf9886cAb5DB55DCAddf'
 
   if (network === 'private') {
-    GENToken = await deploy({ ...require(`./contracts/${arcVersion}/DAOToken.json`), contractName: 'GEN' })
+    GENToken = await deploy({ ...utils.importAbi(`./${contractsDir}/${arcVersion}/DAOToken.json`), contractName: 'GEN' })
 
     const GENTokenContract = new web3.eth.Contract(
-      require(`./contracts/${arcVersion}/DAOToken.json`).abi,
+      utils.importAbi(`./${contractsDir}/${arcVersion}/DAOToken.json`).abi,
       GENToken,
       opts
     )
@@ -183,8 +198,10 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     'ARCVotingMachineCallbacksMock',
     'Auction4Reputation',
     'Avatar',
+    'Competition',
     'ContinuousLocking4Reputation',
     'ContributionReward',
+    'ContributionRewardExt',
     'Controller',
     'ControllerCreator',
     'DAOFactory',
@@ -231,7 +248,7 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
 
     if (contractName === 'GenesisProtocol') {
       Contract = await deploy(
-        require(`./contracts/${arcVersion}/GenesisProtocol.json`),
+        utils.importAbi(`./${contractsDir}/${arcVersion}/GenesisProtocol.json`),
         ['DAOToken'],
         GENToken
       )
@@ -265,9 +282,9 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
       break
   }
 
-  addresses['DAORegistryInstance'] = shouldDeploy('DAORegistryInstance', require(`./contracts/${arcVersion}/AdminUpgradeabilityProxy.json`).deployedBytecode)
+  addresses['DAORegistryInstance'] = shouldDeploy('DAORegistryInstance', utils.importAbi(`./${contractsDir}/${arcVersion}/AdminUpgradeabilityProxy.json`).deployedBytecode)
   if (!(await addresses['DAORegistryInstance'])) {
-    let initData = await new web3.eth.Contract(require(`./contracts/${arcVersion}/DAORegistry.json`).abi)
+    let initData = await new web3.eth.Contract(utils.importAbi(`./${contractsDir}/${arcVersion}/DAORegistry.json`).abi)
       .methods.initialize(daoRegistryAdminAddress).encodeABI()
     let daoRegistryTx = app.methods.create(
       packageName,
@@ -283,7 +300,7 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     addresses['DAORegistryInstance'] = DAORegistry
   } else {
     let daoRegistry = new web3.eth.Contract(
-      require(`./contracts/${arcVersion}/AdminUpgradeabilityProxy.json`).abi,
+      utils.importAbi(`./${contractsDir}/${arcVersion}/AdminUpgradeabilityProxy.json`).abi,
       addresses['DAORegistryInstance'],
       opts
     )
@@ -297,9 +314,9 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     addresses['DAORegistryInstance'] = previousMigration.package[arcVersion]['DAORegistryInstance']
   }
 
-  addresses['DAOFactoryInstance'] = shouldDeploy('DAOFactoryInstance', require(`./contracts/${arcVersion}/AdminUpgradeabilityProxy.json`).deployedBytecode)
+  addresses['DAOFactoryInstance'] = shouldDeploy('DAOFactoryInstance', utils.importAbi(`./${contractsDir}/${arcVersion}/AdminUpgradeabilityProxy.json`).deployedBytecode)
   if (!(await addresses['DAOFactoryInstance'])) {
-    let initData = await new web3.eth.Contract(require(`./contracts/${arcVersion}/DAOFactory.json`).abi)
+    let initData = await new web3.eth.Contract(utils.importAbi(`./${contractsDir}/${arcVersion}/DAOFactory.json`).abi)
       .methods.initialize(App).encodeABI()
 
     let daoFactoryTx = app.methods.create(
@@ -316,7 +333,7 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     addresses['DAOFactoryInstance'] = DAOFactory
   } else {
     let daoFactory = new web3.eth.Contract(
-      require(`./contracts/${arcVersion}/AdminUpgradeabilityProxy.json`).abi,
+      utils.importAbi(`./${contractsDir}/${arcVersion}/AdminUpgradeabilityProxy.json`).abi,
       addresses['DAOFactoryInstance'],
       opts
     )
