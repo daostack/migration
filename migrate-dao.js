@@ -339,6 +339,8 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
           schemeParams.push(GenesisProtocol)
         } else if (scheme.params[i].StandAloneContract !== undefined) {
           schemeParams.push(deploymentState.StandAloneContracts[scheme.params[i].StandAloneContract].address)
+        } else if (scheme.params[i].packageContract !== undefined) {
+          schemeParams.push(arcPackage[arcVersion][scheme.params[i].packageContract])
         } else if (scheme.params[i] === 'AvatarAddress') {
           schemeParams.push(avatar.options.address)
         } else {

@@ -106,7 +106,16 @@
       "permissions":"0x00000000",
       "alias":"ContributionRewardExt",
       "useCompetition": true
-   }
+   },{
+      "name": "SchemeFactory",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        { "packageContract": "DAOFactoryInstance" }
+      ],
+      "permissions": "0x0000001F",
+      "alias" : "SchemeRegistrarAlias"
+    }
   ],
   "runFunctions": [
     {  
