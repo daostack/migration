@@ -203,7 +203,7 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     'ContributionReward',
     'ContributionRewardExt',
     'Controller',
-    'ControllerCreator',
+    'ControllerUpgradeScheme',
     'DAOFactory',
     'DAORegistry',
     'DAOToken',
