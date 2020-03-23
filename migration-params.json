@@ -69,9 +69,10 @@
       "name": "UpgradeScheme",
       "params": [
         "GenesisProtocolAddress",
-        { "voteParams": 0 }
+        { "voteParams": 0 },
+        { "packageContract": "Package" }
       ],
-      "permissions": "0x0000000A",
+      "permissions": "0x00000010",
       "alias" : "UpgradeSchemeAlias"
     },
     {
