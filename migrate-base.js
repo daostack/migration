@@ -189,13 +189,7 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
   })
 
   const arcPackageContracts = [
-    'AbsoluteVote',
-    'AbsoluteVoteExecuteMock',
-    'ActionMock',
     'Agreement',
-    'AgreementMock',
-    'ARCDebug',
-    'ARCVotingMachineCallbacksMock',
     'Auction4Reputation',
     'Avatar',
     'Competition',
@@ -208,21 +202,15 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     'DAORegistry',
     'DAOToken',
     'ExternalLocking4Reputation',
-    'ExternalTokenLockerMock',
     'FixedReputationAllocation',
-    'Forwarder',
     'GenericScheme',
     'GenesisProtocol',
-    'GenesisProtocolCallbacksMock',
-    'GlobalConstraintMock',
     'GlobalConstraintRegistrar',
     'Locking4Reputation',
     'LockingEth4Reputation',
     'LockingToken4Reputation',
     'NectarRepAllocation',
     'PolkaCurve',
-    'PriceOracleMock',
-    'QuorumVote',
     'Redeemer',
     'RepAllocation',
     'Reputation',
@@ -231,7 +219,6 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     'SchemeMock',
     'SchemeRegistrar',
     'SignalScheme',
-    'TokenCapGC',
     'UpgradeScheme',
     'VoteInOrganizationScheme',
     'VotingMachineCallbacks',
@@ -270,6 +257,8 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
   switch (network) {
     case 'kovan':
     case 'rinkeby':
+    case 'xdai':
+    case 'sokol':
       adminAddress = TESTNET_ACCOUNT
       daoRegistryAdminAddress = TESTNET_ACCOUNT // TODO: USE A DIFFERENT ACOUNT
       break
