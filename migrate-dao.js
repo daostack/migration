@@ -268,6 +268,8 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
         for (let i in standAlone.params) {
           if (standAlone.params[i].StandAloneContract !== undefined) {
             contractParams.push(deploymentState.StandAloneContracts[standAlone.params[i].StandAloneContract].address)
+          } else if (standAlone.params[i] === 'DefaultAccount') {
+            contractParams.push(web3.eth.defaultAccount)
           } else {
             contractParams.push(standAlone.params[i])
           }
