@@ -115,7 +115,31 @@
         { "packageContract": "DAOFactoryInstance" }
       ],
       "permissions": "0x0000001F",
-      "alias" : "SchemeRegistrarAlias"
+      "alias" : "SchemeFactoryAlias"
+    },
+    {
+      "name": "JoinAndQuit",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        "0x0000000000000000000000000000000000000000",
+        "100",
+        "100",
+        "1000",
+        "10000000000"
+      ],
+      "permissions": "0x00000000",
+      "alias" : "JoinAndQuitAlias"
+    },
+    {
+      "name": "FundingRequest",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        "0x0000000000000000000000000000000000000000"
+      ],
+      "permissions": "0x00000000",
+      "alias" : "FundingRequestAlias"
     }
   ],
   "runFunctions": [
