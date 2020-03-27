@@ -99,23 +99,47 @@
         { "voteParams": 0 },
         { "packageContract": "DAOFactoryInstance" }
       ]
+    },
+    {
+      "name": "JoinAndQuit",
+      "alias" : "JoinAndQuitAlias",
+      "permissions": "0x00000000",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        "0x0000000000000000000000000000000000000000",
+        "100",
+        "100",
+        "1000",
+        "10000000000"
+      ]
+    },
+    {
+      "name": "FundingRequest",
+      "alias" : "FundingRequestAlias",
+      "permissions": "0x00000000",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        "0x0000000000000000000000000000000000000000"
+      ]
     }
   ],
   "StandAloneContracts": [
     {
-      "name": "Wallet",
-      "fromArc": true,
-      "params": [
-        "DefaultAccount"
-      ],
-      "runFunctions": [
-        {
-          "functionName": "transferOwnership",
-          "params": [
-            "AvatarAddress"
-          ]
-        }
-      ]
+       "name": "Wallet",
+       "fromArc": true,
+       "params": [
+         "DefaultAccount"
+       ],
+       "runFunctions": [
+          { 
+             "functionName": "transferOwnership",
+             "params": [
+                "AvatarAddress"
+             ]
+          }
+       ]
     },
     {
       "name": "Competition",

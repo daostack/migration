@@ -203,9 +203,11 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     'DAOToken',
     'ExternalLocking4Reputation',
     'FixedReputationAllocation',
+    'FundingRequest',
     'GenericScheme',
     'GenesisProtocol',
     'GlobalConstraintRegistrar',
+    'JoinAndQuit',
     'Locking4Reputation',
     'LockingEth4Reputation',
     'LockingToken4Reputation',
@@ -259,6 +261,7 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     case 'rinkeby':
     case 'xdai':
     case 'sokol':
+      // TODO: Here add the address private key to the web3 wallet.
       adminAddress = TESTNET_ACCOUNT
       daoRegistryAdminAddress = TESTNET_ACCOUNT // TODO: USE A DIFFERENT ACOUNT
       break
@@ -297,7 +300,7 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     tx = (await sendTx(
       daoRegistry.methods.upgradeTo(addresses['DAORegistry']),
       `Upgrading DAORegistry contract to version 0.1.${getArcVersionNumber(arcVersion)}...`,
-      web3.eth.accounts.wallet[1].address)
+      adminAddress)
     ).receipt
     await logTx(tx, `Finished upgrading DAORegistry to version 0.1.${getArcVersionNumber(arcVersion)}`)
 
