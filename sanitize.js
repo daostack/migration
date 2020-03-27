@@ -7,44 +7,43 @@ const requiredNumber = {
   required: true
 }
 
+const requiredInteger = {
+  type: 'integer',
+  required: true
+}
+
 const requiredString = {
   type: 'string',
   required: true
 }
 
-Validator.prototype.customFormats.address = function (input) {
+Validator.prototype.customFormats.Address = function (input) {
+  if (typeof input !== 'string') {
+    return false
+  }
+
   const addr = input.toLowerCase()
   return addr[0] === '0' && addr[1] === 'x' && Web3Utils.isAddress(addr)
 }
 
-const optionalAddress = {
-  anyOf: [
-    {
-      type: 'string'
-    },
-    {
-      type: 'object',
-      minLength: 4
-    }
-  ]
-
+const address = {
+  id: 'Address',
+  type: 'string',
+  format: 'Address'
 }
+validator.addSchema(address)
 
-const requiredAddress = {
-  ...optionalAddress,
-  required: true
-}
-
-Validator.prototype.customFormats.permission = function (input) {
+Validator.prototype.customFormats.Permissions = function (input) {
   return input[0] === '0' && input[1] === 'x' &&
          input.length === 10 && Web3Utils.isHex(input)
 }
 
-const requiredPermission = {
+const permissions = {
+  id: 'Permissions',
   type: 'string',
-  format: 'permission',
-  required: true
+  format: 'Permissions'
 }
+validator.addSchema(permissions)
 
 const genesisProtocol = {
   id: 'GenesisProtocol',
@@ -59,7 +58,7 @@ const genesisProtocol = {
     proposingRepReward: requiredNumber,
     quietEndingPeriod: requiredNumber,
     thresholdConst: requiredNumber,
-    voteOnBehalf: requiredAddress,
+    voteOnBehalf: { $ref: 'Address', require: true },
     votersReputationLossRatio: requiredNumber,
     activationTime: requiredNumber
   }
@@ -69,156 +68,152 @@ validator.addSchema(genesisProtocol)
 const votingMachineParams = {
   id: 'VotingMachineParams',
   type: 'array',
-  items: {
-    $ref: 'GenesisProtocol',
-    minItems: 1
-  }
+  items: { $ref: 'GenesisProtocol' },
+  minItems: 1
 }
 validator.addSchema(votingMachineParams)
 
-const schemes = {
-  id: 'SchemeToggles',
+const packageContract = {
+  id: 'PackageContract',
   type: 'object',
   properties: {
-    ContributionReward: { type: 'boolean' },
-    UGenericScheme: { type: 'boolean' },
-    SchemeRegistrar: { type: 'boolean' },
-    GlobalConstraintRegistrar: { type: 'boolean' },
-    UpgradeScheme: { type: 'boolean' }
+    packageContract: requiredString
+  }
+}
+validator.addSchema(packageContract)
+
+Validator.prototype.customFormats.ExternalContractAddress = function (input) {
+  return Validator.prototype.customFormats.VotingMachineAddress(input) ||
+    input === 'Avatar'
+}
+
+const externalContractAddress = {
+  id: 'ExternalContractAddress',
+  type: 'string',
+  format: 'ExternalContractAddress'
+}
+validator.addSchema(externalContractAddress)
+
+const standAloneIndex = {
+  id: 'StandAloneIndex',
+  properties: {
+    StandAloneContract: {
+      ...requiredInteger,
+      minimum: 0
+    }
+  }
+}
+validator.addSchema(standAloneIndex)
+
+const addressOrStandAlone = {
+  id: 'AddressOrStandAlone',
+  anyOf: [
+    { $ref: 'Address' },
+    { $ref: 'StandAloneIndex' }
+  ]
+}
+validator.addSchema(addressOrStandAlone)
+
+Validator.prototype.customFormats.VotingMachineAddress = function (input) {
+  return Validator.prototype.customFormats.Address(input) ||
+    input === 'GenesisProtocolAddress'
+}
+
+const votingMachineAddress = { 
+  id: 'VotingMachineAddress',
+  type: 'string',
+  format: 'VotingMachineAddress',
+}
+validator.addSchema(votingMachineAddress)
+
+const votingMachineParamsIndex = {
+  id: 'VotingMachineParamsIndex',
+  type: 'object',
+  properties: {
+    voteParams: {
+      ...requiredInteger,
+      minimum: 0
+    }
+  }
+}
+validator.addSchema(votingMachineParamsIndex)
+
+const schemes = {
+  id: 'Schemes',
+  type: 'array',
+  items: {
+    anyOf: [
+      { $ref: 'ContributionReward' },
+      { $ref: 'SchemeRegistrar' },
+      { $ref: 'GlobalConstraintRegistrar' },
+      { $ref: 'UpgradeScheme' },
+      { $ref: 'GenericScheme' },
+      { $ref: 'ContributionRewardExt' },
+      { $ref: 'SchemeFactory' }
+    ],
+    required: [
+      'name',
+      'alias',
+      'permissions',
+      'params'
+    ]
   }
 }
 validator.addSchema(schemes)
 
-const contributionReward = {
-  id: 'ContributionReward',
-  type: 'object',
-  properties: {
-    voteParams: { type: 'number' },
-    votingMachine: optionalAddress
+const addSchemeProposalParams = (schemeName, vmParamsNum, params) => {
+  const schema = {
+    id: `${schemeName}Params`,
+    type: 'array',
+    items: [
+      { $ref: 'VotingMachineAddress' },
+      ...new Array(vmParamsNum).map(() => (
+        { $ref: 'VotingMachineParamsIndex' }
+      )),
+      ...params
+    ]
   }
+  schema.minItems =
+  schema.maxItems = schema.items.length
+  validator.addSchema(schema)
 }
-validator.addSchema(contributionReward)
 
-const contributionRewards = {
-  id: 'ContributionRewards',
-  type: 'array',
-  items: {
-    $ref: 'ContributionReward'
-  }
-}
-validator.addSchema(contributionRewards)
+const addScheme = (schemeName, vmParamsNum = 1, params = []) => {
+  addSchemeProposalParams(schemeName, vmParamsNum, params)
 
-const uGenericScheme = {
-  id: 'UGenericScheme',
-  type: 'object',
-  properties: {
-    voteParams: { type: 'number' },
-    votingMachine: optionalAddress,
-    targetContract: requiredAddress
+  const schema = {
+    id: schemeName,
+    type: 'object',
+    properties: {
+      name: {
+        ...requiredString,
+        pattern: new RegExp(`^${schemeName}$`)
+      },
+      permissions: { $ref: 'Permissions', required: true },
+      alias: requiredString,
+      params: {
+        $ref: `${schemeName}Params`,
+        required: true
+      }
+    }
   }
-}
-validator.addSchema(uGenericScheme)
 
-const uGenericSchemes = {
-  id: 'UGenericSchemes',
-  type: 'array',
-  items: {
-    $ref: 'UGenericScheme'
-  }
+  validator.addSchema(schema)
 }
-validator.addSchema(uGenericSchemes)
 
-const schemeRegistrar = {
-  id: 'SchemeRegistrar',
-  type: 'object',
-  properties: {
-    voteRegisterParams: { type: 'number' },
-    voteRemoveParams: { type: 'number' },
-    votingMachine: optionalAddress
-  }
-}
-validator.addSchema(schemeRegistrar)
-
-const schemeRegistrars = {
-  id: 'SchemeRegistrars',
-  type: 'array',
-  items: {
-    $ref: 'SchemeRegistrar'
-  }
-}
-validator.addSchema(schemeRegistrars)
-
-const globalConstraintRegistrar = {
-  id: 'GlobalConstraintRegistrar',
-  type: 'object',
-  properties: {
-    voteParams: { type: 'number' },
-    votingMachine: optionalAddress
-  }
-}
-validator.addSchema(globalConstraintRegistrar)
-
-const globalConstraintRegistrars = {
-  id: 'GlobalConstraintRegistrars',
-  type: 'array',
-  items: {
-    $ref: 'GlobalConstraintRegistrar'
-  }
-}
-validator.addSchema(globalConstraintRegistrars)
-
-const upgradeScheme = {
-  id: 'UpgradeScheme',
-  type: 'object',
-  properties: {
-    voteParams: { type: 'number' },
-    votingMachine: optionalAddress
-  }
-}
-validator.addSchema(upgradeScheme)
-
-const upgradeSchemes = {
-  id: 'UpgradeSchemes',
-  type: 'array',
-  items: {
-    $ref: 'UpgradeScheme'
-  }
-}
-validator.addSchema(upgradeSchemes)
-
-const customScheme = {
-  id: 'CustomScheme',
-  type: 'object',
-  properties: {
-    // TODO: verify this contract exists in either
-    // 1. @daostack/arc/build/contracts/${name}.json
-    // 2. ${customabilocation}/${name}.json
-    name: requiredString,
-    alias: requiredString,
-    address: optionalAddress,
-    fromArc: { type: 'boolean' },
-    isUniversal: { type: 'boolean' },
-    permissions: requiredPermission,
-    // TODO: verify params array entries
-    params: { type: 'array' }
-  }
-}
-validator.addSchema(customScheme)
-
-const customSchemes = {
-  id: 'CustomSchemes',
-  type: 'array',
-  items: {
-    $ref: 'CustomScheme'
-  }
-}
-validator.addSchema(customSchemes)
+addScheme('ContributionReward')
+addScheme('SchemeRegistrar', 2)
+addScheme('GlobalConstraintRegistrar')
+addScheme('UpgradeScheme', 1, [{ $ref: 'PackageContract' }])
+addScheme('GenericScheme', 1, [{ $ref: 'ExternalContractAddress' }])
+addScheme('ContributionRewardExt', 1, [{ $ref: 'AddressOrStandAlone' }])
+addScheme('SchemeFactory', 1, [{ $ref: 'PackageContract' }])
 
 const member = {
   id: 'Member',
   type: 'object',
   properties: {
-    address: requiredAddress,
+    address: { $ref: 'Address', required: true },
     tokens: { type: 'number' },
     reputation: requiredNumber
   }
@@ -228,10 +223,8 @@ validator.addSchema(member)
 const founders = {
   id: 'Founders',
   type: 'array',
-  items: {
-    $ref: 'Member',
-    minItems: 1
-  }
+  items: { $ref: 'Member' },
+  minItems: 1
 }
 validator.addSchema(founders)
 
@@ -242,23 +235,21 @@ const paramsSchema = {
     orgName: { type: 'string' },
     tokenName: { type: 'string' },
     tokenSymbol: { type: 'string' },
+    tokenCap: { type: 'number' },
+    metaData: { type: 'string' },
     VotingMachineParams: {
       $ref: 'VotingMachineParams',
       required: true
     },
-    schemes: {
-      $ref: 'SchemeToggles',
+    Schemes: {
+      $ref: 'Schemes',
       require: true
     },
-    ContributionReward: { $ref: 'ContributionRewards' },
-    UGenericScheme: { $ref: 'UGenericSchemes' },
-    SchemeRegistrar: { $ref: 'SchemeRegistrars' },
-    GlobalConstraintRegistrar: { $ref: 'GlobalConstraintRegistrars' },
-    UpgradeScheme: { $ref: 'UpgradeSchemes' },
-    CustomSchemes: { $ref: 'CustomSchemes' },
-    unregisterOwner: { type: 'boolean' },
-    useUController: { type: 'boolean' },
-    useDaoCreator: { type: 'boolean' },
+    // TODO: implement these
+    /*
+    StandAloneContracts: { $ref: 'StandAloneContracts' },
+    runFunctions: { $ref: 'RunFunctions' },
+    */
     founders: {
       $ref: 'Founders',
       required: true
@@ -268,7 +259,8 @@ const paramsSchema = {
     rinkeby: { type: 'object' },
     private: { type: 'object' },
     ropsten: { type: 'object' },
-    kovan: { type: 'object' }
+    kovan: { type: 'object' },
+    xdai: { type: 'object' }
   }
 }
 
@@ -281,5 +273,176 @@ function sanitizeParams (paramsJsonObj) {
     )
   }
 }
+
+const params = {
+  "orgName": "My DAO",
+  "tokenName": "My DAO Token",
+  "tokenSymbol": "MY",
+  "tokenCap": 0,
+  "metaData": "Deployment Metadata",
+  "VotingMachinesParams": [
+    {
+      "boostedVotePeriodLimit": 600,
+      "daoBountyConst": 10,
+      "minimumDaoBounty": 100,
+      "queuedVotePeriodLimit": 1800,
+      "queuedVoteRequiredPercentage": 50,
+      "preBoostedVotePeriodLimit": 600,
+      "proposingRepReward": 5,
+      "quietEndingPeriod": 300,
+      "thresholdConst": 2000,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votersReputationLossRatio": 1,
+      "activationTime": 0
+    }
+  ],
+  "Schemes": [
+    {
+      "name": "ContributionReward",
+      "alias" : "ContributionRewardAlias",
+      "permissions": "0x00000000",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 }
+      ]
+    },
+    {
+      "name": "SchemeRegistrar",
+      "alias" : "SchemeRegistrarAlias",
+      "permissions": "0x0000001F",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        { "voteParams": 0 }
+      ]
+    },
+    {
+      "name": "GlobalConstraintRegistrar",
+      "alias" : "GlobalConstraintRegistrarAlias",
+      "permissions": "0x00000004",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 }
+      ]
+    },
+    {
+      "name": "UpgradeScheme",
+      "alias" : "UpgradeSchemeAlias",
+      "permissions": "0x00000010",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        { "packageContract": "Package" }
+      ]
+    },
+    {
+      "name": "GenericScheme",
+      "alias" : "GenericSchemeAlias",
+      "permissions": "0x00000010",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        "0x0000000000000000000000000000000000000000"
+      ]
+    },
+    {
+      "name": "GenericScheme",
+      "alias" : "GenericSchemeAlias2",
+      "permissions": "0x00000010",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        "0x0000000000000000000000000000000000000001"
+      ]
+    },
+    {
+      "name":"ContributionRewardExt",
+      "alias":"ContributionRewardExt",
+      "permissions":"0x00000000",
+      "params":[
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        { "StandAloneContract": 1 }
+      ],
+      // TODO: implement this
+      "useCompetition": true
+    },
+    {
+      "name": "SchemeFactory",
+      "alias" : "SchemeRegistrarAlias",
+      "permissions": "0x0000001F",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        { "packageContract": "DAOFactoryInstance" }
+      ]
+    }
+  ],
+  "StandAloneContracts": [
+    {
+      "name": "Wallet",
+      "fromArc": true,
+      "params": [
+        "DefaultAccount"
+      ],
+      "runFunctions": [
+        {
+          "functionName": "transferOwnership",
+          "params": [
+            "AvatarAddress"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Competition",
+      "fromArc": true
+    }
+  ],
+  "runFunctions": [
+    {
+      "contract": { "StandAloneContract": 1 },
+      "contractName": "Competition",
+      "functionName": "initialize",
+      "params": [
+        { "Scheme": 6 }
+      ]
+    }
+  ],
+  "founders": [
+    {
+      "address": "0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1",
+      "tokens": 1000,
+      "reputation": 1000
+    },
+    {
+      "address": "0xffcf8fdee72ac11b5c542428b35eef5769c409f0",
+      "tokens": 1000,
+      "reputation": 1000
+    },
+    {
+      "address": "0x22d491bde2303f2f43325b2108d26f1eaba1e32b",
+      "tokens": 1000,
+      "reputation": 1000
+    },
+    {
+      "address": "0xe11ba2b4d45eaed5996cd0823791e0c93114882d",
+      "tokens": 1000,
+      "reputation": 1000
+    },
+    {
+      "address": "0xd03ea8624c8c5987235048901fb614fdca89b117",
+      "tokens": 1000,
+      "reputation": 1000
+    },
+    {
+      "address": "0x95ced938f7991cd0dfcb48f0a06a40fa1af46ebc",
+      "tokens": 1000,
+      "reputation": 1000
+    }
+  ]
+}
+
+sanitizeParams(params)
 
 module.exports = sanitizeParams

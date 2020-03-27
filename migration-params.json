@@ -1,25 +1,9 @@
 {
-  "StandAloneContracts": [
-    {
-       "name": "Wallet",
-       "fromArc": true,
-       "params": [
-         "DefaultAccount"
-       ],
-       "runFunctions": [
-          { 
-             "functionName": "transferOwnership",
-             "params": [
-                "AvatarAddress"
-             ]
-          }
-       ]
-    },
-    {
-      "name": "Competition",
-      "fromArc": true
-    }
-  ],
+  "orgName": "My DAO",
+  "tokenName": "My DAO Token",
+  "tokenSymbol": "MY",
+  "tokenCap": 0,
+  "metaData": "Deployment Metadata",
   "VotingMachinesParams": [
     {
       "boostedVotePeriodLimit": 600,
@@ -39,87 +23,107 @@
   "Schemes": [
     {
       "name": "ContributionReward",
+      "alias" : "ContributionRewardAlias",
+      "permissions": "0x00000000",
       "params": [
         "GenesisProtocolAddress",
         { "voteParams": 0 }
-      ],
-      "permissions": "0x00000000",
-      "alias" : "ContributionRewardAlias"
+      ]
     },
     {
       "name": "SchemeRegistrar",
+      "alias" : "SchemeRegistrarAlias",
+      "permissions": "0x0000001F",
       "params": [
         "GenesisProtocolAddress",
         { "voteParams": 0 },
         { "voteParams": 0 }
-      ],
-      "permissions": "0x0000001F",
-      "alias" : "SchemeRegistrarAlias"
+      ]
     },
     {
       "name": "GlobalConstraintRegistrar",
+      "alias" : "GlobalConstraintRegistrarAlias",
+      "permissions": "0x00000004",
       "params": [
         "GenesisProtocolAddress",
         { "voteParams": 0 }
-      ],
-      "permissions": "0x00000004",
-      "alias" : "GlobalConstraintRegistrarAlias"
+      ]
     },
     {
       "name": "UpgradeScheme",
+      "alias" : "UpgradeSchemeAlias",
+      "permissions": "0x00000010",
       "params": [
         "GenesisProtocolAddress",
         { "voteParams": 0 },
         { "packageContract": "Package" }
-      ],
-      "permissions": "0x00000010",
-      "alias" : "UpgradeSchemeAlias"
+      ]
     },
     {
       "name": "GenericScheme",
-      "schemeName":"GenericScheme",
+      "alias" : "GenericSchemeAlias",
+      "permissions": "0x00000010",
       "params": [
         "GenesisProtocolAddress",
         { "voteParams": 0 },
         "0x0000000000000000000000000000000000000000"
-      ],
-      "permissions": "0x00000010",
-      "alias" : "GenericSchemeAlias"
+      ]
     },
     {
       "name": "GenericScheme",
+      "alias" : "GenericSchemeAlias2",
+      "permissions": "0x00000010",
       "params": [
         "GenesisProtocolAddress",
         { "voteParams": 0 },
         "0x0000000000000000000000000000000000000001"
-      ],
-      "permissions": "0x00000010",
-      "alias" : "GenericSchemeAlias2"
+      ]
     },
     {
       "name":"ContributionRewardExt",
-      "schemeName":"ContributionRewardExt",
-      "params":[
-         "GenesisProtocolAddress",
-         { "voteParams":0 },
-         { "StandAloneContract": 1 }
-      ],
-      "permissions":"0x00000000",
       "alias":"ContributionRewardExt",
+      "permissions":"0x00000000",
+      "params":[
+        "GenesisProtocolAddress",
+        { "voteParams":0 },
+        { "StandAloneContract": 1 }
+      ],
       "useCompetition": true
-   },{
+    },
+    {
       "name": "SchemeFactory",
+      "alias" : "SchemeRegistrarAlias",
+      "permissions": "0x0000001F",
       "params": [
         "GenesisProtocolAddress",
         { "voteParams": 0 },
         { "packageContract": "DAOFactoryInstance" }
+      ]
+    }
+  ],
+  "StandAloneContracts": [
+    {
+      "name": "Wallet",
+      "fromArc": true,
+      "params": [
+        "DefaultAccount"
       ],
-      "permissions": "0x0000001F",
-      "alias" : "SchemeRegistrarAlias"
+      "runFunctions": [
+        {
+          "functionName": "transferOwnership",
+          "params": [
+            "AvatarAddress"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Competition",
+      "fromArc": true
     }
   ],
   "runFunctions": [
-    {  
+    {
       "contract": { "StandAloneContract": 1 },
       "contractName": "Competition",
       "functionName": "initialize",
