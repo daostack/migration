@@ -178,8 +178,8 @@ const addSchemeProposalParams = (schemeName, vmParamsNum, params) => {
   validator.addSchema(schema)
 }
 
-const addScheme = (schemeName, vmParamsNum = 1, params = []) => {
-  addSchemeProposalParams(schemeName, vmParamsNum, params)
+const addScheme = (schemeName, vmParamsNum = 1, vmParams = [], props = {}) => {
+  addSchemeProposalParams(schemeName, vmParamsNum, vmParams)
 
   const schema = {
     id: schemeName,
@@ -194,7 +194,8 @@ const addScheme = (schemeName, vmParamsNum = 1, params = []) => {
       params: {
         $ref: `${schemeName}Params`,
         required: true
-      }
+      },
+      ...props
     }
   }
 
@@ -206,7 +207,12 @@ addScheme('SchemeRegistrar', 2)
 addScheme('GlobalConstraintRegistrar')
 addScheme('UpgradeScheme', 1, [{ $ref: 'PackageContract' }])
 addScheme('GenericScheme', 1, [{ $ref: 'ExternalContractAddress' }])
-addScheme('ContributionRewardExt', 1, [{ $ref: 'AddressOrStandAlone' }])
+addScheme(
+  'ContributionRewardExt',
+  1,
+  [{ $ref: 'AddressOrStandAlone' }],
+  { useCompetition: { type: 'boolean' } }
+)
 addScheme('SchemeFactory', 1, [{ $ref: 'PackageContract' }])
 
 const member = {
@@ -245,11 +251,9 @@ const paramsSchema = {
       $ref: 'Schemes',
       require: true
     },
-    // TODO: implement these
-    /*
-    StandAloneContracts: { $ref: 'StandAloneContracts' },
-    runFunctions: { $ref: 'RunFunctions' },
-    */
+    // TODO: implement
+    StandAloneContracts: { type: 'any' },
+    runFunctions: { type: 'any' },
     founders: {
       $ref: 'Founders',
       required: true
@@ -364,7 +368,6 @@ const params = {
         { "voteParams": 0 },
         { "StandAloneContract": 1 }
       ],
-      // TODO: implement this
       "useCompetition": true
     },
     {
