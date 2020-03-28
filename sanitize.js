@@ -84,7 +84,7 @@ validator.addSchema(packageContract)
 
 Validator.prototype.customFormats.ExternalContractAddress = function (input) {
   return Validator.prototype.customFormats.VotingMachineAddress(input) ||
-    input === 'Avatar'
+    input === 'AvatarAddress'
 }
 
 const externalContractAddress = {
@@ -161,15 +161,11 @@ const schemes = {
 }
 validator.addSchema(schemes)
 
-const addSchemeProposalParams = (schemeName, vmParamsNum, params) => {
+const addSchemeProposalParams = (schemeName, params) => {
   const schema = {
     id: `${schemeName}Params`,
     type: 'array',
     items: [
-      { $ref: 'VotingMachineAddress' },
-      ...new Array(vmParamsNum).map(() => (
-        { $ref: 'VotingMachineParamsIndex' }
-      )),
       ...params
     ]
   }
@@ -178,8 +174,8 @@ const addSchemeProposalParams = (schemeName, vmParamsNum, params) => {
   validator.addSchema(schema)
 }
 
-const addScheme = (schemeName, vmParamsNum = 1, vmParams = [], props = {}) => {
-  addSchemeProposalParams(schemeName, vmParamsNum, vmParams)
+const addScheme = (schemeName, vmParams = [], props = {}) => {
+  addSchemeProposalParams(schemeName, vmParams)
 
   const schema = {
     id: schemeName,
@@ -202,18 +198,70 @@ const addScheme = (schemeName, vmParamsNum = 1, vmParams = [], props = {}) => {
   validator.addSchema(schema)
 }
 
-addScheme('ContributionReward')
-addScheme('SchemeRegistrar', 2)
-addScheme('GlobalConstraintRegistrar')
-addScheme('UpgradeScheme', 1, [{ $ref: 'PackageContract' }])
-addScheme('GenericScheme', 1, [{ $ref: 'ExternalContractAddress' }])
+addScheme(
+  'ContributionReward',
+  [
+    { $ref: 'ExternalContractAddress' },
+    { $ref: 'VotingMachineAddress' },
+    { $ref: 'VotingMachineParamsIndex' }
+  ]
+)
+addScheme(
+  'SchemeRegistrar',
+  [
+    { $ref: 'ExternalContractAddress' },
+    { $ref: 'VotingMachineAddress' },
+    { $ref: 'VotingMachineParamsIndex' },
+    { $ref: 'VotingMachineParamsIndex' }
+  ]
+)
+addScheme(
+  'GlobalConstraintRegistrar',
+  [
+    { $ref: 'ExternalContractAddress' },
+    { $ref: 'VotingMachineAddress' },
+    { $ref: 'VotingMachineParamsIndex' }
+  ]
+)
+addScheme(
+  'UpgradeScheme',
+  [
+    { $ref: 'ExternalContractAddress' },
+    { $ref: 'VotingMachineAddress' },
+    { $ref: 'VotingMachineParamsIndex' },
+    { $ref: 'PackageContract' }
+  ]
+)
+addScheme(
+  'GenericScheme',
+  [
+    { $ref: 'ExternalContractAddress' },
+    { $ref: 'VotingMachineAddress' },
+    { $ref: 'VotingMachineParamsIndex' },
+    { $ref: 'ExternalContractAddress' }
+  ]
+)
 addScheme(
   'ContributionRewardExt',
-  1,
-  [{ $ref: 'AddressOrStandAlone' }],
-  { useCompetition: { type: 'boolean' } }
+  [
+    { $ref: 'ExternalContractAddress' },
+    { $ref: 'VotingMachineAddress' },
+    { $ref: 'VotingMachineParamsIndex' },
+    { $ref: 'AddressOrStandAlone' }
+  ],
+  {
+    useCompetition: { type: 'boolean' }
+  }
 )
-addScheme('SchemeFactory', 1, [{ $ref: 'PackageContract' }])
+addScheme(
+  'SchemeFactory',
+  [
+    { $ref: 'ExternalContractAddress' },
+    { $ref: 'VotingMachineAddress' },
+    { $ref: 'VotingMachineParamsIndex' },
+    { $ref: 'ExternalContractAddress' }
+  ]
+)
 
 const member = {
   id: 'Member',
