@@ -201,7 +201,6 @@ const addScheme = (schemeName, vmParams = [], props = {}) => {
 addScheme(
   'ContributionReward',
   [
-    { $ref: 'ExternalContractAddress' },
     { $ref: 'VotingMachineAddress' },
     { $ref: 'VotingMachineParamsIndex' }
   ]
@@ -209,7 +208,6 @@ addScheme(
 addScheme(
   'SchemeRegistrar',
   [
-    { $ref: 'ExternalContractAddress' },
     { $ref: 'VotingMachineAddress' },
     { $ref: 'VotingMachineParamsIndex' },
     { $ref: 'VotingMachineParamsIndex' }
@@ -218,7 +216,6 @@ addScheme(
 addScheme(
   'GlobalConstraintRegistrar',
   [
-    { $ref: 'ExternalContractAddress' },
     { $ref: 'VotingMachineAddress' },
     { $ref: 'VotingMachineParamsIndex' }
   ]
@@ -226,7 +223,6 @@ addScheme(
 addScheme(
   'UpgradeScheme',
   [
-    { $ref: 'ExternalContractAddress' },
     { $ref: 'VotingMachineAddress' },
     { $ref: 'VotingMachineParamsIndex' },
     { $ref: 'PackageContract' }
@@ -235,7 +231,6 @@ addScheme(
 addScheme(
   'GenericScheme',
   [
-    { $ref: 'ExternalContractAddress' },
     { $ref: 'VotingMachineAddress' },
     { $ref: 'VotingMachineParamsIndex' },
     { $ref: 'ExternalContractAddress' }
@@ -244,7 +239,6 @@ addScheme(
 addScheme(
   'ContributionRewardExt',
   [
-    { $ref: 'ExternalContractAddress' },
     { $ref: 'VotingMachineAddress' },
     { $ref: 'VotingMachineParamsIndex' },
     { $ref: 'AddressOrStandAlone' }
@@ -256,7 +250,6 @@ addScheme(
 addScheme(
   'SchemeFactory',
   [
-    { $ref: 'ExternalContractAddress' },
     { $ref: 'VotingMachineAddress' },
     { $ref: 'VotingMachineParamsIndex' },
     { $ref: 'ExternalContractAddress' }
