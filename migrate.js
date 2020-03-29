@@ -179,7 +179,7 @@ const wrapCommand = fn => async options => {
       }
     },
     getArcVersionNumber: function getArcVersionNumber (arcVersion) {
-      return Number(arcVersion.slice(-1))
+      return Number(arcVersion.split('rc.')[1])
     },
     sendTx: async function sendTx (tx, msg, from = web3.eth.defaultAccount) {
       spinner.start(msg)
