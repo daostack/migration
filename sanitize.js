@@ -119,10 +119,10 @@ Validator.prototype.customFormats.VotingMachineAddress = function (input) {
     input === 'GenesisProtocolAddress'
 }
 
-const votingMachineAddress = { 
+const votingMachineAddress = {
   id: 'VotingMachineAddress',
   type: 'string',
-  format: 'VotingMachineAddress',
+  format: 'VotingMachineAddress'
 }
 validator.addSchema(votingMachineAddress)
 
