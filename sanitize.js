@@ -161,9 +161,9 @@ const schemes = {
 }
 validator.addSchema(schemes)
 
-const addSchemeProposalParams = (schemeName, params) => {
+const addSchemeInitParams = (schemeName, params) => {
   const schema = {
-    id: `${schemeName}Params`,
+    id: `${schemeName}InitParams`,
     type: 'array',
     items: [
       ...params
@@ -174,8 +174,8 @@ const addSchemeProposalParams = (schemeName, params) => {
   validator.addSchema(schema)
 }
 
-const addScheme = (schemeName, vmParams = [], props = {}) => {
-  addSchemeProposalParams(schemeName, vmParams)
+const addScheme = (schemeName, initParams = [], props = {}) => {
+  addSchemeInitParams(schemeName, initParams)
 
   const schema = {
     id: schemeName,
@@ -188,7 +188,7 @@ const addScheme = (schemeName, vmParams = [], props = {}) => {
       permissions: { $ref: 'Permissions', required: true },
       alias: requiredString,
       params: {
-        $ref: `${schemeName}Params`,
+        $ref: `${schemeName}InitParams`,
         required: true
       },
       ...props
@@ -253,6 +253,26 @@ addScheme(
     { $ref: 'VotingMachineAddress' },
     { $ref: 'VotingMachineParamsIndex' },
     { $ref: 'ExternalContractAddress' }
+  ]
+)
+addScheme(
+  'JoinAndQuit',
+  [
+    { $ref: 'VotingMachineAddress' },
+    { $ref: 'VotingMachineParamsIndex' },
+    { $ref: 'Address' },
+    requiredInteger,
+    requiredInteger,
+    requiredInteger,
+    requiredInteger
+  ]
+)
+addScheme(
+  'FundingRequest',
+  [
+    { $ref: 'VotingMachineAddress' },
+    { $ref: 'VotingMachineParamsIndex' },
+    { $ref: 'Address' }
   ]
 )
 
