@@ -1,4 +1,130 @@
 {
+  "orgName": "My DAO",
+  "tokenName": "My DAO Token",
+  "tokenSymbol": "MY",
+  "tokenCap": 0,
+  "metaData": "Deployment Metadata",
+  "VotingMachinesParams": [
+    {
+      "boostedVotePeriodLimit": 600,
+      "daoBountyConst": 10,
+      "minimumDaoBounty": 100,
+      "queuedVotePeriodLimit": 1800,
+      "queuedVoteRequiredPercentage": 50,
+      "preBoostedVotePeriodLimit": 600,
+      "proposingRepReward": 5,
+      "quietEndingPeriod": 300,
+      "thresholdConst": 2000,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votersReputationLossRatio": 1,
+      "activationTime": 0
+    }
+  ],
+  "Schemes": [
+    {
+      "name": "ContributionReward",
+      "alias" : "ContributionRewardAlias",
+      "permissions": "0x00000000",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 }
+      ]
+    },
+    {
+      "name": "SchemeRegistrar",
+      "alias" : "SchemeRegistrarAlias",
+      "permissions": "0x0000001F",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        { "voteParams": 0 }
+      ]
+    },
+    {
+      "name": "GlobalConstraintRegistrar",
+      "alias" : "GlobalConstraintRegistrarAlias",
+      "permissions": "0x00000004",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 }
+      ]
+    },
+    {
+      "name": "UpgradeScheme",
+      "alias" : "UpgradeSchemeAlias",
+      "permissions": "0x00000010",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        { "packageContract": "Package" }
+      ]
+    },
+    {
+      "name": "GenericScheme",
+      "alias" : "GenericSchemeAlias",
+      "permissions": "0x00000010",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        "0x0000000000000000000000000000000000000000"
+      ]
+    },
+    {
+      "name": "GenericScheme",
+      "alias" : "GenericSchemeAlias2",
+      "permissions": "0x00000010",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        "0x0000000000000000000000000000000000000001"
+      ]
+    },
+    {
+      "name":"ContributionRewardExt",
+      "alias":"ContributionRewardExt",
+      "permissions":"0x00000000",
+      "params":[
+        "GenesisProtocolAddress",
+        { "voteParams":0 },
+        { "StandAloneContract": 1 }
+      ],
+      "useCompetition": true
+    },
+    {
+      "name": "SchemeFactory",
+      "alias" : "SchemeRegistrarAlias",
+      "permissions": "0x0000001F",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        { "packageContract": "DAOFactoryInstance" }
+      ]
+    },
+    {
+      "name": "JoinAndQuit",
+      "alias" : "JoinAndQuitAlias",
+      "permissions": "0x00000000",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        "0x0000000000000000000000000000000000000000",
+        "100",
+        "100",
+        "1000",
+        "10000000000"
+      ]
+    },
+    {
+      "name": "FundingRequest",
+      "alias" : "FundingRequestAlias",
+      "permissions": "0x00000000",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        "0x0000000000000000000000000000000000000000"
+      ]
+    }
+  ],
   "StandAloneContracts": [
     {
        "name": "Wallet",
@@ -20,130 +146,8 @@
       "fromArc": true
     }
   ],
-  "VotingMachinesParams": [
-    {
-      "boostedVotePeriodLimit": 600,
-      "daoBountyConst": 10,
-      "minimumDaoBounty": 100,
-      "queuedVotePeriodLimit": 1800,
-      "queuedVoteRequiredPercentage": 50,
-      "preBoostedVotePeriodLimit": 600,
-      "proposingRepReward": 5,
-      "quietEndingPeriod": 300,
-      "thresholdConst": 2000,
-      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
-      "votersReputationLossRatio": 1,
-      "activationTime": 0
-    }
-  ],
-  "Schemes": [
-    {
-      "name": "ContributionReward",
-      "params": [
-        "GenesisProtocolAddress",
-        { "voteParams": 0 }
-      ],
-      "permissions": "0x00000000",
-      "alias" : "ContributionRewardAlias"
-    },
-    {
-      "name": "SchemeRegistrar",
-      "params": [
-        "GenesisProtocolAddress",
-        { "voteParams": 0 },
-        { "voteParams": 0 }
-      ],
-      "permissions": "0x0000001F",
-      "alias" : "SchemeRegistrarAlias"
-    },
-    {
-      "name": "GlobalConstraintRegistrar",
-      "params": [
-        "GenesisProtocolAddress",
-        { "voteParams": 0 }
-      ],
-      "permissions": "0x00000004",
-      "alias" : "GlobalConstraintRegistrarAlias"
-    },
-    {
-      "name": "UpgradeScheme",
-      "params": [
-        "GenesisProtocolAddress",
-        { "voteParams": 0 },
-        { "packageContract": "Package" }
-      ],
-      "permissions": "0x00000010",
-      "alias" : "UpgradeSchemeAlias"
-    },
-    {
-      "name": "GenericScheme",
-      "schemeName":"GenericScheme",
-      "params": [
-        "GenesisProtocolAddress",
-        { "voteParams": 0 },
-        "0x0000000000000000000000000000000000000000"
-      ],
-      "permissions": "0x00000010",
-      "alias" : "GenericSchemeAlias"
-    },
-    {
-      "name": "GenericScheme",
-      "params": [
-        "GenesisProtocolAddress",
-        { "voteParams": 0 },
-        "0x0000000000000000000000000000000000000001"
-      ],
-      "permissions": "0x00000010",
-      "alias" : "GenericSchemeAlias2"
-    },
-    {
-      "name":"ContributionRewardExt",
-      "schemeName":"ContributionRewardExt",
-      "params":[
-         "GenesisProtocolAddress",
-         { "voteParams":0 },
-         { "StandAloneContract": 1 }
-      ],
-      "permissions":"0x00000000",
-      "alias":"ContributionRewardExt",
-      "useCompetition": true
-   },{
-      "name": "SchemeFactory",
-      "params": [
-        "GenesisProtocolAddress",
-        { "voteParams": 0 },
-        { "packageContract": "DAOFactoryInstance" }
-      ],
-      "permissions": "0x0000001F",
-      "alias" : "SchemeFactoryAlias"
-    },
-    {
-      "name": "JoinAndQuit",
-      "params": [
-        "GenesisProtocolAddress",
-        { "voteParams": 0 },
-        "0x0000000000000000000000000000000000000000",
-        "100",
-        "100",
-        "1000",
-        "10000000000"
-      ],
-      "permissions": "0x00000000",
-      "alias" : "JoinAndQuitAlias"
-    },
-    {
-      "name": "FundingRequest",
-      "params": [
-        "GenesisProtocolAddress",
-        { "voteParams": 0 },
-        "0x0000000000000000000000000000000000000000"
-      ],
-      "permissions": "0x00000000",
-      "alias" : "FundingRequestAlias"
-    }
-  ],
   "runFunctions": [
-    {  
+    {
       "contract": { "StandAloneContract": 1 },
       "contractName": "Competition",
       "functionName": "initialize",

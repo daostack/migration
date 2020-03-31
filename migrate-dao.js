@@ -27,7 +27,13 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
   let deploymentState = getState(network)
 
   // sanitize the parameters
-  sanitize(migrationParams)
+  try {
+    sanitize(migrationParams)
+  } catch (e) {
+    throw new Error(
+      `Failed to sanitize params for:\n${JSON.stringify(migrationParams)}\n${e}`
+    )
+  }
 
   let arcPackage = previousMigration.package
   if (!(await confirm('About to migrate new DAO. Continue?'))) {
