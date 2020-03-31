@@ -138,28 +138,7 @@ const votingMachineParamsIndex = {
 }
 validator.addSchema(votingMachineParamsIndex)
 
-const schemes = {
-  id: 'Schemes',
-  type: 'array',
-  items: {
-    anyOf: [
-      { $ref: 'ContributionReward' },
-      { $ref: 'SchemeRegistrar' },
-      { $ref: 'GlobalConstraintRegistrar' },
-      { $ref: 'UpgradeScheme' },
-      { $ref: 'GenericScheme' },
-      { $ref: 'ContributionRewardExt' },
-      { $ref: 'SchemeFactory' }
-    ],
-    required: [
-      'name',
-      'alias',
-      'permissions',
-      'params'
-    ]
-  }
-}
-validator.addSchema(schemes)
+let schemeNames = []
 
 const addSchemeInitParams = (schemeName, params) => {
   const schema = {
@@ -176,6 +155,8 @@ const addSchemeInitParams = (schemeName, params) => {
 
 const addScheme = (schemeName, initParams = [], props = {}) => {
   addSchemeInitParams(schemeName, initParams)
+
+  schemeNames.push(schemeName)
 
   const schema = {
     id: schemeName,
@@ -252,7 +233,7 @@ addScheme(
   [
     { $ref: 'VotingMachineAddress' },
     { $ref: 'VotingMachineParamsIndex' },
-    { $ref: 'ExternalContractAddress' }
+    { $ref: 'PackageContract' }
   ]
 )
 addScheme(
@@ -275,6 +256,23 @@ addScheme(
     { $ref: 'Address' }
   ]
 )
+
+const schemes = {
+  id: 'Schemes',
+  type: 'array',
+  items: {
+    anyOf: [
+      schemeNames.map(name => ({ $ref: name }))
+    ],
+    required: [
+      'name',
+      'alias',
+      'permissions',
+      'params'
+    ]
+  }
+}
+validator.addSchema(schemes)
 
 const member = {
   id: 'Member',
