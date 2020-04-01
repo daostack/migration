@@ -126,6 +126,7 @@ async function migrateDemoTest (options) {
 
   const migration = await migrateDAO({
     ...options,
+    restart: true,
     migrationParams
   })
 
@@ -405,7 +406,7 @@ async function submitGSProposal ({
 }
 
 async function submitProposal ({
-  ContributionReward,
+  crAddress,
   descHash,
   rep,
   tokens,
@@ -422,7 +423,7 @@ async function submitProposal ({
 
   const contributionReward = new this.web3.eth.Contract(
     require(`./contracts/${this.arcVersion}/ContributionReward.json`).abi,
-    ContributionReward,
+    crAddress,
     this.opts
   )
 
