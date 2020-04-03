@@ -284,7 +284,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
 
       // Allow create as proxy
       let standAloneContract
-      if (standAlone.fromArc) {
+      if (standAlone.fromArc && standAlone.noProxy !== true) {
         const contractInitParams = (standAlone.params !== undefined && standAlone.params.length > 0)
           ? StandAloneContract.methods.initialize(...contractParams).encodeABI()
           : '0x'
