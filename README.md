@@ -258,8 +258,11 @@ Example migration parameters object:
   "StandAloneContracts":[
      {
       "name": "Reputation",
-      // If the contract isnot from Arc you must have the contract data (ABI + Bytecode) as a JSON file with the same name as the scheme
+      // If the contract is not from Arc you must have the contract data (ABI + Bytecode) as a JSON file with the same name as the scheme
       "fromArc": true,
+      // If the contract should be created as a new contract, NOT a proxy. This is
+      // useful if the contract is not apart of the OpenZeppelin DAOstack package.
+      "noProxy": true,
       // Add here any calls to the contract you want to execute
       "runFunctions": [
             {
