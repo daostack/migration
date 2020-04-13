@@ -185,11 +185,12 @@ const wrapCommand = fn => async options => {
       spinner.start(msg)
       let gas = 0
       let nonce = await web3.eth.getTransactionCount(from)
-      const blockLimit = await web3.eth.getBlock('latest').gasLimit
+      const blockLimit = (await web3.eth.getBlock('latest')).gasLimit
       try {
         gas = (await tx.estimateGas())
         if (gas * 1.1 < blockLimit - 100000) {
           gas *= 1.1
+          gas = parseInt(gas)
         }
       } catch (error) {
         gas = blockLimit - 100000
