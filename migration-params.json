@@ -70,16 +70,6 @@
       ]
     },
     {
-      "name": "GenericScheme",
-      "alias" : "GenericSchemeAlias2",
-      "permissions": "0x00000010",
-      "params": [
-        "GenesisProtocolAddress",
-        { "voteParams": 0 },
-        "0x0000000000000000000000000000000000000001"
-      ]
-    },
-    {
       "name":"ContributionRewardExt",
       "alias":"ContributionRewardExt",
       "permissions":"0x00000000",
@@ -152,7 +142,7 @@
       "contractName": "Competition",
       "functionName": "initialize",
       "params": [
-        { "Scheme": 6 }
+        { "Scheme": 5 }
       ]
     }
   ],
