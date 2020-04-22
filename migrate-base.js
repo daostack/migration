@@ -275,25 +275,25 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
       break
   }
 
-  addresses['DAORegistryInstance'] = shouldDeploy('DAORegistryInstance', utils.importAbi(`./${contractsDir}/${arcVersion}/InitializableAdminUpgradeabilityProxy.json`).deployedBytecode)
+  addresses['DAORegistryInstance'] = shouldDeploy('DAORegistryInstance', utils.importAbi(`./${contractsDir}/${arcVersion}/AdminUpgradeabilityProxy.json`).deployedBytecode)
   if (!(await addresses['DAORegistryInstance'])) {
     let initData = await new web3.eth.Contract(utils.importAbi(`./${contractsDir}/${arcVersion}/DAORegistry.json`).abi)
       .methods.initialize(daoRegistryAdminAddress).encodeABI()
-
-    let DAORegistry = await deploy(utils.importAbi(`./${contractsDir}/${arcVersion}/InitializableAdminUpgradeabilityProxy.json`))
-    let daoRegistry = new web3.eth.Contract(
-      utils.importAbi(`./${contractsDir}/${arcVersion}/InitializableAdminUpgradeabilityProxy.json`).abi,
-      DAORegistry,
-      opts
+    let daoRegistryTx = app.methods.create(
+      packageName,
+      'DAORegistry',
+      adminAddress,
+      initData
     )
+    let DAORegistry = await daoRegistryTx.call()
 
-    tx = (await sendTx(daoRegistry.methods.initialize(addresses['DAORegistry'], adminAddress, initData), 'Deploying DAORegistry...')).receipt
+    tx = (await sendTx(daoRegistryTx, 'Deploying DAORegistry...')).receipt
     await logTx(tx, 'Finished Deploying DAORegistry')
 
     addresses['DAORegistryInstance'] = DAORegistry
   } else {
     let daoRegistry = new web3.eth.Contract(
-      utils.importAbi(`./${contractsDir}/${arcVersion}/InitializableAdminUpgradeabilityProxy.json`).abi,
+      utils.importAbi(`./${contractsDir}/${arcVersion}/AdminUpgradeabilityProxy.json`).abi,
       addresses['DAORegistryInstance'],
       opts
     )
@@ -307,25 +307,21 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     addresses['DAORegistryInstance'] = previousMigration.package[arcVersion]['DAORegistryInstance']
   }
 
-  addresses['DAOFactoryInstance'] = shouldDeploy('DAOFactoryInstance', utils.importAbi(`./${contractsDir}/${arcVersion}/InitializableAdminUpgradeabilityProxy.json`).deployedBytecode)
+  addresses['DAOFactoryInstance'] = shouldDeploy('DAOFactoryInstance', utils.importAbi(`./${contractsDir}/${arcVersion}/AdminUpgradeabilityProxy.json`).deployedBytecode)
   if (!(await addresses['DAOFactoryInstance'])) {
     let initData = await new web3.eth.Contract(utils.importAbi(`./${contractsDir}/${arcVersion}/DAOFactory.json`).abi)
       .methods.initialize(App).encodeABI()
 
-    let DAOFactory = await deploy(utils.importAbi(`./${contractsDir}/${arcVersion}/InitializableAdminUpgradeabilityProxy.json`))
-    let daoFactory = new web3.eth.Contract(
-      utils.importAbi(`./${contractsDir}/${arcVersion}/InitializableAdminUpgradeabilityProxy.json`).abi,
-      DAOFactory,
-      opts
+    let DAOFactory = await deploy(
+      utils.importAbi(`./${contractsDir}/${arcVersion}/AdminUpgradeabilityProxy.json`),
+      [],
+      addresses['DAOFactory'], adminAddress, initData
     )
-
-    tx = (await sendTx(daoFactory.methods.initialize(addresses['DAOFactory'], adminAddress, initData), 'Deploying DAOFactory...')).receipt
-    await logTx(tx, 'Finished Deploying DAOFactory')
 
     addresses['DAOFactoryInstance'] = DAOFactory
   } else {
     let daoFactory = new web3.eth.Contract(
-      utils.importAbi(`./${contractsDir}/${arcVersion}/InitializableAdminUpgradeabilityProxy.json`).abi,
+      utils.importAbi(`./${contractsDir}/${arcVersion}/AdminUpgradeabilityProxy.json`).abi,
       addresses['DAOFactoryInstance'],
       opts
     )
