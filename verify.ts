@@ -78,6 +78,7 @@ if (!APIKEY) {
 let addresses = {} as any;
 let allAddresses = {} as any;
 let web3: any;
+const migratedContracts = require('./migration.json');
 
 if (!options.check) {
 
@@ -89,15 +90,14 @@ if (!options.check) {
    * Enumerate contract names (each with its migrated address) and
    * fetch the .sol file for it.
    */
-  const migratedContracts = require('./migration.json');
 
   options.version = options.version ||
     migratedContracts[options.network] &&
     // tslint:disable-next-line: max-line-length
-    (Object.keys(migratedContracts[options.network].base)[Object.keys(migratedContracts[options.network].base).length - 1]);
+    (Object.keys(migratedContracts[options.network].package)[Object.keys(migratedContracts[options.network].package).length - 1]);
 
   allAddresses = (migratedContracts[options.network] &&
-    migratedContracts[options.network].base[options.version]) || undefined;
+    migratedContracts[options.network].package[options.version]) || undefined;
 
   if (!allAddresses) {
     error(`contracts were not deployed to ${options.network}, or invalid network name`);
@@ -146,6 +146,9 @@ const processContracts = async (): Promise<any> => {
         switch (contractName) {
           case 'GEN':
           case 'ControllerCreator':
+          case 'DAORegistryInstance':
+          case 'DAOFactoryInstance':
+          case 'AdminUpgradeabilityProxy':
             // ignore these
             continue;
 
@@ -167,7 +170,7 @@ const processContracts = async (): Promise<any> => {
 
         let solFilePath = glob.sync(`./contracts/**/${contractName}.sol`);
         if (!solFilePath.length) {
-          foundIn = './node_modules/@daostack/infra';
+          foundIn = './node_modules/@daostack/infra-experimental';
           process.chdir(path.join(__dirname, foundIn));
           solFilePath = glob.sync(`./contracts/**/${contractName}.sol`);
         }
@@ -189,9 +192,7 @@ const processContracts = async (): Promise<any> => {
           fs.writeFileSync(path.join(options.outputFlattened, `flattened.${contractName}.sol`), flattened);
         }
 
-        let version =
-          require(`${foundIn}/build/contracts/${contractName}.json`).compiler.version;
-        version = `v${version.substr(0, version.indexOf('Emscripten') - 1)}`;
+        const version = 'v0.5.17+commit.d19bba13';
 
         const apiConfig = {
           action: 'verifysourcecode',
@@ -237,8 +238,7 @@ const processContracts = async (): Promise<any> => {
             spinner.fail(`${contractName} at ${addresses[contractName]} ${result.result}`);
           }
         }
-        // await sleep(500);
-        // spinner.succeed(`${ contractName } at ${ addresses[contractName] } `);
+        await sleep(500);
       }
       exitCode = 0;
     }
