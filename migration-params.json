@@ -75,10 +75,11 @@
       "permissions":"0x00000000",
       "params":[
         "GenesisProtocolAddress",
-        { "voteParams":0 },
-        { "StandAloneContract": 1 }
-      ],
-      "useCompetition": true
+        { "voteParams": 0 },
+        { "packageContract": "DAOFactoryInstance" },
+        "PackageVersion",
+        "Competition"
+      ]
     },
     {
       "name": "SchemeFactory",
@@ -101,7 +102,8 @@
         "100",
         "100",
         "1000",
-        "10000000000"
+        "10000000000",
+        true
       ]
     },
     {
@@ -130,20 +132,6 @@
              ]
           }
        ]
-    },
-    {
-      "name": "Competition",
-      "fromArc": true
-    }
-  ],
-  "runFunctions": [
-    {
-      "contract": { "StandAloneContract": 1 },
-      "contractName": "Competition",
-      "functionName": "initialize",
-      "params": [
-        { "Scheme": 5 }
-      ]
     }
   ],
   "founders": [
