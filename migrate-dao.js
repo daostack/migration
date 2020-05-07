@@ -310,6 +310,8 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
           schemeParams.push(deploymentState.StandAloneContracts[scheme.params[i].StandAloneContract].address)
         } else if (scheme.params[i].packageContract !== undefined) {
           schemeParams.push(arcPackage[arcVersion][scheme.params[i].packageContract])
+        } else if (scheme.params[i] === 'PackageVersion') {
+          schemeParams.push([0, 1, getArcVersionNumber(arcVersion)])
         } else if (scheme.params[i] === 'AvatarAddress') {
           schemeParams.push(avatar.options.address)
         } else {
@@ -353,36 +355,6 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
     }
 
     deploymentState.schemesSet = true
-    setState(deploymentState, network)
-  }
-
-  // Special code for Competition deployment
-  if (migrationParams.Schemes) {
-    let len = migrationParams.Schemes.length
-    if (deploymentState.SchemeAfterCounter === undefined) {
-      deploymentState.SchemeAfterCounter = 0
-    }
-    for (deploymentState.SchemeAfterCounter;
-      deploymentState.SchemeAfterCounter < len; deploymentState.SchemeAfterCounter++) {
-      setState(deploymentState, network)
-      let scheme = migrationParams.Schemes[deploymentState.SchemeAfterCounter]
-
-      if (scheme.name === 'ContributionRewardExt' && scheme.useCompetition === true) {
-        let competitionAddress = scheme.params[2]
-        if (competitionAddress.StandAloneContract !== undefined) {
-          competitionAddress = deploymentState.StandAloneContracts[competitionAddress.StandAloneContract].address
-        }
-        let initCompetition = await new web3.eth.Contract(
-          utils.importAbi(`./${contractsDir}/${arcVersion}/Competition.json`).abi,
-          competitionAddress,
-          opts).methods.initialize(deploymentState.Schemes[deploymentState.SchemeAfterCounter].address)
-        tx = (await sendTx(initCompetition, `Initializing competition with ContributionRewardExt address...`)).receipt
-        await logTx(tx,
-          `Initialized competition with rewarder: ${deploymentState.Schemes[deploymentState.SchemeAfterCounter].address}.`)
-      }
-      setState(deploymentState, network)
-    }
-    deploymentState.SchemeAfterCounter++
     setState(deploymentState, network)
   }
 
