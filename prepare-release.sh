@@ -11,7 +11,7 @@ echo "Installing NPM modules..."
 # npm install
 npm ci
 # initial Arc vrsion to use
-readonly INITIAL_VERSION=17
+readonly INITIAL_VERSION=18
 # get latest Arc version
 readonly ARC=$(cat package.json | jq -r '.dependencies."@daostack/arc-experimental"' | rev | cut -d'.' -f 1 | rev)
 # migrate ganache
@@ -76,9 +76,9 @@ npm run verify.initialize
 npm run verify.build
 
 echo "Verifying..."
-read -n 1 -s -r -p "Press any key to verify contracts on kovan"
-npm run verify -- -n kovan -p $kovan_provider
 read -n 1 -s -r -p "Press any key to verify contracts on rinkeby"
 npm run verify -- -n rinkeby -p $rinkeby_provider
+read -n 1 -s -r -p "Press any key to verify contracts on kovan"
+npm run verify -- -n kovan -p $kovan_provider
 read -n 1 -s -r -p "Press any key to verify contracts on mainnet"
 npm run verify -- -n mainnet -p $mainnet_provider
