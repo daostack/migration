@@ -222,6 +222,7 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     'SchemeRegistrar',
     'SignalScheme',
     'UpgradeScheme',
+    'Vault',
     'VoteInOrganizationScheme',
     'VotingMachineCallbacks',
     'Wallet'
