@@ -115,6 +115,14 @@
         { "voteParams": 0 },
         "0x0000000000000000000000000000000000000000"
       ]
+    },
+    {
+      "name": "Dictator",
+      "alias" : "DictatorAlias",
+      "permissions": "0x0000001f",
+      "params": [
+        "0xbBb06cD354D7f4e67677f090eCc3f6E5916E2447"
+      ]
     }
   ],
   "StandAloneContracts": [
