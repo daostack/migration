@@ -201,6 +201,7 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     'DAOFactory',
     'DAORegistry',
     'DAOToken',
+    'Dictator',
     'ExternalLocking4Reputation',
     'FixedReputationAllocation',
     'FundingRequest',
