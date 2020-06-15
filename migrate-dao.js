@@ -94,25 +94,117 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
 
   const initFoundersBatchSize = 20
   const foundersBatchSize = 100
+
+  if (deploymentState.schemeNames === undefined) {
+    deploymentState.schemes = []
+    deploymentState.schemeNames = []
+    deploymentState.schemesData = '0x'
+    deploymentState.schemesInitializeDataLens = []
+    deploymentState.permissions = []
+  }
+
+  if (migrationParams.Schemes) {
+    let len = migrationParams.Schemes.length
+    if (deploymentState.SchemeCounter === undefined) {
+      deploymentState.SchemeCounter = 0
+    }
+    for (deploymentState.SchemeCounter;
+      deploymentState.SchemeCounter < len; deploymentState.SchemeCounter++) {
+      setState(deploymentState, network)
+      let scheme = migrationParams.Schemes[deploymentState.SchemeCounter]
+
+      let schemeParams = ['0x0000000000000000000000000000000000000000']
+      for (let i in scheme.params) {
+        if (scheme.params[i].voteParams !== undefined) {
+          let votingParameters = [
+            [
+              migrationParams.VotingMachinesParams[scheme.params[i].voteParams].queuedVoteRequiredPercentage.toString(),
+              migrationParams.VotingMachinesParams[scheme.params[i].voteParams].queuedVotePeriodLimit.toString(),
+              migrationParams.VotingMachinesParams[scheme.params[i].voteParams].boostedVotePeriodLimit.toString(),
+              migrationParams.VotingMachinesParams[scheme.params[i].voteParams].preBoostedVotePeriodLimit.toString(),
+              migrationParams.VotingMachinesParams[scheme.params[i].voteParams].thresholdConst.toString(),
+              migrationParams.VotingMachinesParams[scheme.params[i].voteParams].quietEndingPeriod.toString(),
+              web3.utils.toWei(migrationParams.VotingMachinesParams[scheme.params[i].voteParams].proposingRepReward.toString()),
+              migrationParams.VotingMachinesParams[scheme.params[i].voteParams].votersReputationLossRatio.toString(),
+              web3.utils.toWei(migrationParams.VotingMachinesParams[scheme.params[i].voteParams].minimumDaoBounty.toString()),
+              migrationParams.VotingMachinesParams[scheme.params[i].voteParams].daoBountyConst.toString(),
+              migrationParams.VotingMachinesParams[scheme.params[i].voteParams].activationTime.toString()
+            ],
+            migrationParams.VotingMachinesParams[scheme.params[i].voteParams].voteOnBehalf,
+            '0x0000000000000000000000000000000000000000000000000000000000000000'
+          ]
+          schemeParams.push(...votingParameters)
+        } else if (scheme.params[i] === 'GenesisProtocolAddress') {
+          schemeParams.push(GenesisProtocol)
+        } else if (scheme.params[i].StandAloneContract !== undefined) {
+          schemeParams.push(deploymentState.StandAloneContracts[scheme.params[i].StandAloneContract].address)
+        } else if (scheme.params[i].packageContract !== undefined) {
+          schemeParams.push(arcPackage[arcVersion][scheme.params[i].packageContract])
+        } else if (scheme.params[i] === 'PackageVersion') {
+          schemeParams.push([0, 1, getArcVersionNumber(arcVersion)])
+        } else if (scheme.params[i] === 'AvatarAddress') {
+          schemeParams.push(avatar.options.address)
+        } else {
+          schemeParams.push(scheme.params[i])
+        }
+      }
+
+      let schemeData = await new web3.eth.Contract(utils.importAbi(`./${contractsDir}/${arcVersion}/${scheme.name}.json`).abi)
+        .methods.initialize(...schemeParams).encodeABI()
+
+      deploymentState.schemeNames.push(web3.utils.fromAscii(scheme.name))
+      deploymentState.schemesData = utils.concatBytes(deploymentState.schemesData, schemeData)
+      deploymentState.schemesInitializeDataLens.push(utils.getBytesLength(schemeData))
+      deploymentState.permissions.push(scheme.permissions)
+      setState(deploymentState, network)
+    }
+    deploymentState.SchemeCounter++
+    setState(deploymentState, network)
+  }
+
   if (deploymentState.Avatar === undefined) {
     let foundersInitCount = founderAddresses.length < initFoundersBatchSize ? founderAddresses.length : initFoundersBatchSize
     let tokenData = await new web3.eth.Contract(utils.importAbi(`./${contractsDir}/${arcVersion}/DAOToken.json`).abi)
       .methods.initialize(tokenName, tokenSymbol, tokenCap, DAOFactoryInstance).encodeABI()
+    let encodedForgeOrgParams = web3.eth.abi.encodeParameters(
+      ['string', 'bytes', 'address[]', 'uint256[]', 'uint256[]', 'uint64[3]'],
+      [orgName,
+        tokenData,
+        founderAddresses.slice(0, foundersInitCount),
+        tokenDist.slice(0, foundersInitCount),
+        repDist.slice(0, foundersInitCount),
+        [0, 0, getArcVersionNumber(arcVersion)]]
+    )
+    var encodedSetSchemesParams = web3.eth.abi.encodeParameters(
+      ['bytes32[]', 'bytes', 'uint256[]', 'bytes4[]', 'string'],
+      [
+        deploymentState.schemeNames,
+        deploymentState.schemesData,
+        deploymentState.schemesInitializeDataLens,
+        deploymentState.permissions,
+        migrationParams.metaData !== undefined ? migrationParams.metaData : 'metaData'
+      ]
+    )
+
     const forgeOrg = daoFactory.methods.forgeOrg(
-      orgName,
-      tokenData,
-      founderAddresses.slice(0, foundersInitCount),
-      tokenDist.slice(0, foundersInitCount),
-      repDist.slice(0, foundersInitCount),
-      [0, 0, getArcVersionNumber(arcVersion)]
+      encodedForgeOrgParams,
+      encodedSetSchemesParams
     )
 
     tx = (await sendTx(forgeOrg, 'Creating a new organization...')).receipt
     await logTx(tx, 'Created new organization.')
-  }
 
-  if (deploymentState.Avatar === undefined) {
     deploymentState.Avatar = tx.events.NewOrg.returnValues._avatar
+
+    let schemesEvents = tx.events.SchemeInstance
+    for (let i in schemesEvents) {
+      deploymentState.Schemes.push(
+        {
+          name: web3.utils.toAscii(deploymentState.schemeNames[i]),
+          alias: migrationParams.Schemes[i].alias,
+          address: schemesEvents[i].returnValues._scheme
+        })
+    }
     setState(deploymentState, network)
   }
 
@@ -161,13 +253,37 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
   )
   deploymentState.Controller = controller.options.address
 
-  if (deploymentState.schemeNames === undefined) {
-    deploymentState.schemes = []
-    deploymentState.schemeNames = []
-    deploymentState.schemesData = '0x'
-    deploymentState.schemesInitializeDataLens = []
-    deploymentState.permissions = []
-  }
+  // if (deploymentState.schemesSet !== true) {
+  //   var encodedSetSchemesParams = web3.eth.abi.encodeParameters(
+  //     ['bytes32[]', 'bytes', 'uint256[]', 'bytes4[]', 'string'],
+  //     [
+  //       deploymentState.schemeNames,
+  //       deploymentState.schemesData,
+  //       deploymentState.schemesInitializeDataLens,
+  //       deploymentState.permissions,
+  //       migrationParams.metaData !== undefined ? migrationParams.metaData : 'metaData'
+  //     ]
+  //   )
+  //   tx = (await sendTx(
+  //     daoFactory.methods.setSchemes(
+  //       avatar.options.address,
+  //       encodedSetSchemesParams
+  //     ), 'Setting DAO schemes...')).receipt
+  //   await logTx(tx, 'DAO schemes set.')
+
+  //   let schemesEvents = tx.events.SchemeInstance
+  //   for (let i in schemesEvents) {
+  //     deploymentState.Schemes.push(
+  //       {
+  //         name: web3.utils.toAscii(deploymentState.schemeNames[i]),
+  //         alias: migrationParams.Schemes[i].alias,
+  //         address: schemesEvents[i].returnValues._scheme
+  //       })
+  //   }
+
+  //   deploymentState.schemesSet = true
+  //   setState(deploymentState, network)
+  // }
 
   let runFunctions = async function (object, contract) {
     if (object.runFunctions !== undefined) {
@@ -270,91 +386,6 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
       setState(deploymentState, network)
     }
     deploymentState.standAloneContractsCounter++
-    setState(deploymentState, network)
-  }
-
-  if (migrationParams.Schemes) {
-    let len = migrationParams.Schemes.length
-    if (deploymentState.SchemeCounter === undefined) {
-      deploymentState.SchemeCounter = 0
-    }
-    for (deploymentState.SchemeCounter;
-      deploymentState.SchemeCounter < len; deploymentState.SchemeCounter++) {
-      setState(deploymentState, network)
-      let scheme = migrationParams.Schemes[deploymentState.SchemeCounter]
-
-      let schemeParams = [avatar.options.address]
-      for (let i in scheme.params) {
-        if (scheme.params[i].voteParams !== undefined) {
-          let votingParameters = [
-            [
-              migrationParams.VotingMachinesParams[scheme.params[i].voteParams].queuedVoteRequiredPercentage.toString(),
-              migrationParams.VotingMachinesParams[scheme.params[i].voteParams].queuedVotePeriodLimit.toString(),
-              migrationParams.VotingMachinesParams[scheme.params[i].voteParams].boostedVotePeriodLimit.toString(),
-              migrationParams.VotingMachinesParams[scheme.params[i].voteParams].preBoostedVotePeriodLimit.toString(),
-              migrationParams.VotingMachinesParams[scheme.params[i].voteParams].thresholdConst.toString(),
-              migrationParams.VotingMachinesParams[scheme.params[i].voteParams].quietEndingPeriod.toString(),
-              web3.utils.toWei(migrationParams.VotingMachinesParams[scheme.params[i].voteParams].proposingRepReward.toString()),
-              migrationParams.VotingMachinesParams[scheme.params[i].voteParams].votersReputationLossRatio.toString(),
-              web3.utils.toWei(migrationParams.VotingMachinesParams[scheme.params[i].voteParams].minimumDaoBounty.toString()),
-              migrationParams.VotingMachinesParams[scheme.params[i].voteParams].daoBountyConst.toString(),
-              migrationParams.VotingMachinesParams[scheme.params[i].voteParams].activationTime.toString()
-            ],
-            migrationParams.VotingMachinesParams[scheme.params[i].voteParams].voteOnBehalf,
-            '0x0000000000000000000000000000000000000000000000000000000000000000'
-          ]
-          schemeParams.push(...votingParameters)
-        } else if (scheme.params[i] === 'GenesisProtocolAddress') {
-          schemeParams.push(GenesisProtocol)
-        } else if (scheme.params[i].StandAloneContract !== undefined) {
-          schemeParams.push(deploymentState.StandAloneContracts[scheme.params[i].StandAloneContract].address)
-        } else if (scheme.params[i].packageContract !== undefined) {
-          schemeParams.push(arcPackage[arcVersion][scheme.params[i].packageContract])
-        } else if (scheme.params[i] === 'PackageVersion') {
-          schemeParams.push([0, 1, getArcVersionNumber(arcVersion)])
-        } else if (scheme.params[i] === 'AvatarAddress') {
-          schemeParams.push(avatar.options.address)
-        } else {
-          schemeParams.push(scheme.params[i])
-        }
-      }
-
-      let schemeData = await new web3.eth.Contract(utils.importAbi(`./${contractsDir}/${arcVersion}/${scheme.name}.json`).abi)
-        .methods.initialize(...schemeParams).encodeABI()
-
-      deploymentState.schemeNames.push(web3.utils.fromAscii(scheme.name))
-      deploymentState.schemesData = utils.concatBytes(deploymentState.schemesData, schemeData)
-      deploymentState.schemesInitializeDataLens.push(utils.getBytesLength(schemeData))
-      deploymentState.permissions.push(scheme.permissions)
-      setState(deploymentState, network)
-    }
-    deploymentState.SchemeCounter++
-    setState(deploymentState, network)
-  }
-
-  if (deploymentState.schemesSet !== true) {
-    tx = (await sendTx(
-      daoFactory.methods.setSchemes(
-        avatar.options.address,
-        deploymentState.schemeNames,
-        deploymentState.schemesData,
-        deploymentState.schemesInitializeDataLens,
-        deploymentState.permissions,
-        migrationParams.metaData !== undefined ? migrationParams.metaData : 'metaData'
-      ), 'Setting DAO schemes...')).receipt
-    await logTx(tx, 'DAO schemes set.')
-
-    let schemesEvents = tx.events.SchemeInstance
-    for (let i in schemesEvents) {
-      deploymentState.Schemes.push(
-        {
-          name: web3.utils.toAscii(deploymentState.schemeNames[i]),
-          alias: migrationParams.Schemes[i].alias,
-          address: schemesEvents[i].returnValues._scheme
-        })
-    }
-
-    deploymentState.schemesSet = true
     setState(deploymentState, network)
   }
 
