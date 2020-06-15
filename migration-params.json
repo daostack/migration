@@ -41,6 +41,16 @@
       ]
     },
     {
+      "name": "UpgradeScheme",
+      "alias" : "UpgradeSchemeAlias",
+      "permissions": "0x00000010",
+      "params": [
+        "GenesisProtocolAddress",
+        { "voteParams": 0 },
+        { "packageContract": "Package" }
+      ]
+    },
+    {
       "name": "GenericScheme",
       "alias" : "GenericSchemeAlias",
       "permissions": "0x00000010",
