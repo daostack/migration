@@ -52,56 +52,56 @@
     "dao": {
       "0.1.1-rc.23": {
         "name": "My DAO",
-        "Avatar": "0x7E7df67a88747C4403dFdFd9fb3bB6209C63D7b3",
-        "DAOToken": "0x9CBdcCBf4Aca13c2336daC5De229D5c2cFc62224",
-        "Reputation": "0xF397448bE772364b0c6dAe2Fc8bBe9B619528269",
-        "Controller": "0x8AAd712f96272c017CaE3fc0116EC7E3e88ADF5a",
+        "Avatar": "0x8AAd712f96272c017CaE3fc0116EC7E3e88ADF5a",
+        "DAOToken": "0xF397448bE772364b0c6dAe2Fc8bBe9B619528269",
+        "Reputation": "0x7E7df67a88747C4403dFdFd9fb3bB6209C63D7b3",
+        "Controller": "0x0Ed7848E60B6A415c7AdeD0400A6152D8a716758",
         "Schemes": [
           {
             "name": "ContributionReward",
             "alias": "ContributionRewardAlias",
-            "address": "0x0Ed7848E60B6A415c7AdeD0400A6152D8a716758"
+            "address": "0x9F45DeEf4173463781DdDC5883AC72432bb001f1"
           },
           {
             "name": "SchemeRegistrar",
             "alias": "SchemeRegistrarAlias",
-            "address": "0x9F45DeEf4173463781DdDC5883AC72432bb001f1"
+            "address": "0x68bdfECA0Ad5c49ED53D57Bd48c866871D7bAe44"
           },
           {
             "name": "UpgradeScheme",
             "alias": "UpgradeSchemeAlias",
-            "address": "0x68bdfECA0Ad5c49ED53D57Bd48c866871D7bAe44"
+            "address": "0xBA1A3bF26802456b7741f1199Aa7b6535eb6227a"
           },
           {
             "name": "GenericScheme",
             "alias": "GenericSchemeAlias",
-            "address": "0xBA1A3bF26802456b7741f1199Aa7b6535eb6227a"
+            "address": "0x7Ae3F5E6A1C8B9170bBCc13DeECa4bCC076Bb880"
           },
           {
             "name": "ContributionRewardExt",
             "alias": "ContributionRewardExt",
-            "address": "0x7Ae3F5E6A1C8B9170bBCc13DeECa4bCC076Bb880"
+            "address": "0x2FA50F6c715d761A3BdDb93CAEB94537FA273dC8"
           },
           {
             "name": "SchemeFactory",
             "alias": "SchemeRegistrarAlias",
-            "address": "0x6BDd19925a0ecbe9A0D0947C351EC969459f94d9"
+            "address": "0x146ED8D56366Daa9a9Cf8aF495664e4457110010"
           },
           {
             "name": "JoinAndQuit",
             "alias": "JoinAndQuitAlias",
-            "address": "0x146ED8D56366Daa9a9Cf8aF495664e4457110010"
+            "address": "0xE224FF4A69CD109C59e74E3BFE0D16c16be00Cc0"
           },
           {
             "name": "FundingRequest",
             "alias": "FundingRequestAlias",
-            "address": "0xE224FF4A69CD109C59e74E3BFE0D16c16be00Cc0"
+            "address": "0x2C68f66d5D32FD18f48946E0423998ae163b17e7"
           }
         ],
         "StandAloneContracts": [
           {
             "name": "Wallet",
-            "address": "0x2C68f66d5D32FD18f48946E0423998ae163b17e7",
+            "address": "0x9CBdcCBf4Aca13c2336daC5De229D5c2cFc62224",
             "arcVersion": "0.1.1-rc.23"
           }
         ],
