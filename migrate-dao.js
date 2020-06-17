@@ -86,6 +86,108 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
     deploymentState.StandAloneContracts = []
   }
 
+  let runFunctions = async function (object, contract) {
+    if (object.runFunctions !== undefined) {
+      for (let i in object.runFunctions) {
+        let functionParams = []
+        for (let j in object.runFunctions[i].params) {
+          if (object.runFunctions[i].params[j].StandAloneContract !== undefined) {
+            functionParams.push(deploymentState.StandAloneContracts[object.runFunctions[i].params[j].StandAloneContract].address)
+          } else {
+            functionParams.push(object.runFunctions[i].params[j])
+          }
+        }
+        const functionCall = contract.methods[object.runFunctions[i].functionName](...functionParams)
+
+        tx = (await sendTx(functionCall, `Calling ${object.name} - ${object.runFunctions[i].functionName}...`)).receipt
+        await logTx(tx, `${object.name} called function ${object.runFunctions[i].functionName}.`)
+      }
+    }
+  }
+
+  if (migrationParams.StandAloneContracts) {
+    let len = migrationParams.StandAloneContracts.length
+    if (deploymentState.standAloneContractsCounter === undefined) {
+      deploymentState.standAloneContractsCounter = 0
+    }
+    for (deploymentState.standAloneContractsCounter;
+      deploymentState.standAloneContractsCounter < len;
+      deploymentState.standAloneContractsCounter++) {
+      setState(deploymentState, network)
+      let standAlone = migrationParams.StandAloneContracts[deploymentState.standAloneContractsCounter]
+
+      const path = require('path')
+      let contractJson
+      if (standAlone.fromArc) {
+        contractJson = utils.importAbi(`./${contractsDir}/${standAlone.arcVersion ? standAlone.arcVersion : arcVersion}/${standAlone.name}.json`)
+      } else {
+        contractJson = require(path.resolve(`${customAbisLocation}/${standAlone.name}.json`))
+      }
+      let abi = contractJson.abi
+      let bytecode = contractJson.bytecode
+      let contractParams = []
+
+      const StandAloneContract = new web3.eth.Contract(abi, undefined, opts)
+
+      if (standAlone.params !== undefined) {
+        for (let i in standAlone.params) {
+          if (standAlone.params[i].StandAloneContract !== undefined) {
+            contractParams.push(deploymentState.StandAloneContracts[standAlone.params[i].StandAloneContract].address)
+          } else if (standAlone.params[i] === 'DefaultAccount') {
+            contractParams.push(web3.eth.defaultAccount)
+          } else {
+            contractParams.push(standAlone.params[i])
+          }
+        }
+      }
+
+      // Allow create as proxy
+      let standAloneContract
+      if (standAlone.fromArc && standAlone.noProxy !== true) {
+        const contractInitParams = (standAlone.params !== undefined && standAlone.params.length > 0)
+          ? StandAloneContract.methods.initialize(...contractParams).encodeABI()
+          : '0x'
+        let createStandAloneProxyInstance = daoFactory.methods.createInstance(
+          [0, 1, getArcVersionNumber(standAlone.arcVersion ? standAlone.arcVersion : arcVersion)],
+          standAlone.name,
+          web3.eth.accounts.wallet[0].address,
+          contractInitParams
+        )
+        tx = (await sendTx(createStandAloneProxyInstance, `Creating ${standAlone.name} Proxy Instance...`)).receipt
+        standAloneContract = new web3.eth.Contract(abi, tx.events.ProxyCreated.returnValues._proxy, opts)
+        await logTx(tx, `${standAloneContract.options.address} => ${standAlone.name}`)
+      } else {
+        const { receipt, result: standAloneContractRes } = await sendTx(StandAloneContract.deploy({
+          data: bytecode,
+          arguments: standAlone.constructor ? contractParams : null
+        }), `Migrating ${standAlone.name}...`)
+        standAloneContract = standAloneContractRes
+        await logTx(receipt, `${standAloneContract.options.address} => ${standAlone.name}`)
+
+        if (standAlone.constructor !== true && standAlone.params !== undefined) {
+          const contractSetParams = standAloneContract.methods.initialize(...contractParams)
+
+          tx = (await sendTx(contractSetParams, `Initializing ${standAlone.name}...`)).receipt
+          await logTx(tx, `${standAlone.name} initialized.`)
+        }
+      }
+
+      await runFunctions(standAlone, standAloneContract)
+
+      deploymentState.StandAloneContracts.push(
+        {
+          name: standAlone.name,
+          alias: standAlone.alias,
+          address: standAloneContract.options.address,
+          arcVersion: (standAlone.arcVersion ? standAlone.arcVersion : arcVersion)
+        }
+      )
+      setState(deploymentState, network)
+    }
+    deploymentState.standAloneContractsCounter++
+    setState(deploymentState, network)
+  }
+
   const [founderAddresses, tokenDist, repDist] = [
     founders.map(({ address }) => address),
     founders.map(({ tokens }) => web3.utils.toWei(tokens !== undefined ? tokens.toString() : '0')),
@@ -253,140 +355,16 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
   )
   deploymentState.Controller = controller.options.address
 
-  // if (deploymentState.schemesSet !== true) {
-  //   var encodedSetSchemesParams = web3.eth.abi.encodeParameters(
-  //     ['bytes32[]', 'bytes', 'uint256[]', 'bytes4[]', 'string'],
-  //     [
-  //       deploymentState.schemeNames,
-  //       deploymentState.schemesData,
-  //       deploymentState.schemesInitializeDataLens,
-  //       deploymentState.permissions,
-  //       migrationParams.metaData !== undefined ? migrationParams.metaData : 'metaData'
-  //     ]
-  //   )
-  //   tx = (await sendTx(
-  //     daoFactory.methods.setSchemes(
-  //       avatar.options.address,
-  //       encodedSetSchemesParams
-  //     ), 'Setting DAO schemes...')).receipt
-  //   await logTx(tx, 'DAO schemes set.')
-
-  //   let schemesEvents = tx.events.SchemeInstance
-  //   for (let i in schemesEvents) {
-  //     deploymentState.Schemes.push(
-  //       {
-  //         name: web3.utils.toAscii(deploymentState.schemeNames[i]),
-  //         alias: migrationParams.Schemes[i].alias,
-  //         address: schemesEvents[i].returnValues._scheme
-  //       })
-  //   }
-
-  //   deploymentState.schemesSet = true
-  //   setState(deploymentState, network)
-  // }
-
-  let runFunctions = async function (object, contract) {
-    if (object.runFunctions !== undefined) {
-      for (let i in object.runFunctions) {
-        let functionParams = []
-        for (let j in object.runFunctions[i].params) {
-          if (object.runFunctions[i].params[j].StandAloneContract !== undefined) {
-            functionParams.push(deploymentState.StandAloneContracts[object.runFunctions[i].params[j].StandAloneContract].address)
-          } else if (object.runFunctions[i].params[j] === 'AvatarAddress') {
-            functionParams.push(avatar.options.address)
-          } else {
-            functionParams.push(object.runFunctions[i].params[j])
-          }
-        }
-        const functionCall = contract.methods[object.runFunctions[i].functionName](...functionParams)
-
-        tx = (await sendTx(functionCall, `Calling ${object.name} - ${object.runFunctions[i].functionName}...`)).receipt
-        await logTx(tx, `${object.name} called function ${object.runFunctions[i].functionName}.`)
-      }
-    }
-  }
-
-  if (migrationParams.StandAloneContracts) {
-    let len = migrationParams.StandAloneContracts.length
-    if (deploymentState.standAloneContractsCounter === undefined) {
-      deploymentState.standAloneContractsCounter = 0
-    }
-    for (deploymentState.standAloneContractsCounter;
-      deploymentState.standAloneContractsCounter < len;
-      deploymentState.standAloneContractsCounter++) {
-      setState(deploymentState, network)
-      let standAlone = migrationParams.StandAloneContracts[deploymentState.standAloneContractsCounter]
-
-      const path = require('path')
-      let contractJson
-      if (standAlone.fromArc) {
-        contractJson = utils.importAbi(`./${contractsDir}/${standAlone.arcVersion ? standAlone.arcVersion : arcVersion}/${standAlone.name}.json`)
-      } else {
-        contractJson = require(path.resolve(`${customAbisLocation}/${standAlone.name}.json`))
-      }
-      let abi = contractJson.abi
-      let bytecode = contractJson.bytecode
-      let contractParams = []
-
-      const StandAloneContract = new web3.eth.Contract(abi, undefined, opts)
-
-      if (standAlone.params !== undefined) {
-        for (let i in standAlone.params) {
-          if (standAlone.params[i].StandAloneContract !== undefined) {
-            contractParams.push(deploymentState.StandAloneContracts[standAlone.params[i].StandAloneContract].address)
-          } else if (standAlone.params[i] === 'DefaultAccount') {
-            contractParams.push(web3.eth.defaultAccount)
-          } else {
-            contractParams.push(standAlone.params[i])
-          }
-        }
-      }
-
-      // Allow create as proxy
-      let standAloneContract
-      if (standAlone.fromArc && standAlone.noProxy !== true) {
-        const contractInitParams = (standAlone.params !== undefined && standAlone.params.length > 0)
-          ? StandAloneContract.methods.initialize(...contractParams).encodeABI()
-          : '0x'
-        let createStandAloneProxyInstance = daoFactory.methods.createInstance(
-          [0, 1, getArcVersionNumber(standAlone.arcVersion ? standAlone.arcVersion : arcVersion)],
-          standAlone.name,
-          avatar.options.address,
-          contractInitParams
-        )
-        tx = (await sendTx(createStandAloneProxyInstance, `Creating ${standAlone.name} Proxy Instance...`)).receipt
-        standAloneContract = new web3.eth.Contract(abi, tx.events.ProxyCreated.returnValues._proxy, opts)
-        await logTx(tx, `${standAloneContract.options.address} => ${standAlone.name}`)
-      } else {
-        const { receipt, result: standAloneContractRes } = await sendTx(StandAloneContract.deploy({
-          data: bytecode,
-          arguments: standAlone.constructor ? contractParams : null
-        }), `Migrating ${standAlone.name}...`)
-        standAloneContract = standAloneContractRes
-        await logTx(receipt, `${standAloneContract.options.address} => ${standAlone.name}`)
-
-        if (standAlone.constructor !== true && standAlone.params !== undefined) {
-          const contractSetParams = standAloneContract.methods.initialize(...contractParams)
-
-          tx = (await sendTx(contractSetParams, `Initializing ${standAlone.name}...`)).receipt
-          await logTx(tx, `${standAlone.name} initialized.`)
-        }
-      }
-
-      await runFunctions(standAlone, standAloneContract)
-
-      deploymentState.StandAloneContracts.push(
-        {
-          name: standAlone.name,
-          alias: standAlone.alias,
-          address: standAloneContract.options.address,
-          arcVersion: (standAlone.arcVersion ? standAlone.arcVersion : arcVersion)
-        }
+  for (let standaloneContract in deploymentState.StandAloneContracts) {
+    if (standaloneContract.fromArc && standaloneContract.noProxy !== true) {
+      let standaloneContractProxy = new web3.eth.Contract(
+        utils.importAbi(`./${contractsDir}/${arcVersion}/AdminUpgradeabilityProxy.json`).abi,
+        standaloneContract.address,
+        opts
       )
-      setState(deploymentState, network)
+      tx = (await sendTx(standaloneContractProxy.methods.changeAdmin(deploymentState.Avatar), 'Transferring Standalone Proxy Ownership...')).receipt
+      await logTx(tx, 'Transferred Standalone Proxy Ownership.')
     }
-    deploymentState.standAloneContractsCounter++
-    setState(deploymentState, network)
   }
 
   let dao = {

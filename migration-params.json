@@ -114,14 +114,6 @@
        "fromArc": true,
        "params": [
          "DefaultAccount"
-       ],
-       "runFunctions": [
-          { 
-             "functionName": "transferOwnership",
-             "params": [
-                "AvatarAddress"
-             ]
-          }
        ]
     }
   ],
