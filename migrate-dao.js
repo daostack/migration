@@ -355,11 +355,11 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
   )
   deploymentState.Controller = controller.options.address
 
-  for (let standaloneContract in deploymentState.StandAloneContracts) {
-    if (standaloneContract.fromArc && standaloneContract.noProxy !== true) {
+  for (let i in migrationParams.StandAloneContracts) {
+    if (migrationParams.StandAloneContracts[i].fromArc && migrationParams.StandAloneContracts[i].noProxy !== true) {
       let standaloneContractProxy = new web3.eth.Contract(
         utils.importAbi(`./${contractsDir}/${arcVersion}/AdminUpgradeabilityProxy.json`).abi,
-        standaloneContract.address,
+        deploymentState.StandAloneContracts[i].address,
         opts
       )
       tx = (await sendTx(standaloneContractProxy.methods.changeAdmin(deploymentState.Avatar), 'Transferring Standalone Proxy Ownership...')).receipt
