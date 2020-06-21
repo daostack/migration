@@ -7,11 +7,15 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
     network = 'mainnet'
   }
 
+  let adminAddress = web3.eth.accounts.wallet[0].address
+
   if (network === 'private') {
     if (await web3.eth.net.getId() === 100) {
       network = 'xdai'
     } else if (await web3.eth.net.getId() === 77) {
       network = 'sokol'
+    } else {
+      adminAddress = web3.eth.accounts.wallet[1].address
     }
   }
 
@@ -150,7 +154,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
         let createStandAloneProxyInstance = daoFactory.methods.createInstance(
           [0, 1, getArcVersionNumber(standAlone.arcVersion ? standAlone.arcVersion : arcVersion)],
           standAlone.name,
-          web3.eth.accounts.wallet[0].address,
+          adminAddress,
           contractInitParams
         )
         tx = (await sendTx(createStandAloneProxyInstance, `Creating ${standAlone.name} Proxy Instance...`)).receipt
