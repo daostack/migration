@@ -7,11 +7,16 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
     network = 'mainnet'
   }
 
+  let adminAddress = web3.eth.accounts.wallet[0].address
+
   if (network === 'private') {
     if (await web3.eth.net.getId() === 100) {
       network = 'xdai'
     } else if (await web3.eth.net.getId() === 77) {
       network = 'sokol'
+    } else {
+      web3.eth.accounts.wallet.add(web3.eth.accounts.privateKeyToAccount('0x6cbed15c793ce57650b9877cf6fa156fbef513c4e6134f022a85b1ffdd59b2a1'))
+      adminAddress = web3.eth.accounts.wallet[1].address
     }
   }
 
@@ -150,7 +155,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
         let createStandAloneProxyInstance = daoFactory.methods.createInstance(
           [0, 1, getArcVersionNumber(standAlone.arcVersion ? standAlone.arcVersion : arcVersion)],
           standAlone.name,
-          web3.eth.accounts.wallet[0].address,
+          adminAddress,
           contractInitParams
         )
         tx = (await sendTx(createStandAloneProxyInstance, `Creating ${standAlone.name} Proxy Instance...`)).receipt
@@ -362,7 +367,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
         deploymentState.StandAloneContracts[i].address,
         opts
       )
-      tx = (await sendTx(standaloneContractProxy.methods.changeAdmin(deploymentState.Avatar), 'Transferring Standalone Proxy Ownership...')).receipt
+      tx = (await sendTx(standaloneContractProxy.methods.changeAdmin(deploymentState.Avatar), 'Transferring Standalone Proxy Ownership...', adminAddress, 100000)).receipt
       await logTx(tx, 'Transferred Standalone Proxy Ownership.')
     }
   }
