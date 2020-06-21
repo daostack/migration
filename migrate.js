@@ -181,23 +181,26 @@ const wrapCommand = fn => async options => {
     getArcVersionNumber: function getArcVersionNumber (arcVersion) {
       return Number(arcVersion.split('rc.')[1])
     },
-    sendTx: async function sendTx (tx, msg, from = web3.eth.defaultAccount) {
+    sendTx: async function sendTx (tx, msg, from = web3.eth.defaultAccount, manualGas = -1) {
       spinner.start(msg)
       let gas = 0
       let nonce = await web3.eth.getTransactionCount(from)
       const blockLimit = (await web3.eth.getBlock('latest')).gasLimit
-      try {
-        gas = (await tx.estimateGas())
-        if (gas * 1.1 < blockLimit - 10000) {
-          gas *= 1.1
-          gas = parseInt(gas)
-        } else {
+      if (manualGas === -1) {
+        try {
+          gas = (await tx.estimateGas())
+          if (gas * 1.1 < blockLimit - 10000) {
+            gas *= 1.1
+            gas = parseInt(gas)
+          } else {
+            gas = blockLimit - 10000
+          }
+        } catch (error) {
           gas = blockLimit - 10000
         }
-      } catch (error) {
-        gas = blockLimit - 10000
+      } else {
+        gas = manualGas
       }
-
       let result = tx.send({ from, gas, nonce })
       let receipt = await new Promise(resolve => result.on('receipt', resolve).on('error', async error => {
         spinner.fail('Transaction failed: ' + error)
