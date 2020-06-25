@@ -63,7 +63,7 @@
     "yargs": "^12.0.2"
   },
   "devDependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "command-line-args": "^5.0.2",
     "command-line-usage": "^5.0.5",
     "dotenv": "^7.0.0",
