@@ -5,7 +5,7 @@ const Web3 = require('web3')
 const web3 = new Web3()
 const BN = require('bn.js')
 
-async function getLegacyDAOParameters (daoId) {
+async function getLegacyDAOParameters (daoId, subgraphEndpoint) {
   let voteParasQuery = `
       boostedVotePeriodLimit
       daoBountyConst
@@ -77,7 +77,7 @@ async function getLegacyDAOParameters (daoId) {
     }
   }`
   try {
-    let { data } = (await axios.post('https://api.thegraph.com/subgraphs/name/daostack/v39_4', { query })).data
+    let { data } = (await axios.post(subgraphEndpoint, { query })).data
     let { dao } = data
     let migrationParams = {
       founders: [],
@@ -111,7 +111,7 @@ async function getLegacyDAOParameters (daoId) {
         balance
       }
     }`
-    let { tokenHolders } = (await axios.post('https://api.thegraph.com/subgraphs/name/daostack/v39_4', { query: tokenHoldersQuery })).data.data
+    let { tokenHolders } = (await axios.post(subgraphEndpoint, { query: tokenHoldersQuery })).data.data
     for (let tokenHolder of tokenHolders) {
       let existingFounder = false
       for (let i in migrationParams.founders) {
@@ -229,6 +229,13 @@ function realMathToNumber (t) {
   return Math.round((t.shrn(REAL_FBITS).toNumber() + fraction) * 1000)
 }
 
-module.exports = {
-  getLegacyDAOParameters
+if (require.main === module) {
+  let cliArgs = process.argv.slice(2)
+  let daoId = cliArgs[0]
+  let subgraphEndpoint = cliArgs[1]
+  getLegacyDAOParameters(daoId, subgraphEndpoint)
+} else {
+  module.exports = {
+    getLegacyDAOParameters
+  }
 }
