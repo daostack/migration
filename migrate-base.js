@@ -264,7 +264,7 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     case 'xdai':
     case 'sokol':
       // TODO: Here add the address private key to the web3 wallet.
-      adminAddress = TESTNET_ACCOUNT
+      adminAddress = web3.eth.accounts.wallet[0].address
       daoRegistryAdminAddress = TESTNET_ACCOUNT // TODO: USE A DIFFERENT ACOUNT
       break
     case 'mainnet':
