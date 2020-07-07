@@ -217,6 +217,7 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     'Redeemer',
     'RepAllocation',
     'Reputation',
+    'ReputationAdmin',
     'ReputationFromToken',
     'SchemeFactory',
     'SchemeMock',
