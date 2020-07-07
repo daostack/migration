@@ -27,32 +27,32 @@ echo "Generating abis..."
 npm run generate-abis
 # migrating Arc version to ganache
 echo "Migrating ganache..."
-npm run migrate -- --disable-confs --restart --arc-version "0.1.2-rc.$version" "$@"
+npm run migrate -- --disableconfs --restart --arcversion "0.1.2-rc.$version" "$@"
 done
 if [ ! -z "$kovan_private_key" ]; then
 # migrate kovan
 echo "Migrating kovan..."
-npm run migrate -- --gasPrice 10 --provider $kovan_provider --private-key $kovan_private_key "$@"
+npm run migrate.base -- --disableconfs --gasPrice 10 --provider $kovan_provider --private-key $kovan_private_key "$@"
 fi
 if [ ! -z "$rinkeby_private_key" ]; then
 # migrate rinkeby
 echo "Migrating rinkeby..."
-npm run migrate -- --gasPrice 10 --provider $rinkeby_provider --private-key $rinkeby_private_key "$@"
+npm run migrate.base -- --disableconfs --gasPrice 10 --provider $rinkeby_provider --private-key $rinkeby_private_key "$@"
 fi
 if [ ! -z "$mainnet_private_key" ]; then
 # migrate mainnet
 echo "Migrating mainnet..."
-npm run migrate -- --gasPrice 30 --provider $mainnet_provider --private-key $mainnet_private_key "$@"
+# npm run migrate.base -- --disableconfs --gasPrice 30 --provider $mainnet_provider --private-key $mainnet_private_key "$@"
 fi
 if [ ! -z "$xdai_private_key" ]; then
 # migrate xdai
 echo "Migrating xDai..."
-npm run migrate -- --gasPrice 5 --provider $xdai_provider --private-key $xdai_private_key "$@"
+npm run migrate.base -- --disableconfs --gasPrice 5 --provider $xdai_provider --private-key $xdai_private_key "$@"
 fi
 if [ ! -z "$sokol_private_key" ]; then
 # migrate sokol
 echo "Migrating Sokol..."
-npm run migrate -- --gasPrice 5 --provider $sokol_provider --private-key $sokol_private_key "$@"
+# npm run migrate.base -- --disableconfs --gasPrice 5 --provider $sokol_provider --private-key $sokol_private_key "$@"
 fi
 # set version
 echo "Setting version..."
