@@ -110,7 +110,7 @@ Commands:
 
 Options:
   --version          Show version number                                                                       [boolean]
-  --arc-version, -a  Use a specific Arc package version                                       [string] [default: latest supported version]
+  --arcversion, -a  Use a specific Arc package version                                       [string] [default: latest supported version]
   --provider, -p     web3 provider url                                       [string] [default: "http://localhost:8545"]
   --gas-price, -g    gas price in GWei. If not specified, will use an automatically suggested price.            [number]
   --quiet, -q        suppress console output                                                  [boolean] [default: false]

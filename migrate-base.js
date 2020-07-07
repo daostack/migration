@@ -305,8 +305,6 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
       adminAddress)
     ).receipt
     await logTx(tx, `Finished upgrading DAORegistry to version 0.1.${getArcVersionNumber(arcVersion)}`)
-
-    addresses['DAORegistryInstance'] = previousMigration.package[arcVersion]['DAORegistryInstance']
   }
 
   addresses['DAOFactoryInstance'] = shouldDeploy('DAOFactoryInstance', utils.importAbi(`./${contractsDir}/${arcVersion}/AdminUpgradeabilityProxy.json`).deployedBytecode)
@@ -333,8 +331,6 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
       web3.eth.accounts.wallet[1].address)
     ).receipt
     await logTx(tx, `Finished upgrading DAOFactory to version 0.1.${getArcVersionNumber(arcVersion)}`)
-
-    addresses['DAOFactoryInstance'] = previousMigration.package[arcVersion]['DAOFactoryInstance']
   }
 
   let migration = { 'package': previousMigration.package || {} }

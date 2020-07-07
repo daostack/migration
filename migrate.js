@@ -244,7 +244,7 @@ const wrapCommand = fn => async options => {
 function cli () {
   /* eslint no-unused-expressions: "off" */
   yargs
-    .option('arc-version', {
+    .option('arcversion', {
       alias: 'a',
       describe: 'specify an Arc version to use for deployment.',
       type: 'string',
@@ -267,7 +267,7 @@ function cli () {
       type: 'boolean',
       default: defaults.quiet
     })
-    .option('disable-confs', {
+    .option('disableconfs', {
       alias: 'd',
       describe: 'disable confirmation messages',
       type: 'boolean',
