@@ -145,7 +145,6 @@ const processContracts = async (): Promise<any> => {
 
         switch (contractName) {
           case 'GEN':
-          case 'ControllerCreator':
           case 'DAORegistryInstance':
           case 'DAOFactoryInstance':
           case 'AdminUpgradeabilityProxy':
@@ -186,13 +185,13 @@ const processContracts = async (): Promise<any> => {
           continue;
         }
 
-        const flattened = await truffleFlattener([solFilePath[0]]);
-
+        let flattened = await truffleFlattener([solFilePath[0]]);
+        flattened = flattened.split('SPDX-License-Identifier').join('');
         if (options.outputFlattened) {
           fs.writeFileSync(path.join(options.outputFlattened, `flattened.${contractName}.sol`), flattened);
         }
 
-        const version = 'v0.5.17+commit.d19bba13';
+        const version = 'v0.6.10+commit.00c0fcaf';
 
         const apiConfig = {
           action: 'verifysourcecode',
