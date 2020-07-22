@@ -182,6 +182,12 @@ const processContracts = async (): Promise<any> => {
       }
 
       if (!solFilePath.length) {
+        foundIn = './node_modules/@daostack/upgrades';
+        process.chdir(path.join(__dirname, foundIn));
+        solFilePath = glob.sync(`./contracts/**/${contractName}.sol`);
+      }
+
+      if (!solFilePath.length) {
         spinner.fail(`contract ${contractName}.sol not found`);
         continue;
       }
