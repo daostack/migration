@@ -80,5 +80,7 @@ read -n 1 -s -r -p "Press any key to verify contracts on rinkeby"
 npm run verify -- -n rinkeby -p $rinkeby_provider
 read -n 1 -s -r -p "Press any key to verify contracts on kovan"
 npm run verify -- -n kovan -p $kovan_provider
+read -n 1 -s -r -p "Press any key to verify contracts on xdai"
+npm run verify -- -n xdai -p $xdai_provider
 read -n 1 -s -r -p "Press any key to verify contracts on mainnet"
 npm run verify -- -n mainnet -p $mainnet_provider
