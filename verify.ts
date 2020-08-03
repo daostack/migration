@@ -124,77 +124,93 @@ const processContracts = async (): Promise<any> => {
   let anySucceeded = false;
   let spinner: any;
 
-  try {
+  let url;
+  if (options.network === 'xdai') {
+    url = 'https://blockscout.com/poa/xdai/api?module=contract&action=verify';
+  } else {
+    url = `https://api${options.network === 'mainnet' ? '' : ('-' + options.network)}.etherscan.io/api`;
+  }
 
-    const etherscanUrl =
-      `https://api${options.network === 'mainnet' ? '' : ('-' + options.network)}.etherscan.io/api`;
+  if (options.check) { // TODO: xdai support
+    // check is the GUID
+    const result = await validateResult(options.check, url);
+    console.log(`Verification status: ${result.result}`);
+    exitCode = 0;
+  } else {
 
-    if (options.check) {
-      // check is the GUID
-      const result = await validateResult(options.check, etherscanUrl);
-      console.log(`Verification status: ${result.result}`);
-      exitCode = 0;
-    } else {
+    console.log(`Verifying contract(s) on ${options.network}, Arc version ${options.version}...`);
+    // tslint:disable-next-line: forin
+    for (const contractName in addresses) {
+      let constructorArguments: string;
+      const address = addresses[contractName];
 
-      console.log(`Verifying contract(s) on ${options.network}, Arc version ${options.version}...`);
-      // tslint:disable-next-line: forin
-      for (const contractName in addresses) {
-
-        let constructorArguments: string;
-        const address = addresses[contractName];
-
-        switch (contractName) {
-          case 'GEN':
-          case 'ControllerCreator':
-          case 'DAORegistryInstance':
-          case 'DAOFactoryInstance':
-          case 'AdminUpgradeabilityProxy':
-            // ignore these
-            continue;
-
-          case 'Redeemer':
-            constructorArguments = await getConstructorParams(address, 128);
-            break;
-          case 'GenesisProtocol':
-          case 'DaoCreator':
-          case 'DAORegistry':
-            constructorArguments = await getConstructorParams(address, 64);
-            break;
-        }
-
-        spinner = ora();
-        spinner.start(`${contractName} at ${addresses[contractName]}`);
-
-        let foundIn = './node_modules/@daostack/arc-experimental';
-        process.chdir(path.join(__dirname, foundIn));
-
-        let solFilePath = glob.sync(`./contracts/**/${contractName}.sol`);
-        if (!solFilePath.length) {
-          foundIn = './node_modules/@daostack/infra-experimental';
-          process.chdir(path.join(__dirname, foundIn));
-          solFilePath = glob.sync(`./contracts/**/${contractName}.sol`);
-        }
-
-        if (!solFilePath.length) {
-          foundIn = './node_modules/@daostack/arc-hive';
-          process.chdir(path.join(__dirname, foundIn));
-          solFilePath = glob.sync(`./contracts/**/${contractName}.sol`);
-        }
-
-        if (!solFilePath.length) {
-          spinner.fail(`contract ${contractName}.sol not found`);
+      switch (contractName) {
+        case 'GEN':
+        case 'DAORegistryInstance':
+        case 'DAOFactoryInstance':
+        case 'AdminUpgradeabilityProxy':
+          // ignore these
           continue;
-        }
 
-        const flattened = await truffleFlattener([solFilePath[0]]);
+        case 'Redeemer':
+          constructorArguments = await getConstructorParams(address, 128);
+          break;
+        case 'GenesisProtocol':
+        case 'DaoCreator':
+        case 'DAORegistry':
+          constructorArguments = await getConstructorParams(address, 64);
+          break;
+      }
 
-        if (options.outputFlattened) {
-          fs.writeFileSync(path.join(options.outputFlattened, `flattened.${contractName}.sol`), flattened);
-        }
+      spinner = ora();
+      spinner.start(`${contractName} at ${addresses[contractName]}`);
 
-        const version = 'v0.5.17+commit.d19bba13';
+      let foundIn = './node_modules/@daostack/arc-experimental';
+      process.chdir(path.join(__dirname, foundIn));
 
-        const apiConfig = {
+      let solFilePath = glob.sync(`./contracts/**/${contractName}.sol`);
+      if (!solFilePath.length) {
+        foundIn = './node_modules/@daostack/infra-experimental';
+        process.chdir(path.join(__dirname, foundIn));
+        solFilePath = glob.sync(`./contracts/**/${contractName}.sol`);
+      }
+
+      if (!solFilePath.length) {
+        foundIn = './node_modules/@daostack/arc-hive';
+        process.chdir(path.join(__dirname, foundIn));
+        solFilePath = glob.sync(`./contracts/**/${contractName}.sol`);
+      }
+
+      if (!solFilePath.length) {
+        foundIn = './node_modules/@daostack/upgrades';
+        process.chdir(path.join(__dirname, foundIn));
+        solFilePath = glob.sync(`./contracts/**/${contractName}.sol`);
+      }
+
+      if (!solFilePath.length) {
+        spinner.fail(`contract ${contractName}.sol not found`);
+        continue;
+      }
+
+      let flattened = await truffleFlattener([solFilePath[0]]);
+      flattened = flattened.split('SPDX-License-Identifier').join('');
+      if (options.outputFlattened) {
+        fs.writeFileSync(path.join(options.outputFlattened, `flattened.${contractName}.sol`), flattened);
+      }
+
+      const version = 'v0.6.10+commit.00c0fcaf';
+      let apiConfig;
+      if (options.network === 'xdai') {
+        apiConfig = {
+          addressHash: addresses[contractName],
+          compilerVersion: version,
+          constructorArguements: constructorArguments,
+          contractSourceCode: flattened,
+          name: contractName,
+          optimization: true,
+        };
+      } else {
+        apiConfig = {
           action: 'verifysourcecode',
           apikey: APIKEY,
           compilerVersion: version,
@@ -207,9 +223,11 @@ const processContracts = async (): Promise<any> => {
           runs: '200',
           sourceCode: flattened,
         };
+      }
 
+      try {
         const encodedPostData = querystring.stringify(apiConfig).replace(/%20/g, '+');
-        const response = await axios.post(etherscanUrl, encodedPostData,
+        const response = await axios.post(url, encodedPostData,
           {
             headers: {
               'Content-Length': encodedPostData.length,
@@ -219,41 +237,51 @@ const processContracts = async (): Promise<any> => {
         );
 
         const result = response.data;
-
-        if (result.status === '1') {
-          // 1 = submission success, use the guid returned (result.result) to check the status of the submission.
-          anySucceeded = true;
-          const verifyResult = await validateResult(result.result, etherscanUrl);
-          if (verifyResult.result !== 'Pending in queue') {
-            spinner.fail(
-              `${contractName} at ${addresses[contractName]} ${verifyResult.result}, GUID: ${result.result}`);
+        // console.log(response);
+        if (options.network === 'xdai') {
+          const msg = `${contractName} at ${addresses[contractName]} - ${result.message}`;
+          if (result.message.indexOf('Something went wrong') !== -1) {
+            spinner.fail(msg);
+          } else if (result.message.indexOf('OK') !== -1) {
+            spinner.succeed(`${contractName} at ${addresses[contractName]} - contract was verified successfully.`);
           } else {
-            spinner.succeed(
-              `${contractName} at ${addresses[contractName]} ${verifyResult.result}, GUID: ${result.result}`);
+            spinner.info(msg);
           }
         } else {
-          if (result.result.indexOf('already verified') !== -1) {
-            spinner.info(`${contractName} at ${addresses[contractName]} ${result.result}`);
+          if (result.status === '1') {
+            // 1 = submission success, use the guid returned (result.result) to check the status of the submission.
+            anySucceeded = true;
+            const verifyResult = await validateResult(result.result, url);
+            if (verifyResult.result !== 'Pending in queue') {
+              spinner.fail(
+                `${contractName} at ${addresses[contractName]} ${verifyResult.result}, GUID: ${result.result}`);
+            } else {
+              spinner.succeed(
+                `${contractName} at ${addresses[contractName]} ${verifyResult.result}, GUID: ${result.result}`);
+            }
           } else {
-            spinner.fail(`${contractName} at ${addresses[contractName]} ${result.result}`);
+            if (result.result.indexOf('already verified') !== -1) {
+              spinner.info(`${contractName} at ${addresses[contractName]} ${result.result}`);
+            } else {
+              spinner.fail(`${contractName} at ${addresses[contractName]} ${result.result}`);
+            }
           }
         }
         await sleep(500);
+        exitCode = 0;
+      } catch (ex) {
+        if (spinner) {
+          spinner.fail();
+        }
+        console.error(ex.message);
       }
-      exitCode = 0;
     }
-  } catch (ex) {
-    if (spinner) {
-      spinner.fail();
-    }
-    console.error(ex.message);
-  } finally {
-    if (anySucceeded) {
+
+    if (anySucceeded && options.network !== 'xdai') {
       // tslint:disable-next-line: max-line-length
       console.log(`In-queue validation(s) may or may succeed.  To confirm, use -g option with GUID or check on https://${options.network === 'mainnet' ? '' : (options.network + '.')}etherscan.io/contractsVerified`);
     }
   }
-
   process.exit(exitCode);
 };
 
@@ -262,6 +290,7 @@ const processContracts = async (): Promise<any> => {
  * @param guid
  * @param url
  */
+// TODO: Add xdai support
 const validateResult = async (guid: string, url: string): Promise<any> => {
   const response = await axios.get(url,
     {
