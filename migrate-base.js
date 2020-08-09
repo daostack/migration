@@ -208,7 +208,7 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     'GenericScheme',
     'GenesisProtocol',
     'GlobalConstraintRegistrar',
-    'JoinAndQuit',
+    'Join',
     'Locking4Reputation',
     'LockingEth4Reputation',
     'LockingToken4Reputation',
@@ -331,7 +331,7 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     tx = (await sendTx(
       daoFactory.methods.upgradeTo(addresses['DAOFactory']),
       `Upgrading DAOFactory contract to version 0.1.${getArcVersionNumber(arcVersion)}...`,
-      web3.eth.accounts.wallet[1].address)
+      adminAddress)
     ).receipt
     await logTx(tx, `Finished upgrading DAOFactory to version 0.1.${getArcVersionNumber(arcVersion)}`)
   }
