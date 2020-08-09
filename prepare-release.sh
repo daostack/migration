@@ -17,6 +17,9 @@ readonly ARC=$(cat package.json | jq -r '.dependencies."@daostack/arc-experiment
 # migrate ganache
 for (( version=$INITIAL_VERSION; version<=$ARC; version++ ))
 do
+if [ "$version" == "5" ]; then
+continue
+fi
 echo "Installing Arc version $version..."
 npm install "@daostack/arc-experimental@0.1.2-rc.$version" --save --save-exact
 # prune arc build
