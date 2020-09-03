@@ -18,6 +18,8 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
       network = 'xdai'
     } else if (await web3.eth.net.getId() === 77) {
       network = 'sokol'
+    } else if (await web3.eth.net.getId() === 111615170699283) {
+      network = 'arbitrum'
     } else {
       if (migrationParams.StandAloneContracts) {
         web3.eth.accounts.wallet.add(web3.eth.accounts.privateKeyToAccount('0x6cbed15c793ce57650b9877cf6fa156fbef513c4e6134f022a85b1ffdd59b2a1'))

@@ -91,6 +91,8 @@ const wrapCommand = fn => async options => {
       network = 'xdai'
     } else if (await web3.eth.net.getId() === 77) {
       network = 'sokol'
+    } else if (await web3.eth.net.getId() === 111615170699283) {
+      network = 'arbitrum'
     }
   }
   if (network === 'main') {
