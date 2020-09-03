@@ -320,7 +320,8 @@ const paramsSchema = {
     private: { type: 'object' },
     ropsten: { type: 'object' },
     kovan: { type: 'object' },
-    xdai: { type: 'object' }
+    xdai: { type: 'object' },
+    arbitrum: { type: 'object' }
   }
 }
 

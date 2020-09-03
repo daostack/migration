@@ -23,8 +23,11 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
       network = 'xdai'
     } else if (await web3.eth.net.getId() === 77) {
       network = 'sokol'
+    } else if (await web3.eth.net.getId() === 111615170699283) {
+      network = 'arbitrum'
     }
   }
+  console.log(network, await web3.eth.net.getId())
 
   async function shouldDeploy (contractName, deployedBytecode, deps) {
     if (contractName !== 'ImplementationDirectory') {
@@ -76,7 +79,6 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
 
   // OpenZeppelin App and Package setup
   let packageName = 'DAOstack'
-
   let Package = await deploy(utils.importAbi(`./${contractsDir}/${arcVersion}/Package.json`))
   let packageContract = new web3.eth.Contract(
     utils.importAbi(`./${contractsDir}/${arcVersion}/Package.json`).abi,
@@ -267,6 +269,7 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     case 'rinkeby':
     case 'xdai':
     case 'sokol':
+    case 'arbitrum':
       // TODO: Here add the address private key to the web3 wallet.
       adminAddress = web3.eth.accounts.wallet[0].address
       daoRegistryAdminAddress = TESTNET_ACCOUNT // TODO: USE A DIFFERENT ACOUNT
