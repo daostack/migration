@@ -1050,6 +1050,60 @@
         "DAOFactoryInstance": "0x1ba55723eAE3c5f0A268edA12697754d9f0708Fc",
         "AdminUpgradeabilityProxy": "0x1ba55723eAE3c5f0A268edA12697754d9f0708Fc"
       }
+    },
+    "dao": {
+      "0.1.2-rc.6": {
+        "name": "My DAO",
+        "Avatar": "0xE451EBf528c1204aC5EB71382C6Cc0fb9D9d20ad",
+        "DAOToken": "0x54643A5A48aA52F069b6d627E4A25F3AfcaeCA1D",
+        "Reputation": "0x291356A4e5c62E7C2a29d8D9CDC3cE23911F5f84",
+        "Controller": "0x8c2dec65298CE48C296d89C0ABecCb179814CaBC",
+        "Schemes": [
+          {
+            "name": "ContributionReward",
+            "alias": "ContributionRewardAlias",
+            "address": "0x83caa21CAeB878Fc5dc98332CF07B2698F221E06"
+          },
+          {
+            "name": "SchemeRegistrar",
+            "alias": "SchemeRegistrarAlias",
+            "address": "0xfEbbDbF1Fb9436e4C970770725A71243e533b3c0"
+          },
+          {
+            "name": "UpgradeScheme",
+            "alias": "UpgradeSchemeAlias",
+            "address": "0x569D0F8A2B19C1756F634335F002db1Cc9d3BFe7"
+          },
+          {
+            "name": "GenericScheme",
+            "alias": "GenericSchemeAlias",
+            "address": "0xd75B05085339140D9566305549b029BaD080999c"
+          },
+          {
+            "name": "ContributionRewardExt",
+            "alias": "ContributionRewardExt",
+            "address": "0x40ed36C3cD5bbF4e38099Aa12fa90c9bae261C26"
+          },
+          {
+            "name": "SchemeFactory",
+            "alias": "SchemeRegistrarAlias",
+            "address": "0x8c29054C7df412083fd1e2E1D05908097154238A"
+          },
+          {
+            "name": "FundingRequest",
+            "alias": "FundingRequestAlias",
+            "address": "0xa8250a484C3EEE26A666CeAc88E72e6C14A55D29"
+          }
+        ],
+        "StandAloneContracts": [
+          {
+            "name": "Wallet",
+            "address": "0x39A97E129581F42Cda3ea458b42d42ad2B179f5b",
+            "arcVersion": "0.1.2-rc.6"
+          }
+        ],
+        "arcVersion": "0.1.2-rc.6"
+      }
     }
   },
   "xdai": {
