@@ -259,7 +259,7 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
   }
 
   const TESTNET_ACCOUNT = '0x73Db6408abbea97C5DB8A2234C4027C315094936'
-  const DAOSTACK_ACCOUNT = '0x85e7fa550b534656d04d143b9a23a11e05077da3'
+  const DAOSTACK_ACCOUNT = '0xe5b49414b2e130c28a4E67ab6Fe34AcdC0d4beDF'
   let adminAddress, daoRegistryAdminAddress
   switch (network) {
     case 'kovan':
