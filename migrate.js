@@ -24,9 +24,9 @@ async function migrate (opts) {
     ...demo
   }
 }
-let arcVersion = require('./package.json').dependencies['@daostack/arc']
+
 const defaults = {
-  arcVersion: arcVersion === 'github:daostack/arc#schemeconstraint' ? '0.0.1-rc.46' : arcVersion,
+  arcVersion: require('./package.json').dependencies['@daostack/arc'],
   quiet: false,
   disableconfs: false,
   force: false,
