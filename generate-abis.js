@@ -7,6 +7,7 @@ const path = require('path')
 async function generateAbis (bases) {
   for (let i in bases) {
     let arcVersion = require('./package.json').dependencies['@daostack/arc']
+    arcVersion = arcVersion === 'github:daostack/arc#schemeconstraint' ? '0.0.1-rc.46' : arcVersion
     const base = require('path').dirname(require.resolve(bases[i]))
     if (!fs.existsSync('./contracts/' + arcVersion)) {
       fs.mkdirSync('./contracts/' + arcVersion, { recursive: true })

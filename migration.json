@@ -520,6 +520,24 @@
         "VoteInOrganizationScheme": "0x2b73C4DD85499b1957A655704D5B50B96a74578d",
         "OrganizationRegister": "0x27142D3B30696DE6Ec42ad3a40c8BeD3B68086c9",
         "Redeemer": "0x6654d9B3a676D2E621D2ad633b4588c1b30Ddc57"
+      },
+      "0.0.1-rc.46": {
+        "GEN": "0xe78A0F7E598Cc8b0Bb87894B0F60dD2a88d6a8Ab",
+        "DAORegistry": "0x67B5656d60a809915323Bf2C40A8bEF15A152e3e",
+        "DAOTracker": "0x970e8f18ebfEa0B08810f33a5A40438b9530FBCF",
+        "ControllerCreator": "0x2612Af3A521c2df9EAF28422Ca335b04AdF3ac66",
+        "DaoCreator": "0x5b9b42d6e4B2e4Bf8d42Eba32D46918e10899B66",
+        "GenesisProtocol": "0xaf5C4C6C7920B4883bC6252e9d9B8fE27187Cf68",
+        "SchemeRegistrar": "0xEC5d4F247aF81A843612eb1371CBCfa88b762119",
+        "UpgradeScheme": "0xDDb64fE46a91D46ee29420539FC25FD07c5FEa3E",
+        "GlobalConstraintRegistrar": "0x1b88Bdb8269A1aB1372459F5a4eC3663D6f5cCc4",
+        "ContributionReward": "0x22d5C8BdD4346b390014a07109a8F830094d4abf",
+        "AbsoluteVote": "0x7414e38377D6DAf6045626EC8a8ABB8a1BC4B97a",
+        "QuorumVote": "0xB9bdBAEc07751F6d54d19A6B9995708873F3DE18",
+        "TokenCapGC": "0x4bf3A7dFB3b76b5B3E169ACE65f888A4b4FCa5Ee",
+        "VoteInOrganizationScheme": "0xFcCeD5E997E7fb1D0594518D3eD57245bB8ed17E",
+        "OrganizationRegister": "0x4339316e04CFfB5961D1c41fEF8E44bfA2A7fBd1",
+        "Redeemer": "0xdAA71FBBA28C946258DD3d5FcC9001401f72270F"
       }
     },
     "dao": {
@@ -1572,6 +1590,56 @@
           }
         ],
         "arcVersion": "0.0.1-rc.45"
+      },
+      "0.0.1-rc.46": {
+        "name": "Gustatory Potato",
+        "Avatar": "0xaD560490C99f293DeE624883d1c2DF591f4003fb",
+        "DAOToken": "0x23072187A8d29BA56c5c516B5c011Ff40264160B",
+        "Reputation": "0x8BbDa1217Ce07565dC2F41381034a691F1c539fE",
+        "Controller": "0x5109F62E4e0CA152f5543E59E42dc0360C3aeD25",
+        "Schemes": [
+          {
+            "name": "GenericScheme",
+            "alias": "GenericSchemeAlias",
+            "address": "0x2f3efA6bbDC5fAf4dC1a600765c7B7829e47bE10",
+            "arcVersion": "0.0.1-rc.46"
+          },
+          {
+            "name": "ContributionRewardExt",
+            "alias": "ContributionRewardExt",
+            "address": "0xD13ebb5C39fB00C06122827E1cbD389930C9E0E3",
+            "arcVersion": "0.0.1-rc.43"
+          },
+          {
+            "name": "GenericSchemeMultiCall",
+            "alias": "GenericSchemeMultiCall",
+            "address": "0xdFccc9C59c7361307d47c558ffA75840B32DbA29",
+            "arcVersion": "0.0.1-rc.46"
+          }
+        ],
+        "StandAloneContracts": [
+          {
+            "name": "Wallet",
+            "address": "0xe97DbD7116D168190F8A6E7beB1092c103c53a12",
+            "arcVersion": "0.0.1-rc.46"
+          },
+          {
+            "name": "ContributionRewardExt",
+            "address": "0xD13ebb5C39fB00C06122827E1cbD389930C9E0E3",
+            "arcVersion": "0.0.1-rc.43"
+          },
+          {
+            "name": "Competition",
+            "address": "0x8914a9E5C5E234fDC3Ce9dc155ec19F43947ab59",
+            "arcVersion": "0.0.1-rc.43"
+          },
+          {
+            "name": "DxDaoSchemeConstraints",
+            "address": "0x3acc15dE35aaB8A94B7D2426E27c887541e4DE6c",
+            "arcVersion": "0.0.1-rc.46"
+          }
+        ],
+        "arcVersion": "0.0.1-rc.46"
       }
     },
     "test": {
@@ -2077,6 +2145,24 @@
           "DemoAvatar": "0x67B95a3fbca38B9E20AfDa215121178D0451df84",
           "DemoDAOToken": "0x79D1146bf06112CBF289d30bc6CCe62a6569bd9B",
           "DemoReputation": "0x9c5C211178EEF93Bd1D0640D9E2B214Ca952A330"
+        }
+      },
+      "0.0.1-rc.46": {
+        "name": "Efficacious Cookies",
+        "Controller": "0x5fD287667AC7D13161648e82dA6e8B8A3C9Bc432",
+        "Avatar": "0xB2aAf12A93ba6eAE4964c61Aa2854cbC7fE4A58a",
+        "DAOToken": "0xa8F9eBE082A124063dc6BBA795a83779B4187a4b",
+        "Reputation": "0x863640A65c3b18AA1896706de39c9e664A94B0B7",
+        "ActionMock": "0x25AF99b922857C37282f578F428CB7f34335B379",
+        "gsProposalId": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "queuedProposalId": "0x37373df3bb184f5df2da32d8c7d7f0ef970a5daaafbf64f8d3cb03b9a1bfbf97",
+        "preBoostedProposalId": "0x1a44febdae6776710d128db9f409f78426ed53aeeaaa83fa1046762279518f34",
+        "boostedProposalId": "0x58e31c30f460f204d2148208a7602ce4c533af74d8931cf78a2f82798d645f61",
+        "executedProposalId": "0x54b6c4b74751e6e7321501f84dd1a583a4ed4e66ec49fbc44c69f4caa3ae9009",
+        "organs": {
+          "DemoAvatar": "0xEd447aCB0CEb49d77f317dD6D37CB64da7a7E7F8",
+          "DemoDAOToken": "0x0d3C71782055bD88A71b611972152d6e984EDF79",
+          "DemoReputation": "0xe93e3B649d4E01e47dd2170CAFEf0651477649Da"
         }
       }
     }
