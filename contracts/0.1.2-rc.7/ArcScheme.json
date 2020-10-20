@@ -1,0 +1,46 @@
+{
+  "contractName": "ArcScheme",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "avatar",
+      "outputs": [
+        {
+          "internalType": "contract Avatar",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "voteParamsHash",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "votingMachine",
+      "outputs": [
+        {
+          "internalType": "contract IntVoteInterface",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b5060db8061001f6000396000f3fe6080604052348015600f57600080fd5b5060043610603c5760003560e01c80633edf7ca11460415780634ea2c7ec1460635780635aef7de614607b575b600080fd5b60476081565b604080516001600160a01b039092168252519081900360200190f35b60696090565b60408051918252519081900360200190f35b60476096565b6034546001600160a01b031681565b60355481565b6033546001600160a01b03168156fea26469706673582212201e27c102c7c3caf691e2ffbed29ecfa8c2211cb309380367b8bf7ed57d790ef964736f6c634300060c0033",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b5060043610603c5760003560e01c80633edf7ca11460415780634ea2c7ec1460635780635aef7de614607b575b600080fd5b60476081565b604080516001600160a01b039092168252519081900360200190f35b60696090565b60408051918252519081900360200190f35b60476096565b6034546001600160a01b031681565b60355481565b6033546001600160a01b03168156fea26469706673582212201e27c102c7c3caf691e2ffbed29ecfa8c2211cb309380367b8bf7ed57d790ef964736f6c634300060c0033"
+}

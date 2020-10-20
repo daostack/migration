@@ -192,6 +192,7 @@ async function migrateBase ({ arcVersion, web3, confirm, opts, logTx, previousMi
     'Agreement',
     'Auction4Reputation',
     'Avatar',
+    'CL4RRedeemer',
     'Competition',
     'ContinuousLocking4Reputation',
     'ContributionReward',

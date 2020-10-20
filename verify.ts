@@ -198,7 +198,7 @@ const processContracts = async (): Promise<any> => {
         fs.writeFileSync(path.join(options.outputFlattened, `flattened.${contractName}.sol`), flattened);
       }
 
-      const version = 'v0.6.10+commit.00c0fcaf';
+      const version = 'v0.6.12+commit.27d51765';
       let apiConfig;
       if (options.network === 'xdai') {
         apiConfig = {
@@ -237,7 +237,6 @@ const processContracts = async (): Promise<any> => {
         );
 
         const result = response.data;
-        // console.log(response);
         if (options.network === 'xdai') {
           const msg = `${contractName} at ${addresses[contractName]} - ${result.message}`;
           if (result.message.indexOf('Something went wrong') !== -1) {
