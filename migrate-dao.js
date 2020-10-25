@@ -18,7 +18,7 @@ async function migrateDAO ({ arcVersion, web3, spinner, confirm, opts, migration
       network = 'xdai'
     } else if (await web3.eth.net.getId() === 77) {
       network = 'sokol'
-    } else if (await web3.eth.net.getId() === 111615170699283) {
+    } else if (await web3.eth.net.getId() === 215728282823301) {
       network = 'arbitrum'
     } else {
       if (migrationParams.StandAloneContracts) {
