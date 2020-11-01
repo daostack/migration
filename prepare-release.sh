@@ -45,7 +45,7 @@ fi
 if [ ! -z "$mainnet_private_key" ]; then
 # migrate mainnet
 echo "Migrating mainnet..."
-# npm run migrate.base -- --disableconfs --gasPrice 55 --provider $mainnet_provider --private-key $mainnet_private_key "$@"
+npm run migrate.base -- --disableconfs --gasPrice 30 --provider $mainnet_provider --private-key $mainnet_private_key "$@"
 fi
 if [ ! -z "$xdai_private_key" ]; then
 # migrate xdai
