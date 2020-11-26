@@ -30,10 +30,10 @@ exports.importAbi = function (abiPath) {
   return abi
 }
 
-const ARBITIUM_TESTNET_V2_CHAIN_ID = 152709604825713
+const ARBITIUM_TESTNET_V2_CHAIN_ID = 152709604825713 // https://kovan2.arbitrum.io/rpc
 exports.getNetworkName = async function (web3) {
   if (await web3.eth.net.getId() === ARBITIUM_TESTNET_V2_CHAIN_ID) {
-     return 'arbitium_testnet_v2'
+    return 'arbitium_testnet_v2'
   }
   let network = await web3.eth.net.getNetworkType()
   if (network === 'private') {
@@ -43,5 +43,5 @@ exports.getNetworkName = async function (web3) {
       network = 'sokol'
     }
   }
-  return network;
+  return network
 }

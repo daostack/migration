@@ -106,7 +106,6 @@ const wrapCommand = fn => async options => {
 
   // default opts for web3
   const block = await web3.eth.getBlock('latest')
-  //console.log("await web3.eth.getBlock('latest')",await web3.eth.getBlock('latest'))
   const opts = {
     from: web3.eth.defaultAccount,
     gas: block.gasLimit - 100000,
@@ -187,15 +186,15 @@ const wrapCommand = fn => async options => {
       let gas = 0
       let nonce = await web3.eth.getTransactionCount(web3.eth.defaultAccount)
       if (utils.getNetworkName() !== 'arbitium_testnet_v2') {
-          const blockLimit = await web3.eth.getBlock('latest').gasLimit
-          try {
-            gas = (await tx.estimateGas())
-            if (gas * 1.1 < blockLimit - 100000) {
-              gas *= 1.1
-            }
-          } catch (error) {
-            gas = blockLimit - 100000
+        const blockLimit = await web3.eth.getBlock('latest').gasLimit
+        try {
+          gas = (await tx.estimateGas())
+          if (gas * 1.1 < blockLimit - 100000) {
+            gas *= 1.1
           }
+        } catch (error) {
+          gas = blockLimit - 100000
+        }
       }
       let result = tx.send({ gas, nonce })
       let receipt = await new Promise(resolve => result.on('receipt', resolve).on('error', async error => {
