@@ -5435,7 +5435,7 @@
       }
     }
   },
-  "arbitium": {
+  "arbitium_testnet_v2": {
     "base": {
       "0.0.1-rc.51": {
         "GEN": "0x543Ff227F64Aa17eA132Bf9886cAb5DB55DCAddf",

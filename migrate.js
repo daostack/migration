@@ -186,7 +186,7 @@ const wrapCommand = fn => async options => {
       spinner.start(msg)
       let gas = 0
       let nonce = await web3.eth.getTransactionCount(web3.eth.defaultAccount)
-      if (utils.getNetworkName() !== 'arbitium') {
+      if (utils.getNetworkName() !== 'arbitium_testnet_v2') {
           const blockLimit = await web3.eth.getBlock('latest').gasLimit
           try {
             gas = (await tx.estimateGas())
