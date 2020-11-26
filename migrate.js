@@ -13,6 +13,7 @@ const migrateDemoTest = require('./migrate-demo-test')
 const updateDAORegistry = require('./helper-scripts/dao-registry')
 const allocateReputation = require('./helper-scripts/rep-allocation')
 const path = require('path')
+const utils = require('./utils.js')
 
 async function migrate (opts) {
   const base = await migrateBase(opts)
@@ -89,18 +90,12 @@ const wrapCommand = fn => async options => {
       spinner.info(`${transactionHash} | ${Number(txCost).toFixed(5)} ETH | ${msg}`)
     }
   }
+  let network = await utils.getNetworkName(web3)
 
-  let network = await web3.eth.net.getNetworkType()
-  if (network === 'private') {
-    if (await web3.eth.net.getId() === 100) {
-      network = 'xdai'
-    } else if (await web3.eth.net.getId() === 77) {
-      network = 'sokol'
-    }
-  }
   if (network === 'main') {
     network = 'mainnet'
   }
+  console.log(network)
 
   const balance = await web3.eth.getBalance(web3.eth.defaultAccount)
 
@@ -111,6 +106,7 @@ const wrapCommand = fn => async options => {
 
   // default opts for web3
   const block = await web3.eth.getBlock('latest')
+  //console.log("await web3.eth.getBlock('latest')",await web3.eth.getBlock('latest'))
   const opts = {
     from: web3.eth.defaultAccount,
     gas: block.gasLimit - 100000,
@@ -190,16 +186,17 @@ const wrapCommand = fn => async options => {
       spinner.start(msg)
       let gas = 0
       let nonce = await web3.eth.getTransactionCount(web3.eth.defaultAccount)
-      const blockLimit = await web3.eth.getBlock('latest').gasLimit
-      try {
-        gas = (await tx.estimateGas())
-        if (gas * 1.1 < blockLimit - 100000) {
-          gas *= 1.1
-        }
-      } catch (error) {
-        gas = blockLimit - 100000
+      if (utils.getNetworkName() !== 'arbitium') {
+          const blockLimit = await web3.eth.getBlock('latest').gasLimit
+          try {
+            gas = (await tx.estimateGas())
+            if (gas * 1.1 < blockLimit - 100000) {
+              gas *= 1.1
+            }
+          } catch (error) {
+            gas = blockLimit - 100000
+          }
       }
-
       let result = tx.send({ gas, nonce })
       let receipt = await new Promise(resolve => result.on('receipt', resolve).on('error', async error => {
         spinner.fail('Transaction failed: ' + error)

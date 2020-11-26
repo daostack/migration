@@ -5434,5 +5434,90 @@
         "arcVersion": "0.0.1-rc.39"
       }
     }
+  },
+  "arbitium": {
+    "base": {
+      "0.0.1-rc.51": {
+        "GEN": "0x543Ff227F64Aa17eA132Bf9886cAb5DB55DCAddf",
+        "DAORegistry": "0x6340D4787B1C313Bb9c24B63bD0F64c9752Fe3eA",
+        "DAOTracker": "0xb4c759d04467b0486cb2E526FbB4b101254Ae331",
+        "ControllerCreator": "0xbDa54347737730b91e614a9b90E41970f804D23e",
+        "DaoCreator": "0x38a7824d06026AFc726e8302A9d2F2DeccB01497",
+        "GenesisProtocol": "0x6D70cad8e9E39D3d711331ce4bE77C6Ab5665883",
+        "SchemeRegistrar": "0xe1326fDB8CAb008B2Be17061400323C7025FA492",
+        "UpgradeScheme": "0xFCa8D6bc11803F2EDd6f540a302A8f70d9deCD37",
+        "GlobalConstraintRegistrar": "0x0DaC9B02E8c9eF1D05e628203358731e04f9805b",
+        "ContributionReward": "0x9a57409455F676f0f5Ff165512340F7fc8C5234f",
+        "AbsoluteVote": "0xd4f4671cFf15358a5A7EC330d5e6AE20B348A2F8",
+        "QuorumVote": "0x6df62D9FF648875bB4fAd50115C356Ac4C79a0cf",
+        "TokenCapGC": "0xe932873A917DccfFAb76b8A7bB3514a8F2A22318",
+        "VoteInOrganizationScheme": "0xF43a07d42fF2073D01B15fa3a08EAC89ED52d551",
+        "OrganizationRegister": "0x13d19581f588990baf7226C662102d75a70d3492",
+        "Redeemer": "0xE84Bf11b614917754d0677ADe80AE3770BAB897c",
+        "GenericSchemeMultiCallFactory": "0xAf9eb2F8fb85191e387F42aFC8cE4cBE22Bfe77C"
+      }
+    },
+    "dao": {
+      "0.0.1-rc.51": {
+        "name": "Pendulous Salad",
+        "Avatar": "0x47A2Fa69722DDD2e7617167ce7e572139A29E3E5",
+        "DAOToken": "0x01ce0C8F708be2441E4e7b5e80B08E77084b2dEa",
+        "Reputation": "0xaFa8e818c13465863a6596eeE08E6928DC9c5E72",
+        "Controller": "0x9CF30ddAc33408d9DB6Ac23a77da7299B6F3105b",
+        "Schemes": [
+          {
+            "name": "GenericScheme",
+            "alias": "GenericSchemeAlias",
+            "address": "0xA73E74bBc384B237E7B7fEA4D76D18c8a37ED608",
+            "arcVersion": "0.0.1-rc.51"
+          },
+          {
+            "name": "ContributionRewardExt",
+            "alias": "ContributionRewardExt",
+            "address": "0x2Ea0BE07DFC0357F40884365F2C9cFD2A36D4a6E",
+            "arcVersion": "0.0.1-rc.43"
+          },
+          {
+            "name": "GenericSchemeMultiCall",
+            "alias": "GenericSchemeMultiCall",
+            "address": "0x8e8a12588d14E17D710F323999Cc8C2F15257c0B",
+            "arcVersion": "0.0.1-rc.51"
+          }
+        ],
+        "StandAloneContracts": [
+          {
+            "name": "Wallet",
+            "address": "0x9d592E592c0C44A8075215b94b986F617a8A6229",
+            "arcVersion": "0.0.1-rc.51"
+          },
+          {
+            "name": "ContributionRewardExt",
+            "address": "0x2Ea0BE07DFC0357F40884365F2C9cFD2A36D4a6E",
+            "arcVersion": "0.0.1-rc.43"
+          },
+          {
+            "name": "Competition",
+            "address": "0xe46a36BF47864F8cc8eA8A668653bcc43FA7E601",
+            "arcVersion": "0.0.1-rc.43"
+          },
+          {
+            "name": "GenericSchemeMultiCall",
+            "address": "0x8e8a12588d14E17D710F323999Cc8C2F15257c0B",
+            "arcVersion": "0.0.1-rc.51"
+          },
+          {
+            "name": "ActionMock",
+            "address": "0xc72e85debf6e663B3Ae8EDB631AA7d982D892f6b",
+            "arcVersion": "0.0.1-rc.51"
+          },
+          {
+            "name": "DxDaoSchemeConstraints",
+            "address": "0x9b1780385602Ab43Dd60aA6f568253809cB63eF3",
+            "arcVersion": "0.0.1-rc.51"
+          }
+        ],
+        "arcVersion": "0.0.1-rc.51"
+      }
+    }
   }
 }

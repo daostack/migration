@@ -29,3 +29,21 @@ exports.importAbi = function (abiPath) {
   }
   return abi
 }
+
+const ARBITIUM_CHAIN_ID = 152709604825713
+exports.getNetworkName = async function (web3) {
+  if (await web3.eth.net.getId() === ARBITIUM_CHAIN_ID) {
+     return 'arbitium'
+  }
+  let network = await web3.eth.net.getNetworkType()
+  if (network === 'private') {
+    if (await web3.eth.net.getId() === 100) {
+      network = 'xdai'
+    } else if (await web3.eth.net.getId() === 77) {
+      network = 'sokol'
+    } else if (await web3.eth.net.getId() === ARBITIUM_CHAIN_ID) {
+      network = 'arbitium'
+    }
+  }
+  return network;
+}
