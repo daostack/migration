@@ -190,8 +190,6 @@ const processContracts = async (): Promise<any> => {
         }
 
         const version = 'v0.5.17+commit.d19bba13';
-        //   require(`${foundIn}/build/contracts/${contractName}.json`).compiler.version;
-        // version = `v${version.substr(0, version.indexOf('Emscripten') - 1)}`;
 
         const apiConfig = {
           action: 'verifysourcecode',
