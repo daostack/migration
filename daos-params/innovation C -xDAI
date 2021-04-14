@@ -1,0 +1,86 @@
+{
+  "orgName": "Innovation Ç",
+  "tokenName": "Innovation Ç token",
+  "tokenSymbol": "ICRT",
+  "unregisterOwner": true,
+  "useUController": false,
+  "useDaoCreator": true,
+  "schemes": {
+    "ContributionReward": true,
+    "SchemeRegistrar": true,
+    "UGenericScheme": true
+  },
+  "VotingMachinesParams": [
+    {
+      "queuedVoteRequiredPercentage": 51,
+      "queuedVotePeriodLimit": 1209600,
+      "thresholdConst": 1100,
+      "proposingRepReward": 5,
+      "minimumDaoBounty": 10,
+      "boostedVotePeriodLimit": 259200,
+      "daoBountyConst": 1,
+      "activationTime": 0,
+      "preBoostedVotePeriodLimit": 129600,
+      "quietEndingPeriod": 259200,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votersReputationLossRatio": 1
+    },
+    {
+      "queuedVoteRequiredPercentage": 61,
+      "queuedVotePeriodLimit": 2592000,
+      "thresholdConst": 1100,
+      "proposingRepReward": 10,
+      "minimumDaoBounty": 50,
+      "boostedVotePeriodLimit": 345600,
+      "daoBountyConst": 1,
+      "activationTime": 0,
+      "preBoostedVotePeriodLimit": 86400,
+      "quietEndingPeriod": 172800,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votersReputationLossRatio": 3
+    },
+    {
+      "queuedVoteRequiredPercentage": 51,
+      "queuedVotePeriodLimit": 1209600,
+      "thresholdConst": 1100,
+      "proposingRepReward": 5,
+      "minimumDaoBounty": 10,
+      "boostedVotePeriodLimit": 259200,
+      "daoBountyConst": 1,
+      "activationTime": 0,
+      "preBoostedVotePeriodLimit": 129600,
+      "quietEndingPeriod": 259200,
+      "voteOnBehalf": "0x0000000000000000000000000000000000000000",
+      "votersReputationLossRatio": 2
+    }
+  ],
+  "founders": [
+    {
+      "address": "0x9A94Ac82B17E67F7dff81912de68EB74ca20E6C3",
+      "tokens": 0,
+      "reputation": 80
+    },
+    {
+      "address": "0x526cb50eb8f78f6c2a7537716ea7ce537aa0a329",
+      "tokens": 0,
+      "reputation": 40
+    }
+  ],
+  "ContributionReward": [
+    {
+      "voteParams": 0
+    }
+  ],
+  "SchemeRegistrar": [
+    {
+      "voteRegisterParams": 1,
+      "voteRemoveParams": 1
+    }
+  ],
+  "UGenericScheme": [
+    {
+      "voteParams": 2,
+      "targetContract": "0x0a4b2d4B48a63088e0897a3F147Ba37f81a27722"
+    }
+  ]
+}
